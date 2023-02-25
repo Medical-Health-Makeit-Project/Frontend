@@ -1,0 +1,16 @@
+.header {
+  width: 100%;
+}
+
+.navigation-desktop {
+  display: none;
+}
+
+@media (min-width: 700px) {
+  .navigation-desktop {
+    display: block;
+  }
+  .navigation-mobile {
+    display: none;
+  }
+}

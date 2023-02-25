@@ -1,0 +1,108 @@
+@import url('../../App.css');
+
+.container-info {
+  background-color: var(--neutral-black);
+  color: var(--neutral-white);
+  font-family: var(--font-poppins);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  padding: 1rem 0;
+  width: 100%;
+}
+
+.main-info-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.info__emergencies-container,
+.info__options-container,
+.info__languages {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.info__options-container {
+  width: 100%;
+  justify-content: space-around;
+}
+
+.info__emergencies-container {
+  flex-direction: column;
+  gap: 5px;
+}
+
+.info-icon-phone-emergency,
+.info-icon-voice,
+.info-icon-phone {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.info__emergencies,
+.info__patients,
+.info__phone {
+  display: flex;
+  gap: 5px;
+}
+
+.info__languages-select {
+  width: 90px;
+  background: none;
+  color: var(--neutral-white);
+  font-size: 12px;
+  border: none;
+  outline: none;
+}
+
+.info-icon-languages {
+  display: flex;
+}
+
+.info-paragraph-emergency,
+.info__paragraph-patients,
+.info__paragraph-phone {
+  font-size: 12px;
+  margin: 0;
+}
+
+@media (min-width: 400px) {
+  .info__emergencies-container {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .container-info {
+    gap: 10px;
+  }
+}
+
+@media (min-width: 700px) {
+  .main-info-container {
+    max-width: 800px;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .info__emergencies-container {
+    justify-self: flex-start;
+  }
+
+  .info__options-container {
+    justify-self: flex-end;
+    justify-content: space-between;
+  }
+
+  .info__emergencies-container,
+  .info__options-container {
+    width: 280px;
+  }
+}

@@ -1,8 +1,13 @@
-:root{
-  --primary-color-scooter: #3FB6D6,
-  --primary-color-blue-ribbon: #0D6EFD
-  --neutral-white: #FFFFFF,
-  --neutral-black: #000000
+:root {
+  --primary-color-scooter: #3fb6d6;
+  --primary-color-blue-ribbon: #0d6efd;
+  --neutral-white: #ffffff;
+  --neutral-black: black;
   --font-sans: 'Open Sans', sans-serif;
   --font-poppins: 'Poppins', sans-serif;
+}
+
+.App {
+  width: 100vw;
+  height: 100%;
 }
