@@ -1,0 +1,29 @@
+@import url('../../App.css');
+.appointment-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  border: none;
+  background-color: var(--primary-color-blue-ribbon);
+  padding: 0.8rem 1rem;
+  color: var(--neutral-white);
+  font-family: var(--font-sans);
+}
+
+.appointment-button__text {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.appointment-button__icon {
+  display: flex;
+  align-items: flex-end;
+}
+
+@media screen and (min-width: 992px) {
+  .appointment-button {
+    cursor: pointer;
+  }
+}

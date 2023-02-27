@@ -1,0 +1,24 @@
+.container-nav {
+  padding: 1rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mobile-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.container-logo {
+  max-width: 40%;
+}
+
+.logo {
+  width: 100%;
+}

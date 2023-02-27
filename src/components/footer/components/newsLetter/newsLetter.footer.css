@@ -1,0 +1,79 @@
+@import url('../../../../App.css');
+
+.news-letter-container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.news-letter__title {
+  font-size: 18px;
+  margin-top: 2rem;
+}
+.news-letter__paragraph {
+  font-size: 12px;
+  max-width: 320px;
+  line-height: 25px;
+}
+
+.news-letter-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid white;
+}
+
+.news-letter-form__input-email {
+  background-color: var(--neutral-black);
+  border: none;
+  outline: none;
+  color: var(--neutral-white);
+  caret-color: var(--neutral-white);
+}
+
+.news-letter-form__input-email::placeholder {
+  color: var(--neutral-white);
+  font-size: 14px;
+}
+
+.news-letter-form__button {
+  background-color: var(--neutral-black);
+  border: none;
+}
+
+.socials {
+  margin-top: 2rem;
+}
+
+.socials__ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 10px;
+}
+
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--neutral-white);
+  padding: 0.8rem;
+  border-radius: 50%;
+}
+
+@media screen and (min-width: 700px) {
+  .socials__ul {
+    justify-content: center;
+    gap: 20px;
+  }
+  .news-letter-container {
+    width: 50%;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .news-letter-container {
+    width: 25%;
+  }
+}
