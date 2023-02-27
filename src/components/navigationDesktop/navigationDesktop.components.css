@@ -1,0 +1,30 @@
+@import url('../../App.css');
+
+.desktop-navigation-options {
+  display: flex;
+  gap: 1rem;
+}
+
+.desktop-navigation-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.desktop-navigation-links {
+  text-decoration: none;
+  font-family: var(--font-sans);
+  color: var(--neutral-black);
+  font-size: 14px;
+}
+
+.desktop-navigation-links:hover {
+  text-decoration: underline;
+}
+
+@media screen and (min-width: 768px) {
+  .desktop-navigation-options {
+    gap: 2.5rem;
+  }
+}

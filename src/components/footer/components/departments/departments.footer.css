@@ -1,0 +1,23 @@
+.departments__title {
+  font-size: 18px;
+  margin-top: 2rem;
+}
+
+.departments__ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.departments__li {
+  display: flex;
+  gap: 10px;
+}
+
+.departments__text {
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+}

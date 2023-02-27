@@ -1,28 +1,11 @@
 @import url('../../App.css');
 
-.container-nav {
-  padding: 1rem;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.mobile-menu__hamburger {
-  width: 30px;
-}
-
 .mobile-menu__ul {
-  width: 80%;
+  width: 50%;
   height: 100%;
   position: fixed;
   margin: 0;
   top: 0;
-  left: 0;
   padding: 0;
   background-color: white;
   list-style: none;
@@ -44,20 +27,40 @@
   border-top: 1px solid rgb(197, 196, 196);
 }
 
+.left-menu {
+  left: 50.6%;
+  transition: all 1s ease-in-out;
+}
+
+.left-full-menu {
+  left: 100%;
+  transition: all 1s ease-in-out;
+}
+
 .mobile-menu__mask {
   width: 100%;
   height: 100%;
   position: fixed;
   top: 0;
-  left: 0;
   background-color: rgb(0, 0, 0, 0.7);
   z-index: 9999;
 }
 
-.container-logo {
-  max-width: 40%;
+.mobile-menu__mask-opacity-1 {
+  opacity: 1;
+  transition: all 1s ease-in-out;
 }
 
-.logo {
-  width: 100%;
+.mobile-menu__mask-opacity-0 {
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
+
+.mobile-menu__mask-left-0 {
+  left: 0;
+  transition: all 1s ease-in-out;
+}
+.mobile-menu__mask-right {
+  right: -90rem;
+  transition: all 1s ease-in-out;
 }
