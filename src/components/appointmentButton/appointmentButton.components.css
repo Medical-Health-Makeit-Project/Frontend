@@ -21,3 +21,9 @@
   display: flex;
   align-items: flex-end;
 }
+
+@media screen and (min-width: 992px) {
+  .appointment-button {
+    cursor: pointer;
+  }
+}

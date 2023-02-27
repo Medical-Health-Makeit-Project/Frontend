@@ -28,3 +28,9 @@
     gap: 2.5rem;
   }
 }
+
+@media screen and (min-width: 992px) {
+  .desktop-navigation-options {
+    cursor: pointer;
+  }
+}

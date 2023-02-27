@@ -22,3 +22,9 @@
   font-family: var(--font-sans);
   font-size: 14px;
 }
+
+@media screen and (min-width: 992px) {
+  .cart-container {
+    cursor: pointer;
+  }
+}

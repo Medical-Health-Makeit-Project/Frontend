@@ -1,5 +1,10 @@
 @import url('../../../../App.css');
 
+.news-letter-container {
+  width: 100%;
+  margin: 0 auto;
+}
+
 .news-letter__title {
   font-size: 18px;
   margin-top: 2rem;
@@ -60,5 +65,15 @@
   .socials__ul {
     justify-content: center;
     gap: 20px;
+  }
+  .news-letter-container {
+    width: 50%;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .news-letter-container {
+    width: 25%;
   }
 }

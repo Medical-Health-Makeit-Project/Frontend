@@ -29,10 +29,33 @@
   .footer {
     display: flex;
     flex-wrap: wrap;
-    max-width: 700px;
+    flex-direction: row;
+    max-width: 1000px;
   }
   .first {
+    width: 100%;
     display: flex;
     justify-content: space-between;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .footer {
+    flex-direction: row;
+  }
+
+  .first {
+    width: 55%;
+    gap: 10px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .footer {
+    justify-content: space-between;
+  }
+  .first {
+    width: 50%;
+    justify-content: space-evenly;
   }
 }

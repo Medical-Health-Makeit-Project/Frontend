@@ -38,3 +38,23 @@
     flex-direction: row;
   }
 }
+
+@media screen and (min-width: 700px) {
+  .about {
+    width: 40%;
+  }
+
+  .about__paragraph {
+    max-width: 280px;
+  }
+
+  .about__ul {
+    flex-direction: column;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .about {
+    width: 25%;
+  }
+}

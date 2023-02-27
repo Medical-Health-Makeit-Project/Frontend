@@ -21,3 +21,6 @@
   display: inline-flex;
   align-items: center;
 }
+
+@media screen and (min-width: 400px) {
+}
