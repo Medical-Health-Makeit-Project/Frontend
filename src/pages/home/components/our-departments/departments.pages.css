@@ -1,0 +1,30 @@
+@import url('../../../../App.css');
+
+.departments {
+  background-color: rgb(205, 244, 255);
+  padding: 10px;
+}
+.scroll__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.scroll__card {
+  background-color: var(--neutral-white);
+  width: 250px;
+}
+
+.icon__container {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--primary-color-scooter);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.more__container {
+  display: flex;
+
+  align-items: center;
+}
