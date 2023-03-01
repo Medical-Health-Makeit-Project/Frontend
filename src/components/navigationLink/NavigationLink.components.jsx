@@ -1,4 +1,4 @@
-import './navigationLink.components.css';
+import './navigationLink.components.scss';
 
 export const NavigationLink = ({ text, link, isButton }) => {
   return isButton ? (

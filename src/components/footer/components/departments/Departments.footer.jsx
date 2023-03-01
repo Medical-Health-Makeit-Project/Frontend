@@ -1,5 +1,5 @@
 import { HiOutlineMinus } from 'react-icons/hi2';
-import './departments.footer.css';
+import './departments.footer.scss';
 
 export const Departments = () => {
   const departments = [

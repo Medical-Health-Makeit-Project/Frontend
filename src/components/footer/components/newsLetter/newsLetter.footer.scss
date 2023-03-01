@@ -1,4 +1,4 @@
-@import url('../../../../App.css');
+@import '../../../../App.scss';
 
 .news-letter-container {
   width: 100%;
@@ -24,20 +24,20 @@
 }
 
 .news-letter-form__input-email {
-  background-color: var(--neutral-black);
+  background-color: $neutral-black;
   border: none;
   outline: none;
-  color: var(--neutral-white);
-  caret-color: var(--neutral-white);
+  color: neutral-white;
+  caret-color: $neutral-white;
 }
 
 .news-letter-form__input-email::placeholder {
-  color: var(--neutral-white);
+  color: $neutral-white;
   font-size: 14px;
 }
 
 .news-letter-form__button {
-  background-color: var(--neutral-black);
+  background-color: $neutral-black;
   border: none;
 }
 
@@ -56,7 +56,7 @@
 .social-icon {
   display: inline-flex;
   align-items: center;
-  background-color: var(--neutral-white);
+  background-color: $neutral-white;
   padding: 0.8rem;
   border-radius: 50%;
 }

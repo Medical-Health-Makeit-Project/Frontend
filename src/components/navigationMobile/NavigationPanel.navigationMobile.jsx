@@ -1,7 +1,5 @@
-import { useState } from 'react';
-import { useEffect } from 'react';
 import { NavigationLink } from '../navigationLink';
-import './navigationPanel.navigationMobile.css';
+import './navigationPanel.navigationMobile.scss';
 
 export const NavigationPanel = ({ panelOptions, showMenu, setShowMenu }) => {
   let positionPanel = showMenu ? 'left-menu' : 'left-full-menu';

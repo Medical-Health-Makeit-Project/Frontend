@@ -1,4 +1,4 @@
-@import url('../../App.css');
+@import '../../App.scss';
 
 .desktop-navigation-options {
   display: flex;
@@ -14,8 +14,8 @@
 
 .desktop-navigation-links {
   text-decoration: none;
-  font-family: var(--font-sans);
-  color: var(--neutral-black);
+  font-family: $font-sans;
+  color: $neutral-black;
   font-size: 14px;
 }
 
