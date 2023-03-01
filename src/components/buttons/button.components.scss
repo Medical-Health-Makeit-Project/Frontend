@@ -1,0 +1,83 @@
+@import '../../sass/abstract/variables.abstract.scss';
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: $font-poppins;
+  padding: 0.8rem;
+  border-radius: 10px;
+  gap: 0.8rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.solid-info {
+  border: none;
+  background-color: $button-info;
+  color: $neutral-white;
+  font-size: 14px;
+}
+
+.solid-danger {
+  border: none;
+  background-color: $button-danger;
+  color: $neutral-white;
+  font-size: 14px;
+}
+
+.solid-success {
+  border: none;
+  background-color: $button-success;
+  color: $neutral-white;
+  font-size: 14px;
+}
+
+.solid-warning {
+  border: none;
+  background-color: $button-warning;
+  color: $neutral-white;
+  font-size: 14px;
+}
+
+.outline-info {
+  border: 1px solid $button-info;
+  color: $button-info;
+  background-color: transparent;
+
+  &:hover {
+    color: $neutral-white;
+    background-color: $button-info;
+  }
+}
+
+.outline-danger {
+  border: 1px solid $button-danger;
+  color: $button-danger;
+  background-color: transparent;
+
+  &:hover {
+    color: $neutral-white;
+    background-color: $button-danger;
+  }
+}
+
+.outline-success {
+  border: 1px solid $button-success;
+  color: $button-success;
+  background-color: transparent;
+
+  &:hover {
+    color: $neutral-white;
+    background-color: $button-success;
+  }
+}
+.outline-warning {
+  border: 1px solid $button-warning;
+  color: $button-warning;
+  background-color: transparent;
+
+  &:hover {
+    color: $neutral-white;
+    background-color: $button-warning;
+  }
+}
