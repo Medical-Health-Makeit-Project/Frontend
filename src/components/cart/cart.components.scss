@@ -1,11 +1,11 @@
-@import url('../../App.css');
+@import '../../App.scss';
 .cart-container {
   display: flex;
   justify-content: center;
 }
 
 .circle {
-  background-color: var(--primary-red);
+  background-color: $primary-red;
   width: 1rem;
   height: 1rem;
   border-radius: 50%;
@@ -18,8 +18,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--neutral-black);
-  font-family: var(--font-sans);
+  color: $neutral-black;
+  font-family: $font-sans;
   font-size: 14px;
 }
 

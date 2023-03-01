@@ -1,7 +1,7 @@
 import { BsArrowRight } from 'react-icons/bs';
 import { RiFacebookLine, RiTwitterFill, RiInstagramFill, RiLinkedinFill } from 'react-icons/ri';
 import { colorIcons } from '../../../../constants';
-import './newsLetter.footer.css';
+import './newsLetter.footer.scss';
 
 export const NewsLetter = () => {
   const socials = [

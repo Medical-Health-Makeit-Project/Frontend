@@ -2,7 +2,7 @@ import { BiPhone } from 'react-icons/bi';
 import { BiUserVoice } from 'react-icons/bi';
 import { BiPhoneCall } from 'react-icons/bi';
 import { BiWorld } from 'react-icons/bi';
-import './headerInfo.components.css';
+import './headerInfo.components.scss';
 
 export const HeaderInfo = () => {
   return (

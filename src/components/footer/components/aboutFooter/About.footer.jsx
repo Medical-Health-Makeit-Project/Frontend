@@ -1,6 +1,6 @@
 import { HiPhone, HiOutlineMail, HiLocationMarker } from 'react-icons/hi';
 import { colorIcons } from '../../../../constants';
-import './about.footer.css';
+import './about.footer.scss';
 
 export const About = () => {
   return (
