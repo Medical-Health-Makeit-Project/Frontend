@@ -1,111 +1,21 @@
-@import '../../../../sass/abstract/variables.abstract.scss';
-
-.welcome-container {
-  width: 100vw;
-  background-image: url('../../../../assets/background-welcome-home.jpeg');
-  background-position: center;
-  background-size: cover;
-  position: relative;
-
-  @media screen and (min-width: 700px) {
-    background-image: none;
-    background-color: black;
-  }
-}
-
-.welcome-container::before {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(3px);
-}
-
-.welcome {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-
-  @media screen and (min-width: 700px) {
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-  }
-}
-
-.welcome-info {
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-  margin-top: 3rem;
-  gap: 1.5rem;
-  font-family: $font-poppins;
-}
-
-.welcome-info__title {
-  color: $primary-color-scooter;
-  font-weight: 600;
-  font-size: 14px;
-  margin: 0;
-}
-.welcome-info__subtitle {
-  margin: 0;
-  color: $neutral-white;
-  font-size: 23px;
-}
-
-.welcome-info__paragraph {
-  margin: 0;
-  color: $neutral-white;
-  line-height: 30px;
-  font-size: 15px;
-}
-
-.icons-container {
-  display: flex;
-  gap: 1.5rem;
-}
-
-.ambulance-icon__wrap,
-.first-care-icon__wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-}
-
-.ambulance-icon,
-.first-care-icon {
-  width: 35px;
-  height: 35px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  padding: 0.5rem;
-  background-color: $primary-color-scooter;
-}
-
-.ambulance-message,
-.first-care-message {
-  color: $neutral-white;
-  font-size: 12px;
-}
-
+@import '../../../../../sass/abstract/variables.abstract.scss';
 .welcome-form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  margin-top: 3rem;
+  margin: 3rem 0;
+
   padding: 2rem 3.5rem;
   background-color: $neutral-black;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 
   @media screen and (min-width: 525px) {
     border-radius: 20px;
+  }
+
+  @media screen and (min-width: 700px) {
+    width: 50%;
+    gap: 0.8rem;
   }
 
   .welcome-form__title {
@@ -149,13 +59,26 @@
       font-size: 12px;
     }
   }
+
   .welcome-form__input-date {
     display: none;
     color-scheme: dark;
 
+    .welcome-form__input-date-component {
+      width: 100%;
+      background-color: $neutral-black;
+      border: none;
+      outline: none;
+    }
     @media screen and (min-width: 700px) {
       display: block;
+      margin-top: 0.5rem;
     }
+  }
+
+  .welcome-form__input-name:not(:placeholder-shown):invalid,
+  .welcome-form__input-email:not(:placeholder-shown):invalid {
+    border: rgba(254, 0, 0, 0.6) 1px solid;
   }
 
   .welcome-form__select-department-container,
