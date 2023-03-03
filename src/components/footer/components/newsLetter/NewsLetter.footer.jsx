@@ -1,6 +1,7 @@
 import { BsArrowRight } from 'react-icons/bs';
 import { RiFacebookLine, RiTwitterFill, RiInstagramFill, RiLinkedinFill } from 'react-icons/ri';
 import { colorIcons } from '@constants';
+import { Icon } from '@components/icon';
 import './newsLetter.footer.scss';
 
 export const NewsLetter = () => {
@@ -26,7 +27,7 @@ export const NewsLetter = () => {
           {socials.map((social, idx) => {
             return (
               <li className="socials__li " key={idx}>
-                <span className="social-icon">{social}</span>
+                <Icon size="sm">{social}</Icon>
               </li>
             );
           })}
