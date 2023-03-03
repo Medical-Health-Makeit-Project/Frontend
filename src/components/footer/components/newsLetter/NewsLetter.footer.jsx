@@ -23,9 +23,9 @@ export const NewsLetter = () => {
       </article>
       <article className="socials">
         <ul className="socials__ul">
-          {socials.map((social) => {
+          {socials.map((social, idx) => {
             return (
-              <li className="socials__li">
+              <li className="socials__li " key={idx}>
                 <span className="social-icon">{social}</span>
               </li>
             );
