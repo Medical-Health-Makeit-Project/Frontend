@@ -1,4 +1,4 @@
-@import '../../sass/abstract/variables.abstract.scss';
+@import '@sass/abstract/variables.abstract.scss';
 
 .button {
   display: flex;
@@ -6,7 +6,7 @@
   align-items: center;
   font-family: $font-poppins;
   padding: 0.8rem;
-  border-radius: 10px;
+
   gap: 0.8rem;
   transition: all 0.2s ease-in-out;
 }

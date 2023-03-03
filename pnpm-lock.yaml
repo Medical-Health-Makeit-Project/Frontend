@@ -14,6 +14,7 @@ specifiers:
   react-icons: ^4.7.1
   react-toastify: ^9.1.1
   sass: ^1.58.3
+  uuid: ^9.0.0
   vite: ^4.1.0
 
 dependencies:
@@ -24,6 +25,7 @@ dependencies:
   react-icons: 4.7.1_react@18.2.0
   react-toastify: 9.1.1_biqbaboplfbrettd7655fr4n2y
   sass: 1.58.3
+  uuid: 9.0.0
 
 devDependencies:
   '@types/react': 18.0.28
@@ -1996,6 +1998,11 @@ packages:
   /util-deprecate/1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
     dev: true
+
+  /uuid/9.0.0:
+    resolution: {integrity: sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==}
+    hasBin: true
+    dev: false
 
   /v8-compile-cache-lib/3.0.1:
     resolution: {integrity: sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==}
