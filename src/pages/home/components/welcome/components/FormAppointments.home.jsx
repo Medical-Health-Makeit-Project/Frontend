@@ -1,12 +1,12 @@
 import { BsArrowRight } from 'react-icons/bs';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
+import { Button } from '@components/buttons';
 import Calendar from 'react-calendar';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './calendar.components.scss';
 import './formAppointments.home.scss';
-import { Button } from '../../../../../components/buttons/Button.components';
 
 export const FormAppointments = () => {
   const [date, setDate] = useState(new Date());
@@ -58,7 +58,7 @@ export const FormAppointments = () => {
           </select>
         </div>
         <input type="text" placeholder="Your message" className="welcome-form__input-message" required maxLength="50" />
-        <Button variant="solid" color="info" onClick={handlerbutton}>
+        <Button variant="solid" color="info" onClick={handlerAlert}>
           Book appointment <span className="arrow-button">{<BsArrowRight size={18} />}</span>
         </Button>
       </section>

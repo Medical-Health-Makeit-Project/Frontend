@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Cart } from '../cart';
 import { NavigationPanel } from './NavigationPanel.navigationMobile';
 import { HiMenu } from 'react-icons/hi';
-import logo from '../../assets/logo.png';
+import logo from '@assets/logo.png';
 import './navigation.components.scss';
 
 export const NavigationMobile = ({ options }) => {

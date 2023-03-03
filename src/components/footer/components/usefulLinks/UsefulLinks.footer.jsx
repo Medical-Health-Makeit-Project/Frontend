@@ -1,5 +1,5 @@
 import { HiOutlineMinus } from 'react-icons/hi2';
-import { colorIcons } from '../../../../constants';
+import { colorIcons } from '@constants';
 import './usefulLinks.footer.scss';
 
 export const UsefulLinks = () => {
