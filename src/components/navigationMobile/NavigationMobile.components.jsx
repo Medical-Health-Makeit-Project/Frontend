@@ -3,7 +3,7 @@ import { Cart } from '../cart';
 import { NavigationPanel } from './NavigationPanel.navigationMobile';
 import { HiMenu } from 'react-icons/hi';
 import logo from '../../assets/logo.png';
-import './navigation.components.css';
+import './navigation.components.scss';
 
 export const NavigationMobile = ({ options }) => {
   const [showMenu, setShowMenu] = useState(false);

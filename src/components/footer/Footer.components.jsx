@@ -1,8 +1,8 @@
-import './footer.components.css';
 import { About } from './components/aboutFooter';
 import { Departments } from './components/departments';
 import { UsefulLinks } from './components/usefulLinks';
 import { NewsLetter } from './components/newsLetter';
+import './footer.components.scss';
 
 export const Footer = () => {
   return (

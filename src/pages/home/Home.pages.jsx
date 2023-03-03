@@ -1,6 +1,6 @@
 import { Welcome } from './components/welcome';
+import './home.pages.scss';
 import { Departments } from './components/our-departments/departments.pages';
-import './home.pages.css';
 
 export const Home = () => {
   return (

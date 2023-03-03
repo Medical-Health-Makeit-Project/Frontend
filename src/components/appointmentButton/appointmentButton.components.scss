@@ -1,14 +1,15 @@
-@import url('../../App.css');
+@import '../../sass/abstract/variables.abstract.scss';
+
 .appointment-button {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 5px;
   border: none;
-  background-color: var(--primary-color-blue-ribbon);
+  background-color: $primary-color-blue-ribbon;
   padding: 0.8rem 1rem;
-  color: var(--neutral-white);
-  font-family: var(--font-sans);
+  color: $neutral-white;
+  font-family: $font-sans;
 }
 
 .appointment-button__text {

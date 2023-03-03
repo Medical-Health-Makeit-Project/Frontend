@@ -1,9 +1,9 @@
-@import url('../../App.css');
+@import '../../sass/abstract/variables.abstract.scss';
 
 .text {
-  font-family: var(--font-sans);
+  font-family: $font-sans;
   text-decoration: none;
-  color: var(--neutral-black);
+  color: $neutral-black;
   font-size: 14px;
 }
 

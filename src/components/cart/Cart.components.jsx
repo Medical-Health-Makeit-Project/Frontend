@@ -1,5 +1,5 @@
 import { IoCartOutline } from 'react-icons/io5';
-import './cart.components.css';
+import './cart.components.scss';
 
 //mostrar el circulo solo cuando hay productos agregados al carrito
 

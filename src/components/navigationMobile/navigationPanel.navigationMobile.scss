@@ -1,4 +1,4 @@
-@import url('../../App.css');
+@import '../../sass/abstract/variables.abstract.scss';
 
 .mobile-menu__ul {
   width: 50%;
@@ -15,8 +15,8 @@
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  color: var(--neutral-black);
-  font-family: var(--font-poppins);
+  color: $neutral-black;
+  font-family: $font-poppins;
   font-weight: 600;
   font-size: 14px;
 }

@@ -1,8 +1,8 @@
 import { Cart } from '../cart';
 import { NavigationLink } from '../navigationLink';
-import './navigationDesktop.components.css';
-import logo from '../../assets/logo.png';
 import { AppointmentButton } from '../appointmentButton';
+import logo from '../../assets/logo.png';
+import './navigationDesktop.components.scss';
 
 export const NavigationDesktop = ({ options }) => {
   let [home, profile, ourDoctors, shop, appointments, signin] = options;

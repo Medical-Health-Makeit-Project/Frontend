@@ -1,8 +1,7 @@
 import { HeaderInfo } from '../headerInfo';
-import { Cart } from '../cart';
 import { NavigationMobile } from '../navigationMobile';
 import { NavigationDesktop } from '../navigationDesktop';
-import './header.components.css';
+import './header.components.scss';
 
 /*
   Si el usuario tiene rol de doctor no se le debe

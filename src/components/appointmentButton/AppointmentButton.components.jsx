@@ -1,5 +1,5 @@
 import { BiCalendar } from 'react-icons/bi';
-import './appointmentButton.components.css';
+import './appointmentButton.components.scss';
 
 export const AppointmentButton = () => {
   return (

@@ -1,9 +1,9 @@
-@import url('../../App.css');
+@import '../../sass/abstract/variables.abstract.scss';
 
 .container-info {
-  background-color: var(--neutral-black);
-  color: var(--neutral-white);
-  font-family: var(--font-poppins);
+  background-color: $neutral-black;
+  color: $neutral-white;
+  font-family: $font-poppins;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -54,7 +54,7 @@
 .info__languages-select {
   width: 70px;
   background: none;
-  color: var(--neutral-white);
+  color: $neutral-white;
   font-size: 12px;
   border: none;
   outline: none;

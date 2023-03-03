@@ -1,13 +1,13 @@
-@import url('../../App.css');
+@import '../../sass/abstract/variables.abstract.scss';
 
 .footer-container {
-  background-color: var(--neutral-black);
+  background-color: $neutral-black;
   width: 100vw;
 }
 
 .footer {
-  color: var(--neutral-white);
-  font-family: var(--font-poppins);
+  color: $neutral-white;
+  font-family: $font-poppins;
   max-width: 1000px;
   margin: 0 auto;
   padding: 1rem;
@@ -17,8 +17,8 @@
 }
 
 .footer__credits {
-  background-color: var(--neutral-white);
-  color: var(--neutral-black);
+  background-color: $neutral-white;
+  color: $neutral-black;
   font-size: 10px;
   text-align: center;
   padding: 0.8rem 0;

@@ -1,4 +1,4 @@
-import './signin.components.css';
+import './signin.components.scss';
 
 export const Signin = () => {
   return <button>{}</button>;
