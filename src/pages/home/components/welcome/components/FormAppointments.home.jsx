@@ -5,7 +5,7 @@ import { Button } from '@components/buttons';
 import Calendar from 'react-calendar';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import './calendar.components.scss';
+import './calendar.home.scss';
 import './formAppointments.home.scss';
 
 export const FormAppointments = () => {

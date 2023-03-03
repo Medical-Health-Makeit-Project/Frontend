@@ -1,0 +1,13 @@
+@import '@sass/abstract/variables.abstract.scss';
+
+.video {
+  width: 100%;
+  height: 400px;
+  background-color: $primary-background-blue;
+}
+
+video {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
