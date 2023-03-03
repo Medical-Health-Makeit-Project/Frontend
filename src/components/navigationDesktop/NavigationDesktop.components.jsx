@@ -1,7 +1,7 @@
 import { Cart } from '../cart';
 import { NavigationLink } from '../navigationLink';
 import { AppointmentButton } from '../appointmentButton';
-import logo from '../../assets/logo.png';
+import logo from '@assets/logo.png';
 import './navigationDesktop.components.scss';
 
 export const NavigationDesktop = ({ options }) => {

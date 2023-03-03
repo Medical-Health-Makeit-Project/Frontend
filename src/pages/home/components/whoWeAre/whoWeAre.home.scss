@@ -1,0 +1,17 @@
+@import '@sass/abstract/variables.abstract.scss';
+
+.whoWeAre {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 1rem;
+
+  @media screen and (min-width: 768px) {
+    max-width: 1000px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0;
+    justify-content: space-between;
+  }
+}

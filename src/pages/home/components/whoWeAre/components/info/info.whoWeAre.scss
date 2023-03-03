@@ -1,0 +1,83 @@
+// @import '../../../../../../sass/abstract/variables.abstract.scss';
+@import '@sass/abstract/variables.abstract.scss';
+
+.whoWeAre-info {
+  display: flex;
+  flex-direction: column;
+  margin-top: 3rem;
+  gap: 1.5rem;
+
+  @media screen and (min-width: 768px) {
+    width: 55%;
+  }
+}
+
+.whoWeAre-info-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  font-family: $font-poppins;
+  color: $primary-color-scooter;
+
+  .whoWeAre-info-header-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .whoWeAre-info-header-subtitle {
+    color: $neutral-black;
+    font-size: 23px;
+    margin: 0;
+  }
+
+  .whoWeAre-info-header-paragraph {
+    color: $neutral-black;
+    font-size: 15px;
+    margin: 0;
+    line-height: 30px;
+    font-weight: 300;
+  }
+}
+
+.whoWeAre-info-figure {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  @media screen and (min-width: 550px) {
+    flex-direction: row;
+  }
+
+  .whoWeAre-info-image-container {
+    @media screen and (min-width: 550px) {
+      width: 50%;
+    }
+  }
+  .whoWeAre-info-imagen-container__imagen {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .whoWeAre-info-figure__caption {
+    margin: 0;
+    font-family: $font-poppins;
+    color: $neutral-black;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 30px;
+
+    @media screen and (min-width: 550px) {
+      width: 50%;
+    }
+    // @media screen and (min-width: 768px) {
+    //   max-width: 200px;
+    // }
+  }
+}
+
+.arrow-button {
+  display: inline-flex;
+  align-items: center;
+}

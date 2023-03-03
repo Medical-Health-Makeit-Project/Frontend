@@ -1,0 +1,60 @@
+@import '@sass/abstract/variables.abstract.scss';
+.whoWeAre-achievements {
+  width: 100%;
+  @media screen and (min-width: 768px) {
+    margin-top: 6rem;
+  }
+}
+
+.whoWeAre-achievements__ul {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  font-family: $font-poppins;
+
+  @media screen and (min-width: 768px) {
+    flex-wrap: nowrap;
+  }
+  .whoWeAre-achievements__li {
+    width: 35%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: $neutral-white;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    @media screen and (min-width: 768px) {
+      flex-direction: row;
+      justify-content: center;
+      gap: 20px;
+    }
+  }
+
+  .whoWeAre-achievements-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 1rem 0;
+    @media screen and (min-width: 768px) {
+      align-items: flex-start;
+    }
+  }
+
+  .whoWeAre-achievements-info__quantity {
+    margin: 0;
+    font-size: 23px;
+    font-weight: 800;
+  }
+  .whoWeAre-achievements-info__achievement {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 20px;
+  }
+}
