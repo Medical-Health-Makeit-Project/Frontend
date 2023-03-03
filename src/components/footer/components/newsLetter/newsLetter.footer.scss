@@ -66,6 +66,11 @@
     justify-content: center;
     gap: 20px;
   }
+
+  .socials__li {
+    cursor: pointer;
+  }
+
   .news-letter-container {
     width: 50%;
     margin: 0 auto;

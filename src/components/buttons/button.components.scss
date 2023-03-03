@@ -6,9 +6,12 @@
   align-items: center;
   font-family: $font-poppins;
   padding: 0.8rem;
-
   gap: 0.8rem;
   transition: all 0.2s ease-in-out;
+
+  @media screen and (min-width: 700px) {
+    cursor: pointer;
+  }
 }
 
 .solid-info {
