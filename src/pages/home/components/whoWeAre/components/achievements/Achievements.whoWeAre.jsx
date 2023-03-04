@@ -32,6 +32,7 @@ export const Achievements = () => {
       achievement: 'Laboratory Experts',
     },
   ];
+
   return (
     <article className="whoWeAre-achievements">
       <ul className="whoWeAre-achievements__ul">

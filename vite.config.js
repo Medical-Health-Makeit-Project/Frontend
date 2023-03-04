@@ -13,4 +13,9 @@ export default defineConfig({
       { find: '@constants', replacement: '/src/constants' },
     ],
   },
+  server: {
+    watch: {
+      usePolling: true,
+    },
+  },
 });

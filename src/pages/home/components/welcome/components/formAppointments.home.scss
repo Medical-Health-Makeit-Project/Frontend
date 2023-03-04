@@ -19,18 +19,20 @@
   }
 
   .welcome-form__title {
-    font-family: $font-poppins;
-    color: $neutral-white;
-    font-size: 23px;
     margin: 0;
     margin-top: 1rem;
+    font-family: $font-poppins;
+    color: $neutral-white;
+    font-weight: 600;
+    font-size: 23px;
   }
 
   .welcome-form__paragraph {
+    margin: 0;
     font-family: $font-poppins;
     color: $neutral-white;
     font-size: 15px;
-    margin: 0;
+    font-weight: 300;
   }
 
   .welcome-form-inputs {
