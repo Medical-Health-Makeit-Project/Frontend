@@ -1,5 +1,13 @@
+@import '@sass/base/typography.base.scss';
+
+.departments {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .departments__title {
-  font-size: 18px;
+  font-size: $size-md;
   margin-top: 2rem;
 }
 
@@ -17,7 +25,7 @@
 }
 
 .departments__text {
-  font-size: 12px;
+  font-size: $size-xxs;
   display: inline-flex;
   align-items: center;
 }

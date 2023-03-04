@@ -1,8 +1,9 @@
-@import '@sass/abstract/variables.abstract.scss';
+@import '@sass/base/typography.base.scss';
+@import '@sass/themes/theme.themes.scss';
 
 .container-info {
-  background-color: $neutral-black;
-  color: $neutral-white;
+  background-color: theme-color('background', 'dark');
+  color: map-get($typography-colors, 'white');
   font-family: $font-poppins;
   display: flex;
   flex-direction: column;
@@ -54,8 +55,8 @@
 .info__languages-select {
   width: 70px;
   background: none;
-  color: $neutral-white;
-  font-size: 12px;
+  color: map-get($typography-colors, 'white');
+  font-size: $size-xxs;
   border: none;
   outline: none;
 }
@@ -67,7 +68,7 @@
 .info-paragraph-emergency,
 .info__paragraph-patients,
 .info__paragraph-phone {
-  font-size: 12px;
+  font-size: $size-xxs;
   margin: 0;
 }
 

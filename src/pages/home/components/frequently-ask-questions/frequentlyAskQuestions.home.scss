@@ -1,4 +1,5 @@
 @import '@sass/abstract/variables.abstract.scss';
+@import '@sass/themes/theme.themes.scss';
 
 .frequently-ask-question {
   max-width: 1000px;
@@ -59,7 +60,7 @@
       font-weight: 500;
 
       &:focus {
-        color: $primary-color-scooter;
+        color: theme-color('primary', 'base');
       }
     }
 

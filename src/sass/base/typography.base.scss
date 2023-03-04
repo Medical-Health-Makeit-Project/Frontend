@@ -1,0 +1,30 @@
+$font-sans: 'Open Sans', sans-serif;
+$font-poppins: 'Poppins', sans-serif;
+$size-xl: 1.875rem;
+$size-lg: 1.478rem;
+$size-md: 1.125rem;
+$size-sm: 0.938rem;
+$size-xs: 0.875rem;
+$size-xxs: 0.75rem;
+
+$typography-colors: (
+  'black': #000000,
+  'white': #ffffff,
+);
+
+$weights-typo: (
+  'poppins': (
+    'light': 300,
+    'semi-bold': 500,
+    'bold': 600,
+  ),
+  'sans': (
+    'light': 400,
+    'bold': 600,
+  ),
+);
+
+@function weight-typo($key: 'poppins', $variant: 'semi-bold') {
+  $map: map-get($weights-typo, $key);
+  @return map-get($map, $variant);
+}

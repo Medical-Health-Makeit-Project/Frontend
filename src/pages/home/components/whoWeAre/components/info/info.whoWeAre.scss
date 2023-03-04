@@ -1,5 +1,6 @@
-// @import '../../../../../../sass/abstract/variables.abstract.scss';
 @import '@sass/abstract/variables.abstract.scss';
+@import '@sass/themes/theme.themes.scss';
+@import '@sass/base/typography.base.scss';
 
 .whoWeAre-info {
   display: flex;
@@ -17,7 +18,7 @@
   flex-direction: column;
   gap: 1.5rem;
   font-family: $font-poppins;
-  color: $primary-color-scooter;
+  color: theme-color('primary', 'base');
 
   .whoWeAre-info-header-title {
     font-size: 14px;
@@ -26,14 +27,14 @@
   }
 
   .whoWeAre-info-header-subtitle {
-    color: $neutral-black;
+    color: map-get($typography-colors, 'black');
     font-size: 23px;
     font-weight: 600;
     margin: 0;
   }
 
   .whoWeAre-info-header-paragraph {
-    color: $neutral-black;
+    color: map-get($typography-colors, 'black');
     font-size: 15px;
     margin: 0;
     line-height: 30px;
@@ -64,7 +65,7 @@
   .whoWeAre-info-figure__caption {
     margin: 0;
     font-family: $font-poppins;
-    color: $neutral-black;
+    color: map-get($typography-colors, 'black');
     font-size: 15px;
     font-weight: 300;
     line-height: 30px;
@@ -72,9 +73,6 @@
     @media screen and (min-width: 550px) {
       width: 50%;
     }
-    // @media screen and (min-width: 768px) {
-    //   max-width: 200px;
-    // }
   }
 }
 

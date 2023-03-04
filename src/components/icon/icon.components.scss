@@ -1,4 +1,4 @@
-@import '@sass/abstract/variables.abstract.scss';
+@import '@sass/base/alerts.base.scss';
 
 .icon {
   display: inline-flex;
@@ -20,21 +20,25 @@
 }
 
 .regular {
-  background-color: $icon-regular;
+  background-color: alert-color('regular', 'base');
 }
 
 .danger {
-  background-color: $icon-danger;
+  background-color: alert-color('danger', 'base');
 }
 
 .success {
-  background-color: $icon-success;
+  background-color: alert-color('success', 'base');
 }
 
 .warning {
-  background-color: $icon-warning;
+  background-color: alert-color('warning', 'base');
 }
 
 .info {
-  background-color: $icon-info;
+  background-color: alert-color('info', 'base');
+}
+
+.transparent {
+  background-color: transparent;
 }

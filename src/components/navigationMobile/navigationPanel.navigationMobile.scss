@@ -1,4 +1,6 @@
 @import '@sass/abstract/variables.abstract.scss';
+@import '@sass/themes/theme.themes.scss';
+@import '@sass/base/typography.base.scss';
 
 .mobile-menu__ul {
   width: 50%;
@@ -7,7 +9,7 @@
   margin: 0;
   top: 0;
   padding: 0;
-  background-color: white;
+  background-color: theme-color('background', 'base');
   list-style: none;
   z-index: 99999;
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
@@ -15,9 +17,9 @@
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  color: $neutral-black;
+  color: map-get($typography-colors, 'black');
   font-family: $font-poppins;
-  font-weight: 600;
+  font-weight: weight-typo('poppins', 'bold');
   font-size: 14px;
 }
 

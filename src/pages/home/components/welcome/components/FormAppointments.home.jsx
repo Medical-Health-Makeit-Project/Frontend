@@ -58,7 +58,7 @@ export const FormAppointments = () => {
           </select>
         </div>
         <input type="text" placeholder="Your message" className="welcome-form__input-message" required maxLength="50" />
-        <Button variant="solid" color="info" onClick={handlerAlert}>
+        <Button variant="outline" color="info" onClick={handlerAlert}>
           Book appointment <span className="arrow-button">{<BsArrowRight size={18} />}</span>
         </Button>
       </section>

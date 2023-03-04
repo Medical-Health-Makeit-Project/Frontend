@@ -1,12 +1,14 @@
 @import '@sass/abstract/variables.abstract.scss';
+@import '@sass/base/typography.base.scss';
+@import '@sass/base/alerts.base.scss';
 
 .footer-container {
-  background-color: $neutral-black;
+  background-color: map-get($typography-colors, 'black');
   width: 100vw;
 }
 
 .footer {
-  color: $neutral-white;
+  color: map-get($typography-colors, 'white');
   font-family: $font-poppins;
   max-width: 1000px;
   margin: 0 auto;
@@ -17,8 +19,8 @@
 }
 
 .footer__credits {
-  background-color: $neutral-white;
-  color: $neutral-black;
+  background-color: map-get($typography-colors, 'white');
+  color: map-get($typography-colors, 'black');
   font-size: 10px;
   text-align: center;
   padding: 0.8rem 0;

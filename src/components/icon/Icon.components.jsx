@@ -7,6 +7,7 @@ const colorVariant = {
   danger: 'danger',
   warning: 'warning',
   success: 'success',
+  transparent: 'transparent',
 };
 
 export const Icon = forwardRef(function Icon(
@@ -28,6 +29,8 @@ export const Icon = forwardRef(function Icon(
           ? colorVariant.danger
           : color === 'success'
           ? colorVariant.success
+          : color === 'transparent'
+          ? colorVariant.transparent
           : ''
       }
         ${size === 'sm' ? 'sm' : size === 'md' ? 'md' : size === 'lg' ? 'lg' : ''}

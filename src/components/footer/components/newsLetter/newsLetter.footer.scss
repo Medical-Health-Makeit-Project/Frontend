@@ -1,4 +1,11 @@
 @import '@sass/abstract/variables.abstract.scss';
+@import '@sass/base/typography.base.scss';
+
+.news-letter {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
 
 .news-letter-container {
   width: 100%;
@@ -6,11 +13,11 @@
 }
 
 .news-letter__title {
-  font-size: 18px;
+  font-size: $size-md;
   margin-top: 2rem;
 }
 .news-letter__paragraph {
-  font-size: 12px;
+  font-size: $size-xxs;
   max-width: 320px;
   line-height: 25px;
 }
@@ -27,13 +34,13 @@
   background-color: $neutral-black;
   border: none;
   outline: none;
-  color: neutral-white;
+  color: $neutral-white;
   caret-color: $neutral-white;
 }
 
 .news-letter-form__input-email::placeholder {
   color: $neutral-white;
-  font-size: 14px;
+  font-size: $size-xs;
 }
 
 .news-letter-form__button {
