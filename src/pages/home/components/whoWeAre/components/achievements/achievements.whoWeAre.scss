@@ -1,4 +1,8 @@
 @import '@sass/abstract/variables.abstract.scss';
+@import '@sass/base/typography.base.scss';
+@import '@sass/themes/theme.themes.scss';
+@import '@sass/abstract/mixins.abstract.scss';
+
 .whoWeAre-achievements {
   width: 100%;
   @media screen and (min-width: 768px) {
@@ -20,13 +24,14 @@
   @media screen and (min-width: 768px) {
     flex-wrap: nowrap;
   }
+
   .whoWeAre-achievements__li {
     width: 35%;
     padding: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: $neutral-white;
+    background-color: theme-color('background', 'base');
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
     @media screen and (min-width: 768px) {
       flex-direction: row;
@@ -47,14 +52,10 @@
   }
 
   .whoWeAre-achievements-info__quantity {
-    margin: 0;
-    font-size: 23px;
-    font-weight: 800;
+    @include subtitle;
   }
   .whoWeAre-achievements-info__achievement {
-    margin: 0;
-    font-size: 14px;
-    font-weight: 300;
+    @include paragraph;
     line-height: 20px;
   }
 }

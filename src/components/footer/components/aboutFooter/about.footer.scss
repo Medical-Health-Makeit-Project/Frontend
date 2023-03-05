@@ -1,11 +1,18 @@
+@import '@sass/base/typography.base.scss';
+
+.about {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .about__title {
-  font-size: 18px;
+  font-size: $size-md;
   margin-top: 2rem;
 }
 
 .about__paragraph {
-  font-size: 12px;
-  /* max-width: 280px; */
+  font-size: $size-xxs;
   line-height: 25px;
 }
 

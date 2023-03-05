@@ -1,4 +1,5 @@
-@import '@sass/abstract/variables.abstract.scss';
+@import '@sass/base/typography.base.scss';
+@import '@sass/base/alerts.base.scss';
 
 .appointment-button {
   display: flex;
@@ -6,16 +7,16 @@
   align-items: center;
   gap: 5px;
   border: none;
-  background-color: $primary-color-blue-ribbon;
+  background-color: alert-color('regular', 'dark');
   padding: 0.8rem 1rem;
-  color: $neutral-white;
+  color: map-get($typography-colors, 'white');
   font-family: $font-sans;
 }
 
 .appointment-button__text {
   margin: 0;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: $size-xs;
+  font-weight: weight-typo('sans', 'bold');
 }
 
 .appointment-button__icon {

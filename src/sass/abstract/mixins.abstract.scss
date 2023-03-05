@@ -1,0 +1,54 @@
+@import '@sass/base/typography.base.scss';
+
+@mixin heading(
+  $color: map-get($typography-colors, 'white'),
+  $size: $size-xl,
+  $weight: weight-typo('poppins', 'bold'),
+  $family: $font-poppins
+) {
+  margin: 0;
+  font-family: $family;
+  font-size: $size;
+  font-weight: $weight;
+  color: $color;
+}
+
+@mixin title(
+  $color: map-get($typography-colors, 'blue'),
+  $size: $size-xs,
+  $weight: weight-typo('poppins', 'bold'),
+  $family: $font-poppins
+) {
+  margin: 0;
+  font-family: $family;
+  font-size: $size;
+  font-weight: $weight;
+  color: $color;
+}
+
+@mixin subtitle(
+  $color: map-get($typography-colors, 'black'),
+  $size: $size-lg,
+  $weight: weight-typo('poppins', 'bold'),
+  $family: $font-poppins
+) {
+  margin: 0;
+  font-family: $family;
+  font-size: $size;
+  font-weight: $weight;
+  color: $color;
+}
+
+@mixin paragraph(
+  $color: map-get($typography-colors, 'black'),
+  $size: $size-sm,
+  $weight: weight-typo('poppins', 'light'),
+  $family: $font-poppins
+) {
+  margin: 0;
+  font-family: $family;
+  font-size: $size;
+  font-weight: $weight;
+  color: $color;
+  line-height: 30px;
+}

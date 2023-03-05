@@ -1,4 +1,4 @@
-@import '@sass/abstract/variables.abstract.scss';
+@import '@sass/base/typography.base.scss';
 
 .desktop-navigation-options {
   display: flex;
@@ -15,8 +15,8 @@
 .desktop-navigation-links {
   text-decoration: none;
   font-family: $font-sans;
-  color: $neutral-black;
-  font-size: 14px;
+  color: map-get($typography-colors, 'black');
+  font-size: $size-xs;
 }
 
 .desktop-navigation-links:hover {

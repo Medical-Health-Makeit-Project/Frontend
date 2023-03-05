@@ -21,7 +21,7 @@ export const FormAppointments = () => {
 
   return (
     <form className="welcome-form">
-      <h2 className="welcome-form__title">Book appointment</h2>
+      <h2 className="welcome-form__subtitle">Book appointment</h2>
       <p className="welcome-form__paragraph">Fillup the form to make an appointment with the doctor</p>
       <Calendar onChange={onChangeDate} value={date} minDate={new Date()} calendarType="US" />
       <section className="welcome-form-inputs">
@@ -58,7 +58,7 @@ export const FormAppointments = () => {
           </select>
         </div>
         <input type="text" placeholder="Your message" className="welcome-form__input-message" required maxLength="50" />
-        <Button variant="solid" color="info" onClick={handlerAlert}>
+        <Button variant="outline" color="info" onClick={handlerAlert}>
           Book appointment <span className="arrow-button">{<BsArrowRight size={18} />}</span>
         </Button>
       </section>

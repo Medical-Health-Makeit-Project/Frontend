@@ -1,5 +1,6 @@
-// @import '../../../../../../sass/abstract/variables.abstract.scss';
-@import '@sass/abstract/variables.abstract.scss';
+@import '@sass/themes/theme.themes.scss';
+@import '@sass/base/typography.base.scss';
+@import '@sass/abstract/mixins.abstract.scss';
 
 .whoWeAre-info {
   display: flex;
@@ -16,28 +17,17 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  font-family: $font-poppins;
-  color: $primary-color-scooter;
 
   .whoWeAre-info-header-title {
-    font-size: 14px;
-    font-weight: 600;
-    margin: 0;
+    @include title;
   }
 
   .whoWeAre-info-header-subtitle {
-    color: $neutral-black;
-    font-size: 23px;
-    font-weight: 600;
-    margin: 0;
+    @include subtitle;
   }
 
   .whoWeAre-info-header-paragraph {
-    color: $neutral-black;
-    font-size: 15px;
-    margin: 0;
-    line-height: 30px;
-    font-weight: 300;
+    @include paragraph;
   }
 }
 
@@ -62,19 +52,11 @@
   }
 
   .whoWeAre-info-figure__caption {
-    margin: 0;
-    font-family: $font-poppins;
-    color: $neutral-black;
-    font-size: 15px;
-    font-weight: 300;
-    line-height: 30px;
+    @include paragraph;
 
     @media screen and (min-width: 550px) {
       width: 50%;
     }
-    // @media screen and (min-width: 768px) {
-    //   max-width: 200px;
-    // }
   }
 }
 

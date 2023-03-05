@@ -1,4 +1,5 @@
-@import '@sass/abstract/variables.abstract.scss';
+@import '@sass/base/typography.base.scss';
+@import '@sass/base/alerts.base.scss';
 
 .button {
   display: flex;
@@ -16,71 +17,71 @@
 
 .solid-info {
   border: none;
-  background-color: $button-info;
-  color: $neutral-white;
-  font-size: 14px;
+  background-color: alert-color('info', 'base');
+  color: map-get($typography-colors, 'white');
+  font-size: $size-xs;
 }
 
 .solid-danger {
   border: none;
-  background-color: $button-danger;
-  color: $neutral-white;
-  font-size: 14px;
+  background-color: alert-color('danger', 'base');
+  color: map-get($typography-colors, 'white');
+  font-size: $size-xs;
 }
 
 .solid-success {
   border: none;
-  background-color: $button-success;
-  color: $neutral-white;
-  font-size: 14px;
+  background-color: alert-color('success', 'base');
+  color: map-get($typography-colors, 'white');
+  font-size: $size-xs;
 }
 
 .solid-warning {
   border: none;
-  background-color: $button-warning;
-  color: $neutral-white;
-  font-size: 14px;
+  background-color: alert-color('warning', 'base');
+  color: map-get($typography-colors, 'white');
+  font-size: $size-xs;
 }
 
 .outline-info {
-  border: 1px solid $button-info;
-  color: $button-info;
+  border: 1px solid alert-color('info', 'base');
+  color: alert-color('info', 'base');
   background-color: transparent;
 
   &:hover {
-    color: $neutral-white;
-    background-color: $button-info;
+    color: map-get($typography-colors, 'white');
+    background-color: alert-color('info', 'base');
   }
 }
 
 .outline-danger {
-  border: 1px solid $button-danger;
-  color: $button-danger;
+  border: 1px solid alert-color('danger', 'base');
+  color: alert-color('danger', 'base');
   background-color: transparent;
 
   &:hover {
-    color: $neutral-white;
-    background-color: $button-danger;
+    color: map-get($typography-colors, 'white');
+    background-color: alert-color('danger', 'base');
   }
 }
 
 .outline-success {
-  border: 1px solid $button-success;
-  color: $button-success;
+  border: 1px solid alert-color('success', 'base');
+  color: alert-color('success', 'base');
   background-color: transparent;
 
   &:hover {
-    color: $neutral-white;
-    background-color: $button-success;
+    color: map-get($typography-colors, 'white');
+    background-color: alert-color('success', 'base');
   }
 }
 .outline-warning {
-  border: 1px solid $button-warning;
-  color: $button-warning;
+  border: 1px solid alert-color('warning', 'base');
+  color: alert-color('warning', 'base');
   background-color: transparent;
 
   &:hover {
-    color: $neutral-white;
-    background-color: $button-warning;
+    color: map-get($typography-colors, 'white');
+    background-color: alert-color('warning', 'base');
   }
 }
