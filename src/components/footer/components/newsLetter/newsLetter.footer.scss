@@ -1,5 +1,5 @@
-@import '@sass/abstract/variables.abstract.scss';
 @import '@sass/base/typography.base.scss';
+@import '@sass/themes/theme.themes.scss';
 
 .news-letter {
   display: flex;
@@ -31,20 +31,20 @@
 }
 
 .news-letter-form__input-email {
-  background-color: $neutral-black;
+  background-color: theme-color('background', 'dark');
   border: none;
   outline: none;
-  color: $neutral-white;
-  caret-color: $neutral-white;
+  color: map-get($typography-colors, 'white');
+  caret-color: map-get($typography-colors, 'white');
 }
 
 .news-letter-form__input-email::placeholder {
-  color: $neutral-white;
+  color: map-get($typography-colors, 'white');
   font-size: $size-xs;
 }
 
 .news-letter-form__button {
-  background-color: $neutral-black;
+  background-color: theme-color('background', 'dark');
   border: none;
 }
 
@@ -58,14 +58,6 @@
   display: flex;
   justify-content: space-evenly;
   gap: 10px;
-}
-
-.social-icon {
-  display: inline-flex;
-  align-items: center;
-  background-color: $neutral-white;
-  padding: 0.8rem;
-  border-radius: 50%;
 }
 
 @media screen and (min-width: 700px) {

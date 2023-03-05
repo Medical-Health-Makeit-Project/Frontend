@@ -1,6 +1,7 @@
-@import '@sass/abstract/variables.abstract.scss';
 @import '@sass/themes/theme.themes.scss';
 @import '@sass/base/typography.base.scss';
+@import '@sass/base/alerts.base.scss';
+@import '@sass/abstract/mixins.abstract.scss';
 
 .welcome-container {
   width: 100vw;
@@ -56,28 +57,22 @@
   }
 
   .welcome-info__title {
-    color: theme-color('primary', 'base');
-    font-weight: 600;
-    font-size: 14px;
-    margin: 0;
+    @include title;
   }
   .welcome-info__subtitle {
-    margin: 0;
-    color: map-get($typography-colors, 'white');
-    font-size: 23px;
-    font-weight: 600;
-
+    @include subtitle(map-get($typography-colors, 'white'));
     @media screen and (min-width: 700px) {
-      font-size: 30px;
+      @include heading;
     }
   }
 
   .welcome-info__paragraph {
-    margin: 0;
-    color: map-get($typography-colors, 'white');
-    line-height: 30px;
-    font-size: 15px;
-    font-weight: 300;
+    @include paragraph(map-get($typography-colors, 'white'));
+    // margin: 0;
+    // color: map-get($typography-colors, 'white');
+    // line-height: 30px;
+    // font-size: $size-sm;
+    // font-weight: weight-typo('poppins', 'light');
   }
 }
 
@@ -109,5 +104,5 @@
 .ambulance-message,
 .first-care-message {
   color: map-get($typography-colors, 'white');
-  font-size: 12px;
+  font-size: $size-xxs;
 }

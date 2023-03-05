@@ -1,12 +1,16 @@
 @import '@sass/abstract/variables.abstract.scss';
+@import '@sass/base/typography.base.scss';
+@import '@sass/themes/theme.themes.scss';
+@import '@sass/base/alerts.base.scss';
+@import '@sass/abstract/mixins.abstract.scss';
+
 .welcome-form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   margin: 3rem 0;
-
   padding: 2rem 3.5rem;
-  background-color: $neutral-black;
+  background-color: theme-color('background', 'dark');
   box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 
   @media screen and (min-width: 525px) {
@@ -18,27 +22,20 @@
     gap: 0.8rem;
   }
 
-  .welcome-form__title {
-    margin: 0;
+  .welcome-form__subtitle {
+    @include subtitle($color: map-get($typography-colors, 'white'));
     margin-top: 1rem;
-    font-family: $font-poppins;
-    color: $neutral-white;
-    font-weight: 600;
-    font-size: 23px;
   }
 
   .welcome-form__paragraph {
     margin: 0;
-    font-family: $font-poppins;
-    color: $neutral-white;
-    font-size: 15px;
-    font-weight: 300;
+    @include paragraph($color: map-get($typography-colors, 'white'));
   }
 
   .welcome-form-inputs {
     display: flex;
     flex-direction: column;
-    margin-top: 2rem;
+    margin-top: 1rem;
     gap: 1rem;
   }
 
@@ -46,29 +43,28 @@
   .welcome-form__input-message,
   .welcome-form__input-email,
   .welcome-form__input-date {
-    background-color: $neutral-black;
+    background-color: theme-color('background', 'dark');
     outline: none;
     padding: 0.5rem;
     border: 1px rgba(255, 255, 255, 0.3) solid;
-    caret-color: $neutral-white;
-    color: $neutral-white;
+    caret-color: map-get($typography-colors, 'white');
+    color: map-get($typography-colors, 'white');
     font-family: $font-poppins;
-    font-size: 12px;
+    font-size: $size-xxs;
 
     &::placeholder {
-      color: $neutral-white;
+      color: map-get($typography-colors, 'white');
       font-family: $font-poppins;
-      font-size: 12px;
+      font-size: $size-xxs;
     }
   }
 
   .welcome-form__input-date {
     display: none;
-    color-scheme: dark;
 
     .welcome-form__input-date-component {
       width: 100%;
-      background-color: $neutral-black;
+      background-color: theme-color('background', 'dark');
       border: none;
       outline: none;
     }
@@ -80,7 +76,7 @@
 
   .welcome-form__input-name:not(:placeholder-shown):invalid,
   .welcome-form__input-email:not(:placeholder-shown):invalid {
-    border: rgba(254, 0, 0, 0.6) 1px solid;
+    border: 1px solid alert-color('danger', 'dark');
   }
 
   .welcome-form__select-department-container,
@@ -91,31 +87,12 @@
     .welcome-form__select-department,
     .welcome-form__select-doctor {
       width: 100%;
-      background-color: $neutral-black;
+      background-color: theme-color('background', 'dark');
       border: none;
-      color: $neutral-white;
+      color: map-get($typography-colors, 'white');
       font-family: $font-poppins;
-      font-size: 12px;
+      font-size: $size-xxs;
       outline: none;
-    }
-  }
-
-  .welcome-form__button-submit {
-    background-color: rgb(63, 181, 214);
-    border: none;
-    font-family: $font-poppins;
-    padding: 0.8rem;
-    border-radius: 10px;
-    font-size: 14px;
-    color: $neutral-white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.8rem;
-
-    .arrow-button {
-      display: inline-flex;
-      align-items: center;
     }
   }
 }

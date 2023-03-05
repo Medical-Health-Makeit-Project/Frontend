@@ -1,15 +1,16 @@
 $font-sans: 'Open Sans', sans-serif;
 $font-poppins: 'Poppins', sans-serif;
-$size-xl: 1.875rem;
-$size-lg: 1.478rem;
-$size-md: 1.125rem;
-$size-sm: 0.938rem;
-$size-xs: 0.875rem;
-$size-xxs: 0.75rem;
+$size-xl: 1.875rem; //30px
+$size-lg: 1.478rem; //23px
+$size-md: 1.125rem; //18px
+$size-sm: 0.938rem; //15px
+$size-xs: 0.875rem; //14px
+$size-xxs: 0.75rem; //12px
 
 $typography-colors: (
   'black': #000000,
   'white': #ffffff,
+  'blue': #3fb6d6,
 );
 
 $weights-typo: (

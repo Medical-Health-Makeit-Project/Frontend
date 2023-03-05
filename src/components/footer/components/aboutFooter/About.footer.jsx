@@ -15,7 +15,7 @@ export const About = () => {
     },
     {
       icon: <HiLocationMarker color={colorIcons} size="20" />,
-      message: '24 Newport road, Carlton IP19<',
+      message: '24 Newport road, Carlton IP19',
     },
   ];
 

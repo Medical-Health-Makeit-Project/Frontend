@@ -1,5 +1,6 @@
-@import '@sass/abstract/variables.abstract.scss';
 @import '@sass/themes/theme.themes.scss';
+@import '@sass/base/typography.base.scss';
+@import '@sass/abstract/mixins.abstract.scss';
 
 .frequently-ask-question {
   max-width: 1000px;
@@ -45,8 +46,8 @@
 
     .accordion-container__title {
       width: 100%;
-      font-size: 23px;
-      font-weight: 600;
+      font-size: $size-lg;
+      font-weight: weight-typo('poppins', 'bold');
       margin: 0;
     }
   }
@@ -57,7 +58,7 @@
     margin-top: 1.5rem;
 
     .accordion__title {
-      font-weight: 500;
+      font-weight: weight-typo('poppins', 'semi-bold');
 
       &:focus {
         color: theme-color('primary', 'base');
@@ -65,9 +66,9 @@
     }
 
     .accordion__paragraph {
-      font-size: 14px;
-      font-weight: 300;
       width: 420px;
+      @include paragraph($size: $size-xs);
+      line-height: 20px;
     }
   }
 }

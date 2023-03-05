@@ -1,4 +1,3 @@
-@import '@sass/abstract/variables.abstract.scss';
 @import '@sass/base/typography.base.scss';
 @import '@sass/base/alerts.base.scss';
 
@@ -17,7 +16,7 @@
 .appointment-button__text {
   margin: 0;
   font-size: $size-xs;
-  font-weight: weight-typo('sans', 'light');
+  font-weight: weight-typo('sans', 'bold');
 }
 
 .appointment-button__icon {
