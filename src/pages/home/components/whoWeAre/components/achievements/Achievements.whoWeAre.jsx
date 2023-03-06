@@ -23,7 +23,7 @@ export const Achievements = ({ achievements }) => {
                   <li>
                     <Icon color="info" size="md"></Icon>
                     <div className="whoWeAre-achievements-info">
-                      <p className="whoWeAre-achievements-info__quantity"></p>
+                      <p className="whoWeAre-achievements-info__quantity">hola miuund</p>
                       <p className="whoWeAre-achievements-info__achievement"></p>
                     </div>
                   </li>
