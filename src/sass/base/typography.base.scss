@@ -1,5 +1,6 @@
 $font-sans: 'Open Sans', sans-serif;
 $font-poppins: 'Poppins', sans-serif;
+$size-xxl: 2.5rem; // 40px
 $size-xl: 1.875rem; //30px
 $size-lg: 1.478rem; //23px
 $size-md: 1.125rem; //18px
@@ -18,6 +19,7 @@ $weights-typo: (
     'light': 300,
     'semi-bold': 500,
     'bold': 600,
+    'bolder': 700,
   ),
   'sans': (
     'light': 400,

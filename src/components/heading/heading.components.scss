@@ -1,0 +1,41 @@
+@import '@sass/base/typography.base.scss';
+@import '@sass/abstract/mixins.abstract.scss';
+
+.header-container {
+  width: 100vw;
+  height: 300px;
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.header-container::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+}
+
+.header__image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.header-title-breadcrumb {
+  position: absolute;
+}
+
+.breadcrump {
+  display: grid;
+  place-items: center;
+  vertical-align: middle;
+  color: map-get($typography-colors, 'white');
+  font-size: $size-xs;
+}
+
+.header__title {
+  @include heading;
+}
