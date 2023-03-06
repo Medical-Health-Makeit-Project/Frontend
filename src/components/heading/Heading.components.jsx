@@ -1,8 +1,7 @@
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/react';
-import image from '@assets/heading.jpeg';
 import './heading.components.scss';
 
-export const Heading = ({ title }) => {
+export const Heading = ({ title, image }) => {
   let pathname = new URL(window.location).pathname.split('/').splice(1);
   return (
     <header className="header-container">
