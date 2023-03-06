@@ -23,6 +23,8 @@ export const Button = forwardRef(function Button(
             ? 'solid-success'
             : color === 'warning'
             ? 'solid-warning'
+            : color === 'light'
+            ? 'solid-light'
             : ''
           : variant === buttonVariant.outline
           ? color === 'info'
