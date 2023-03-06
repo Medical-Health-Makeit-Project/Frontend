@@ -2,8 +2,8 @@
 
 @mixin heading(
   $color: map-get($typography-colors, 'white'),
-  $size: $size-xl,
-  $weight: weight-typo('poppins', 'bold'),
+  $size: $size-xxl,
+  $weight: weight-typo('poppins', 'bolder'),
   $family: $font-poppins
 ) {
   margin: 0;

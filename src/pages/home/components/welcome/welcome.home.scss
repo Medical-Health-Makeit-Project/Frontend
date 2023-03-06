@@ -62,7 +62,7 @@
   .welcome-info__subtitle {
     @include subtitle(map-get($typography-colors, 'white'));
     @media screen and (min-width: 700px) {
-      @include heading;
+      @include title($color: map-get($typography-colors, 'white'), $size: $size-lg);
     }
   }
 
