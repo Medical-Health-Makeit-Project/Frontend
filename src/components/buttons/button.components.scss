@@ -43,6 +43,13 @@
   font-size: $size-xs;
 }
 
+.solid-light {
+  border: none;
+  background-color: alert-color('regular', 'base');
+  color: map-get($typography-colors, 'black');
+  font-size: $size-xs;
+}
+
 .outline-info {
   border: 1px solid alert-color('info', 'base');
   color: alert-color('info', 'base');
