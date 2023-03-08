@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import useSWR from 'swr';
 import { ALL_PRODUCTS, CATEGORIES, PRODUCTS_BY_CATEGORY } from '@constants/';
 import { getProducts, getCategories, getProductsByCategory } from '../service';
@@ -9,7 +10,10 @@ export const useProducts = (category) => {
     isLoading: productsIsLoading,
   } = useSWR(
     category ? [PRODUCTS_BY_CATEGORY, category] : ALL_PRODUCTS,
-    category ? ([PRODUCTS_BY_CATEGORY, category]) => getProductsByCategory(PRODUCTS_BY_CATEGORY, category) : getProducts
+    category
+      ? ([PRODUCTS_BY_CATEGORY, category]) =>
+          getProductsByCategory(PRODUCTS_BY_CATEGORY, category)
+      : getProducts
   );
 
   return {

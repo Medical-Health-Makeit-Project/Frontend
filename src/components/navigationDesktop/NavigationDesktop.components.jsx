@@ -1,13 +1,13 @@
+import logo from '@assets/logo.png';
 import { Cart } from '../cart';
 import { NavigationLink } from '../navigationLink';
 import { AppointmentButton } from '../appointmentButton';
-import logo from '@assets/logo.png';
 import './navigationDesktop.components.scss';
 
 export const NavigationDesktop = ({ options }) => {
-  let [home, profile, ourDoctors, shop, appointments, signin] = options;
+  const [home, profile, ourDoctors, shop, appointments, signin] = options;
 
-  let navigation = [home, profile, ourDoctors, shop];
+  const navigation = [home, profile, ourDoctors, shop];
 
   return (
     <section className="container-nav">
@@ -17,12 +17,14 @@ export const NavigationDesktop = ({ options }) => {
         </div>
         <div className="desktop-navigation-options">
           {navigation.map((element) => {
-            return <NavigationLink key={element} text={element} isButton={false} />;
+            return (
+              <NavigationLink key={element} text={element} isButton={false} />
+            );
           })}
         </div>
         <div className="desktop-navigation-actions">
-          {<Cart size={26} />}
-          {<AppointmentButton />}
+          <Cart size={26} />
+          <AppointmentButton />
         </div>
       </nav>
     </section>

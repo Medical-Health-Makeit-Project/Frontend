@@ -25,28 +25,38 @@ export const Schedule = () => {
   return (
     <article className="whoWeAre-schedule">
       <div className="whoWeAre-schedule-image-container">
-        <img src={emergency} alt="emergency" className="whoWeAre-schedule-container__image" />
+        <img
+          src={emergency}
+          alt="emergency"
+          className="whoWeAre-schedule-container__image"
+        />
       </div>
       <div className="whoWeAre-schedule-info">
         <header className="whoWeAre-schedule-info__header">
           <span className="whoWeAre-schedule-icon">
-            {
-              <Icon color="regular" size="md">
-                <FaPhoneAlt size={24} />
-              </Icon>
-            }
+            <Icon color="regular" size="md">
+              <FaPhoneAlt size={24} />
+            </Icon>
           </span>
           <div className="whoWeAre-schedule-info-emergency">
-            <p className="whoWeAre-schedule-info-emergency__message">Emergency 24 hours</p>
-            <p className="whoWeAre-schedule-info-emergency__phone">+04 8544 3322</p>
+            <p className="whoWeAre-schedule-info-emergency__message">
+              Emergency 24 hours
+            </p>
+            <p className="whoWeAre-schedule-info-emergency__phone">
+              +04 8544 3322
+            </p>
           </div>
         </header>
         <ul className="whoWeAre-schedule-info-ul">
           {schedule.map((element) => {
             return (
               <li key={element.id} className="whoWeAre-schedule-info-ul__li">
-                <p className="whoWeAre-schedule-info-ul__days">{element.days}</p>
-                <p className="whoWeAre-schedule-info-ul__hours">{element.hours}</p>
+                <p className="whoWeAre-schedule-info-ul__days">
+                  {element.days}
+                </p>
+                <p className="whoWeAre-schedule-info-ul__hours">
+                  {element.hours}
+                </p>
               </li>
             );
           })}

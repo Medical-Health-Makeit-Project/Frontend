@@ -4,10 +4,25 @@ import { ProductQuantity } from '../productQuantity';
 import { ProductBuyButton } from '../productBuyButton';
 import './product.shop.scss';
 
-export const Product = ({ id, product, image, dose, description, label, discount, category, price, stock }) => {
+export const Product = ({
+  id,
+  product,
+  image,
+  dose,
+  description,
+  label,
+  discount,
+  price,
+  stock,
+}) => {
   return (
     <article className="product">
-      <ProductImage id={id} image={image} discount={discount} product={product} />
+      <ProductImage
+        id={id}
+        image={image}
+        discount={discount}
+        product={product}
+      />
       <ProductInfo product={product} dose={dose} price={price} label={label} />
       <ProductQuantity stock={stock} />
       <ProductBuyButton />

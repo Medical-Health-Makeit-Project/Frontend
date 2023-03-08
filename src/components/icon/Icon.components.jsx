@@ -33,7 +33,15 @@ export const Icon = forwardRef(function Icon(
           ? colorVariant.transparent
           : ''
       }
-        ${size === 'sm' ? 'sm' : size === 'md' ? 'md' : size === 'lg' ? 'lg' : ''}
+        ${
+          size === 'sm'
+            ? 'sm'
+            : size === 'md'
+            ? 'md'
+            : size === 'lg'
+            ? 'lg'
+            : ''
+        }
       } icon`}
     >
       {children}

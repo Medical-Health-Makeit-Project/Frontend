@@ -3,8 +3,10 @@ import './appointmentButton.components.scss';
 
 export const AppointmentButton = () => {
   return (
-    <button className="appointment-button">
-      <span className="appointment-button__icon">{<BiCalendar size={21} />}</span>{' '}
+    <button type="button" className="appointment-button">
+      <span className="appointment-button__icon">
+        <BiCalendar size={21} />
+      </span>{' '}
       <p className="appointment-button__text">Appointment</p>
     </button>
   );
