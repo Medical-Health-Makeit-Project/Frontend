@@ -20,21 +20,6 @@ export const Carousel = ({ departments }) => {
     FaBaby: <FaBaby color="white" size={24} />,
   };
 
-  /*const useWindowSize = () => {
-    const [windowSize, setWindowSize] = useState(window.innerWidth);
-
-    useEffect(() => {
-      const changeWindowSize = () => {
-        setWindowSize(window.innerWidth);
-      };
-
-      window.addEventListener('resize', changeWindowSize);
-
-      return () => window.removeEventListener('resize', changeWindowSize);
-    }, []);
-
-    return windowSize;
-  };*/
   const nav = useWindowSize() <= 768 ? false : true;
   let spv = useWindowSize() > 600 ? 2 : 1;
   if (useWindowSize() > 600) spv = 2;
