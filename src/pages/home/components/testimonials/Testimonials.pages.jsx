@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Testimonial1 } from './components/testimonial1.testimonials';
 import 'swiper/css';
 //import 'swiper/scss/navigation';
 import 'swiper/css/pagination';
