@@ -1,14 +1,14 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useWindowSize } from '@hooks';
-import 'swiper/css';
-import 'swiper/scss/navigation';
-import 'swiper/css/pagination';
 import { Navigation, Pagination } from 'swiper';
 import { Icon } from '@components/icon';
 import { BsArrowRight, BsEyeglasses } from 'react-icons/bs';
 import { GiBrokenBone, GiBrain, GiStomach } from 'react-icons/gi';
 import { FaHeartbeat, FaBaby } from 'react-icons/fa';
+import 'swiper/css';
+import 'swiper/scss/navigation';
+import 'swiper/css/pagination';
 
 export const Carousel = ({ departments }) => {
   const icons = {
