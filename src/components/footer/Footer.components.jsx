@@ -15,7 +15,9 @@ export const Footer = () => {
         </div>
         <NewsLetter />
       </div>
-      <section className="footer__credits">Coded by Jean Vittory & Sebastian Alvarez</section>
+      <section className="footer__credits">
+        Coded by Jean Vittory & Sebastian Alvarez
+      </section>
     </footer>
   );
 };

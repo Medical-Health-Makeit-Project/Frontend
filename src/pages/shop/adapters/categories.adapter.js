@@ -6,10 +6,9 @@ export const categoryAapter = (categories) => {
         category: category.category,
       };
     });
-  } else {
-    return {
-      id: categories.id,
-      category: categories.category,
-    };
   }
+  return {
+    id: categories.id,
+    category: categories.category,
+  };
 };

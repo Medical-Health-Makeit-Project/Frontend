@@ -10,7 +10,9 @@ export const getProducts = async (URL) => {
 export const getProductsByCategory = async (URL, category) => {
   const response = await axios.get(URL);
   const productsAdapted = productAdapter(response.data);
-  const productsFiltered = productsAdapted.filter((product) => product.category === category);
+  const productsFiltered = productsAdapted.filter(
+    (product) => product.category === category
+  );
   return productsFiltered;
 };
 

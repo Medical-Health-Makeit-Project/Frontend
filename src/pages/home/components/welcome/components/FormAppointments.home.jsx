@@ -17,13 +17,18 @@ export const FormAppointments = () => {
     TransformStream();
   };
 
-  console.log(date);
-
   return (
     <form className="welcome-form">
       <h2 className="welcome-form__subtitle">Book appointment</h2>
-      <p className="welcome-form__paragraph">Fillup the form to make an appointment with the doctor</p>
-      <Calendar onChange={onChangeDate} value={date} minDate={new Date()} calendarType="US" />
+      <p className="welcome-form__paragraph">
+        Fillup the form to make an appointment with the doctor
+      </p>
+      <Calendar
+        onChange={onChangeDate}
+        value={date}
+        minDate={new Date()}
+        calendarType="US"
+      />
       <section className="welcome-form-inputs">
         <input
           type="text"
@@ -41,25 +46,46 @@ export const FormAppointments = () => {
           required
         />
         <div className="welcome-form__input-date">
-          <DatePicker selected={date} onChange={onChangeDate} className="welcome-form__input-date-component" />
+          <DatePicker
+            selected={date}
+            onChange={onChangeDate}
+            className="welcome-form__input-date-component"
+          />
         </div>
         <div className="welcome-form__select-department-container">
           <select name="" className="welcome-form__select-department" required>
-            <option defaultValue="Department" hidden className="welcome-form__select-department--option">
+            <option
+              defaultValue="Department"
+              hidden
+              className="welcome-form__select-department--option"
+            >
               Department
             </option>
           </select>
         </div>
         <div className="welcome-form__select-doctor-container">
           <select name="" className="welcome-form__select-doctor" required>
-            <option defaultValue="Select Doctor" hidden className="welcome-form__select-doctor--option">
+            <option
+              defaultValue="Select Doctor"
+              hidden
+              className="welcome-form__select-doctor--option"
+            >
               Select Doctor
             </option>
           </select>
         </div>
-        <input type="text" placeholder="Your message" className="welcome-form__input-message" required maxLength="50" />
+        <input
+          type="text"
+          placeholder="Your message"
+          className="welcome-form__input-message"
+          required
+          maxLength="50"
+        />
         <Button variant="outline" color="info" onClick={handlerAlert}>
-          Book appointment <span className="arrow-button">{<BsArrowRight size={18} />}</span>
+          Book appointment{' '}
+          <span className="arrow-button">
+            <BsArrowRight size={18} />
+          </span>
         </Button>
       </section>
     </form>

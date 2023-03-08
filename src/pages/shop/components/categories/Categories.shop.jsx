@@ -2,8 +2,13 @@ import { BiErrorCircle } from 'react-icons/bi';
 import { Spinner } from '@chakra-ui/react';
 import './categories.shop.scss';
 
-export const SelectCategories = ({ categories, error, handleSelectCategories, isLoading }) => {
-  let location = window.location.pathname;
+export const SelectCategories = ({
+  categories,
+  error,
+  handleSelectCategories,
+  isLoading,
+}) => {
+  const location = window.location.pathname;
   if (error) {
     return (
       <div className="error-message">
@@ -21,13 +26,20 @@ export const SelectCategories = ({ categories, error, handleSelectCategories, is
 
   return (
     <div className="categories-container">
-      <select className="categories" onChange={(e) => handleSelectCategories(e.target.value)}>
+      <select
+        className="categories"
+        onChange={(e) => handleSelectCategories(e.target.value)}
+      >
         <option value="/home/shop">All</option>
         {categories.map((e) => {
-          let selected = location.endsWith(e.category.toLowerCase());
+          const selected = location.endsWith(e.category.toLowerCase());
           console.log(selected);
           return (
-            <option key={e.id} value={`/home/shop/${e.category.toLowerCase()}`} selected={selected}>
+            <option
+              key={e.id}
+              value={`/home/shop/${e.category.toLowerCase()}`}
+              selected={selected}
+            >
               {e.category}
             </option>
           );

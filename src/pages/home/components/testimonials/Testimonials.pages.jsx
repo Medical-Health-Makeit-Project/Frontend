@@ -1,20 +1,10 @@
-import React, { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-//import 'swiper/scss/navigation';
-import 'swiper/css/pagination';
-
-import './testimonials.pages.scss';
 import { Navigation, Autoplay, Pagination } from 'swiper';
+import 'swiper/css/pagination';
+import 'swiper/css';
+import './testimonials.pages.scss';
 
 export const Testimonials = () => {
-  const progressCircle = useRef(null);
-  const progressContent = useRef(null);
-  const onAutoplayTimeLeft = (s, time, progress) => {
-    progressCircle.current.style.setProperty('--progress', 1 - progress);
-    progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
-  };
-
   return (
     <div className="testimonials__container">
       <div className="testimonials__text">
@@ -22,14 +12,13 @@ export const Testimonials = () => {
         <h3>What patients say about us</h3>
       </div>
       <Swiper
-        loop={true}
+        loop
         navigation={false}
         pagination={{
           dynamicBullets: true,
         }}
         modules={[Navigation, Autoplay, Pagination]}
-        effect={'cube'}
-        grabCursor={true}
+        grabCursor
         cubeEffect={{
           shadow: true,
           slideShadows: true,
@@ -45,9 +34,10 @@ export const Testimonials = () => {
         <SwiperSlide>
           <article className="testimonial">
             <p>
-              "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam consequuntur possimus rem ea, odit
-              ratione doloribus tenetur fuga porro sapiente reprehenderit ullam illum tempore id repudiandae vitae?
-              Enim, qui temporibus! Cum corporism."
+              `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam
+              consequuntur possimus rem ea, odit ratione doloribus tenetur fuga
+              porro sapiente reprehenderit ullam illum tempore id repudiandae
+              vitae? Enim, qui temporibus! Cum corporism.`
             </p>
 
             <div className="testimonial__name">
@@ -59,9 +49,10 @@ export const Testimonials = () => {
         <SwiperSlide>
           <article className="testimonial">
             <p>
-              "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam consequuntur possimus rem ea, odit
-              ratione doloribus tenetur fuga porro sapiente reprehenderit ullam illum tempore id repudiandae vitae?
-              Enim, qui temporibus! Cum corporism."
+              `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam
+              consequuntur possimus rem ea, odit ratione doloribus tenetur fuga
+              porro sapiente reprehenderit ullam illum tempore id repudiandae
+              vitae? Enim, qui temporibus! Cum corporism.`
             </p>
             <div className="testimonial__name">
               <p className="testimonial__fullname">Jhon Doe</p>
@@ -72,9 +63,10 @@ export const Testimonials = () => {
         <SwiperSlide>
           <article className="testimonial">
             <p>
-              "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam consequuntur possimus rem ea, odit
-              ratione doloribus tenetur fuga porro sapiente reprehenderit ullam illum tempore id repudiandae vitae?
-              Enim, qui temporibus! Cum corporism."
+              `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam
+              consequuntur possimus rem ea, odit ratione doloribus tenetur fuga
+              porro sapiente reprehenderit ullam illum tempore id repudiandae
+              vitae? Enim, qui temporibus! Cum corporism.`
             </p>
             <div className="testimonial__name">
               <p className="testimonial__fullname">Isabella Fernadez</p>
@@ -85,9 +77,10 @@ export const Testimonials = () => {
         <SwiperSlide>
           <article className="testimonial">
             <p className="testimonial__fullname">
-              "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam consequuntur possimus rem ea, odit
-              ratione doloribus tenetur fuga porro sapiente reprehenderit ullam illum tempore id repudiandae vitae?
-              Enim, qui temporibus! Cum corporism."
+              `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam
+              consequuntur possimus rem ea, odit ratione doloribus tenetur fuga
+              porro sapiente reprehenderit ullam illum tempore id repudiandae
+              vitae? Enim, qui temporibus! Cum corporism.`
             </p>
             <div className="testimonial__name">
               <p className="testimonial__fullname">Jhon Smith</p>

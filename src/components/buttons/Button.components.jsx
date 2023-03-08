@@ -11,6 +11,7 @@ export const Button = forwardRef(function Button(
 ) {
   return (
     <button
+      type="button"
       {...props}
       ref={ref}
       className={`${className} ${

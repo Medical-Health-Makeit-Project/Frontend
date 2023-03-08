@@ -1,4 +1,3 @@
-import React, { useRef, useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useWindowSize } from '@hooks';
 import { Navigation, Pagination } from 'swiper';
@@ -20,7 +19,7 @@ export const Carousel = ({ departments }) => {
     FaBaby: <FaBaby color="white" size={24} />,
   };
 
-  const nav = useWindowSize() <= 768 ? false : true;
+  const nav = !useWindowSize() <= 768;
   let spv = useWindowSize() > 600 ? 2 : 1;
   if (useWindowSize() > 600) spv = 2;
   if (useWindowSize() > 1000) spv = 3;
@@ -30,18 +29,18 @@ export const Carousel = ({ departments }) => {
       <Swiper
         slidesPerView={spv}
         spaceBetween={20}
-        loop={true}
+        loop
         navigation={false}
         pagination={{
           dynamicBullets: true,
           clickable: nav,
         }}
         modules={[Navigation, Pagination]}
-        grabCursor={true}
+        grabCursor
         className="mySwiper swiper__container"
       >
         {departments.map((element) => {
-          let icon = icons[element.icon];
+          const icon = icons[element.icon];
           return (
             <SwiperSlide key={element.id}>
               <article className="scroll__card">
@@ -50,11 +49,15 @@ export const Carousel = ({ departments }) => {
                 </Icon>
                 <div className="scroll__card-text">
                   <p className="scroll__card-title">{element.department}</p>
-                  <p className="scroll__card-description">{element.description}</p>
+                  <p className="scroll__card-description">
+                    {element.description}
+                  </p>
                 </div>
                 <div className="more__container">
                   <p>Read more</p>
-                  <span>{<BsArrowRight color="black" />}</span>
+                  <span>
+                    <BsArrowRight color="black" />
+                  </span>
                 </div>
               </article>
             </SwiperSlide>

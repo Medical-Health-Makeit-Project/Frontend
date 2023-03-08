@@ -23,12 +23,13 @@ export const About = () => {
     <section className="about">
       <h2 className="about__title">About</h2>
       <p className="about__paragraph">
-        Vestibulum ac diam sit amet quam vehicula elementum sed sit amet. Nulla portitor accumsan.
+        Vestibulum ac diam sit amet quam vehicula elementum sed sit amet. Nulla
+        portitor accumsan.
       </p>
       <ul className="about__ul">
         {icons.map((icon) => {
           return (
-            <li className="about__li">
+            <li key={icon} className="about__li">
               <Icon color="transparent" size="sm">
                 {icon.icon}
               </Icon>

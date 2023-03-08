@@ -15,19 +15,18 @@ export const productAdapter = (products) => {
         category: product.category,
       };
     });
-  } else {
-    return {
-      id: products.id,
-      product: products.product,
-      label: products.label,
-      description: products.description,
-      price: products.price,
-      stock: products.stock,
-      quantity: products.quantity,
-      dose: products.dose,
-      image: products.image,
-      discount: products.discount,
-      category: products.category,
-    };
   }
+  return {
+    id: products.id,
+    product: products.product,
+    label: products.label,
+    description: products.description,
+    price: products.price,
+    stock: products.stock,
+    quantity: products.quantity,
+    dose: products.dose,
+    image: products.image,
+    discount: products.discount,
+    category: products.category,
+  };
 };

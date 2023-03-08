@@ -9,12 +9,23 @@ import './header.components.scss';
 */
 
 export const Header = () => {
-  const navigationOptions = ['Home', 'Profile', 'Our Doctors', 'Shop', 'Appointments', 'Sign in'];
+  const navigationOptions = [
+    'Home',
+    'Profile',
+    'Our Doctors',
+    'Shop',
+    'Appointments',
+    'Sign in',
+  ];
   return (
     <header className="header">
-      {<HeaderInfo />}
-      <div className="navigation-mobile">{<NavigationMobile options={navigationOptions} />}</div>
-      <div className="navigation-desktop">{<NavigationDesktop options={navigationOptions} />}</div>
+      <HeaderInfo />
+      <div className="navigation-mobile">
+        <NavigationMobile options={navigationOptions} />
+      </div>
+      <div className="navigation-desktop">
+        <NavigationDesktop options={navigationOptions} />
+      </div>
     </header>
   );
 };
