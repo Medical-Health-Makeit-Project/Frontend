@@ -1,4 +1,5 @@
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 import './heading.components.scss';
 
 export const Heading = ({ title, image }) => {
@@ -9,10 +10,13 @@ export const Heading = ({ title, image }) => {
       <div className="header-title-breadcrumb">
         <h1 className="header__title">{title}</h1>
         <Breadcrumb className="breadcrump">
-          {pathname.map((element) => {
+          {pathname.map((element, idx) => {
+            let route = pathname.slice(0, idx + 1).join('/');
             return (
               <BreadcrumbItem key={element}>
-                <BreadcrumbLink href="#">{element}</BreadcrumbLink>
+                <BreadcrumbLink as={Link} to={`/${route}`}>
+                  {element}
+                </BreadcrumbLink>
               </BreadcrumbItem>
             );
           })}

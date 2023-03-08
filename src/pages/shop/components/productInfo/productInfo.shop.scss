@@ -1,0 +1,36 @@
+@import '@sass/abstract/mixins.abstract.scss';
+@import '@sass/base/typography.base.scss';
+@import '@sass/abstract/mixins.abstract.scss';
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding: 1rem;
+
+  .product-name-container {
+    width: 100%;
+    text-align: center;
+  }
+
+  .product-name-container__name {
+    @include paragraph($weight: weight-typo('poppins', 'bolder'));
+    border-top: solid rgba(0, 0, 0, 0.474) 1px;
+    border-bottom: solid rgba(0, 0, 0, 0.474) 1px;
+    letter-spacing: 1px;
+  }
+  .product-data-container {
+    display: flex;
+    justify-content: space-around;
+    @include paragraph;
+  }
+
+  .product-info__price {
+    width: 50%;
+    @include paragraph($weight: weight-typo('poppins', 'semi-bold'), $color: map-get($typography-colors, 'black'));
+    text-align: center;
+    background-color: #f49d1a;
+    border-radius: 16px;
+    margin: 0 auto;
+  }
+}

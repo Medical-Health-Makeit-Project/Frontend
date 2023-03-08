@@ -1,0 +1,32 @@
+@import '@sass/base/alerts.base.scss';
+@import '@sass/base/typography.base.scss';
+@import '@sass/abstract/mixins.abstract.scss';
+
+.image-container {
+  position: relative;
+
+  .discount-flag {
+    width: 35px;
+    height: 30px;
+    position: absolute;
+    top: 15px;
+    left: 235px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+
+    @include paragraph(
+      $color: map-get($typography-colors, 'white'),
+      $size: $size-xxs,
+      $weight: weight-typo('poppins', 'semi-bold')
+    );
+    background-color: alert-color('danger', 'base');
+  }
+}
+
+.image-container__image {
+  border-radius: 20px 20px 0 0;
+  width: 100%;
+}
