@@ -9,6 +9,9 @@
 
 .buttonQuantity {
   border: solid #000000 1px;
-
   padding: 0.4rem;
+
+  @media screen and (min-width: 700px) {
+    cursor: pointer;
+  }
 }

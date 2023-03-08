@@ -1,13 +1,14 @@
+import { Link } from 'react-router-dom';
 import './navigationLink.components.scss';
 
 export const NavigationLink = ({ text, link, isButton }) => {
   return isButton ? (
-    <a href="#" className="button">
+    <Link to={`${text === 'Home' ? 'home' : `home/${text.toLowerCase()}`}`} className="button">
       {text}
-    </a>
+    </Link>
   ) : (
-    <a href="#" className="text">
+    <Link to={`${text === 'Home' ? 'home' : `home/${text.toLowerCase()}`}`} className="text">
       {text}
-    </a>
+    </Link>
   );
 };

@@ -1,29 +1,40 @@
-import { useState, useEffect } from 'react';
-import { Heading } from '@components/heading';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Spinner } from '@chakra-ui/react';
-import useSWR from 'swr';
+import { Heading } from '@components/heading';
 import { Product } from './components/product';
-import { getProducts } from './service';
-import { ALL_PRODUCTS } from '@constants/';
+import { SelectCategories } from './components/categories';
+import { useProducts, useCategories } from './swr';
+
 import headingImage from '@assets/heading-shop.jpeg';
 import './shop.page.scss';
 
 export const Shop = () => {
-  const { data, error, isLoading } = useSWR(ALL_PRODUCTS, getProducts);
+  let { category } = useParams();
+  let navigate = useNavigate();
+  const { products, productsError, productsIsLoading } = useProducts(category);
+  const { categories, categoriesError, categoriesIsLoading } = useCategories();
 
-  if (isLoading)
+  const handleSelectCategories = (value) => {
+    navigate(value);
+  };
+  if (productsIsLoading)
     return (
       <div className="spinner-container">
         <Spinner />
       </div>
     );
-  if (error) return <div className="spinner-container">ERROR</div>;
-
+  if (productsError) return <div className="spinner-container">ERROR</div>;
   return (
-    <main>
+    <main className="shop-container">
       <Heading title="Shop" image={headingImage} />
+      <SelectCategories
+        categories={categories}
+        error={categoriesError?.message}
+        handleSelectCategories={handleSelectCategories}
+        isLoading={categoriesIsLoading}
+      />
       <section className="products-container">
-        {data.map((element) => {
+        {products.map((element) => {
           return <Product key={element.id} {...element} />;
         })}
       </section>

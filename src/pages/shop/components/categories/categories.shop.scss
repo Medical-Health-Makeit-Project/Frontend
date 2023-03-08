@@ -1,0 +1,29 @@
+@import '@sass/abstract/mixins.abstract.scss';
+@import '@sass/base/typography.base.scss';
+
+//ml-12  md:ml-20  lg:ml-40  w-1/2  md:w-1/6 border border-black text-xs  tracking-wider font-Mono px-4 py-2 mt-16
+.categories-container {
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  gap: 4rem 0;
+  border: 1px solid black;
+  padding: 0.5rem;
+  outline: none;
+  @include paragraph();
+  margin: 3rem auto;
+
+  .categories {
+    border: none;
+    outline: none;
+    background-color: transparent;
+  }
+}
+
+.error-message {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  margin-top: 2rem;
+}
