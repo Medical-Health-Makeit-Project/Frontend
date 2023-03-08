@@ -29,14 +29,8 @@
         }
     }
 }
-
-.swiper{
-    width: 90%;
-    height: 400px;
-
-    @media(min-width:768px){
-        width: 700px;
-    }
+.swiper__container{
+    width: 100%;
 }
 .swiper-slide {
     text-align: center;
@@ -59,11 +53,6 @@
         margin-bottom: 2.3rem;
 
     }
-}
-
-.swiper__container{
-    height: 400px;
-    padding-bottom: 3rem;
 }
 
 .testimonial__name{
