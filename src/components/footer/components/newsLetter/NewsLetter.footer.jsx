@@ -11,10 +11,10 @@ import './newsLetter.footer.scss';
 
 export const NewsLetter = () => {
   const socials = [
-    <RiFacebookLine color={colorIcons} size={22} key="1" />,
-    <RiTwitterFill color={colorIcons} size={22} key="2" />,
-    <RiInstagramFill color={colorIcons} size={22} key="3" />,
-    <RiLinkedinFill color={colorIcons} size={22} key="4" />,
+    { id: '1', icon: <RiFacebookLine color={colorIcons} size={22} key="1" /> },
+    { id: '2', icon: <RiTwitterFill color={colorIcons} size={22} key="2" /> },
+    { id: '3', icon: <RiInstagramFill color={colorIcons} size={22} key="3" /> },
+    { id: '4', icon: <RiLinkedinFill color={colorIcons} size={22} key="4" /> },
   ];
 
   return (
@@ -39,8 +39,8 @@ export const NewsLetter = () => {
         <ul className="socials__ul">
           {socials.map((social) => {
             return (
-              <li className="socials__li " key={social}>
-                <Icon size="sm">{social}</Icon>
+              <li className="socials__li " key={social.id}>
+                <Icon size="sm">{social.icon}</Icon>
               </li>
             );
           })}

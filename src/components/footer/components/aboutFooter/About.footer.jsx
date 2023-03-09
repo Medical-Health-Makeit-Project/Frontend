@@ -29,7 +29,7 @@ export const About = () => {
       <ul className="about__ul">
         {icons.map((icon) => {
           return (
-            <li key={icon} className="about__li">
+            <li key={icon.message} className="about__li">
               <Icon color="transparent" size="sm">
                 {icon.icon}
               </Icon>
