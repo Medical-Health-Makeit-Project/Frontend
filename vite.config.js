@@ -7,20 +7,32 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: [
-      { find: '@assets', replacement: path.resolve(__dirname, '/src/assets') },
+      {
+        find: '@assets',
+        replacement: path.resolve(path.join(__dirname, '/src/assets')),
+      },
       {
         find: '@components',
-        replacement: path.resolve(__dirname, '/src/components'),
+        replacement: path.resolve(path.join(__dirname, '/src/components')),
       },
 
-      { find: '@pages', replacement: path.resolve(__dirname, '/src/pages') },
+      {
+        find: '@pages',
+        replacement: path.resolve(path.join(__dirname, '/src/pages')),
+      },
 
-      { find: '@sass', replacement: path.resolve(__dirname, '/src/sass') },
+      {
+        find: '@sass',
+        replacement: path.resolve(path.join(__dirname, '/src/sass')),
+      },
       {
         find: '@constants',
-        replacement: path.resolve(__dirname, '/src/constants'),
+        replacement: path.resolve(path.join(__dirname, '/src/constants')),
       },
-      { find: '@hooks', replacement: path.resolve(__dirname, '/src/hooks') },
+      {
+        find: '@hooks',
+        replacement: path.resolve(path.join(__dirname, '/src/hooks')),
+      },
     ],
   },
   server: {
