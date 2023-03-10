@@ -21,6 +21,7 @@ specifiers:
   eslint-plugin-react-hooks: ^4.3.0
   framer-motion: ^10.0.1
   prettier: ^2.8.4
+  prop-types: ^15.8.1
   react: ^18.2.0
   react-calendar: ^4.0.0
   react-datepicker: ^4.10.0
@@ -41,6 +42,7 @@ dependencies:
   '@emotion/styled': 11.10.6_oouaibmszuch5k64ms7uxp2aia
   axios: 1.3.4
   framer-motion: 10.0.1_biqbaboplfbrettd7655fr4n2y
+  prop-types: 15.8.1
   react: 18.2.0
   react-calendar: 4.0.0_biqbaboplfbrettd7655fr4n2y
   react-datepicker: 4.10.0_biqbaboplfbrettd7655fr4n2y
