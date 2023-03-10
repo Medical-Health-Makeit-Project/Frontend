@@ -12,11 +12,16 @@ export const Shop = () => {
   const navigate = useNavigate();
   const { products, productsError, productsIsLoading } = useProducts(category);
   const { categories, categoriesError, categoriesIsLoading } = useCategories();
-
   const handleSelectCategories = (value) => {
     navigate(value);
   };
-  if (productsError) return <div className="spinner-container">ERROR</div>;
+  if (productsError)
+    return (
+      <div className="spinner-container">
+        ERROR LOADING PRODUCTS, PLEASE TRY AGAIN OR CONTACT YOUR NEAREST TRUSTED
+        DEVELOPER
+      </div>
+    );
   if (productsIsLoading)
     return (
       <div className="spinner-container">
