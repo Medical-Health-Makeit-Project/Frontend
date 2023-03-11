@@ -1,5 +1,6 @@
 import { forwardRef } from 'react';
 import './icon.components.scss';
+import { PropTypes } from 'prop-types';
 
 const colorVariant = {
   regular: 'regular',
@@ -48,3 +49,21 @@ export const Icon = forwardRef(function Icon(
     </div>
   );
 });
+
+Icon.propTypes = {
+  color: PropTypes.oneOf([
+    'regular',
+    'info',
+    'danger',
+    'warning',
+    'success',
+    'transpaerent',
+  ]),
+  size: PropTypes.string,
+  children: PropTypes.node.isRequired,
+};
+
+Icon.defaultProps = {
+  color: 'regular',
+  size: 'md',
+};

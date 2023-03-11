@@ -1,5 +1,6 @@
-import { HiMenu } from 'react-icons/hi';
+import { PropTypes } from 'prop-types';
 import logo from '@assets/logo.png';
+import { HiMenu } from 'react-icons/hi';
 import { useState } from 'react';
 import { Cart } from '../cart';
 import { NavigationPanel } from './NavigationPanel.navigationMobile';
@@ -34,4 +35,8 @@ export const NavigationMobile = ({ options }) => {
       </nav>
     </section>
   );
+};
+
+NavigationMobile.propTypes = {
+  options: PropTypes.oneOfType([PropTypes.string]).isRequired,
 };
