@@ -5,7 +5,7 @@ export const ProductBuyButton = () => {
   return (
     <section className="button-container">
       <Button color="danger" className="button">
-        Buy
+        Add
       </Button>
     </section>
   );
