@@ -7,7 +7,8 @@ export const useQuantity = () => {
     if (!quantity) return;
     setQuantity((prev) => prev - 1);
   };
-  const handlerPlus = () => {
+  const handlerPlus = (isOutOfStock) => {
+    if (isOutOfStock) return;
     setQuantity((prev) => prev + 1);
   };
 
