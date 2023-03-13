@@ -54,17 +54,7 @@
     }
   }
 }
-.password__input {
-  height: 30px;
-  width: 100%;
-  padding-left: 10px;
-  border: 1px solid rgb(211 211 211);
-  border-radius: 5px;
 
-  &:hover {
-    background-color: $primary-background-blue;
-  }
-}
 .terms__container {
   width: 290px;
   display: flex;
