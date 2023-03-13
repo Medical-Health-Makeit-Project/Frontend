@@ -1,5 +1,6 @@
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
+import { PropTypes } from 'prop-types';
 import './heading.components.scss';
 
 export const Heading = ({ title, image }) => {
@@ -24,4 +25,19 @@ export const Heading = ({ title, image }) => {
       </div>
     </header>
   );
+};
+
+/*
+ title and image to build the component 
+ */
+Heading.propTypes = {
+  title: PropTypes.string.isRequired,
+  image: PropTypes.string,
+};
+
+/*
+  The image could pass with a default value as an empty string
+ */
+Heading.defaultProps = {
+  image: '',
 };

@@ -1,3 +1,4 @@
+import { PropTypes } from 'prop-types';
 import { TfiMedallAlt, TfiThumbUp } from 'react-icons/tfi';
 import { TbBed } from 'react-icons/tb';
 import { AiOutlineExperiment } from 'react-icons/ai';
@@ -55,4 +56,15 @@ export const Achievements = ({ achievements }) => {
       </ul>
     </article>
   );
+};
+
+Achievements.propTypes = {
+  achievements: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      icon: PropTypes.string,
+      quantity: PropTypes.string,
+      achievement: PropTypes.string,
+    })
+  ).isRequired,
 };

@@ -35,5 +35,6 @@ module.exports = {
     'react/jsx-props-no-spreading': 0,
     'react/no-shadow': 0,
     'no-nested-ternary': 0,
+    'jsx-a11y/label-has-associated-control': 0,
   },
 };

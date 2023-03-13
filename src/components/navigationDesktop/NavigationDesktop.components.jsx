@@ -1,4 +1,5 @@
 import logo from '@assets/logo.png';
+import { PropTypes } from 'prop-types';
 import { Cart } from '../cart';
 import { NavigationLink } from '../navigationLink';
 import { AppointmentButton } from '../appointmentButton';
@@ -29,4 +30,8 @@ export const NavigationDesktop = ({ options }) => {
       </nav>
     </section>
   );
+};
+
+NavigationDesktop.propTypes = {
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
 };

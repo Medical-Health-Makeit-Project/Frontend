@@ -1,5 +1,6 @@
 import { IoCartOutline } from 'react-icons/io5';
 import './cart.components.scss';
+import { PropTypes } from 'prop-types';
 /*
   mostrar el circulo solo cuando hay productos agregados al carrito
 */
@@ -12,4 +13,8 @@ export const Cart = ({ size }) => {
       <IoCartOutline size={size} color="black" />
     </div>
   );
+};
+
+Cart.propTypes = {
+  size: PropTypes.number.isRequired,
 };
