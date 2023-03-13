@@ -1,1 +1,2 @@
-export * from './useQuantity.hooks';
+export * from './useQuantity.shop';
+export * from './useStock.shop';
