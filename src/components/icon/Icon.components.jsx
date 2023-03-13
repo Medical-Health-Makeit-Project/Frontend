@@ -50,6 +50,9 @@ export const Icon = forwardRef(function Icon(
   );
 });
 
+/*
+  The color based on one kind of alert who the dev want to show at user
+*/
 Icon.propTypes = {
   color: PropTypes.oneOf([
     'regular',
@@ -57,13 +60,19 @@ Icon.propTypes = {
     'danger',
     'warning',
     'success',
-    'transpaerent',
+    'transparent',
   ]),
   size: PropTypes.string,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
+  className: PropTypes.string,
 };
 
+/**
+ *there is 3 props with default this default values
+ */
 Icon.defaultProps = {
   color: 'regular',
   size: 'md',
+  className: '',
+  children: '',
 };

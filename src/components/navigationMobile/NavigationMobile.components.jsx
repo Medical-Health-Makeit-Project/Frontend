@@ -8,7 +8,6 @@ import './navigation.components.scss';
 
 export const NavigationMobile = ({ options }) => {
   const [showMenu, setShowMenu] = useState(false);
-
   const handlerShowMenu = () => {
     setShowMenu(!showMenu);
   };
@@ -38,5 +37,5 @@ export const NavigationMobile = ({ options }) => {
 };
 
 NavigationMobile.propTypes = {
-  options: PropTypes.oneOfType([PropTypes.string]).isRequired,
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
 };

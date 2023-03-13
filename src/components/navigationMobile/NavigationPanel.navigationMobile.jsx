@@ -33,7 +33,7 @@ export const NavigationPanel = ({ panelOptions, showMenu, setShowMenu }) => {
 };
 
 NavigationPanel.propTypes = {
-  panelOptions: PropTypes.oneOfType([PropTypes.string]).isRequired,
+  panelOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
   showMenu: PropTypes.bool.isRequired,
   setShowMenu: PropTypes.func.isRequired,
 };

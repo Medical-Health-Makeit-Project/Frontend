@@ -27,11 +27,17 @@ export const Heading = ({ title, image }) => {
   );
 };
 
+/*
+ title and image to build the component 
+ */
 Heading.propTypes = {
   title: PropTypes.string.isRequired,
   image: PropTypes.string,
 };
 
+/*
+  The image could pass with a default value as an empty string
+ */
 Heading.defaultProps = {
-  image: PropTypes.string,
+  image: '',
 };
