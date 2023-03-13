@@ -1,5 +1,6 @@
 import { forwardRef } from 'react';
 import './icon.components.scss';
+import { PropTypes } from 'prop-types';
 
 const colorVariant = {
   regular: 'regular',
@@ -48,3 +49,30 @@ export const Icon = forwardRef(function Icon(
     </div>
   );
 });
+
+/*
+  The color based on one kind of alert who the dev want to show at user
+*/
+Icon.propTypes = {
+  color: PropTypes.oneOf([
+    'regular',
+    'info',
+    'danger',
+    'warning',
+    'success',
+    'transparent',
+  ]),
+  size: PropTypes.string,
+  children: PropTypes.node,
+  className: PropTypes.string,
+};
+
+/**
+ *there is 3 props with default this default values
+ */
+Icon.defaultProps = {
+  color: 'regular',
+  size: 'md',
+  className: '',
+  children: '',
+};

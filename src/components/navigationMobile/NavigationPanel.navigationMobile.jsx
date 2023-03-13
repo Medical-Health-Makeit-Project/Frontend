@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
+import { PropTypes } from 'prop-types';
 import { NavigationLink } from '../navigationLink';
 import './navigationPanel.navigationMobile.scss';
 
@@ -29,4 +30,10 @@ export const NavigationPanel = ({ panelOptions, showMenu, setShowMenu }) => {
       </ul>
     </div>
   );
+};
+
+NavigationPanel.propTypes = {
+  panelOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
+  showMenu: PropTypes.bool.isRequired,
+  setShowMenu: PropTypes.func.isRequired,
 };

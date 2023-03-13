@@ -1,4 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { PropTypes } from 'prop-types';
 import { useWindowSize } from '@hooks';
 import { Navigation, Pagination } from 'swiper';
 import { Icon } from '@components/icon';
@@ -66,4 +67,15 @@ export const Carousel = ({ departments }) => {
       </Swiper>
     </div>
   );
+};
+
+Carousel.propTypes = {
+  departments: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      department: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      icon: PropTypes.string,
+    }).isRequired
+  ).isRequired,
 };
