@@ -1,5 +1,6 @@
-import { HiMenu } from 'react-icons/hi';
+import { PropTypes } from 'prop-types';
 import logo from '@assets/logo.png';
+import { HiMenu } from 'react-icons/hi';
 import { useState } from 'react';
 import { Cart } from '../cart';
 import { NavigationPanel } from './NavigationPanel.navigationMobile';
@@ -7,7 +8,6 @@ import './navigation.components.scss';
 
 export const NavigationMobile = ({ options }) => {
   const [showMenu, setShowMenu] = useState(false);
-
   const handlerShowMenu = () => {
     setShowMenu(!showMenu);
   };
@@ -34,4 +34,8 @@ export const NavigationMobile = ({ options }) => {
       </nav>
     </section>
   );
+};
+
+NavigationMobile.propTypes = {
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
 };

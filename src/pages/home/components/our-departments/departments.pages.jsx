@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import './departments.pages.scss';
 import { Carousel } from './components/Carousel.departments';
-
 import { departmentsService } from './service/departments.service';
 
 export const Departments = () => {
