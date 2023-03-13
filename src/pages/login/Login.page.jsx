@@ -18,7 +18,7 @@ export const Login = () => {
     setData({
       user: '',
       password: '',
-      done: false,
+      remember: false,
     });
   };
 
@@ -27,7 +27,7 @@ export const Login = () => {
     setData({ ...data, [name]: type === 'checkbox' ? checked : value });
   };
 
-  const { user, password, done } = data;
+  const { user, password, remember } = data;
   return (
     <section className="login__container">
       <Heading title="Login" image={headingImage} />
@@ -35,10 +35,10 @@ export const Login = () => {
         <h2 className="login__title">Login</h2>
         <form className="form__container" onSubmit={handleSubmit}>
           <div className="user__container input__container">
-            <label htmlFor="user">Username or email</label>
+            <label htmlFor="user">Username</label>
             <input
               type="text"
-              placeholder="Username or email"
+              placeholder="Username"
               name="user"
               id="user"
               minLength="3"
@@ -75,7 +75,7 @@ export const Login = () => {
                 type="checkbox"
                 className="remember__button"
                 onChange={(event) => handleChange(event)}
-                checked={done}
+                checked={remember}
               />
             </div>
             <div className="forgot__container">
@@ -86,7 +86,7 @@ export const Login = () => {
           <div className="account__container-register">
             <p>Don't have an account?</p>
             <div className="link__container">
-              <Link to="/">
+              <Link to="/home/register">
                 <p>Register now</p>
               </Link>
             </div>
