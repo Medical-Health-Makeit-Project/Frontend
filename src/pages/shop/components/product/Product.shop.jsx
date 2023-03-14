@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import {
   Modal,
   ModalOverlay,
@@ -31,6 +32,17 @@ export const Product = ({
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const windowSize = useWindowSize();
+  const [quantitySelected, setQuantitySelected] = useState(null);
+  const [resetQuantity, setResetQuantity] = useState(false);
+
+  const handlerRetrieveQuantity = (quantity) => {
+    setQuantitySelected(quantity);
+  };
+
+  const handlerResetQuantity = () => {
+    setResetQuantity(!resetQuantity);
+  };
+
   return (
     <>
       <article className="product">
@@ -47,8 +59,23 @@ export const Product = ({
           price={price}
           label={label}
         />
-        <ProductQuantity stock={stock} />
-        <ProductBuyButton />
+        <ProductQuantity
+          stock={stock}
+          quantityRetriever={handlerRetrieveQuantity}
+          resetQuantity={resetQuantity}
+        />
+        <ProductBuyButton
+          id={id}
+          quantity={quantitySelected}
+          product={product}
+          image={image}
+          dose={dose}
+          label={label}
+          discount={discount}
+          price={price}
+          stock={stock}
+          resetQuantity={handlerResetQuantity}
+        />
       </article>
       <Modal
         isOpen={isOpen}
@@ -76,10 +103,24 @@ export const Product = ({
               label={label}
               price={price}
               product={product}
+              stock={stock}
+              quantityRetriever={handlerRetrieveQuantity}
+              resetQuantity={resetQuantity}
             />
           </ModalBody>
           <ModalFooter>
-            <ProductBuyButton />
+            <ProductBuyButton
+              id={id}
+              quantity={quantitySelected}
+              product={product}
+              image={image}
+              dose={dose}
+              label={label}
+              discount={discount}
+              price={price}
+              stock={stock}
+              resetQuantity={handlerResetQuantity}
+            />
           </ModalFooter>
         </ModalContent>
       </Modal>

@@ -4,9 +4,14 @@ import { toast } from 'react-toastify';
 import { Icon } from '@components/Icon';
 import { useQuantity, useStock } from '../../hooks';
 import './productQuantity.shop.scss';
+import { useEffect } from 'react';
 
-export const ProductQuantity = ({ stock }) => {
-  const [quantity, handlerMinus, handlerPlus] = useQuantity();
+export const ProductQuantity = ({
+  stock,
+  quantityRetriever,
+  resetQuantity,
+}) => {
+  const [quantity, handlerMinus, handlerPlus] = useQuantity(resetQuantity);
   const [isOutOfStock] = useStock(stock, quantity);
   if (isOutOfStock) {
     toast.error('If you need more of these quantity please contact us.', {
@@ -20,6 +25,11 @@ export const ProductQuantity = ({ stock }) => {
     });
     toast.clearWaitingQueue();
   }
+
+  useEffect(() => {
+    quantityRetriever(quantity);
+  }, [quantity]);
+
   return (
     <section className="select-quantity-container">
       <Icon
@@ -42,5 +52,5 @@ export const ProductQuantity = ({ stock }) => {
 };
 
 ProductQuantity.propTypes = {
-  stock: PropTypes.number.isRequired,
+  stock: PropTypes.number,
 };
