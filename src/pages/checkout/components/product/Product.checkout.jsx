@@ -1,3 +1,10 @@
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import {
+  checkoutUpdate,
+  deleteProduct,
+} from '@redux/features/cartSlice.feature';
+import { toast } from 'react-toastify';
 import { Button } from '@components/buttons';
 import './product.checkout.scss';
 
@@ -13,6 +20,42 @@ export const Product = ({
   stock,
 }) => {
   let priceAfterDiscount = (price - (price * discount) / 100).toFixed(2);
+  const dispatch = useDispatch();
+
+  const handlerDispacth = (e) => {
+    if (!quantity) {
+      return dispatch(deleteProduct(id));
+    }
+
+    if (quantity >= stock) {
+      toast.error(
+        'You reached the maximum product available. If you need more, please contact us.',
+        {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored',
+        }
+      );
+      toast.clearWaitingQueue();
+    }
+    if (e.target.dataset.action === '+') {
+      if (quantity >= stock) return;
+      return dispatch(checkoutUpdate({ id, quantity, isAdd: true }));
+    } else {
+      return dispatch(checkoutUpdate({ id, quantity, isAdd: false }));
+    }
+  };
+
+  useEffect(() => {
+    if (!quantity) {
+      dispatch(deleteProduct({ id }));
+    }
+  }, [quantity]);
 
   return (
     <article className="product-checkout">
@@ -21,23 +64,37 @@ export const Product = ({
           <img src={image} alt="product" />
         </div>
         <section className="product-data">
-          <div className="product-data__name">Name: {product}</div>
-          <div className="product-data__label">label: {label}</div>
-          <div className="product-data__price">price: {price}</div>
+          <div className="product-data__name">
+            Name: {product} - {dose}
+          </div>
+          <div className="product-data__label">Label: {label}</div>
+          <div className="product-data__price">Price: {price}</div>
         </section>
       </div>
       <section className="footer-product-checkout">
         <div className="resume-product-checkout">
           <div className="quantity">
-            <Button color="light" className="buttons">
+            <Button
+              color="light"
+              className="buttons"
+              onClick={handlerDispacth}
+              data-action="-"
+            >
               -
             </Button>
             <p className="product-quantity__quantity">{quantity}</p>
-            <Button color="light" className="buttons">
+            <Button
+              color="light"
+              className="buttons"
+              onClick={handlerDispacth}
+              data-action="+"
+            >
               +
             </Button>
           </div>
-          <div className="total">TOTAL: ${priceAfterDiscount * quantity}</div>
+          <div className="total">
+            TOTAL: ${(priceAfterDiscount * quantity).toFixed(2)}
+          </div>
         </div>
       </section>
     </article>

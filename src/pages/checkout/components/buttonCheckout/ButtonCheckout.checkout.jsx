@@ -6,7 +6,7 @@ export const ButtonCheckout = () => {
   return (
     <div className="button-checkout">
       <Link>
-        <Button color="danger" classname="button-checkout">
+        <Button color="danger" className="button-checkout">
           Checkout
         </Button>
       </Link>

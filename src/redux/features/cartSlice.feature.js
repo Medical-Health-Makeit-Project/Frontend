@@ -27,17 +27,42 @@ export const cartSlice = createSlice({
       }
     },
 
-    deleteProduct: (state, action) => {
-      const exist = state.find((e) => e.id === action.payload);
+    checkoutUpdate: (state, action) => {
+      const exist = state.find((e) => e.id === action.payload.id);
+      console.log(exist.quantity);
       if (exist) {
-        const productListFiltered = state.filter(
-          (e) => e.id !== action.payload
-        );
-        state = [...productListFiltered];
+        const productListUpdated = state.map((e) => {
+          if (e.id === action.payload.id) {
+            if (action.payload.isAdd) {
+              console.log('hello');
+              return {
+                ...exist,
+                quantity: (exist.quantity += 1),
+              };
+            } else {
+              return {
+                ...exist,
+                quantity: (exist.quantity -= 1),
+              };
+            }
+          } else {
+            return e;
+          }
+        });
+        state = [...productListUpdated];
+      }
+    },
+
+    deleteProduct: (state, action) => {
+      const exist = state.find((e) => e.id === action.payload.id);
+      if (exist) {
+        state = state.filter((e) => e.id !== action.payload.id);
+        return state;
       }
     },
   },
 });
 
-export const { postProduct, updateProduct, deleteProduct } = cartSlice.actions;
+export const { postProduct, updateProduct, deleteProduct, checkoutUpdate } =
+  cartSlice.actions;
 export default cartSlice.reducer;

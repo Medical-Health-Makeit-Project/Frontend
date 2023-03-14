@@ -6,7 +6,7 @@ import './cart.components.scss';
 
 export const Cart = ({ size }) => {
   const products = useSelector((state) => state.cart);
-  console.log(products);
+
   return (
     <>
       {!!products.length && (

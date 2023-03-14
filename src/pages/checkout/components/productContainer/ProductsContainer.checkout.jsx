@@ -19,7 +19,7 @@ export const ProductsContainer = () => {
     (prev, acc) => (acc += prev),
     0
   );
-  console.log(totalAfterDiscount);
+
   return (
     <section className="products-container">
       <div className="link-container">
@@ -27,12 +27,16 @@ export const ProductsContainer = () => {
           <Button color="info">Keep Buying</Button>
         </Link>
       </div>
-
-      {products.map((e) => {
-        return <Product key={e.id} {...e} />;
-      })}
-
-      <div className="total">SUBTOTAL: {totalAfterDiscount}</div>
+      {!products.length ? (
+        <div>Your cart is empty please add some product.</div>
+      ) : (
+        products.map((e) => {
+          return <Product key={e.id} {...e} />;
+        })
+      )}
+      {!!products.length && (
+        <div className="total">SUBTOTAL: ${totalAfterDiscount.toFixed(2)}</div>
+      )}
     </section>
   );
 };
