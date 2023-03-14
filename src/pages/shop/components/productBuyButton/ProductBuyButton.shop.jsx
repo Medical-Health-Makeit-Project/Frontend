@@ -7,7 +7,7 @@ import './productBuyButton.shop.scss';
 
 const alert = (type) => {
   if (type === 'error') {
-    return toast.error('You must select a quantity greater than zero', {
+    toast.error('You must select a quantity greater than zero', {
       position: 'top-right',
       autoClose: 5000,
       hideProgressBar: false,
@@ -20,7 +20,7 @@ const alert = (type) => {
     toast.clearWaitingQueue();
   }
   if (type === 'success') {
-    return toast.success('Your product is waiting for you, thank you!', {
+    toast.success('Your product is waiting for you, thank you!', {
       position: 'top-right',
       autoClose: 5000,
       hideProgressBar: false,
@@ -59,14 +59,7 @@ export const ProductBuyButton = ({
       return dispatch(
         updateProduct({
           id,
-          product,
-          image,
-          dose,
           quantity,
-          label,
-          discount,
-          price,
-          stock,
         })
       );
     }
