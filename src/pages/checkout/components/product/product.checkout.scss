@@ -1,0 +1,70 @@
+@import '@sass/abstract/mixins.abstract.scss';
+
+.product-checkout {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.436);
+  padding-bottom: 1rem;
+
+  @media screen and (min-width: 700px) {
+    flex-direction: row;
+  }
+
+  .product-info {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+
+    align-items: center;
+  }
+
+  .img-container {
+    width: 90px;
+  }
+
+  .product-data__name,
+  .product-data__label,
+  .product-data__price {
+    @include paragraph($size: $size-xxs);
+    line-height: 20px;
+  }
+
+  .product-quantity__quantity,
+  .total {
+    @include paragraph($size: $size-sm);
+  }
+
+  .footer-product-checkout {
+    width: 100%;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .resume-product-checkout {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+  }
+
+  .quantity {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+  }
+
+  .buttons {
+    width: 25px;
+    height: 25px;
+    border: 1px solid rgba(0, 0, 0, 0.116);
+    padding: 0;
+    text-align: center;
+  }
+}
