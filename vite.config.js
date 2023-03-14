@@ -33,6 +33,10 @@ export default defineConfig({
         find: '@hooks',
         replacement: path.resolve(path.join(__dirname, '/src/hooks')),
       },
+      {
+        find: '@redux',
+        replacement: path.resolve(path.join(__dirname, '/src/redux')),
+      },
     ],
   },
   server: {

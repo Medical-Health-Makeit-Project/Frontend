@@ -20,7 +20,12 @@ module.exports = {
       },
     },
   },
-  overrides: [],
+  overrides: [
+    {
+      rules: { 'no-param-reassign': ['error', { props: false }] },
+    },
+  ],
+
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',

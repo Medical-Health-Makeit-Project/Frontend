@@ -1,7 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-export const useQuantity = () => {
+export const useQuantity = (resetQuantity) => {
   const [quantity, setQuantity] = useState(0);
+
+  useEffect(() => {
+    setQuantity(0);
+  }, [resetQuantity]);
 
   const handlerMinus = () => {
     if (!quantity) return;

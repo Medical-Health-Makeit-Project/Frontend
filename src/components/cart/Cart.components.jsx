@@ -1,17 +1,22 @@
 import { IoCartOutline } from 'react-icons/io5';
-import './cart.components.scss';
 import { PropTypes } from 'prop-types';
-/*
-  mostrar el circulo solo cuando hay productos agregados al carrito
-*/
+import { useSelector } from 'react-redux';
+import './cart.components.scss';
+
 export const Cart = ({ size }) => {
+  const products = useSelector((state) => state.cart);
+  console.log(products);
   return (
-    <div href="#" className="cart-container">
-      <div className="circle">
-        <span className="circle__content">5</span>
-      </div>
-      <IoCartOutline size={size} color="black" />
-    </div>
+    <>
+      {!!products.length && (
+        <div href="#" className="cart-container">
+          <div className="circle">
+            <span className="circle__content">{products.length}</span>
+          </div>
+          <IoCartOutline size={size} color="black" />
+        </div>
+      )}
+    </>
   );
 };
 

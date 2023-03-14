@@ -8,6 +8,9 @@ export const ContentModal = ({
   product,
   dose,
   price,
+  stock,
+  quantityRetriever,
+  resetQuantity,
 }) => {
   return (
     <article className="modal-container">
@@ -35,7 +38,11 @@ export const ContentModal = ({
             </div>
           </div>
         </div>
-        <ProductQuantity />
+        <ProductQuantity
+          stock={stock}
+          quantityRetriever={quantityRetriever}
+          resetQuantity={resetQuantity}
+        />
       </section>
     </article>
   );
