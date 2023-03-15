@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Heading } from '@components/heading';
 import { ProductsContainer } from './components/productContainer';
 import { ButtonCheckout } from './components/buttonCheckout';
