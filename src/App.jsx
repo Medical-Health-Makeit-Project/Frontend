@@ -6,6 +6,7 @@ import { Login } from './pages/login/Login.page';
 import { Register } from './pages/register';
 import { Shop } from './pages/shop';
 import { Checkout } from './pages/checkout';
+import { Payment } from './pages/payment';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.scss';
 
@@ -21,6 +22,7 @@ function App() {
           <Route path="home/shop" element={<Shop />} />
           <Route path="home/shop/:category" element={<Shop />} />
           <Route path="home/checkout" element={<Checkout />} />
+          <Route path="home/payment" element={<Payment />} />
         </Routes>
       </Layout>
       <ToastContainer limit={1} />

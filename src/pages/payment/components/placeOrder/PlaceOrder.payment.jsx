@@ -1,13 +1,13 @@
 import { Button } from '@components/buttons';
 import { Link } from 'react-router-dom';
-import './buttonCheckout.checkout.scss';
+import './placeOrder.payment.scss';
 
-export const ButtonCheckout = () => {
+export const PlaceOrder = () => {
   return (
-    <div className="button-checkout">
-      <Link className="link" to="/home/payment">
+    <div className="button-payment">
+      <Link className="link">
         <Button color="danger" className="button-checkout">
-          Checkout
+          Place order
         </Button>
       </Link>
     </div>

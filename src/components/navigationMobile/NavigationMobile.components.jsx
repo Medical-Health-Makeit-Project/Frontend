@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 import logo from '@assets/logo.png';
 import { HiMenu } from 'react-icons/hi';
@@ -16,7 +17,9 @@ export const NavigationMobile = ({ options }) => {
     <section className="container-nav">
       <nav className="nav">
         <div className="container-logo">
-          <img src={logo} alt="logo" className="logo" />
+          <Link to="/home">
+            <img src={logo} alt="logo" className="logo" />
+          </Link>
         </div>
         <div className="mobile-menu">
           <div className="mobile-actions">

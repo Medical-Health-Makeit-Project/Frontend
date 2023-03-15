@@ -1,8 +1,9 @@
-import logo from '@assets/logo.png';
+import { Link } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 import { Cart } from '../cart';
 import { NavigationLink } from '../navigationLink';
 import { AppointmentButton } from '../appointmentButton';
+import logo from '@assets/logo.png';
 import './navigationDesktop.components.scss';
 
 export const NavigationDesktop = ({ options }) => {
@@ -14,7 +15,9 @@ export const NavigationDesktop = ({ options }) => {
     <section className="container-nav">
       <nav className="nav">
         <div className="container-logo">
-          <img src={logo} alt="logo" className="logo" />
+          <Link to="/home">
+            <img src={logo} alt="logo" className="logo" />
+          </Link>
         </div>
         <div className="desktop-navigation-options">
           {navigation.map((element) => {
