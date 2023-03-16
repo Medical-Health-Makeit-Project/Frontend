@@ -1,0 +1,78 @@
+@import '@sass/abstract/variables.abstract.scss';
+@import '@sass/base/typography.base.scss';
+@import '@sass/themes/theme.themes.scss';
+@import '@sass/base/alerts.base.scss';
+@import '@sass/abstract/mixins.abstract.scss';
+
+.main__doctors-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.doctors__main-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 2rem 0;
+  text-align: center;
+
+  & p {
+    @include title;
+  }
+
+  & h2 {
+    @include subtitle;
+  }
+}
+
+.doctor__img-container {
+  display: flex;
+  width: 200px;
+  height: 230px;
+
+  .doctors__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.doctors__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin: 4rem 0;
+  padding: 0 3rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5rem;
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+  }
+}
+
+.doctor__card {
+  margin: 0 10px 50px;
+}
+.doctor__main-description {
+  width: max-content;
+
+  margin-top: 10px;
+  .doctor__name {
+    @include paragraph;
+    font-weight: 700;
+    margin-bottom: 2px;
+    cursor: pointer;
+    &:hover {
+      border-bottom: 1px solid $primary-color-scooter;
+    }
+  }
+
+  .doctor__area {
+    font-size: smaller;
+    color: gray;
+  }
+}
