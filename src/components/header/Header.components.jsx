@@ -15,7 +15,8 @@ export const Header = () => {
     'Our Doctors',
     'Shop',
     'Appointments',
-    'Sign in',
+    'Login',
+    'Logout',
   ];
   return (
     <header className="header">
