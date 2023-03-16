@@ -1,0 +1,14 @@
+@import '@sass/abstract/mixins.abstract.scss';
+
+.info-container {
+  max-width: 1000px;
+  margin: 3rem auto;
+
+  .info-container__ul {
+    width: 100%;
+    list-style: none;
+    @include paragraph($size: $size-xxs);
+    font-style: italic;
+    text-decoration: underline;
+  }
+}

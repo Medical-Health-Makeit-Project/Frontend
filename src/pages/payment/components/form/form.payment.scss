@@ -1,0 +1,52 @@
+@import '@sass/abstract/mixins.abstract.scss';
+@import '@sass/base/alerts.base.scss';
+
+.form-container {
+  max-width: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+
+  .form {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem;
+  }
+
+  .label {
+    @include paragraph(
+      $size: $size-xs,
+      $weight: weight-typo('poppins', 'semi-bold')
+    );
+  }
+
+  .select {
+    @include paragraph($size: $size-xxs);
+    padding: 0.3rem;
+  }
+
+  input {
+    padding: 0.1rem 0.6rem;
+  }
+
+  input,
+  select,
+  input:valid {
+    display: flex;
+    justify-content: center;
+    border: 1px solid rgba(0, 0, 0, 0.295);
+    border-radius: 5px;
+  }
+
+  input:invalid {
+    border: 1px solid alert-color('danger', 'dark');
+  }
+  input::placeholder {
+    @include paragraph($size: $size-xxs);
+    color: gray;
+  }
+}
