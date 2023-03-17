@@ -1,69 +1,105 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setAuth } from '@redux/features';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { BiShow, BiHide } from 'react-icons/bi';
+import { authService } from './service';
 import { Heading } from '@components/heading';
-import headingImage from '@assets/heading-login.png';
-import { Link } from 'react-router-dom';
 import { Button } from '@components/buttons/Button.components';
+import { AUTH } from '@constants';
+import { errorMessage } from '@utils/toastify';
+import headingImage from '@assets/heading-login.png';
 import './login.page.scss';
 
 export const Login = () => {
-  const [data, setData] = useState({
-    user: '',
+  const [userData, setUserData] = useState({
+    username: '',
     password: '',
-    done: false,
+    remberMe: false,
   });
+  const [showPwd, setShowPwd] = useState(false);
+  const dispatch = useDispatch();
+  const inputName = useRef(null);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || '/home';
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(data);
-    setData({
-      user: '',
+  useEffect(() => {
+    inputName.current.focus();
+  }, []);
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setUserData({ ...userData, [name]: type === 'checkbox' ? checked : value });
+  };
+
+  const handleAuth = async () => {
+    if (Object.values(userData).some((e) => e === '')) {
+      errorMessage('You need fill every field on the form');
+    }
+    try {
+      const isAuth = await authService(AUTH, userData);
+      if (isAuth instanceof Error) throw isAuth;
+      localStorage.setItem('token', isAuth.ACCESS_TOKEN);
+      navigate(from, { replace: true });
+    } catch (error) {
+      errorMessage(error.message);
+    }
+    setUserData({
+      username: '',
       password: '',
-      remember: false,
+      remberMe: false,
     });
+    setShowPwd(false);
   };
 
-  const handleChange = (event) => {
-    const { name, value, type, checked } = event.target;
-    setData({ ...data, [name]: type === 'checkbox' ? checked : value });
+  const handleShowPwd = () => {
+    setShowPwd(!showPwd);
   };
 
-  const { user, password, remember } = data;
+  const { user, password, remember } = userData;
   return (
     <section className="login__container">
       <Heading title="Login" image={headingImage} />
       <section className="login__main">
         <h2 className="login__title">Login</h2>
-        <form className="form__container" onSubmit={handleSubmit}>
+        <form className="form__container">
           <div className="user__container input__container">
-            <label htmlFor="user">Username</label>
+            <label htmlFor="username">Username</label>
             <input
               type="text"
+              ref={inputName}
               placeholder="Username"
-              name="user"
-              id="user"
+              name="username"
+              id="username"
               minLength="3"
               pattern="[A-Za-z\s]{3,}"
               required
               className="user__input input-box"
-              onChange={(event) => handleChange(event)}
-              value={user}
+              onChange={handleChange}
+              value={userData.username}
             />
           </div>
 
           <div className="password__container input__container ">
             <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              placeholder="Password"
-              name="password"
-              id="password"
-              minLength="3"
-              pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$"
-              required
-              className="password__input input-box"
-              onChange={(event) => handleChange(event)}
-              value={password}
-            />
+            <div className="pwd__container">
+              <input
+                type={showPwd ? 'text' : 'password'}
+                placeholder="Password"
+                name="password"
+                id="password"
+                minLength="3"
+                required
+                pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$"
+                className="password__input input-box"
+                onChange={handleChange}
+                value={password}
+              />
+              <span className="hide-show" onClick={handleShowPwd}>
+                {showPwd ? <BiShow /> : <BiHide />}
+              </span>
+            </div>
           </div>
 
           <div className="bottom__section">
@@ -71,10 +107,10 @@ export const Login = () => {
               <label htmlFor="done">Remember me</label>
               <input
                 id="done"
-                name="done"
+                name="remberMe"
                 type="checkbox"
                 className="remember__button"
-                onChange={(event) => handleChange(event)}
+                onChange={handleChange}
                 checked={remember}
               />
             </div>
@@ -92,16 +128,14 @@ export const Login = () => {
             </div>
           </div>
 
-          <div>
-            <Button
-              variant="solid"
-              color="info"
-              className="login__button"
-              type="submit"
-            >
-              Login
-            </Button>
-          </div>
+          <Button
+            variant="solid"
+            color="info"
+            className="login__button"
+            onClick={handleAuth}
+          >
+            Login
+          </Button>
         </form>
       </section>
     </section>

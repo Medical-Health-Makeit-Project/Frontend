@@ -7,9 +7,10 @@ import logo from '@assets/logo.png';
 import './navigationDesktop.components.scss';
 
 export const NavigationDesktop = ({ options }) => {
-  const [home, profile, ourDoctors, shop, appointments, signin] = options;
+  const [home, profile, ourDoctors, shop, appointments, login, logout] =
+    options;
 
-  const navigation = [home, profile, ourDoctors, shop];
+  const navigation = [home, ourDoctors, shop, login];
 
   return (
     <section className="container-nav">

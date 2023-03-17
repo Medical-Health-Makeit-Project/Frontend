@@ -41,7 +41,7 @@ export const Product = ({
           theme: 'colored',
         }
       );
-      toast.clearWaitingQueue();
+      return toast.clearWaitingQueue();
     }
     if (e.target.dataset.action === '+') {
       if (quantity >= stock) return;
