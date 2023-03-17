@@ -6,6 +6,7 @@ import { Home } from './pages/home';
 import { Login } from './pages/login/Login.page';
 import { Register } from './pages/register';
 import { Shop } from './pages/shop';
+import { Doctors } from './pages/doctors/Doctors.page';
 import { Checkout } from './pages/checkout';
 import { Payment } from './pages/payment';
 import { Unauthorized } from './pages/unauthorized';
