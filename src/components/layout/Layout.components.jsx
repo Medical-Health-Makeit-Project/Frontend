@@ -1,20 +1,17 @@
 import { PropTypes } from 'prop-types';
+import { Outlet } from 'react-router-dom';
 import { Header } from '../header';
 import { Footer } from '../footer';
 import './layout.components.scss';
 
-export const Layout = ({ children }) => {
+export const Layout = () => {
   return (
     <>
       <div className="content-wrap">
         <Header />
-        {children}
+        <Outlet />
       </div>
       <Footer />
     </>
   );
-};
-
-Layout.propTypes = {
-  children: PropTypes.element.isRequired,
 };

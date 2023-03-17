@@ -1,11 +1,13 @@
 import { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { setAuth } from '@redux/features';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { BiShow, BiHide } from 'react-icons/bi';
+import { authService } from './service';
 import { Heading } from '@components/heading';
 import { Button } from '@components/buttons/Button.components';
 import { AUTH } from '@constants';
-import { authService } from './service';
+import { errorMessage } from '@utils/toastify';
 import headingImage from '@assets/heading-login.png';
 import './login.page.scss';
 
@@ -16,8 +18,11 @@ export const Login = () => {
     remberMe: false,
   });
   const [showPwd, setShowPwd] = useState(false);
-
+  const dispatch = useDispatch();
   const inputName = useRef(null);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || '/home';
 
   useEffect(() => {
     inputName.current.focus();
@@ -30,37 +35,16 @@ export const Login = () => {
 
   const handleAuth = async () => {
     if (Object.values(userData).some((e) => e === '')) {
-      toast.error('You need fill every field on the form', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'colored',
-      });
-      return toast.clearWaitingQueue();
+      errorMessage('You need fill every field on the form');
     }
-
     try {
       const isAuth = await authService(AUTH, userData);
-      console.log(isAuth);
       if (isAuth instanceof Error) throw isAuth;
+      localStorage.setItem('token', isAuth.ACCESS_TOKEN);
+      navigate(from, { replace: true });
     } catch (error) {
-      toast.error(`${error.message}`, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'colored',
-      });
+      errorMessage(error.message);
     }
-    const isValid = authService(userData);
-
     setUserData({
       username: '',
       password: '',
