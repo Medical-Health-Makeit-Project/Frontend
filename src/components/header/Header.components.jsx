@@ -12,7 +12,7 @@ export const Header = () => {
   const navigationOptions = [
     'Home',
     'Profile',
-    'Our Doctors',
+    'our-doctors',
     'Shop',
     'Appointments',
     'Sign in',

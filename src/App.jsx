@@ -6,6 +6,7 @@ import { Login } from './pages/login/Login.page';
 import { Register } from './pages/register';
 import { Shop } from './pages/shop';
 import { Doctors } from './pages/doctors/Doctors.page';
+import { DoctorDetail } from './pages/doctors/components/DoctorDetail.doctors';
 import { Checkout } from './pages/checkout';
 import { Payment } from './pages/payment';
 import 'react-toastify/dist/ReactToastify.css';
@@ -22,7 +23,7 @@ function App() {
           <Route path="home/register" element={<Register />} />
           <Route path="home/shop" element={<Shop />} />
           <Route path="home/shop/:category" element={<Shop />} />
-          <Route path="home/Our Doctors" element={<Doctors />} />
+          <Route path="home/our-doctors/*" element={<Doctors />} />
           <Route path="home/checkout" element={<Checkout />} />
           <Route path="home/payment" element={<Payment />} />
         </Routes>

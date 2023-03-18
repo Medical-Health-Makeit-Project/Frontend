@@ -1,0 +1,178 @@
+@import '@sass/abstract/mixins.abstract.scss';
+@import '@sass/base/typography.base.scss';
+@import '@sass/themes/theme.themes.scss';
+
+.main__detail-container {
+  max-width: 100%;
+  margin: 20px 10px;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media (min-width: 768px) {
+    max-width: 90%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+}
+
+.avatar__container {
+  display: flex;
+  width: 280px;
+  margin-bottom: 20px;
+  .avatar__img {
+    width: 100%;
+    border-radius: 5px;
+  }
+}
+.name__container p {
+  @include paragraph($weight: weight-typo('poppins', 'bolder'));
+}
+.area__container p {
+  @include paragraph(
+    $weight: weight-typo('poppins', 'semi-bold'),
+    $color: map-get($typography-colors, 'blue')
+  );
+  font-size: small;
+}
+
+.qualifications__container {
+  margin: 10px 0;
+  background-color: #a9a9a94d;
+  padding: 15px;
+  border-radius: 3px;
+
+  h3 {
+    @include paragraph($weight: weight-typo('poppins', 'bold'));
+    font-size: medium;
+  }
+
+  p {
+    @include paragraph($weight: weight-typo('poppins', 'light'));
+    font-size: small;
+  }
+}
+
+.memberships__container {
+  margin: 10px 0;
+  background-color: #a9a9a94d;
+  padding: 15px;
+  border-radius: 3px;
+
+  h3 {
+    @include paragraph($weight: weight-typo('poppins', 'bold'));
+    font-size: medium;
+  }
+
+  p {
+    @include paragraph(
+      $weight: weight-typo('poppins', 'semi-bold'),
+      $color: map-get($typography-colors, 'blue')
+    );
+    font-size: small;
+  }
+}
+
+.details__main-container {
+  max-width: 280px;
+  @media (min-width: 768px) {
+    max-width: 90%;
+    padding: 0 40px;
+  }
+}
+.bio__container {
+  margin-top: 20px;
+
+  h3 {
+    @include paragraph($weight: weight-typo('poppins', 'bold'));
+    font-size: medium;
+    margin-bottom: 10px;
+  }
+
+  p {
+    @include paragraph($weight: weight-typo('poppins', 'light'));
+    font-size: small;
+    margin-bottom: 20px;
+  }
+}
+
+.skills__container {
+  height: 100%;
+  h3 {
+    @include paragraph($weight: weight-typo('poppins', 'bold'));
+    font-size: medium;
+    margin-bottom: 10px;
+  }
+  .skill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #a9a9a94d;
+    margin: 8px 0;
+    padding-left: 5px;
+    border-radius: 5px;
+  }
+  p {
+    @include paragraph($weight: weight-typo('poppins', 'light'));
+    font-size: small;
+  }
+  .check-icon {
+    color: #3fb6d6;
+  }
+}
+.skill__layout {
+  display: grid;
+  grid-template-columns: 1f;
+  grid-auto-rows: auto;
+
+  @media (min-width: 1000px) {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 30px;
+  }
+}
+
+.appointment__container {
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+
+  h3 {
+    @include paragraph($weight: weight-typo('poppins', 'bold'));
+    font-size: medium;
+    margin-bottom: 10px;
+  }
+
+  .form__container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .inputs-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    label {
+      @include paragraph($weight: weight-typo('poppins', 'semi-bold'));
+    }
+  }
+}
+
+.input-box {
+  width: 100%;
+  height: 40px;
+  border: 1px solid #80808082;
+  border-radius: 5px;
+  padding-left: 10px;
+
+  &:hover {
+    background-color: rgb(205 244 255 / 36%);
+  }
+}
+.appointment__button {
+  width: 160px;
+}
