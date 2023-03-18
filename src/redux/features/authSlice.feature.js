@@ -1,21 +1,8 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { isAuthorized } from '@services/authorization';
-import { AUTH } from '@constants';
+import { createSlice } from '@reduxjs/toolkit';
+import { findUserWithToken } from '../thunks';
+import { TOKEN } from '@constants';
 
 const initialState = {};
-
-export const findUserWithToken = createAsyncThunk(
-  'authorization/findUserWithToken',
-  async (token, { rejectWithValue }) => {
-    try {
-      const response = await isAuthorized(AUTH, token);
-      if (response instanceof Error) throw response;
-      return response;
-    } catch (error) {
-      rejectWithValue(error.message);
-    }
-  }
-);
 
 export const authSlice = createSlice({
   name: 'authorization',
@@ -26,19 +13,19 @@ export const authSlice = createSlice({
       return state;
     },
     logout: () => {
-      localStorage.removeItem('token');
+      localStorage.removeItem(TOKEN);
       return initialState;
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(findUserWithToken.rejected, (state, action) => {
-      state = { error: action.payload };
+    builder.addCase(findUserWithToken.fulfilled, (state, action) => {
+      state = action.payload;
       return state;
     });
   },
 });
 
-export const { setAuth, isError, logout } = authSlice.actions;
+export const { setAuth, logout } = authSlice.actions;
 export default authSlice.reducer;
 
 /*

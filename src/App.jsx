@@ -20,15 +20,18 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Layout />}>
-          {/*Public Routes*/}
           <Route index element={<Navigate to="home" />} />
           <Route path={PublicRoutes.HOME} element={<Home />} />
           <Route path={PublicRoutes.LOGIN} element={<Login />} />
           <Route path={PublicRoutes.REGISTER} element={<Register />} />
-          <Route path={PublicRoutes.UNATHORIZED} element={<Unauthorized />} />
-          {/*Private Routes */}
+          <Route path={PublicRoutes.UNAUTHORIZED} element={<Unauthorized />} />
+
           <Route
-            element={<RequireAuth allowedRoles={[roles.ADMIN, roles.USER]} />}
+            element={
+              <RequireAuth
+                allowedRoles={[roles.ADMIN, roles.USER, roles.DOCTOR]}
+              />
+            }
           >
             <Route path={PrivateRoutes.SHOP} element={<Shop />} />
             <Route path={PrivateRoutes.CATEGORY} element={<Shop />} />
@@ -38,12 +41,10 @@ function App() {
           <Route
             element={<RequireAuth allowedRoles={[roles.ADMIN, roles.DOCTOR]} />}
           >
-            {/*Rutas habiles para doctores*/}
             <Route path="home/test" element={<div>Test</div>} />
           </Route>
         </Route>
       </Routes>
-
       <ToastContainer limit={1} />
     </div>
   );

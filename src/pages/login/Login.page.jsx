@@ -5,10 +5,11 @@ import { BiShow, BiHide } from 'react-icons/bi';
 import { authService } from './service';
 import { Heading } from '@components/heading';
 import { Button } from '@components/buttons/Button.components';
-import { AUTH } from '@constants';
+import { AUTH, TOKEN } from '@constants';
 import { errorMessage } from '@utils/toastify';
-import { findUserWithToken } from '@redux/features';
+import { findUserWithToken } from '@redux/thunks';
 import headingImage from '@assets/heading-login.png';
+import { PublicRoutes } from '@routes';
 import './login.page.scss';
 
 export const Login = () => {
@@ -17,12 +18,9 @@ export const Login = () => {
     password: '',
     remberMe: false,
   });
-  const authRedux = useSelector((state) => state.auth);
   const [showPwd, setShowPwd] = useState(false);
   const inputName = useRef(null);
   const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || '/home';
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -41,13 +39,14 @@ export const Login = () => {
     try {
       const isToken = await authService(AUTH, userData);
       if (isToken instanceof Error) throw isToken;
-      localStorage.setItem('token', isToken.ACCESS_TOKEN);
+      localStorage.setItem(TOKEN, isToken.ACCESS_TOKEN);
       const isUser = await dispatch(findUserWithToken(isToken.ACCESS_TOKEN));
       if (isUser.payload === 'Unauthorized')
         throw new Error('Something went wrong, contact your nearest dev!');
-      navigate(from, { replace: true });
+      navigate(PublicRoutes.HOME);
     } catch (error) {
-      localStorage.removeItem('token');
+      localStorage.removeItem(TOKEN);
+      navigate(PublicRoutes.login);
       errorMessage(error.message);
     }
     setUserData({

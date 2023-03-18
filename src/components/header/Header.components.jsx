@@ -6,21 +6,17 @@ import { roles } from '@utils/roles';
 import { emptyObject } from '@utils/tools';
 import './header.components.scss';
 
-/*
-  Si el usuario tiene rol de doctor no se le debe
-  mostrar el boton 'Our Doctors'
-*/
-
 export const Header = () => {
   const user = useSelector((state) => state.auth);
 
-  const navigationOptions = emptyObject(user)
-    ? ['Home', 'Our Doctors', 'Shop', 'Login']
-    : user.role === roles.USER || user.role === roles.ADMIN
-    ? ['Home', 'Profile', 'Our Doctors', 'Shop', 'Appointments']
-    : user.role === roles.DOCTOR
-    ? ['Home', 'Profile']
-    : [];
+  const navigationOptions =
+    emptyObject(user) || user === 'Unauthorized'
+      ? ['Home', 'Our Doctors', 'Shop', 'Login']
+      : user.role === roles.USER || user.role === roles.ADMIN
+      ? ['Profile', 'Our Doctors', 'Shop']
+      : user.role === roles.DOCTOR
+      ? ['Profile', 'Shop']
+      : ['Our Doctors', 'Shop', 'Login'];
 
   return (
     <header className="header">
