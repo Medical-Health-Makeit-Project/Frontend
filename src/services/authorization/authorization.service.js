@@ -13,6 +13,7 @@ export const isAuthorized = async (URL, token) => {
 };
 
 const userAuthorized = (user, token) => {
+  console.log(token);
   if (token === '987654321') {
     const { username, avatar, role } = user[0];
     return {

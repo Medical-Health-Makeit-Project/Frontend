@@ -8,7 +8,7 @@ export const authService = async (URL, user) => {
     if (isValid instanceof Error) throw isValid;
     return authAdapter(isValid);
   } catch (error) {
-    return error;
+    throw error;
   }
 };
 

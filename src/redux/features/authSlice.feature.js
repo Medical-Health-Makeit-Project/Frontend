@@ -1,20 +1,27 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { isAuthorized } from '@services/authorization';
 import { AUTH } from '@constants';
 
-// export const persistLocalStorageToken = (token) => {
-//   localStorage.setItem('token', JSON.stringify(token));
-// };
-
 const initialState = {};
+
+export const findUserWithToken = createAsyncThunk(
+  'authorization/findUserWithToken',
+  async (token, { rejectWithValue }) => {
+    try {
+      const response = await isAuthorized(AUTH, token);
+      if (response instanceof Error) throw response;
+      return response;
+    } catch (error) {
+      rejectWithValue(error.message);
+    }
+  }
+);
 
 export const authSlice = createSlice({
   name: 'authorization',
   initialState,
   reducers: {
     setAuth: (state, action) => {
-      // persistLocalStorageToken(action.payload.ACCESS_TOKEN);
-      // return { token: action.payload.ACCESS_TOKEN };
       state = action.payload;
       return state;
     },
@@ -23,19 +30,15 @@ export const authSlice = createSlice({
       return initialState;
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(findUserWithToken.rejected, (state, action) => {
+      state = { error: action.payload };
+      return state;
+    });
+  },
 });
 
-export const findUserWithToken = (token) => {
-  return (dispatch) => {
-    try {
-      isAuthorized(AUTH, token).then((response) => dispatch(setAuth(response)));
-    } catch (error) {
-      console.log(res);
-    }
-  };
-};
-
-export const { setAuth } = authSlice.actions;
+export const { setAuth, isError, logout } = authSlice.actions;
 export default authSlice.reducer;
 
 /*

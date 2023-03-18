@@ -9,14 +9,12 @@ export const Cart = ({ size }) => {
 
   return (
     <>
-      {!!products.length && (
-        <Link to="home/checkout" className="cart-container">
-          <div className="circle">
-            <span className="circle__content">{products.length}</span>
-          </div>
-          <IoCartOutline size={size} color="black" />
-        </Link>
-      )}
+      <Link to="home/checkout" className="cart-container">
+        <div className="circle">
+          <span className="circle__content">{products.length}</span>
+        </div>
+        <IoCartOutline size={size} color="black" />
+      </Link>
     </>
   );
 };

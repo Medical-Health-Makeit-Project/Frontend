@@ -10,6 +10,8 @@ import { Doctors } from './pages/doctors/Doctors.page';
 import { Checkout } from './pages/checkout';
 import { Payment } from './pages/payment';
 import { Unauthorized } from './pages/unauthorized';
+import { PublicRoutes, PrivateRoutes } from './routes/routes.routes';
+import { roles } from './utils/roles/roles.utils';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.scss';
 
@@ -20,18 +22,22 @@ function App() {
         <Route path="/" element={<Layout />}>
           {/*Public Routes*/}
           <Route index element={<Navigate to="home" />} />
-          <Route path="home" element={<Home />} />
-          <Route path="home/login" element={<Login />} />
-          <Route path="home/register" element={<Register />} />
-          <Route path="home/unauthorized" element={<Unauthorized />} />
+          <Route path={PublicRoutes.HOME} element={<Home />} />
+          <Route path={PublicRoutes.LOGIN} element={<Login />} />
+          <Route path={PublicRoutes.REGISTER} element={<Register />} />
+          <Route path={PublicRoutes.UNATHORIZED} element={<Unauthorized />} />
           {/*Private Routes */}
-          <Route element={<RequireAuth allowedRoles={[1993, 1000]} />}>
-            <Route path="home/shop" element={<Shop />} />
-            <Route path="home/shop/:category" element={<Shop />} />
-            <Route path="home/checkout" element={<Checkout />} />
-            <Route path="home/payment" element={<Payment />} />
+          <Route
+            element={<RequireAuth allowedRoles={[roles.ADMIN, roles.USER]} />}
+          >
+            <Route path={PrivateRoutes.SHOP} element={<Shop />} />
+            <Route path={PrivateRoutes.CATEGORY} element={<Shop />} />
+            <Route path={PrivateRoutes.CHECKOUT} element={<Checkout />} />
+            <Route path={PrivateRoutes.PAYMENT} element={<Payment />} />
           </Route>
-          <Route element={<RequireAuth allowedRoles={[2023, 1000]} />}>
+          <Route
+            element={<RequireAuth allowedRoles={[roles.ADMIN, roles.DOCTOR]} />}
+          >
             {/*Rutas habiles para doctores*/}
             <Route path="home/test" element={<div>Test</div>} />
           </Route>
