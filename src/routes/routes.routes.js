@@ -1,7 +1,13 @@
 export const PublicRoutes = {
-  LOGIN: 'home/login',
+  HOME: '/home',
+  LOGIN: '/home/login',
+  REGISTER: '/home/register',
+  UNAUTHORIZED: '/home/unauthorized',
 };
 
 export const PrivateRoutes = {
-  SHOP: 'home/shop',
+  SHOP: '/home/shop',
+  CATEGORY: '/home/shop/:category',
+  CHECKOUT: '/home/checkout',
+  PAYMENT: '/home/payment',
 };

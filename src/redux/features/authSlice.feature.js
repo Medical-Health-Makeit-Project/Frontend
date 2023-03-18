@@ -1,10 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { isAuthorized } from '@services/authorization';
-import { AUTH } from '@constants';
-
-// export const persistLocalStorageToken = (token) => {
-//   localStorage.setItem('token', JSON.stringify(token));
-// };
+import { findUserWithToken } from '../thunks';
+import { TOKEN } from '@constants';
 
 const initialState = {};
 
@@ -13,29 +9,23 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     setAuth: (state, action) => {
-      // persistLocalStorageToken(action.payload.ACCESS_TOKEN);
-      // return { token: action.payload.ACCESS_TOKEN };
       state = action.payload;
       return state;
     },
     logout: () => {
-      localStorage.removeItem('token');
+      localStorage.removeItem(TOKEN);
       return initialState;
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(findUserWithToken.fulfilled, (state, action) => {
+      state = action.payload;
+      return state;
+    });
+  },
 });
 
-export const findUserWithToken = (token) => {
-  return (dispatch) => {
-    try {
-      isAuthorized(AUTH, token).then((response) => dispatch(setAuth(response)));
-    } catch (error) {
-      console.log(res);
-    }
-  };
-};
-
-export const { setAuth } = authSlice.actions;
+export const { setAuth, logout } = authSlice.actions;
 export default authSlice.reducer;
 
 /*

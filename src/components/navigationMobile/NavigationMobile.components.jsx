@@ -13,11 +13,6 @@ export const NavigationMobile = ({ options }) => {
     setShowMenu(!showMenu);
   };
 
-  const [home, profile, ourDoctors, shop, appointments, login, logout] =
-    options;
-
-  const navigation = [home, ourDoctors, shop, login];
-
   return (
     <section className="container-nav">
       <nav className="nav">
@@ -34,7 +29,7 @@ export const NavigationMobile = ({ options }) => {
             </button>
           </div>
           <NavigationPanel
-            panelOptions={navigation}
+            panelOptions={options}
             showMenu={showMenu}
             setShowMenu={setShowMenu}
           />

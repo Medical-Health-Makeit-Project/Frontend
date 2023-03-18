@@ -8,7 +8,7 @@ export const authService = async (URL, user) => {
     if (isValid instanceof Error) throw isValid;
     return authAdapter(isValid);
   } catch (error) {
-    return error;
+    throw error;
   }
 };
 
@@ -19,7 +19,13 @@ const validateUser = (userToValidate, user) => {
   if (!userExist) return new Error('Invalid credentials');
   if (userExist.password !== userToValidate.password)
     return new Error('Invalid credentials');
-  return {
-    ACCESS_TOKEN: 987654321,
-  };
+  if (userExist.username === 'Ricardo Munera') {
+    return {
+      ACCESS_TOKEN: '123456789',
+    };
+  } else {
+    return {
+      ACCESS_TOKEN: '987654321',
+    };
+  }
 };

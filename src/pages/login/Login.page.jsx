@@ -1,14 +1,15 @@
 import { useState, useRef, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { setAuth } from '@redux/features';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { BiShow, BiHide } from 'react-icons/bi';
 import { authService } from './service';
 import { Heading } from '@components/heading';
 import { Button } from '@components/buttons/Button.components';
-import { AUTH } from '@constants';
+import { AUTH, TOKEN } from '@constants';
 import { errorMessage } from '@utils/toastify';
+import { findUserWithToken } from '@redux/thunks';
 import headingImage from '@assets/heading-login.png';
+import { PublicRoutes } from '@routes';
 import './login.page.scss';
 
 export const Login = () => {
@@ -18,11 +19,9 @@ export const Login = () => {
     remberMe: false,
   });
   const [showPwd, setShowPwd] = useState(false);
-  const dispatch = useDispatch();
   const inputName = useRef(null);
   const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || '/home';
+  const dispatch = useDispatch();
 
   useEffect(() => {
     inputName.current.focus();
@@ -38,11 +37,16 @@ export const Login = () => {
       errorMessage('You need fill every field on the form');
     }
     try {
-      const isAuth = await authService(AUTH, userData);
-      if (isAuth instanceof Error) throw isAuth;
-      localStorage.setItem('token', isAuth.ACCESS_TOKEN);
-      navigate(from, { replace: true });
+      const isToken = await authService(AUTH, userData);
+      if (isToken instanceof Error) throw isToken;
+      localStorage.setItem(TOKEN, isToken.ACCESS_TOKEN);
+      const isUser = await dispatch(findUserWithToken(isToken.ACCESS_TOKEN));
+      if (isUser.payload === 'Unauthorized')
+        throw new Error('Something went wrong, contact your nearest dev!');
+      navigate(PublicRoutes.HOME);
     } catch (error) {
+      localStorage.removeItem(TOKEN);
+      navigate(PublicRoutes.login);
       errorMessage(error.message);
     }
     setUserData({
