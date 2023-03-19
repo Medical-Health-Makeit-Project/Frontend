@@ -7,6 +7,7 @@ import { Login } from './pages/login/Login.page';
 import { Register } from './pages/register';
 import { Shop } from './pages/shop';
 import { Doctors } from './pages/doctors/Doctors.page';
+import { DoctorDetail } from './pages/doctors/components/DoctorDetail.doctors';
 import { Checkout } from './pages/checkout';
 import { Payment } from './pages/payment';
 import { Unauthorized } from './pages/unauthorized';
@@ -25,6 +26,7 @@ function App() {
           <Route path={PublicRoutes.LOGIN} element={<Login />} />
           <Route path={PublicRoutes.REGISTER} element={<Register />} />
           <Route path={PublicRoutes.UNAUTHORIZED} element={<Unauthorized />} />
+          <Route path={PublicRoutes.DOCTORS} element={<Doctors />} />
 
           <Route
             element={

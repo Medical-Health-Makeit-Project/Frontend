@@ -3,6 +3,8 @@ export const PublicRoutes = {
   LOGIN: '/home/login',
   REGISTER: '/home/register',
   UNAUTHORIZED: '/home/unauthorized',
+  DOCTORS: '/home/our-doctors/*',
+  DOCTOR_DETAIL: '/:id',
 };
 
 export const PrivateRoutes = {

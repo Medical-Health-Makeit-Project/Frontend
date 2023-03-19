@@ -3,54 +3,206 @@
     "id": "1",
     "name": "Dr. Perry Barkley",
     "area": "Family physician",
-    "img_profile": "https://images.unsplash.com/photo-1622253692010-333f2da6031d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGRvY3RvcnN8ZW58MHx8MHx8&auto=format&fit=crop&w=400&q=60"
+    "img_profile": "https://images.unsplash.com/photo-1622253692010-333f2da6031d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGRvY3RvcnN8ZW58MHx8MHx8&auto=format&fit=crop&w=400&q=60",
+
+    "qualifications": ["Master of science", "University of medical science"],
+
+    "memberships": [
+      "Europenan society of cardiology",
+      "Fellow royal society of medicine",
+      "British cardiovascular society"
+    ],
+
+    "introduction": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores beatae ducimus, nostrum repellendus laborum enim dolor nisi! Unde maxime ipsa similique a ut sapiente accusamus, magni fugit repellat laboriosam dolores? Dignissimos, corrupti a recusandae architecto debitis dolore blanditiis. Cumque, odio eos ducimus, recusandae, distinctio praesentium dignissimos rerum officia porro ab magnam reiciendis commodi minus amet! Ipsa accusamus aperiam eos consequatur! Officiis voluptatum doloremque nulla velit nam quos earum nihil rerum molestiae assumenda ratione debitis unde voluptates tempore rem beatae aut hic quisquam nobis fuga tempora accusamus facilis, quo quam. Sed!",
+
+    "skills": [
+      "Safety and fall prevention",
+      "Dental implants",
+      "Dental demi text",
+      "Filling content",
+      "Root canal demi text",
+      "Orthodontics prob"
+    ]
   },
 
   {
     "id": "2",
     "name": "Dr. Crystal Fitzhug",
     "area": "Endocrinologist",
-    "img_profile": "https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=400"
+    "img_profile": "https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=400",
+
+    "qualifications": ["Master of science", "University of medical science"],
+
+    "memberships": [
+      "Europenan society of cardiology",
+      "Fellow royal society of medicine",
+      "British cardiovascular society"
+    ],
+
+    "introduction": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores beatae ducimus, nostrum repellendus laborum enim dolor nisi! Unde maxime ipsa similique a ut sapiente accusamus, magni fugit repellat laboriosam dolores? Dignissimos, corrupti a recusandae architecto debitis dolore blanditiis. Cumque, odio eos ducimus, recusandae, distinctio praesentium dignissimos rerum officia porro ab magnam reiciendis commodi minus amet! Ipsa accusamus aperiam eos consequatur! Officiis voluptatum doloremque nulla velit nam quos earum nihil rerum molestiae assumenda ratione debitis unde voluptates tempore rem beatae aut hic quisquam nobis fuga tempora accusamus facilis, quo quam. Sed!",
+
+    "skills": [
+      "Safety and fall prevention",
+      "Dental implants",
+      "Dental demi text",
+      "Filling content",
+      "Root canal demi text",
+      "Orthodontics prob"
+    ]
   },
 
   {
     "id": "3",
     "name": "Dr. Helen Schefler",
     "area": "Oncologist",
-    "img_profile": "https://images.pexels.com/photos/5327580/pexels-photo-5327580.jpeg?auto=compress&cs=tinysrgb&w=400"
+    "img_profile": "https://images.pexels.com/photos/5327580/pexels-photo-5327580.jpeg?auto=compress&cs=tinysrgb&w=400",
+
+    "qualifications": ["Master of science", "University of medical science"],
+
+    "memberships": [
+      "Europenan society of cardiology",
+      "Fellow royal society of medicine",
+      "British cardiovascular society"
+    ],
+
+    "introduction": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores beatae ducimus, nostrum repellendus laborum enim dolor nisi! Unde maxime ipsa similique a ut sapiente accusamus, magni fugit repellat laboriosam dolores? Dignissimos, corrupti a recusandae architecto debitis dolore blanditiis. Cumque, odio eos ducimus, recusandae, distinctio praesentium dignissimos rerum officia porro ab magnam reiciendis commodi minus amet! Ipsa accusamus aperiam eos consequatur! Officiis voluptatum doloremque nulla velit nam quos earum nihil rerum molestiae assumenda ratione debitis unde voluptates tempore rem beatae aut hic quisquam nobis fuga tempora accusamus facilis, quo quam. Sed!",
+
+    "skills": [
+      "Safety and fall prevention",
+      "Dental implants",
+      "Dental demi text",
+      "Filling content",
+      "Root canal demi text",
+      "Orthodontics prob"
+    ]
   },
 
   {
     "id": "4",
     "name": "Dr. Gail Parrish",
     "area": "General surgeon",
-    "img_profile": "https://images.pexels.com/photos/5327656/pexels-photo-5327656.jpeg?auto=compress&cs=tinysrgb&w=400"
+    "img_profile": "https://images.pexels.com/photos/5327656/pexels-photo-5327656.jpeg?auto=compress&cs=tinysrgb&w=400",
+
+    "qualifications": ["Master of science", "University of medical science"],
+
+    "memberships": [
+      "Europenan society of cardiology",
+      "Fellow royal society of medicine",
+      "British cardiovascular society"
+    ],
+
+    "introduction": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores beatae ducimus, nostrum repellendus laborum enim dolor nisi! Unde maxime ipsa similique a ut sapiente accusamus, magni fugit repellat laboriosam dolores? Dignissimos, corrupti a recusandae architecto debitis dolore blanditiis. Cumque, odio eos ducimus, recusandae, distinctio praesentium dignissimos rerum officia porro ab magnam reiciendis commodi minus amet! Ipsa accusamus aperiam eos consequatur! Officiis voluptatum doloremque nulla velit nam quos earum nihil rerum molestiae assumenda ratione debitis unde voluptates tempore rem beatae aut hic quisquam nobis fuga tempora accusamus facilis, quo quam. Sed!",
+
+    "skills": [
+      "Safety and fall prevention",
+      "Dental implants",
+      "Dental demi text",
+      "Filling content",
+      "Root canal demi text",
+      "Orthodontics prob"
+    ]
   },
 
   {
     "id": "5",
     "name": "Dr. Charles Gordon",
     "area": "Medical advisor",
-    "img_profile": "/src/assets/charles.jpg"
+    "img_profile": "/src/assets/charles.jpg",
+
+    "qualifications": ["Master of science", "University of medical science"],
+
+    "memberships": [
+      "Europenan society of cardiology",
+      "Fellow royal society of medicine",
+      "British cardiovascular society"
+    ],
+
+    "introduction": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores beatae ducimus, nostrum repellendus laborum enim dolor nisi! Unde maxime ipsa similique a ut sapiente accusamus, magni fugit repellat laboriosam dolores? Dignissimos, corrupti a recusandae architecto debitis dolore blanditiis. Cumque, odio eos ducimus, recusandae, distinctio praesentium dignissimos rerum officia porro ab magnam reiciendis commodi minus amet! Ipsa accusamus aperiam eos consequatur! Officiis voluptatum doloremque nulla velit nam quos earum nihil rerum molestiae assumenda ratione debitis unde voluptates tempore rem beatae aut hic quisquam nobis fuga tempora accusamus facilis, quo quam. Sed!",
+
+    "skills": [
+      "Safety and fall prevention",
+      "Dental implants",
+      "Dental demi text",
+      "Filling content",
+      "Root canal demi text",
+      "Orthodontics prob"
+    ]
   },
 
   {
     "id": "6",
     "name": "Dr. Matie Delgado",
     "area": "General surgeon",
-    "img_profile": "https://images.unsplash.com/photo-1623854767276-5025b88735d3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NzF8fGRvY3RvcnN8ZW58MHx8MHx8&auto=format&fit=crop&w=400&q=60"
+    "img_profile": "https://images.unsplash.com/photo-1623854767276-5025b88735d3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NzF8fGRvY3RvcnN8ZW58MHx8MHx8&auto=format&fit=crop&w=400&q=60",
+
+    "qualifications": ["Master of science", "University of medical science"],
+
+    "memberships": [
+      "Europenan society of cardiology",
+      "Fellow royal society of medicine",
+      "British cardiovascular society"
+    ],
+
+    "introduction": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores beatae ducimus, nostrum repellendus laborum enim dolor nisi! Unde maxime ipsa similique a ut sapiente accusamus, magni fugit repellat laboriosam dolores? Dignissimos, corrupti a recusandae architecto debitis dolore blanditiis. Cumque, odio eos ducimus, recusandae, distinctio praesentium dignissimos rerum officia porro ab magnam reiciendis commodi minus amet! Ipsa accusamus aperiam eos consequatur! Officiis voluptatum doloremque nulla velit nam quos earum nihil rerum molestiae assumenda ratione debitis unde voluptates tempore rem beatae aut hic quisquam nobis fuga tempora accusamus facilis, quo quam. Sed!",
+
+    "skills": [
+      "Safety and fall prevention",
+      "Dental implants",
+      "Dental demi text",
+      "Filling content",
+      "Root canal demi text",
+      "Orthodontics prob"
+    ]
   },
   {
     "id": "7",
     "name": "Dr. Verna Leto",
     "area": "Cosmetic surgeon",
-    "img_profile": "/src/assets/verna.jpg"
+    "img_profile": "/src/assets/verna.jpg",
+
+    "qualifications": ["Master of science", "University of medical science"],
+
+    "memberships": [
+      "Europenan society of cardiology",
+      "Fellow royal society of medicine",
+      "British cardiovascular society"
+    ],
+
+    "introduction": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores beatae ducimus, nostrum repellendus laborum enim dolor nisi! Unde maxime ipsa similique a ut sapiente accusamus, magni fugit repellat laboriosam dolores? Dignissimos, corrupti a recusandae architecto debitis dolore blanditiis. Cumque, odio eos ducimus, recusandae, distinctio praesentium dignissimos rerum officia porro ab magnam reiciendis commodi minus amet! Ipsa accusamus aperiam eos consequatur! Officiis voluptatum doloremque nulla velit nam quos earum nihil rerum molestiae assumenda ratione debitis unde voluptates tempore rem beatae aut hic quisquam nobis fuga tempora accusamus facilis, quo quam. Sed!",
+
+    "skills": [
+      "Safety and fall prevention",
+      "Dental implants",
+      "Dental demi text",
+      "Filling content",
+      "Root canal demi text",
+      "Orthodontics prob"
+    ]
   },
 
   {
     "id": "8",
     "name": "Dr. Gail Parrish",
     "area": "Neurologist",
-    "img_profile": "/src/assets/gail.jpg"
+    "img_profile": "/src/assets/gail.jpg",
+
+    "qualifications": ["Master of science", "University of medical science"],
+
+    "memberships": [
+      "Europenan society of cardiology",
+      "Fellow royal society of medicine",
+      "British cardiovascular society"
+    ],
+
+    "introduction": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores beatae ducimus, nostrum repellendus laborum enim dolor nisi! Unde maxime ipsa similique a ut sapiente accusamus, magni fugit repellat laboriosam dolores? Dignissimos, corrupti a recusandae architecto debitis dolore blanditiis. Cumque, odio eos ducimus, recusandae, distinctio praesentium dignissimos rerum officia porro ab magnam reiciendis commodi minus amet! Ipsa accusamus aperiam eos consequatur! Officiis voluptatum doloremque nulla velit nam quos earum nihil rerum molestiae assumenda ratione debitis unde voluptates tempore rem beatae aut hic quisquam nobis fuga tempora accusamus facilis, quo quam. Sed!",
+
+    "skills": [
+      "Safety and fall prevention",
+      "Dental implants",
+      "Dental demi text",
+      "Filling content",
+      "Root canal demi text",
+      "Orthodontics prob"
+    ]
   }
 ]
