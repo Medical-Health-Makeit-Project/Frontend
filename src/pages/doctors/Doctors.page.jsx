@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import { DoctorDetail } from './components/DoctorDetail.doctors';
 import { DoctorsList } from './components/DoctorsList.doctors';
 import { DoctorsContext } from './context/DoctorsContext';
+import { PublicRoutes } from '@routes';
 import headingImage from '@assets/doctorsheading.jpg';
 import './doctors.page.scss';
 
@@ -13,7 +14,7 @@ export const Doctors = () => {
         <Heading title="Our Doctors" image={headingImage} />
         <Routes>
           <Route index element={<DoctorsList />} />
-          <Route path="/:id" element={<DoctorDetail />} />
+          <Route path={PublicRoutes.DOCTOR_DETAIL} element={<DoctorDetail />} />
         </Routes>
       </section>
     </DoctorsContext>

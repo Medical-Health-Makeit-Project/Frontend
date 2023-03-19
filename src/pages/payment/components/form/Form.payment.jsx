@@ -61,7 +61,6 @@ export const Form = () => {
       );
     return toast.clearWaitingQueue();
   };
-  console.log(userData);
 
   return (
     <div className="form-container">

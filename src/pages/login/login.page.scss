@@ -18,6 +18,18 @@
   }
 }
 
+.pwd__container {
+  position: relative;
+  width: 100%;
+}
+
+.hide-show {
+  position: absolute;
+  right: 20px;
+  top: 17px;
+  cursor: pointer;
+}
+
 .login__title {
   @include subtitle;
   margin-bottom: 1rem;
