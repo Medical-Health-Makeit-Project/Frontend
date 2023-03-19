@@ -3,16 +3,19 @@ import { Link } from 'react-router-dom';
 import './navigationLink.components.scss';
 
 export const NavigationLink = ({ text, isButton }) => {
+  const regex = /\s/i;
+  const link = text.replace(regex, '-').toLowerCase();
+
   return isButton ? (
     <Link
-      to={`${text === 'Home' ? '/home' : `/home/${text.toLowerCase()}`}`}
+      to={`${text === 'Home' ? '/home' : `/home/${link}`}`}
       className="button"
     >
       {text}
     </Link>
   ) : (
     <Link
-      to={`${text === 'Home' ? '/home' : `/home/${text.toLowerCase()}`}`}
+      to={`${text === 'Home' ? '/home' : `/home/${link}`}`}
       className="text"
     >
       {text}
