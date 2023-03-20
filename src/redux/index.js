@@ -1,2 +1,3 @@
-export * from './features/cartSlice.feature';
+export * from './features';
 export * from './store.redux';
+export * from './thunks';
