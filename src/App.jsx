@@ -39,7 +39,7 @@ function App() {
           </Route>
         </Route>
       </Routes>
-      <ToastContainer limit={1} />
+      <ToastContainer limit={2} />
     </div>
   );
 }
