@@ -7,9 +7,9 @@ import { Login } from './pages/login/Login.page';
 import { Register } from './pages/register';
 import { Shop } from './pages/shop';
 import { Doctors } from './pages/doctors/Doctors.page';
-import { DoctorDetail } from './pages/doctors/components/DoctorDetail.doctors';
 import { Checkout } from './pages/checkout';
 import { Payment } from './pages/payment';
+import { Appointments } from './pages/appointments';
 import { Unauthorized } from './pages/unauthorized';
 import { PublicRoutes, PrivateRoutes } from './routes/routes.routes';
 import { roles } from './utils/roles/roles.utils';
@@ -28,21 +28,13 @@ function App() {
           <Route path={PublicRoutes.UNAUTHORIZED} element={<Unauthorized />} />
           <Route path={PublicRoutes.DOCTORS} element={<Doctors />} />
 
-          <Route
-            element={
-              <RequireAuth
-                allowedRoles={[roles.ADMIN, roles.USER, roles.DOCTOR]}
-              />
-            }
-          >
+          <Route element={<RequireAuth allowedRoles={[roles.ADMIN, roles.USER, roles.DOCTOR]} />}>
             <Route path={PrivateRoutes.SHOP} element={<Shop />} />
             <Route path={PrivateRoutes.CATEGORY} element={<Shop />} />
             <Route path={PrivateRoutes.CHECKOUT} element={<Checkout />} />
             <Route path={PrivateRoutes.PAYMENT} element={<Payment />} />
           </Route>
-          <Route
-            element={<RequireAuth allowedRoles={[roles.ADMIN, roles.DOCTOR]} />}
-          >
+          <Route element={<RequireAuth allowedRoles={[roles.ADMIN, roles.DOCTOR]} />}>
             <Route path="home/test" element={<div>Test</div>} />
           </Route>
         </Route>

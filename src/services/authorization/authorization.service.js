@@ -16,18 +16,14 @@ export const isAuthorized = async (URL, token) => {
 const userAuthorized = (user, token) => {
   if (token === '987654321' || token === '123456789') {
     if (token === '987654321') {
-      const { username, avatar, role } = user.find(
-        (e) => e.username === 'Danilo Carvajal' && e
-      );
+      const { username, avatar, role } = user.find((e) => e.username === 'Danilo Carvajal' && e);
       return {
         username: username,
         avatar: avatar,
         role: role,
       };
     } else {
-      const { username, avatar, role } = user.find(
-        (e) => e.username === 'Ricardo Munera' && e
-      );
+      const { username, avatar, role } = user.find((e) => e.username === 'Ricardo Munera' && e);
       return {
         username: username,
         avatar: avatar,

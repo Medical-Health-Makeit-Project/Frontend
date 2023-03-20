@@ -1,10 +1,5 @@
 import { BsArrowRight } from 'react-icons/bs';
-import {
-  RiFacebookLine,
-  RiTwitterFill,
-  RiInstagramFill,
-  RiLinkedinFill,
-} from 'react-icons/ri';
+import { RiFacebookLine, RiTwitterFill, RiInstagramFill, RiLinkedinFill } from 'react-icons/ri';
 import { colorIcons } from '@constants';
 import { Icon } from '@components/icon';
 import './newsLetter.footer.scss';
@@ -21,9 +16,7 @@ export const NewsLetter = () => {
     <section className="news-letter-container">
       <article className="news-letter">
         <h2 className="news-letter__title">Newsletter</h2>
-        <p className="news-letter__paragraph">
-          Sign up for weekly news and updates
-        </p>
+        <p className="news-letter__paragraph">Sign up for weekly news and updates</p>
         <form className="news-letter-form">
           <input
             type="email"

@@ -1,66 +1,62 @@
 @import '@sass/abstract/variables.abstract.scss';
 
-.testimonials__container{
-    height: 500px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: $primary-background-blue;
-    padding: 3rem 0 1rem 0;
+.testimonials__container {
+  height: 500px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: $primary-background-blue;
+  padding: 3rem 0 1rem 0;
 
+  .testimonials__text {
+    font-family: $font-poppins;
+    text-align: center;
+    margin-bottom: 2rem;
 
-    
-    .testimonials__text{
-        font-family: $font-poppins;
-        text-align: center;
-        margin-bottom: 2rem;
-        
-        
-        p{
-            font-size: 14px;
-            font-weight: 600;
-            color: $primary-color-scooter;
-            margin-bottom: 40px;
-        }
-        h3{
-            font-size: 23px;
-            font-weight: 700;
-        }
+    p {
+      font-size: 14px;
+      font-weight: 600;
+      color: $primary-color-scooter;
+      margin-bottom: 40px;
     }
+    h3 {
+      font-size: 23px;
+      font-weight: 700;
+    }
+  }
 }
-.swiper__container{
-    width: 100%;
+.swiper__container {
+  width: 100%;
 }
 .swiper-slide {
-    text-align: center;
+  text-align: center;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  .testimonial {
     height: 100%;
+    width: 300px;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
     gap: 10px;
-
-    .testimonial{
-        height: 100%;
-        width: 300px;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        margin-top: 50px;
-        font-size: 14px;
-        font-family: $font-poppins;
-        color: gray;
-        margin-bottom: 2.3rem;
-
-    }
+    margin-top: 50px;
+    font-size: 14px;
+    font-family: $font-poppins;
+    color: gray;
+    margin-bottom: 2.3rem;
+  }
 }
 
-.testimonial__name{
-    margin-top: 1rem;
+.testimonial__name {
+  margin-top: 1rem;
 
-    .testimonial__fullname{
-        font-size: 16px;
-        font-weight: 700;
-        color: black;
-    }
+  .testimonial__fullname {
+    font-size: 16px;
+    font-weight: 700;
+    color: black;
+  }
 }

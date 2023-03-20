@@ -6,11 +6,7 @@ import { useQuantity, useStock } from '../../hooks';
 import './productQuantity.shop.scss';
 import { useEffect } from 'react';
 
-export const ProductQuantity = ({
-  stock,
-  quantityRetriever,
-  resetQuantity,
-}) => {
+export const ProductQuantity = ({ stock, quantityRetriever, resetQuantity }) => {
   const [quantity, handlerMinus, handlerPlus] = useQuantity(resetQuantity);
   const [isOutOfStock] = useStock(stock, quantity);
   if (isOutOfStock) {
@@ -32,11 +28,7 @@ export const ProductQuantity = ({
 
   return (
     <section className="select-quantity-container">
-      <Icon
-        color="transparent"
-        className="buttonQuantity"
-        onClick={handlerMinus}
-      >
+      <Icon color="transparent" className="buttonQuantity" onClick={handlerMinus}>
         <BiMinus />
       </Icon>
       <p>{quantity}</p>

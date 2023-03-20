@@ -11,8 +11,7 @@ export const useProducts = (category) => {
   } = useSWR(
     category ? [PRODUCTS_BY_CATEGORY, category] : ALL_PRODUCTS,
     category
-      ? ([PRODUCTS_BY_CATEGORY, category]) =>
-          getProductsByCategory(PRODUCTS_BY_CATEGORY, category)
+      ? ([PRODUCTS_BY_CATEGORY, category]) => getProductsByCategory(PRODUCTS_BY_CATEGORY, category)
       : getProducts
   );
 

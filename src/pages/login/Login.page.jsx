@@ -132,12 +132,7 @@ export const Login = () => {
             </div>
           </div>
 
-          <Button
-            variant="solid"
-            color="info"
-            className="login__button"
-            onClick={handleAuth}
-          >
+          <Button variant="solid" color="info" className="login__button" onClick={handleAuth}>
             Login
           </Button>
         </form>

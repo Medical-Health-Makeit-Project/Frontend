@@ -3,12 +3,7 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: [
-    'airbnb',
-    'airbnb/hooks',
-    'plugin:react/recommended',
-    'plugin:prettier/recommended',
-  ],
+  extends: ['airbnb', 'airbnb/hooks', 'plugin:react/recommended', 'plugin:prettier/recommended'],
   settings: {
     'import/resolver': {
       alias: {

@@ -10,12 +10,8 @@ import './navigationPanel.navigationMobile.scss';
 
 export const NavigationPanel = ({ panelOptions, showMenu, setShowMenu }) => {
   const positionPanel = showMenu ? 'left-menu' : 'left-full-menu';
-  const opacityBlackout = showMenu
-    ? 'mobile-menu__mask-opacity-1'
-    : 'mobile-menu__mask-opacity-0';
-  const positionBlackout = showMenu
-    ? 'mobile-menu__mask-left-0'
-    : 'mobile-menu__mask-right';
+  const opacityBlackout = showMenu ? 'mobile-menu__mask-opacity-1' : 'mobile-menu__mask-opacity-0';
+  const positionBlackout = showMenu ? 'mobile-menu__mask-left-0' : 'mobile-menu__mask-right';
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -42,9 +38,7 @@ export const NavigationPanel = ({ panelOptions, showMenu, setShowMenu }) => {
           );
         })}
         <li className="mobile-menu__li">
-          <div onClick={handleAccessButton}>
-            {isLoggedOut ? 'Login' : 'Logout'}
-          </div>
+          <div onClick={handleAccessButton}>{isLoggedOut ? 'Login' : 'Logout'}</div>
         </li>
       </ul>
     </div>

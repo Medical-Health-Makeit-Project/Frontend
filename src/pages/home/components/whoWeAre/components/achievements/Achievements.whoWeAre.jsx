@@ -20,11 +20,7 @@ export const Achievements = ({ achievements }) => {
         {!achievements.length
           ? Object.keys(icons).map((element) => {
               return (
-                <Skeleton
-                  key={element}
-                  className="whoWeAre-achievements__li"
-                  height="230px"
-                >
+                <Skeleton key={element} className="whoWeAre-achievements__li" height="230px">
                   <li>
                     <Icon color="info" size="md" />
                     <div className="whoWeAre-achievements-info">
@@ -43,12 +39,8 @@ export const Achievements = ({ achievements }) => {
                     {icon}
                   </Icon>
                   <div className="whoWeAre-achievements-info">
-                    <p className="whoWeAre-achievements-info__quantity">
-                      {element.quantity}
-                    </p>
-                    <p className="whoWeAre-achievements-info__achievement">
-                      {element.achievement}
-                    </p>
+                    <p className="whoWeAre-achievements-info__quantity">{element.quantity}</p>
+                    <p className="whoWeAre-achievements-info__achievement">{element.achievement}</p>
                   </div>
                 </li>
               );

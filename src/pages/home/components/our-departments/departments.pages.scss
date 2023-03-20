@@ -9,7 +9,7 @@
   align-items: center;
   background-color: $primary-background-blue;
 }
-.swiper__container{
+.swiper__container {
   max-width: 1000px;
   margin: 0;
   padding-bottom: 3rem;
@@ -46,10 +46,7 @@
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     background-color: $neutral-white;
   }
-
-  
 }
-
 
 .scroll__card-text {
   width: 100%;
@@ -67,7 +64,6 @@
     margin-bottom: 10px;
   }
 }
-
 
 .more__container {
   display: flex;
@@ -92,4 +88,3 @@
 .more__container:hover {
   border-bottom: solid 1px $primary-color-scooter;
 }
-

@@ -25,11 +25,7 @@ export const DoctorsList = () => {
             return (
               <div key={doctor.id} className="doctor__card">
                 <picture className="doctor__img-container">
-                  <img
-                    src={doctor.avatar}
-                    alt="doctor image profile"
-                    className="doctors__image"
-                  />
+                  <img src={doctor.avatar} alt="doctor image profile" className="doctors__image" />
                 </picture>
                 <div className="doctor__main-description">
                   <Link to={`/home/our-doctors/${doctor.id}`}>

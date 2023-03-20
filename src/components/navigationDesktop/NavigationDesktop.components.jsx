@@ -37,18 +37,13 @@ export const NavigationDesktop = ({ options }) => {
         </div>
         <div className="desktop-navigation-options">
           {filteredOptions.map((element) => {
-            return (
-              <NavigationLink key={element} text={element} isButton={false} />
-            );
+            return <NavigationLink key={element} text={element} isButton={false} />;
           })}
         </div>
         <div className="desktop-navigation-actions">
           <Cart size={26} />
           <AppointmentButton />
-          <Button
-            className="desktop-navigation-actions__login-logout"
-            onClick={handleAccessButton}
-          >
+          <Button className="desktop-navigation-actions__login-logout" onClick={handleAccessButton}>
             <BiLogIn size="20" />
             {isLoggedOut ? 'Login' : 'Logout'}
           </Button>
