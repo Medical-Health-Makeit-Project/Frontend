@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { BiShow, BiHide } from 'react-icons/bi';
 import { authService } from './service';
 import { Heading } from '@components/heading';

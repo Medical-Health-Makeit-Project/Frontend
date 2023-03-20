@@ -1,6 +1,6 @@
 import { PropTypes } from 'prop-types';
 import { IoCartOutline } from 'react-icons/io5';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { errorMessage } from '@utils/toastify';
 import { PrivateRoutes } from '@routes';

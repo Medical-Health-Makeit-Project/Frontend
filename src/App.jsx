@@ -25,12 +25,12 @@ function App() {
           <Route path={PublicRoutes.HOME} element={<Home />} />
           <Route path={PublicRoutes.LOGIN} element={<Login />} />
           <Route path={PublicRoutes.REGISTER} element={<Register />} />
-          <Route path={PublicRoutes.UNAUTHORIZED} element={<Unauthorized />} />
           <Route path={PublicRoutes.DOCTORS} element={<Doctors />} />
-
+          <Route path={PublicRoutes.SHOP} element={<Shop />} />
+          <Route path={PublicRoutes.CATEGORY} element={<Shop />} />
+          <Route path={PublicRoutes.UNAUTHORIZED} element={<Unauthorized />} />
+          <Route path={PrivateRoutes.APPOINTMENTS} element={<Appointments />} />
           <Route element={<RequireAuth allowedRoles={[roles.ADMIN, roles.USER, roles.DOCTOR]} />}>
-            <Route path={PrivateRoutes.SHOP} element={<Shop />} />
-            <Route path={PrivateRoutes.CATEGORY} element={<Shop />} />
             <Route path={PrivateRoutes.CHECKOUT} element={<Checkout />} />
             <Route path={PrivateRoutes.PAYMENT} element={<Payment />} />
           </Route>

@@ -33,7 +33,7 @@ export const Register = () => {
       alert('Passwords must match');
     }
   };
-  //console.log(data);
+
   const { firstName, lastName, username, email, password, repeatPassword, termsAndConditions } =
     data;
 

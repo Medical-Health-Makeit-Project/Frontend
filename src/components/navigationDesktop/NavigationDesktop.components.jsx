@@ -1,6 +1,6 @@
 import { PropTypes } from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { logout } from '@redux/features';
+import { logout, emptyCart } from '@redux/features';
 import { Link } from 'react-router-dom';
 import { BiLogIn } from 'react-icons/bi';
 import { Cart } from '../cart';
@@ -22,6 +22,7 @@ export const NavigationDesktop = ({ options }) => {
 
   const handleAccessButton = () => {
     dispatch(logout());
+    dispatch(emptyCart());
     return navigate(PublicRoutes.LOGIN);
   };
 
