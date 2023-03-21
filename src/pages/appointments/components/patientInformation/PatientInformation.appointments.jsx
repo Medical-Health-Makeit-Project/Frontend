@@ -1,7 +1,8 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import { Button } from '@components/buttons';
 import { useForm } from './hooks/useForm';
+import { useAppointmentContext } from '../../context';
 import { errorMessage } from '@utils/toastify';
 import './patientInformation.appointments.scss';
 
@@ -19,6 +20,8 @@ export const PatientInformation = () => {
     handleIsAdult,
   } = useForm();
 
+  const { setShowSecondForm } = useAppointmentContext();
+
   const inputName = useRef(null);
   useEffect(() => {
     inputName.current.focus();
@@ -29,6 +32,7 @@ export const PatientInformation = () => {
     if (Object.values(appointmentForm).some((input) => input === '')) {
       return errorMessage('You must complete the form');
     }
+    return setShowSecondForm(true);
   };
 
   return (
@@ -130,7 +134,7 @@ export const PatientInformation = () => {
             id="phone"
             name="patientPhone"
             className="input-container__input"
-            pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$"
+            pattern="^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$"
             onChange={handleChangePhone}
           />
           <span className="errorMessage">{errorsMessage.phoneError || null}</span>

@@ -1,0 +1,76 @@
+[
+  {
+    "id": "1",
+    "area": "Family Phisician",
+    "doctors": [
+      {
+        "id": "1",
+        "name": "Dr. Perry Barkley"
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "area": "Endocrinologist",
+    "doctors": [
+      {
+        "id": "2",
+        "name": "Dr. Crystal Fitzhug"
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "area": "Oncologist",
+    "doctors": [
+      {
+        "id": "3",
+        "name": "Dr. Helen Schefler"
+      }
+    ]
+  },
+  {
+    "id": "4",
+    "area": "General surgeon",
+    "doctors": [
+      {
+        "id": "4",
+        "name": "Dr. Gail Parrish"
+      },
+      {
+        "id": "6",
+        "name": "Dr. Matie Delgado"
+      }
+    ]
+  },
+  {
+    "id": "4",
+    "area": "Medical Advisor",
+    "doctors": [
+      {
+        "id": "5",
+        "name": "Dr. Charles Gordon"
+      }
+    ]
+  },
+  {
+    "id": "5",
+    "area": "Cosmetic Surgeon",
+    "doctors": [
+      {
+        "id": "7",
+        "name": "Dr. Verna Leto"
+      }
+    ]
+  },
+  {
+    "id": "6",
+    "area": "Neurologist",
+    "doctors": [
+      {
+        "id": "8",
+        "name": "Dr. Gail Parrish"
+      }
+    ]
+  }
+]

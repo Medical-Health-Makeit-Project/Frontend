@@ -1,17 +1,9 @@
 import { useState } from 'react';
+import { useAppointmentContext } from '../../../../context';
 import { formValidator } from '@utils/tools';
 
 export const useForm = () => {
-  const [appointmentForm, setAppointmentForm] = useState({
-    patientName: '',
-    patientLastname: '',
-    patientId: '',
-    patientEmail: '',
-    patientPhone: '',
-    isAdult: true,
-    patientGender: 'No Binary',
-    patientBirth: new Date(),
-  });
+  const { appointmentForm, setAppointmentForm } = useAppointmentContext();
 
   const [errorsMessage, setErrorsMessage] = useState({
     nameError: '',
@@ -129,10 +121,18 @@ export const useForm = () => {
 
   const handleIsAdult = (e) => {
     const { name, value } = e.target;
-    setAppointmentForm({
-      ...appointmentForm,
-      [name]: value,
-    });
+    if (value === 'false') {
+      setAppointmentForm({
+        ...appointmentForm,
+        patientId: '',
+        [name]: value,
+      });
+    } else {
+      setAppointmentForm({
+        ...appointmentForm,
+        [name]: value,
+      });
+    }
   };
 
   return {
