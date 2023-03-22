@@ -9,3 +9,4 @@ export const CATEGORIES = '/src/pages/shop/db/categories/categories.json';
 export const AUTH = '/src/pages/login/db/users.db.json';
 export const ALL_DOCTORS = '/src/pages/doctors/doctors.json';
 export const DOCTORS_BY_AREA = '/src/pages/appointments/db/doctorsByArea.json';
+export const LOCATIONS = '/src/pages/appointments/db/locations.json';

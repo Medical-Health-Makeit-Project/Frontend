@@ -1,5 +1,6 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
+import { Spinner } from '@chakra-ui/react';
 import { Button } from '@components/buttons';
 import { useForm } from './hooks/useForm';
 import { useAppointmentContext } from '../../context';
@@ -7,6 +8,7 @@ import { errorMessage } from '@utils/toastify';
 import './patientInformation.appointments.scss';
 
 export const PatientInformation = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
   const {
     errorsMessage,
     appointmentForm,
@@ -24,21 +26,28 @@ export const PatientInformation = () => {
 
   const inputName = useRef(null);
   useEffect(() => {
-    inputName.current.focus();
+    setIsLoaded(true);
+    if (isLoaded) {
+      inputName.current.focus();
+    }
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (Object.values(appointmentForm).some((input) => input === '')) {
-      return errorMessage('You must complete the form');
-    }
+    // if (Object.values(appointmentForm).some((input) => input === '')) {
+    //   return errorMessage('You must complete the form');
+    // }
     return setShowSecondForm(true);
   };
 
-  return (
+  return !isLoaded ? (
+    <div className="spinner-container">
+      <Spinner color="#3fb6d6" />
+    </div>
+  ) : (
     <section className="appointments-section-1">
       <h2 className="appointments-section-1__title">Patient Information</h2>
-      <form className="appointments-section-1__form">
+      <form className="appointments-section-1__form" data-aos="fade-right">
         <div className="input-container">
           <label htmlFor="name">Patient Name:</label>
           <input

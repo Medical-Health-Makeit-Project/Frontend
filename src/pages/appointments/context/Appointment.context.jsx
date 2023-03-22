@@ -1,12 +1,18 @@
 import { createContext, useContext, useState } from 'react';
 import { PropTypes } from 'prop-types';
-import { getDoctorsByArea } from '../service/appointment.service';
-import { DOCTORS_BY_AREA } from '@constants';
 import useSWR from 'swr';
+import { doctorsByAreaService } from '../service/appointment.service';
+import { locationService } from '@services/locations';
+import { DOCTORS_BY_AREA, LOCATIONS } from '@constants';
 
 export const AppointmentStore = createContext();
 
 export const AppointmentContext = ({ children }) => {
+  const swrConfig = {
+    revalidateOnFocus: false,
+    revalidateIfStale: false,
+  };
+
   const [appointmentForm, setAppointmentForm] = useState({
     patientName: '',
     patientLastname: '',
@@ -17,11 +23,15 @@ export const AppointmentContext = ({ children }) => {
     patientGender: 'No Binary',
     patientBirth: new Date(),
   });
+
   const [showSecondForm, setShowSecondForm] = useState(false);
+
   const { data: doctorsByArea, error: isErrorDoctorsByArea } = useSWR(
     DOCTORS_BY_AREA,
-    getDoctorsByArea
+    doctorsByAreaService,
+    swrConfig
   );
+  const { data: locations, error: locationsError } = useSWR(LOCATIONS, locationService, swrConfig);
 
   return (
     <AppointmentStore.Provider
@@ -32,6 +42,8 @@ export const AppointmentContext = ({ children }) => {
         setShowSecondForm,
         doctorsByArea,
         isErrorDoctorsByArea,
+        locations,
+        locationsError,
       }}
     >
       {children}

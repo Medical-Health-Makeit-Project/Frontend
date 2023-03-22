@@ -114,4 +114,11 @@
     );
     line-height: 15px;
   }
+
+  .spinner-container {
+    max-width: 1000px;
+    height: 500px;
+    display: grid;
+    place-items: center;
+  }
 }
