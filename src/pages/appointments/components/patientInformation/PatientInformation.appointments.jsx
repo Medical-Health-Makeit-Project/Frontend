@@ -34,9 +34,9 @@ export const PatientInformation = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // if (Object.values(appointmentForm).some((input) => input === '')) {
-    //   return errorMessage('You must complete the form');
-    // }
+    if (Object.values(appointmentForm).some((input) => input === '')) {
+      return errorMessage('You must complete the form');
+    }
     return setShowSecondForm(true);
   };
 
