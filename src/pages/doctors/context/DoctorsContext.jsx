@@ -9,7 +9,7 @@ export const DoctorsContext = ({ children }) => {
   const [error, setError] = useState(null);
 
   const doctorFilter = (id) => {
-    return doctors.filter((doctor) => doctor.id === id)[0];
+    return doctors.find((doctor) => doctor.id === id);
   };
 
   useEffect(() => {

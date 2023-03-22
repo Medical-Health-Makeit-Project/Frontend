@@ -25,6 +25,7 @@ export const Register = () => {
     event.preventDefault();
     if (data.password === data.repeatPassword) {
       if (data.termsAndConditions) {
+        //Aquí irá el POST al back
         console.log(data);
       } else {
         alert('You must agree to terms and conditions');
@@ -33,7 +34,6 @@ export const Register = () => {
       alert('Passwords must match');
     }
   };
-  //console.log(data);
   const {
     firstName,
     lastName,

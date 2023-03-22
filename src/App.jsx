@@ -7,6 +7,7 @@ import { Login } from './pages/login/Login.page';
 import { Register } from './pages/register';
 import { Shop } from './pages/shop';
 import { Doctors } from './pages/doctors/Doctors.page';
+import { UserProfile } from './pages/user-profile/UserProfile.page';
 import { Checkout } from './pages/checkout';
 import { Payment } from './pages/payment';
 import { Unauthorized } from './pages/unauthorized';
@@ -26,6 +27,7 @@ function App() {
           <Route path={PublicRoutes.REGISTER} element={<Register />} />
           <Route path={PublicRoutes.UNAUTHORIZED} element={<Unauthorized />} />
           <Route path={PublicRoutes.DOCTORS} element={<Doctors />} />
+          <Route path={PublicRoutes.USER_PROFILE} element={<UserProfile />} />
 
           <Route
             element={

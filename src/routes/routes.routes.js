@@ -5,6 +5,7 @@ export const PublicRoutes = {
   DOCTORS: '/home/our-doctors/*',
   DOCTOR_DETAIL: '/:id',
   UNAUTHORIZED: '/home/unauthorized',
+  USER_PROFILE: '/home/profile',
 };
 
 export const PrivateRoutes = {

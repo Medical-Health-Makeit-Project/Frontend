@@ -1,0 +1,11 @@
+{
+  "id": 1,
+  "name": "Robert Langdon",
+  "email": "test123@test.com",
+  "phone": "320 774 1234",
+  "nationality": "Medellin, Colombia",
+  "avatar": "/src/assets/user-avatar.jpg",
+  "gender": "Male",
+  "birthday": "02/12/1996",
+  "blood": "A-"
+}
