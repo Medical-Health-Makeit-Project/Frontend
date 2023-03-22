@@ -1,6 +1,6 @@
 import { PropTypes } from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { logout } from '@redux/features';
+import { logout, emptyCart } from '@redux/features';
 import { Link } from 'react-router-dom';
 import { BiLogIn } from 'react-icons/bi';
 import { Cart } from '../cart';
@@ -22,6 +22,7 @@ export const NavigationDesktop = ({ options }) => {
 
   const handleAccessButton = () => {
     dispatch(logout());
+    dispatch(emptyCart());
     return navigate(PublicRoutes.LOGIN);
   };
 
@@ -37,18 +38,13 @@ export const NavigationDesktop = ({ options }) => {
         </div>
         <div className="desktop-navigation-options">
           {filteredOptions.map((element) => {
-            return (
-              <NavigationLink key={element} text={element} isButton={false} />
-            );
+            return <NavigationLink key={element} text={element} isButton={false} />;
           })}
         </div>
         <div className="desktop-navigation-actions">
           <Cart size={26} />
           <AppointmentButton />
-          <Button
-            className="desktop-navigation-actions__login-logout"
-            onClick={handleAccessButton}
-          >
+          <Button className="desktop-navigation-actions__login-logout" onClick={handleAccessButton}>
             <BiLogIn size="20" />
             {isLoggedOut ? 'Login' : 'Logout'}
           </Button>

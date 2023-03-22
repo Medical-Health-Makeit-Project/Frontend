@@ -34,15 +34,9 @@ export const Register = () => {
       alert('Passwords must match');
     }
   };
-  const {
-    firstName,
-    lastName,
-    username,
-    email,
-    password,
-    repeatPassword,
-    termsAndConditions,
-  } = data;
+
+  const { firstName, lastName, username, email, password, repeatPassword, termsAndConditions } =
+    data;
 
   return (
     <section className="register__container">
@@ -148,12 +142,7 @@ export const Register = () => {
             />
           </div>
 
-          <Button
-            variant="solid"
-            color="info"
-            className="register__buton"
-            type="submit"
-          >
+          <Button variant="solid" color="info" className="register__buton" type="submit">
             Register now
             <span className="arrow-button">
               <BsArrowRight size={18} />

@@ -51,11 +51,7 @@ export const DoctorDetail = () => {
       <div className="main__detail-container">
         <section className="profile__main">
           <picture className="avatar__container">
-            <img
-              src={doctor.avatar}
-              alt="Profile Image"
-              className="avatar__img"
-            />
+            <img src={doctor.avatar} alt="Profile Image" className="avatar__img" />
           </picture>
 
           <div className="name__container">
@@ -137,12 +133,7 @@ export const DoctorDetail = () => {
 
               <div className="service__input-container inputs-container">
                 <label htmlFor="service">Type of service required</label>
-                <select
-                  name="service"
-                  id="service"
-                  className="input-box"
-                  onChange={handleChange}
-                >
+                <select name="service" id="service" className="input-box" onChange={handleChange}>
                   <option value="null">Select service</option>
                   <option value="orthopedics">Orthopedics</option>
                   <option value="cardiology">Cardiology</option>
@@ -155,20 +146,10 @@ export const DoctorDetail = () => {
 
               <div className="date__input-container inputs-container">
                 <label htmlFor="date">Select date</label>
-                <DatePicker
-                  name="date"
-                  selected={date}
-                  value={inputDate}
-                  className="input-box"
-                />
+                <DatePicker name="date" selected={date} value={inputDate} className="input-box" />
               </div>
 
-              <Button
-                variant="solid"
-                color="info"
-                className="appointment__button"
-                type="submit"
-              >
+              <Button variant="solid" color="info" className="appointment__button" type="submit">
                 Get appointment
               </Button>
             </form>

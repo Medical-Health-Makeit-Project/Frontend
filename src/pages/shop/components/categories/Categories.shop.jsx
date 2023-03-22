@@ -4,12 +4,8 @@ import './categories.shop.scss';
 import { useShopContext } from '../../context';
 
 export const SelectCategories = () => {
-  const {
-    categories,
-    categoriesError,
-    categoriesIsLoading,
-    handleSelectCategories,
-  } = useShopContext();
+  const { categories, categoriesError, categoriesIsLoading, handleSelectCategories } =
+    useShopContext();
 
   const location = window.location.pathname;
   if (categoriesError) {
@@ -29,10 +25,7 @@ export const SelectCategories = () => {
 
   return (
     <div className="categories-container">
-      <select
-        className="categories"
-        onChange={(e) => handleSelectCategories(e.target.value)}
-      >
+      <select className="categories" onChange={(e) => handleSelectCategories(e.target.value)}>
         <option value="/home/shop">All</option>
         {categories.map((e) => {
           const selected = location.endsWith(e.category.toLowerCase());

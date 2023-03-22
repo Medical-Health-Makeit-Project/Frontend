@@ -13,12 +13,9 @@ export const authService = async (URL, user) => {
 };
 
 const validateUser = (userToValidate, user) => {
-  const userExist = user.find(
-    (user) => user.username === userToValidate.username
-  );
+  const userExist = user.find((user) => user.username === userToValidate.username);
   if (!userExist) return new Error('Invalid credentials');
-  if (userExist.password !== userToValidate.password)
-    return new Error('Invalid credentials');
+  if (userExist.password !== userToValidate.password) return new Error('Invalid credentials');
   if (userExist.username === 'Ricardo Munera') {
     return {
       ACCESS_TOKEN: '123456789',

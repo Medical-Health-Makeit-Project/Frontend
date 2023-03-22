@@ -23,12 +23,7 @@ export const FormAppointments = () => {
       <p className="welcome-form__paragraph">
         Fillup the form to make an appointment with the doctor
       </p>
-      <Calendar
-        onChange={onChangeDate}
-        value={date}
-        minDate={new Date()}
-        calendarType="US"
-      />
+      <Calendar onChange={onChangeDate} value={date} minDate={new Date()} calendarType="US" />
       <section className="welcome-form-inputs">
         <input
           type="text"

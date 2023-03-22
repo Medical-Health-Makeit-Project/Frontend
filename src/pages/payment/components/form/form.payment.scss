@@ -18,10 +18,7 @@
   }
 
   .label {
-    @include paragraph(
-      $size: $size-xs,
-      $weight: weight-typo('poppins', 'semi-bold')
-    );
+    @include paragraph($size: $size-xs, $weight: weight-typo('poppins', 'semi-bold'));
   }
 
   .select {

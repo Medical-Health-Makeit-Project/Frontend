@@ -27,7 +27,10 @@
 
   .product-info__price {
     width: 50%;
-    @include paragraph($weight: weight-typo('poppins', 'semi-bold'), $color: map-get($typography-colors, 'black'));
+    @include paragraph(
+      $weight: weight-typo('poppins', 'semi-bold'),
+      $color: map-get($typography-colors, 'black')
+    );
     text-align: center;
     background-color: #f49d1a;
     border-radius: 16px;

@@ -28,11 +28,7 @@ export const NavigationMobile = ({ options }) => {
               <HiMenu size={25} />
             </button>
           </div>
-          <NavigationPanel
-            panelOptions={options}
-            showMenu={showMenu}
-            setShowMenu={setShowMenu}
-          />
+          <NavigationPanel panelOptions={options} showMenu={showMenu} setShowMenu={setShowMenu} />
         </div>
       </nav>
     </section>

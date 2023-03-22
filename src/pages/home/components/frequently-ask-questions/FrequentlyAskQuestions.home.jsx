@@ -24,9 +24,7 @@ export const FrequentlyAskQuestions = () => {
           />
         </div>
         <article className="accordion-container">
-          <h2 className="accordion-container__title">
-            Frequently ask questions
-          </h2>
+          <h2 className="accordion-container__title">Frequently ask questions</h2>
           <Accordion allowToggle className="accordion">
             <AccordionItem>
               <h3>
@@ -38,9 +36,9 @@ export const FrequentlyAskQuestions = () => {
                 </AccordionButton>
               </h3>
               <AccordionPanel pb={4} className="accordion__paragraph">
-                Donec sollicitudin molestie malesuada. Pellentesque in ipsum id
-                orci porta dapibus. Curabitur arcu erat acumsan id imperdiet et
-                porttitor at seum. nulla porttitor accumsan tincidunt.
+                Donec sollicitudin molestie malesuada. Pellentesque in ipsum id orci porta dapibus.
+                Curabitur arcu erat acumsan id imperdiet et porttitor at seum. nulla porttitor
+                accumsan tincidunt.
               </AccordionPanel>
             </AccordionItem>
             <AccordionItem>
@@ -53,9 +51,9 @@ export const FrequentlyAskQuestions = () => {
                 </AccordionButton>
               </h3>
               <AccordionPanel pb={4} className="accordion__paragraph">
-                Donec sollicitudin molestie malesuada. Pellentesque in ipsum id
-                orci porta dapibus. Curabitur arcu erat acumsan id imperdiet et
-                porttitor at seum. nulla porttitor accumsan tincidunt.
+                Donec sollicitudin molestie malesuada. Pellentesque in ipsum id orci porta dapibus.
+                Curabitur arcu erat acumsan id imperdiet et porttitor at seum. nulla porttitor
+                accumsan tincidunt.
               </AccordionPanel>
             </AccordionItem>
             <AccordionItem>
@@ -68,9 +66,9 @@ export const FrequentlyAskQuestions = () => {
                 </AccordionButton>
               </h3>
               <AccordionPanel pb={4} className="accordion__paragraph">
-                Donec sollicitudin molestie malesuada. Pellentesque in ipsum id
-                orci porta dapibus. Curabitur arcu erat acumsan id imperdiet et
-                porttitor at seum. nulla porttitor accumsan tincidunt.
+                Donec sollicitudin molestie malesuada. Pellentesque in ipsum id orci porta dapibus.
+                Curabitur arcu erat acumsan id imperdiet et porttitor at seum. nulla porttitor
+                accumsan tincidunt.
               </AccordionPanel>
             </AccordionItem>
             <AccordionItem>
@@ -83,9 +81,9 @@ export const FrequentlyAskQuestions = () => {
                 </AccordionButton>
               </h3>
               <AccordionPanel pb={4} className="accordion__paragraph">
-                Donec sollicitudin molestie malesuada. Pellentesque in ipsum id
-                orci porta dapibus. Curabitur arcu erat acumsan id imperdiet et
-                porttitor at seum. nulla porttitor accumsan tincidunt.
+                Donec sollicitudin molestie malesuada. Pellentesque in ipsum id orci porta dapibus.
+                Curabitur arcu erat acumsan id imperdiet et porttitor at seum. nulla porttitor
+                accumsan tincidunt.
               </AccordionPanel>
             </AccordionItem>
             <AccordionItem>
@@ -98,9 +96,9 @@ export const FrequentlyAskQuestions = () => {
                 </AccordionButton>
               </h3>
               <AccordionPanel pb={4} className="accordion__paragraph">
-                Donec sollicitudin molestie malesuada. Pellentesque in ipsum id
-                orci porta dapibus. Curabitur arcu erat acumsan id imperdiet et
-                porttitor at seum. nulla porttitor accumsan tincidunt.
+                Donec sollicitudin molestie malesuada. Pellentesque in ipsum id orci porta dapibus.
+                Curabitur arcu erat acumsan id imperdiet et porttitor at seum. nulla porttitor
+                accumsan tincidunt.
               </AccordionPanel>
             </AccordionItem>
           </Accordion>
@@ -109,20 +107,12 @@ export const FrequentlyAskQuestions = () => {
       <section className="more-information-container">
         <div className="more-information">
           <div className="more-information-logo-container">
-            <img
-              src={logo}
-              alt="logo"
-              className="more-information-logo-container__imagen"
-            />
+            <img src={logo} alt="logo" className="more-information-logo-container__imagen" />
           </div>
           <h2 className="more-information__subtitle">
             Need more information please contact us or book an appointment
           </h2>
-          <Button
-            variant="solid"
-            color="light"
-            className="more-information__button"
-          >
+          <Button variant="solid" color="light" className="more-information__button">
             Contact Us{' '}
             <span className="arrow-button">
               <BsArrowRight size={14} />
