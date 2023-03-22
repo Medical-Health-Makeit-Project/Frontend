@@ -50,9 +50,7 @@ export const Carousel = ({ departments }) => {
                 </Icon>
                 <div className="scroll__card-text">
                   <p className="scroll__card-title">{element.department}</p>
-                  <p className="scroll__card-description">
-                    {element.description}
-                  </p>
+                  <p className="scroll__card-description">{element.description}</p>
                 </div>
                 <div className="more__container">
                   <p>Read more</p>

@@ -53,12 +53,7 @@ export const Product = ({
           product={product}
           setShowModal={onOpen}
         />
-        <ProductInfo
-          product={product}
-          dose={dose}
-          price={price}
-          label={label}
-        />
+        <ProductInfo product={product} dose={dose} price={price} label={label} />
         <ProductQuantity
           stock={stock}
           quantityRetriever={handlerRetrieveQuantity}
@@ -81,15 +76,7 @@ export const Product = ({
         isOpen={isOpen}
         onClose={onClose}
         onEsc
-        size={
-          windowSize > 900
-            ? '3xl'
-            : windowSize > 700
-            ? '2xl'
-            : windowSize > 400
-            ? 'md'
-            : 'xs'
-        }
+        size={windowSize > 900 ? '3xl' : windowSize > 700 ? '2xl' : windowSize > 400 ? 'md' : 'xs'}
       >
         <ModalOverlay />
         <ModalContent>

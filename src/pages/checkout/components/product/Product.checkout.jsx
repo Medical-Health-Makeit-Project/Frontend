@@ -1,24 +1,11 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import {
-  checkoutUpdate,
-  deleteProduct,
-} from '@redux/features/cartSlice.feature';
+import { checkoutUpdate, deleteProduct } from '@redux/features/cartSlice.feature';
 import { toast } from 'react-toastify';
 import { Button } from '@components/buttons';
 import './product.checkout.scss';
 
-export const Product = ({
-  id,
-  discount,
-  dose,
-  image,
-  label,
-  price,
-  product,
-  quantity,
-  stock,
-}) => {
+export const Product = ({ id, discount, dose, image, label, price, product, quantity, stock }) => {
   let priceAfterDiscount = (price - (price * discount) / 100).toFixed(2);
   const dispatch = useDispatch();
 
@@ -74,27 +61,15 @@ export const Product = ({
       <section className="footer-product-checkout">
         <div className="resume-product-checkout">
           <div className="quantity">
-            <Button
-              color="light"
-              className="buttons"
-              onClick={handlerDispacth}
-              data-action="-"
-            >
+            <Button color="light" className="buttons" onClick={handlerDispacth} data-action="-">
               -
             </Button>
             <p className="product-quantity__quantity">{quantity}</p>
-            <Button
-              color="light"
-              className="buttons"
-              onClick={handlerDispacth}
-              data-action="+"
-            >
+            <Button color="light" className="buttons" onClick={handlerDispacth} data-action="+">
               +
             </Button>
           </div>
-          <div className="total">
-            TOTAL: ${(priceAfterDiscount * quantity).toFixed(2)}
-          </div>
+          <div className="total">TOTAL: ${(priceAfterDiscount * quantity).toFixed(2)}</div>
         </div>
       </section>
     </article>

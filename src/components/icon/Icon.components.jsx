@@ -34,15 +34,7 @@ export const Icon = forwardRef(function Icon(
           ? colorVariant.transparent
           : ''
       }
-        ${
-          size === 'sm'
-            ? 'sm'
-            : size === 'md'
-            ? 'md'
-            : size === 'lg'
-            ? 'lg'
-            : ''
-        }
+        ${size === 'sm' ? 'sm' : size === 'md' ? 'md' : size === 'lg' ? 'lg' : ''}
       } icon`}
     >
       {children}
@@ -54,14 +46,7 @@ export const Icon = forwardRef(function Icon(
   The color based on one kind of alert who the dev want to show at user
 */
 Icon.propTypes = {
-  color: PropTypes.oneOf([
-    'regular',
-    'info',
-    'danger',
-    'warning',
-    'success',
-    'transparent',
-  ]),
+  color: PropTypes.oneOf(['regular', 'info', 'danger', 'warning', 'success', 'transparent']),
   size: PropTypes.string,
   children: PropTypes.node,
   className: PropTypes.string,

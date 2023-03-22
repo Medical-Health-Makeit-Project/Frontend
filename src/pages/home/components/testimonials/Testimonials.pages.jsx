@@ -34,10 +34,9 @@ export const Testimonials = () => {
         <SwiperSlide>
           <article className="testimonial">
             <p>
-              `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam
-              consequuntur possimus rem ea, odit ratione doloribus tenetur fuga
-              porro sapiente reprehenderit ullam illum tempore id repudiandae
-              vitae? Enim, qui temporibus! Cum corporism.`
+              `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam consequuntur possimus
+              rem ea, odit ratione doloribus tenetur fuga porro sapiente reprehenderit ullam illum
+              tempore id repudiandae vitae? Enim, qui temporibus! Cum corporism.`
             </p>
 
             <div className="testimonial__name">
@@ -49,10 +48,9 @@ export const Testimonials = () => {
         <SwiperSlide>
           <article className="testimonial">
             <p>
-              `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam
-              consequuntur possimus rem ea, odit ratione doloribus tenetur fuga
-              porro sapiente reprehenderit ullam illum tempore id repudiandae
-              vitae? Enim, qui temporibus! Cum corporism.`
+              `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam consequuntur possimus
+              rem ea, odit ratione doloribus tenetur fuga porro sapiente reprehenderit ullam illum
+              tempore id repudiandae vitae? Enim, qui temporibus! Cum corporism.`
             </p>
             <div className="testimonial__name">
               <p className="testimonial__fullname">Jhon Doe</p>
@@ -63,10 +61,9 @@ export const Testimonials = () => {
         <SwiperSlide>
           <article className="testimonial">
             <p>
-              `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam
-              consequuntur possimus rem ea, odit ratione doloribus tenetur fuga
-              porro sapiente reprehenderit ullam illum tempore id repudiandae
-              vitae? Enim, qui temporibus! Cum corporism.`
+              `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam consequuntur possimus
+              rem ea, odit ratione doloribus tenetur fuga porro sapiente reprehenderit ullam illum
+              tempore id repudiandae vitae? Enim, qui temporibus! Cum corporism.`
             </p>
             <div className="testimonial__name">
               <p className="testimonial__fullname">Isabella Fernadez</p>
@@ -77,10 +74,9 @@ export const Testimonials = () => {
         <SwiperSlide>
           <article className="testimonial">
             <p className="testimonial__fullname">
-              `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam
-              consequuntur possimus rem ea, odit ratione doloribus tenetur fuga
-              porro sapiente reprehenderit ullam illum tempore id repudiandae
-              vitae? Enim, qui temporibus! Cum corporism.`
+              `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam consequuntur possimus
+              rem ea, odit ratione doloribus tenetur fuga porro sapiente reprehenderit ullam illum
+              tempore id repudiandae vitae? Enim, qui temporibus! Cum corporism.`
             </p>
             <div className="testimonial__name">
               <p className="testimonial__fullname">Jhon Smith</p>

@@ -46,19 +46,16 @@ export const Form = () => {
   const handlerSubmit = (e) => {
     e.preventDefault();
     if (Object.values(userData).some((e) => e === ''))
-      toast.error(
-        `We can't send your products if you don't complete the form.`,
-        {
-          position: 'top-right',
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: 'colored',
-        }
-      );
+      toast.error(`We can't send your products if you don't complete the form.`, {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+      });
     return toast.clearWaitingQueue();
   };
 
@@ -114,12 +111,7 @@ export const Form = () => {
         <label className="label" htmlFor="idType">
           Identification Type
         </label>
-        <select
-          className="select"
-          name="idType"
-          id="idType"
-          onChange={handleOnChange}
-        >
+        <select className="select" name="idType" id="idType" onChange={handleOnChange}>
           <option value="ID">ID</option>
           <option value="passport">Passport</option>
         </select>
@@ -137,12 +129,7 @@ export const Form = () => {
         <label className="label" htmlFor="country">
           Your Country
         </label>
-        <select
-          className="select"
-          name="country"
-          id="country"
-          onChange={handleSelectedCountry}
-        >
+        <select className="select" name="country" id="country" onChange={handleSelectedCountry}>
           {Object.keys(locations).map((e) => {
             return (
               <option value={e} key={e}>
@@ -154,12 +141,7 @@ export const Form = () => {
         <label className="label" htmlFor="city">
           Your City
         </label>
-        <select
-          className="select"
-          name="city"
-          id="city"
-          onChange={handleOnChange}
-        >
+        <select className="select" name="city" id="city" onChange={handleOnChange}>
           {citySelected.map((city) => {
             return (
               <option value={city} key={city}>
@@ -171,12 +153,7 @@ export const Form = () => {
         <label className="label" htmlFor="address">
           Your Address
         </label>
-        <input
-          type="text"
-          id="address"
-          name="address"
-          onChange={handleOnChange}
-        />
+        <input type="text" id="address" name="address" onChange={handleOnChange} />
         <Button type="submit" color="danger" className="button-checkout">
           Place order
         </Button>

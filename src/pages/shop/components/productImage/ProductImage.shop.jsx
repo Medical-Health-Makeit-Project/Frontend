@@ -2,13 +2,7 @@
 import { PropTypes } from 'prop-types';
 import './productImage.shop.scss';
 
-export const ProductImage = ({
-  id,
-  image,
-  discount,
-  product,
-  setShowModal,
-}) => {
+export const ProductImage = ({ id, image, discount, product, setShowModal }) => {
   const handlerOpenModal = () => {
     setShowModal(true);
   };

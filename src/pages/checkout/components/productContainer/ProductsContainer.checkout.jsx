@@ -15,10 +15,7 @@ export const ProductsContainer = () => {
     }
     return product.price * product.quantity;
   });
-  const totalAfterDiscount = priceUnityAfterDiscount.reduce(
-    (prev, acc) => (acc += prev),
-    0
-  );
+  const totalAfterDiscount = priceUnityAfterDiscount.reduce((prev, acc) => (acc += prev), 0);
 
   return (
     <section className="products-container">
@@ -34,9 +31,7 @@ export const ProductsContainer = () => {
           return <Product key={e.id} {...e} />;
         })
       )}
-      {!!products.length && (
-        <div className="total">SUBTOTAL: ${totalAfterDiscount.toFixed(2)}</div>
-      )}
+      {!!products.length && <div className="total">SUBTOTAL: ${totalAfterDiscount.toFixed(2)}</div>}
     </section>
   );
 };

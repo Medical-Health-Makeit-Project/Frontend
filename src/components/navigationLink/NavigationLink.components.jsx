@@ -7,17 +7,11 @@ export const NavigationLink = ({ text, isButton }) => {
   const link = text.replace(regex, '-').toLowerCase();
 
   return isButton ? (
-    <Link
-      to={`${text === 'Home' ? '/home' : `/home/${link}`}`}
-      className="button"
-    >
+    <Link to={`${text === 'Home' ? '/home' : `/home/${link}`}`} className="button">
       {text}
     </Link>
   ) : (
-    <Link
-      to={`${text === 'Home' ? '/home' : `/home/${link}`}`}
-      className="text"
-    >
+    <Link to={`${text === 'Home' ? '/home' : `/home/${link}`}`} className="text">
       {text}
     </Link>
   );

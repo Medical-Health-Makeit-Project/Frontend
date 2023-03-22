@@ -9,8 +9,7 @@ export const ProductsContainer = () => {
   if (productsError)
     return (
       <div className="spinner-container">
-        ERROR LOADING PRODUCTS, PLEASE TRY AGAIN OR CONTACT YOUR NEAREST TRUSTED
-        DEVELOPER
+        ERROR LOADING PRODUCTS, PLEASE TRY AGAIN OR CONTACT YOUR NEAREST TRUSTED DEVELOPER
       </div>
     );
   if (productsIsLoading)
