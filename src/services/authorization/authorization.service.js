@@ -14,19 +14,62 @@ export const isAuthorized = async (URL, token) => {
 };
 
 const userAuthorized = (user, token) => {
-  if (token === '987654321' || token === '123456789') {
+  if (token === '987654321' || token === '123456789' || token === '56789') {
     if (token === '987654321') {
-      const { username, avatar, role } = user.find((e) => e.username === 'Danilo Carvajal' && e);
+      const {
+        id,
+        name,
+        img_profile,
+        area,
+        email,
+        phone,
+        headquarter,
+        gender,
+        qualifications,
+        memberships,
+        skills,
+        role,
+      } = user.find((e) => e.username === 'Perry Barkley' && e);
+      return {
+        id,
+        name,
+        img_profile,
+        area,
+        email,
+        phone,
+        headquarter,
+        gender,
+        qualifications,
+        memberships,
+        skills,
+        role,
+      };
+    } else if (token === '123456789') {
+      const { username, avatar, role, email, phone, nationality, gender, birthday, blood } =
+        user.find((e) => e.username === 'Ricardo Munera' && e);
       return {
         username: username,
         avatar: avatar,
+        email: email,
+        phone: phone,
+        nationality: nationality,
+        gender: gender,
+        birthday: birthday,
+        blood: blood,
         role: role,
       };
-    } else {
-      const { username, avatar, role } = user.find((e) => e.username === 'Ricardo Munera' && e);
+    } else if (token === '56789') {
+      const { username, avatar, role, email, phone, nationality, gender, birthday, blood } =
+        user.find((e) => e.username === 'Robert Langdon' && e);
       return {
         username: username,
         avatar: avatar,
+        email: email,
+        phone: phone,
+        nationality: nationality,
+        gender: gender,
+        birthday: birthday,
+        blood: blood,
         role: role,
       };
     }

@@ -7,7 +7,7 @@ import { Login } from './pages/login/Login.page';
 import { Register } from './pages/register';
 import { Shop } from './pages/shop';
 import { Doctors } from './pages/doctors/Doctors.page';
-import { UserProfile } from './pages/user-profile/UserProfile.page';
+import { ContainerProfiles } from './pages/profiles';
 import { Checkout } from './pages/checkout';
 import { Payment } from './pages/payment';
 import { Appointments } from './pages/appointments';
@@ -34,6 +34,7 @@ function App() {
           <Route element={<RequireAuth allowedRoles={[roles.ADMIN, roles.USER, roles.DOCTOR]} />}>
             <Route path={PrivateRoutes.CHECKOUT} element={<Checkout />} />
             <Route path={PrivateRoutes.PAYMENT} element={<Payment />} />
+            <Route path={PrivateRoutes.PROFILES} element={<ContainerProfiles />} />
           </Route>
           <Route element={<RequireAuth allowedRoles={[roles.ADMIN, roles.DOCTOR]} />}>
             <Route path="home/test" element={<div>Test</div>} />

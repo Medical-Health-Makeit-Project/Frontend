@@ -7,11 +7,11 @@ export const PublicRoutes = {
   SHOP: '/home/shop',
   CATEGORY: '/home/shop/:category',
   UNAUTHORIZED: '/home/unauthorized',
-  USER_PROFILE: '/home/profile',
 };
 
 export const PrivateRoutes = {
   APPOINTMENTS: '/home/appointments',
   CHECKOUT: '/home/checkout',
   PAYMENT: '/home/payment',
+  PROFILES: '/home/profile',
 };

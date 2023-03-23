@@ -20,9 +20,17 @@ const validateUser = (userToValidate, user) => {
     return {
       ACCESS_TOKEN: '123456789',
     };
-  } else {
+  } else if (userExist.username === 'Robert Langdon') {
+    return {
+      ACCESS_TOKEN: '56789',
+    };
+  } else if (userExist.username === 'Perry Barkley') {
     return {
       ACCESS_TOKEN: '987654321',
+    };
+  } else {
+    return {
+      ACCESS_TOKEN: '9876543210',
     };
   }
 };
