@@ -116,7 +116,16 @@
   .react-time-picker__wrapper {
     border: none;
   }
+
+  .react-time-picker__inputGroup__input:invalid {
+    background-color: transparent;
+  }
   textarea {
     resize: none;
+  }
+
+  .errorMessage {
+    @include paragraph($size: 10px, $color: black, $weight: weight-typo('poppins', 'light'));
+    line-height: 15px;
   }
 }

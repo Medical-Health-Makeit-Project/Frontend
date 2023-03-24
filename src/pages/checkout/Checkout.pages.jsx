@@ -7,12 +7,13 @@ import headingImage from '@assets/heading-checkout.jpeg';
 import './checkout.pages.scss';
 
 export const Checkout = () => {
-  const products = useSelector((state) => state.cart);
+  const cart = useSelector((state) => state.cart);
+  const showCheckout = cart.products.length > 0 || cart.appointments.length > 0 ? true : false;
   return (
     <main>
       <Heading title="Checkout" image={headingImage} />
       <ProductsContainer />
-      {!!products.length && <ButtonCheckout />}
+      {showCheckout ? <ButtonCheckout /> : null}
     </main>
   );
 };
