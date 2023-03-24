@@ -11,8 +11,8 @@ export const PatientInformation = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const {
     errorsMessage,
-    appointmentForm,
-    setAppointmentForm,
+    patientForm,
+    setPatientForm,
     handleChangeName,
     handleChangeLastname,
     handleChangeIdentification,
@@ -34,8 +34,11 @@ export const PatientInformation = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (Object.values(appointmentForm).some((input) => input === '')) {
-      return errorMessage('You must complete the form');
+    // if (Object.values(patientForm).some((input) => input === '')) {
+    //   return errorMessage('You must complete the form');
+    // }
+    if (Object.values(errorsMessage).some((error) => error !== '')) {
+      return errorMessage('You have some error in the form, please verify');
     }
     return setShowSecondForm(true);
   };
@@ -57,8 +60,9 @@ export const PatientInformation = () => {
             id="name"
             name="patientName"
             className="input-container__input"
-            pattern="[A-Za-z\s]{3,}"
+            pattern="[A-Za-z\s]{2,}"
             onChange={handleChangeName}
+            value={patientForm.patientName}
           />
           <span className="errorMessage">{errorsMessage.nameError || null}</span>
         </div>
@@ -72,6 +76,7 @@ export const PatientInformation = () => {
             className="input-container__input"
             pattern="^[A-Z][a-z]+\s[A-Z][a-z]+$"
             onChange={handleChangeLastname}
+            value={patientForm.patientLastname}
           />
           <span className="errorMessage">{errorsMessage.lastnameError || null}</span>
         </div>
@@ -86,8 +91,8 @@ export const PatientInformation = () => {
                 id="adult"
                 value={true}
                 name="isAdult"
-                defaultChecked
                 onChange={handleIsAdult}
+                checked={patientForm.isAdult === 'true'}
               />
               <label htmlFor="adult">Yes</label>
             </div>
@@ -98,6 +103,7 @@ export const PatientInformation = () => {
                 value={false}
                 name="isAdult"
                 onChange={handleIsAdult}
+                checked={patientForm.isAdult === 'false'}
               />
               <label htmlFor="younger">No</label>
             </div>
@@ -113,13 +119,11 @@ export const PatientInformation = () => {
             className="input-container__input"
             pattern="^([0-9]{10})$"
             onChange={handleChangeIdentification}
-            disabled={appointmentForm.isAdult === 'true' ? false : true}
-            value={appointmentForm.isAdult === 'true' ? appointmentForm.patientId : ''}
+            disabled={patientForm.isAdult === 'true' ? false : true}
+            value={patientForm.isAdult === 'true' ? patientForm.patientId || '' : ''}
           />
           <span className="errorMessage">
-            {errorsMessage.idError && appointmentForm.isAdult === 'true'
-              ? errorsMessage.idError
-              : null}
+            {errorsMessage.idError && patientForm.isAdult === 'true' ? errorsMessage.idError : null}
           </span>
         </div>
         <div className="input-container">
@@ -132,6 +136,7 @@ export const PatientInformation = () => {
             className="input-container__input"
             pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}"
             onChange={handleChangeEmail}
+            value={patientForm.patientEmail}
           />
           <span className="errorMessage">{errorsMessage.emailError || null}</span>
         </div>
@@ -145,6 +150,7 @@ export const PatientInformation = () => {
             className="input-container__input"
             pattern="^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$"
             onChange={handleChangePhone}
+            value={patientForm.patientPhone}
           />
           <span className="errorMessage">{errorsMessage.phoneError || null}</span>
         </div>
@@ -153,11 +159,11 @@ export const PatientInformation = () => {
           <DatePicker
             maxDate={new Date()}
             dateFormat="dd/MM/yyyy"
-            selected={appointmentForm.patientBirth}
+            selected={patientForm.patientBirth}
             name="patientBirth"
             id="birth"
             className="input-container__input"
-            onChange={(date) => setAppointmentForm({ ...appointmentForm, patientBirth: date })}
+            onChange={(date) => setPatientForm({ ...patientForm, patientBirth: date })}
           />
         </div>
         <div className="input-gender-container">
@@ -172,6 +178,7 @@ export const PatientInformation = () => {
                 value="Male"
                 name="patientGender"
                 onChange={handleChangeGender}
+                checked={patientForm.patientGender === 'Male'}
               />
               <label htmlFor="male">Male</label>
             </div>
@@ -179,10 +186,10 @@ export const PatientInformation = () => {
               <input
                 type="radio"
                 id="female"
-                defaultChecked
                 value="Female"
                 name="patientGender"
                 onChange={handleChangeGender}
+                checked={patientForm.patientGender === 'Female'}
               />
               <label htmlFor="female">Female</label>
             </div>
@@ -193,6 +200,7 @@ export const PatientInformation = () => {
                 value="No Binary"
                 name="patientGender"
                 onChange={handleChangeGender}
+                checked={patientForm.patientGender === 'No Binary'}
               />
               <label htmlFor="noBinary">No Binary</label>
             </div>

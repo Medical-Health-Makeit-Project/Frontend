@@ -1,6 +1,9 @@
 import { createContext, useContext, useState } from 'react';
 import { PropTypes } from 'prop-types';
 import useSWR from 'swr';
+import { v4 as uuid } from 'uuid';
+import { useDispatch } from 'react-redux';
+import { postAppointment } from '@redux/features';
 import { doctorsByAreaService } from '../service/appointment.service';
 import { locationService } from '@services/locations';
 import { DOCTORS_BY_AREA, LOCATIONS } from '@constants';
@@ -13,18 +16,30 @@ export const AppointmentContext = ({ children }) => {
     revalidateIfStale: false,
   };
 
-  const [appointmentForm, setAppointmentForm] = useState({
+  const dispatch = useDispatch();
+
+  const [showSecondForm, setShowSecondForm] = useState(false);
+
+  const [patientForm, setPatientForm] = useState({
     patientName: '',
     patientLastname: '',
     patientId: '',
     patientEmail: '',
     patientPhone: '',
     isAdult: 'true',
-    patientGender: 'No Binary',
+    patientGender: 'Female',
     patientBirth: new Date(),
   });
 
-  const [showSecondForm, setShowSecondForm] = useState(false);
+  const [appointmentForm, setAppointmentForm] = useState({
+    specialitySelected: '',
+    preferredDoctorSelected: '',
+    countrySelected: '',
+    citySelected: '',
+    appointmentDate: new Date(),
+    appointmentTime: '',
+    consultationReasons: '',
+  });
 
   const { data: doctorsByArea, error: isErrorDoctorsByArea } = useSWR(
     DOCTORS_BY_AREA,
@@ -33,9 +48,25 @@ export const AppointmentContext = ({ children }) => {
   );
   const { data: locations, error: locationsError } = useSWR(LOCATIONS, locationService, swrConfig);
 
+  const createppointment = () => {
+    const newAppointment = {
+      id: uuid(),
+      patientData: { ...patientForm, patientBirth: patientForm.patientBirth.toLocaleDateString() },
+      appointmentData: {
+        ...appointmentForm,
+        appointmentDate: appointmentForm.appointmentDate.toLocaleDateString(),
+      },
+    };
+    dispatch(postAppointment(newAppointment));
+  };
+  console.log(appointmentForm);
+  console.log(patientForm);
+
   return (
     <AppointmentStore.Provider
       value={{
+        patientForm,
+        setPatientForm,
         appointmentForm,
         setAppointmentForm,
         showSecondForm,
@@ -44,6 +75,7 @@ export const AppointmentContext = ({ children }) => {
         isErrorDoctorsByArea,
         locations,
         locationsError,
+        createppointment,
       }}
     >
       {children}

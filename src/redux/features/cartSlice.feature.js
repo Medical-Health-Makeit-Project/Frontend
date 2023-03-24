@@ -1,21 +1,29 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = [];
+const initialState = {
+  products: [],
+  appointments: [],
+};
 
 export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
     postProduct: (state, action) => {
-      state.push(action.payload);
+      state.products.push(action.payload);
+      return state;
+    },
+
+    postAppointment: (state, action) => {
+      state.appointments.push(action.payload);
       return state;
     },
 
     updateProduct: (state, action) => {
-      const exist = state.find((e) => e.id === action.payload.id);
+      const exist = state.products.find((e) => e.id === action.payload.id);
       if (exist) {
-        const productListUpdated = state.map((e) =>
+        const productListUpdated = state.products.map((e) =>
           e.id === action.payload.id
             ? {
                 ...exist,
@@ -23,18 +31,16 @@ export const cartSlice = createSlice({
               }
             : e
         );
-        state = [...productListUpdated];
+        state.products = [...productListUpdated];
       }
     },
 
     checkoutUpdate: (state, action) => {
-      const exist = state.find((e) => e.id === action.payload.id);
-      console.log(exist.quantity);
+      const exist = state.products.find((e) => e.id === action.payload.id);
       if (exist) {
-        const productListUpdated = state.map((e) => {
+        const productListUpdated = state.products.map((e) => {
           if (e.id === action.payload.id) {
             if (action.payload.isAdd) {
-              console.log('hello');
               return {
                 ...exist,
                 quantity: (exist.quantity += 1),
@@ -49,14 +55,14 @@ export const cartSlice = createSlice({
             return e;
           }
         });
-        state = [...productListUpdated];
+        state.products = [...productListUpdated];
       }
     },
 
     deleteProduct: (state, action) => {
-      const exist = state.find((e) => e.id === action.payload.id);
+      const exist = state.products.find((e) => e.id === action.payload.id);
       if (exist) {
-        state = state.filter((e) => e.id !== action.payload.id);
+        state.products = state.products.filter((e) => e.id !== action.payload.id);
         return state;
       }
     },
@@ -68,6 +74,12 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { postProduct, updateProduct, deleteProduct, checkoutUpdate, emptyCart } =
-  cartSlice.actions;
+export const {
+  postProduct,
+  postAppointment,
+  updateProduct,
+  deleteProduct,
+  checkoutUpdate,
+  emptyCart,
+} = cartSlice.actions;
 export default cartSlice.reducer;

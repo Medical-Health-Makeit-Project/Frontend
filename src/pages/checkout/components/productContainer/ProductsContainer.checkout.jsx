@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 import './productsContainer.checkout.scss';
 
 export const ProductsContainer = () => {
-  const products = useSelector((state) => state.cart);
-  const priceUnityAfterDiscount = products.map((product) => {
+  const cart = useSelector((state) => state.cart);
+  const priceUnityAfterDiscount = cart.products.map((product) => {
     if (product.discount) {
       return +(
         (product.price - (product.price * product.discount) / 100) *
@@ -16,6 +16,8 @@ export const ProductsContainer = () => {
     return product.price * product.quantity;
   });
   const totalAfterDiscount = priceUnityAfterDiscount.reduce((prev, acc) => (acc += prev), 0);
+  const showEmptyMessage =
+    cart.products.length <= 0 && cart.appointments.length <= 0 ? true : false;
 
   return (
     <section className="products-container">
@@ -24,14 +26,16 @@ export const ProductsContainer = () => {
           <Button color="info">Keep Buying</Button>
         </Link>
       </div>
-      {!products.length ? (
-        <div>Your cart is empty please add some product.</div>
+      {showEmptyMessage ? (
+        <div>Your cart is empty please add some product</div>
       ) : (
-        products.map((e) => {
+        cart.products.map((e) => {
           return <Product key={e.id} {...e} />;
         })
       )}
-      {!!products.length && <div className="total">SUBTOTAL: ${totalAfterDiscount.toFixed(2)}</div>}
+      {(!!cart.products.length || !!cart.appointments.length) && (
+        <div className="total">SUBTOTAL: ${totalAfterDiscount.toFixed(2)}</div>
+      )}
     </section>
   );
 };

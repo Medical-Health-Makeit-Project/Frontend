@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 export const FormContainer = () => {
   const { showSecondForm } = useAppointmentContext();
+
   return (
     <>
       <AnimatePresence mode="wait">
