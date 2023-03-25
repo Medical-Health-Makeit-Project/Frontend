@@ -3,7 +3,7 @@ import { useAppointmentContext } from '../../../../context';
 import { formValidator } from '@utils/tools';
 
 export const useForm = () => {
-  const { appointmentForm, setAppointmentForm } = useAppointmentContext();
+  const { patientForm, setPatientForm } = useAppointmentContext();
 
   const [errorsMessage, setErrorsMessage] = useState({
     nameError: '',
@@ -15,6 +15,10 @@ export const useForm = () => {
 
   const handleChangeName = (e) => {
     const { name, value } = e.target;
+    setPatientForm({
+      ...patientForm,
+      [name]: value,
+    });
     if (!formValidator().firstName(value)) {
       setErrorsMessage({
         ...errorsMessage,
@@ -26,15 +30,15 @@ export const useForm = () => {
         ...errorsMessage,
         nameError: '',
       });
-      setAppointmentForm({
-        ...appointmentForm,
-        [name]: value,
-      });
     }
   };
 
   const handleChangeLastname = (e) => {
     const { name, value } = e.target;
+    setPatientForm({
+      ...patientForm,
+      [name]: value,
+    });
     if (!formValidator().lastname(value)) {
       setErrorsMessage({
         ...errorsMessage,
@@ -45,17 +49,13 @@ export const useForm = () => {
         ...errorsMessage,
         lastnameError: '',
       });
-      setAppointmentForm({
-        ...appointmentForm,
-        [name]: value,
-      });
     }
   };
 
   const handleChangeIdentification = (e) => {
     const { name, value } = e.target;
-    setAppointmentForm({
-      ...appointmentForm,
+    setPatientForm({
+      ...patientForm,
       [name]: value,
     });
     if (!formValidator().identification(value)) {
@@ -73,6 +73,10 @@ export const useForm = () => {
 
   const handleChangeEmail = (e) => {
     const { name, value } = e.target;
+    setPatientForm({
+      ...patientForm,
+      [name]: value,
+    });
     if (!formValidator().email(value)) {
       setErrorsMessage({
         ...errorsMessage,
@@ -83,15 +87,15 @@ export const useForm = () => {
         ...errorsMessage,
         emailError: '',
       });
-      setAppointmentForm({
-        ...appointmentForm,
-        [name]: value,
-      });
     }
   };
 
   const handleChangePhone = (e) => {
     const { name, value } = e.target;
+    setPatientForm({
+      ...patientForm,
+      [name]: value,
+    });
     if (!formValidator().phone(value)) {
       setErrorsMessage({
         ...errorsMessage,
@@ -102,18 +106,14 @@ export const useForm = () => {
         ...errorsMessage,
         phoneError: '',
       });
-      setAppointmentForm({
-        ...appointmentForm,
-        [name]: value,
-      });
     }
   };
 
   const handleChangeGender = (e) => {
     const { name, value } = e.target;
     if (formValidator().gender(value)) {
-      setAppointmentForm({
-        ...appointmentForm,
+      setPatientForm({
+        ...patientForm,
         [name]: value,
       });
     }
@@ -122,14 +122,15 @@ export const useForm = () => {
   const handleIsAdult = (e) => {
     const { name, value } = e.target;
     if (value === 'false') {
-      setAppointmentForm({
-        ...appointmentForm,
-        patientId: '',
+      setPatientForm({
+        ...patientForm,
+        patientId: null,
         [name]: value,
       });
     } else {
-      setAppointmentForm({
-        ...appointmentForm,
+      setPatientForm({
+        ...patientForm,
+        patientId: '',
         [name]: value,
       });
     }
@@ -137,8 +138,8 @@ export const useForm = () => {
 
   return {
     errorsMessage,
-    appointmentForm,
-    setAppointmentForm,
+    patientForm,
+    setPatientForm,
     handleChangeName,
     handleChangeLastname,
     handleChangeIdentification,

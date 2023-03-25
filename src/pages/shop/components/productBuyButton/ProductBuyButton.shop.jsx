@@ -46,13 +46,13 @@ export const ProductBuyButton = ({
   stock,
   resetQuantity,
 }) => {
-  const products = useSelector((state) => state.cart);
+  const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const handlerDispatch = () => {
     if (!quantity) {
       return alert('error');
     }
-    const isProduct = products.find((product) => product.id === id);
+    const isProduct = cart.products.find((product) => product.id === id);
     if (isProduct) {
       resetQuantity();
       alert('success');

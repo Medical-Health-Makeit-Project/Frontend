@@ -4,12 +4,23 @@ import TimePicker from 'react-time-picker';
 import { BsArrowLeftShort } from 'react-icons/bs';
 import { Button } from '@components/buttons';
 import { useAppointmentContext } from '../../context';
+import { errorMessage } from '@utils/toastify';
+import { timeExtractor } from '@utils/tools';
 import './appointmentInformation.appointments.scss';
 
 export const AppointmentInformation = () => {
-  const { setShowSecondForm, locations, doctorsByArea } = useAppointmentContext();
-  const [countrySelected, setCountrySelected] = useState('Colombia');
-  const [citySelected, setCitySelected] = useState([
+  const {
+    setShowSecondForm,
+    locations,
+    doctorsByArea,
+    appointmentForm,
+    setAppointmentForm,
+    createppointment,
+  } = useAppointmentContext();
+  const [countrySelected, setCountrySelected] = useState(
+    appointmentForm.countrySelected || 'Colombia'
+  );
+  const [city, setCity] = useState([
     {
       id: '1',
       city: 'Bogotá',
@@ -36,15 +47,17 @@ export const AppointmentInformation = () => {
       address: 'Calle Valdegarea, 12',
     },
   ]);
-  const [areaSelected, setAreaSelected] = useState('General surgeon');
+  const [areaSelected, setAreaSelected] = useState(
+    appointmentForm.specialitySelected || 'General surgeon'
+  );
   const [doctorSelected, setDoctorSelected] = useState([
-    { id: '4', name: 'Dr. Gail Parrish' },
+    { id: '4', name: 'Dr. Gil Parrish' },
     { id: '6', name: 'Dr. Matie Delgado' },
   ]);
 
   useEffect(() => {
     const citys = locations.find((element) => element.country === countrySelected);
-    setCitySelected(citys.locations);
+    setCity(citys.locations);
   }, [countrySelected]);
 
   useEffect(() => {
@@ -53,33 +66,91 @@ export const AppointmentInformation = () => {
     setDoctorSelected(doctors);
   }, [areaSelected]);
 
+  useEffect(() => {
+    if (appointmentForm.preferredDoctorSelected === '') {
+      setAppointmentForm({
+        ...appointmentForm,
+        preferredDoctorSelected: '',
+      });
+    } else {
+      setAppointmentForm({
+        ...appointmentForm,
+        preferredDoctorSelected: doctorSelected[0].name,
+      });
+    }
+  }, [doctorSelected]);
+
+  useEffect(() => {
+    if (appointmentForm.citySelected === '') {
+      setAppointmentForm({
+        ...appointmentForm,
+        citySelected: '',
+      });
+    } else {
+      setAppointmentForm({
+        ...appointmentForm,
+        citySelected: appointmentForm.citySelected,
+      });
+    }
+  }, [city]);
+
   const handleGoBack = (e) => {
     e.preventDefault();
-    setShowSecondForm(false);
+    return setShowSecondForm(false);
   };
+
   const handleSelectCountry = (e) => {
-    return setCountrySelected(e.currentTarget.value);
+    setCountrySelected(e.currentTarget.value);
+    return handleChangeForm(e);
   };
 
   const handleSpeciality = (e) => {
-    return setAreaSelected(e.target.value);
+    setAreaSelected(e.target.value);
+    return handleChangeForm(e);
+  };
+
+  const handleChangeForm = (e) => {
+    const { name, value } = e.target;
+    return setAppointmentForm({
+      ...appointmentForm,
+      [name]: value,
+    });
+  };
+
+  const handleTime = (e) => {
+    const time = timeExtractor(e);
+    if (time < 6 || time >= 19) {
+      return errorMessage('Our atention hours are from 6:00 am to 19:00 pm');
+    }
+    setAppointmentForm({ ...appointmentForm, appointmentTime: e });
+  };
+
+  const handleOnsubmit = (e) => {
+    e.preventDefault();
+    if (Object.values(appointmentForm).find((e) => e === '')) {
+      return errorMessage('You must complete the form');
+    }
+    createppointment();
   };
 
   return (
     <section className="appointments-section-2">
       <h2 className="appointments-section-2__title">Appointment Information</h2>
-      <form className="appointments-section-2__form" data-aos="fade-right">
+      <form className="appointments-section-2__form">
         <div className="input-container">
           <label htmlFor="speciality">Speciality:</label>
           <div className="select-container">
             <select
-              name="speciality"
+              name="specialitySelected"
               id="speciality"
               className="input-container__input"
+              value={appointmentForm.specialitySelected}
               onChange={handleSpeciality}
             >
+              <option value="" disabled>
+                --Choose a speciality--
+              </option>
               {doctorsByArea.map((e) => {
-                console.log(doctorsByArea);
                 return (
                   <option key={e.area} value={e.area}>
                     {e.area}
@@ -92,9 +163,17 @@ export const AppointmentInformation = () => {
         <div className="input-container">
           <label htmlFor="preferredDoctor">Preferred doctor:</label>
           <div className="select-container">
-            <select name="preferredDoctor" id="preferredDoctor" className="input-container__input">
-              {doctorSelected?.map((e) => {
-                console.log(e);
+            <select
+              name="preferredDoctorSelected"
+              id="preferredDoctor"
+              className="input-container__input"
+              value={appointmentForm.preferredDoctorSelected}
+              onChange={handleChangeForm}
+            >
+              <option value="" disabled>
+                --Choose a doctor--
+              </option>
+              {doctorSelected.map((e) => {
                 return (
                   <option key={e.id} value={e.name}>
                     {e.name}
@@ -108,11 +187,15 @@ export const AppointmentInformation = () => {
           <label htmlFor="country">Country:</label>
           <div className="select-container">
             <select
-              name="country"
+              name="countrySelected"
               id="country"
               className="input-container__input"
+              value={appointmentForm.countrySelected}
               onChange={handleSelectCountry}
             >
+              <option value="" disabled>
+                --Choose your country--
+              </option>
               {locations.map((element) => {
                 return (
                   <option key={element.id} value={element.country}>
@@ -126,8 +209,17 @@ export const AppointmentInformation = () => {
         <div className="input-container">
           <label htmlFor="city">City:</label>
           <div className="select-container">
-            <select name="city" id="city" className="input-container__input">
-              {citySelected.map((element) => {
+            <select
+              name="citySelected"
+              id="city"
+              className="input-container__input"
+              onChange={handleChangeForm}
+              value={appointmentForm.citySelected}
+            >
+              <option value="" disabled>
+                --Choose your city--
+              </option>
+              {city.map((element) => {
                 return (
                   <option key={element.city} value={element.city}>
                     {element.city}
@@ -143,34 +235,41 @@ export const AppointmentInformation = () => {
             <DatePicker
               id="dateAppointment"
               minDate={new Date()}
-              selected={new Date()}
+              selected={appointmentForm.appointmentDate}
               dateFormat="dd/MM/yyyy"
-              name="dateAppointment"
+              name="appointmentDate"
               className="input-container__date"
+              onChange={(date) => setAppointmentForm({ ...appointmentForm, appointmentDate: date })}
+              required
             />
           </div>
         </div>
         <div className="input-container">
-          <label htmlFor="timeAppointment">Time of Appointment:</label>
+          <label htmlFor="appointmentTime">Time of Appointment:</label>
           <div className="select-container-clock">
             <TimePicker
-              name="patientBirth"
-              id="timeAppointment"
-              format="h:m"
+              name="appointmentTime"
+              id="appointmentTime"
+              format="h:m a"
+              clearIcon={null}
               disableClock
-              maxTime="19:00:00"
-              minTime="6:00:00"
+              amPmAriaLabel="Select AM/PM"
               openClockOnFocus={false}
               className="input-container__clock"
+              required
+              onChange={handleTime}
             />
           </div>
+          <span className="errorMessage">*Our atention time are between 6:00 and 19:00</span>
         </div>
         <div className="input-container-textarea">
           <label htmlFor="consultation">Reason of consultation:</label>
           <textarea
-            name="consultationReason"
+            name="consultationReasons"
             id="consultation"
             className="input-container__textarea"
+            onChange={handleChangeForm}
+            value={appointmentForm.consultationReasons}
           ></textarea>
         </div>
         <div className="buttons-container">
@@ -182,7 +281,12 @@ export const AppointmentInformation = () => {
           >
             <BsArrowLeftShort size={20} /> Back
           </Button>
-          <Button type="submit" color="info" className="button-container__next-button">
+          <Button
+            type="submit"
+            color="info"
+            className="button-container__next-button"
+            onClick={handleOnsubmit}
+          >
             Checkout
           </Button>
         </div>
