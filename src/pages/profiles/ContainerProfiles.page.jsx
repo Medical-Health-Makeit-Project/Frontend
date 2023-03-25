@@ -8,7 +8,6 @@ import './containerProfiles.page.scss';
 
 export const ContainerProfiles = () => {
   const user = useSelector((state) => state.auth);
-  console.log(user);
 
   return (
     <main>
