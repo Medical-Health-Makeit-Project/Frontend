@@ -10,7 +10,6 @@ import './home.pages.scss';
 
 export const Home = () => {
   const [isLoading] = useIsLoading();
-
   if (isLoading) return <Loading />;
   return (
     <main>
