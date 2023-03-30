@@ -2,14 +2,16 @@ import { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { BiShow, BiHide } from 'react-icons/bi';
-import { authService } from './service';
 import { Heading } from '@components/heading';
-import { Button } from '@components/buttons/Button.components';
+import { Button } from '@components/buttons';
+import { Loading } from '@components/loading';
 import { AUTH, TOKEN } from '@constants';
 import { errorMessage } from '@utils/toastify';
-import { findUserWithToken } from '@redux/thunks';
-import headingImage from '@assets/heading-login.png';
 import { PublicRoutes } from '@routes';
+import { authService } from './service';
+import { findUserWithToken } from '@redux/thunks';
+import { useIsLoading } from '@hooks';
+import headingImage from '@assets/heading-login.png';
 import './login.page.scss';
 
 export const Login = () => {
@@ -19,12 +21,13 @@ export const Login = () => {
     remberMe: false,
   });
   const [showPwd, setShowPwd] = useState(false);
+  const [isLoading] = useIsLoading();
   const inputName = useRef(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    inputName.current.focus();
+    inputName?.current?.focus();
   }, []);
 
   const handleChange = (e) => {
@@ -60,8 +63,9 @@ export const Login = () => {
   const handleShowPwd = () => {
     setShowPwd(!showPwd);
   };
+  const { password, remember } = userData;
 
-  const { user, password, remember } = userData;
+  if (isLoading) return <Loading />;
   return (
     <section className="login__container">
       <Heading title="Login" image={headingImage} />
