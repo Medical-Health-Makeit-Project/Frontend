@@ -13,4 +13,5 @@ export const PrivateRoutes = {
   APPOINTMENTS: '/home/appointments',
   CHECKOUT: '/home/checkout',
   PAYMENT: '/home/payment',
+  PROFILES: '/home/profile',
 };
