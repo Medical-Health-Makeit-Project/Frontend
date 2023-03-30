@@ -15,13 +15,14 @@ import headingImage from '@assets/heading-login.png';
 import './login.page.scss';
 
 export const Login = () => {
+  const [isLoading] = useIsLoading();
+
   const [userData, setUserData] = useState({
     username: '',
     password: '',
     remberMe: false,
   });
   const [showPwd, setShowPwd] = useState(false);
-  const [isLoading] = useIsLoading();
   const inputName = useRef(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();

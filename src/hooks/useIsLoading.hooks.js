@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react ';
+import { useLocation } from 'react-router-dom';
 
 export const useIsLoading = () => {
-  const [isLoading, setIslLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  let location = useLocation();
   const handleIsLoading = () => {
-    setIslLoading(false);
+    setIsLoading(false);
   };
   useEffect(() => {
-    window.addEventListener('load', handleIsLoading);
+    window.addEventListener('load', handleIsLoading());
     return () => window.removeEventListener('load', handleIsLoading);
-  }, []);
+  }, [location.pathname]);
 
   return [isLoading];
 };
