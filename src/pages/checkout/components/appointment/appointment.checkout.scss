@@ -18,7 +18,10 @@
     flex-direction: row;
     padding: 0;
     gap: 1rem;
-    align-items: center;
+
+    @media screen and (min-width: 500px) {
+      flex-direction: row;
+    }
   }
 
   .appointment__img-container {
@@ -61,6 +64,21 @@
     align-items: center;
 
     gap: 10px;
+  }
+
+  .appointment-checkout__bin {
+    width: 95px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media screen and (min-width: 500px) {
+      width: 90px;
+    }
+
+    @media screen and (min-width: 700px) {
+      cursor: pointer;
+    }
   }
 
   .buttons {

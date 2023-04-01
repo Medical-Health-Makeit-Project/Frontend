@@ -1,5 +1,8 @@
 import { PropTypes } from 'prop-types';
+import { MdDelete } from 'react-icons/md';
+import { useDispatch } from 'react-redux';
 import appointmentSvg from '@assets/appointment-checkout.svg';
+import { deleteAppointment } from '@redux/features';
 import './appointment.checkout.scss';
 
 export const Appointment = ({ appointmentData, patientData, id }) => {
@@ -11,6 +14,11 @@ export const Appointment = ({ appointmentData, patientData, id }) => {
     appointmentDate,
   } = appointmentData;
   const { patientName, patientLastname } = patientData;
+  const dispatch = useDispatch();
+
+  const handleDeleteAppointment = () => {
+    dispatch(deleteAppointment(id));
+  };
   return (
     <article className="appointment-checkout">
       <div className="appointment-info">
@@ -27,6 +35,9 @@ export const Appointment = ({ appointmentData, patientData, id }) => {
         </section>
       </div>
       <section className="footer-appointment-checkout">
+        <div className="appointment-checkout__bin" onClick={handleDeleteAppointment}>
+          {<MdDelete size={22} color="black" className="bin" />}
+        </div>
         <div className="resume-appointment-checkout">
           <div className="appointment__total">TOTAL: ${appointmentPrice.toFixed(2)}</div>
         </div>

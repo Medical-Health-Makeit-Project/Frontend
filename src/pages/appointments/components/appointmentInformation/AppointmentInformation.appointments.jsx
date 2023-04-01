@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import TimePicker from 'react-time-picker';
+import { useNavigate } from 'react-router-dom';
 import { BsArrowLeftShort } from 'react-icons/bs';
 import { Button } from '@components/buttons';
 import { useAppointmentContext } from '../../context';
 import { errorMessage } from '@utils/toastify';
 import { timeExtractor } from '@utils/tools';
+import { PrivateRoutes } from '@routes';
 import './appointmentInformation.appointments.scss';
 
 export const AppointmentInformation = () => {
@@ -17,6 +19,7 @@ export const AppointmentInformation = () => {
     setAppointmentForm,
     createAppointment,
   } = useAppointmentContext();
+
   const [countrySelected, setCountrySelected] = useState(
     appointmentForm.countrySelected || 'Colombia'
   );
@@ -54,6 +57,7 @@ export const AppointmentInformation = () => {
     { id: '4', name: 'Dr. Gil Parrish' },
     { id: '6', name: 'Dr. Matie Delgado' },
   ]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const citys = locations.find((element) => element.country === countrySelected);
@@ -134,8 +138,8 @@ export const AppointmentInformation = () => {
       return errorMessage('You must complete the form');
     }
     const price = doctorsByArea.find((e) => e.area === areaSelected).price;
-
     createAppointment(price);
+    navigate(PrivateRoutes.CHECKOUT);
   };
 
   return (

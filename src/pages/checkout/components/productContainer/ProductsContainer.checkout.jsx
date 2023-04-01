@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { Product } from '../product';
 import { Appointment } from '../appointment';
+import emptyCart from '@assets/empty-cart-checkout.svg';
 import './productsContainer.checkout.scss';
 
 export const ProductsContainer = () => {
@@ -27,7 +28,12 @@ export const ProductsContainer = () => {
   return (
     <section className="checkout__products-container">
       {showEmptyMessage ? (
-        <div>Your cart is empty please add some product</div>
+        <div>
+          <div className="empty-cart-container">
+            <img src={emptyCart} alt="Empty Cart" className="empty-cart__img" />
+          </div>
+          <p className="empty-cart__text">Your cart is empty please add some product</p>
+        </div>
       ) : cart.products.length && cart.appointments.length ? (
         <div className="products-list">
           <h2 className="products-list__title">PRODUCTS:</h2>

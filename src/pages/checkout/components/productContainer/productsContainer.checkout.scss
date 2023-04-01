@@ -1,9 +1,26 @@
 @import '@sass/abstract/mixins.abstract.scss';
 @import '@sass/base/typography.base.scss';
+@import '@sass/base/alerts.base.scss';
 
 .checkout__products-container {
   max-width: 1000px;
   margin: 0 auto;
+
+  .empty-cart-container {
+    width: 500px;
+    margin: 0 auto;
+  }
+
+  .empty-cart__text {
+    width: 500px;
+    @include paragraph();
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 5px;
+    font-weight: 500;
+    background-color: alert-color($key: 'danger', $variant: 'base');
+    margin-bottom: 3rem;
+  }
 
   .products-list {
     width: 100%;
