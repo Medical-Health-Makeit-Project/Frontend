@@ -9,7 +9,7 @@ import './doctordetail.doctors.scss';
 
 export const DoctorDetail = () => {
   const { id } = useParams();
-  console.log(id);
+
   const { doctorFilter, isLoading, error } = useDoctorsContext();
   const [date, setDate] = useState(new Date());
   const [data, setData] = useState({
