@@ -1,10 +1,10 @@
 export const locationsAdapter = (response) => {
   if (Array.isArray(response)) {
-    return response.map((element) => {
+    return response.map(({ id, country, locations }) => {
       return {
-        id: element.id,
-        country: element.country,
-        locations: element.locations,
+        id: id,
+        country: country,
+        locations: locations,
       };
     });
   } else {
