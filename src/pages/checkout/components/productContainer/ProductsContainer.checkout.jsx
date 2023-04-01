@@ -52,7 +52,14 @@ export const ProductsContainer = () => {
             return <Appointment key={e.id} {...e} />;
           })}
         </div>
-      ) : null}
+      ) : (
+        <div className="products-list">
+          <h2 className="products-list__title">PRODUCTS:</h2>
+          {cart.products.map((e) => {
+            return <Product key={e.id} {...e} />;
+          })}
+        </div>
+      )}
       {(!!cart.products.length || !!cart.appointments.length) && (
         <div className="total">
           SUBTOTAL: ${(totalAfterDiscount + appointmentsPrice).toFixed(2)}

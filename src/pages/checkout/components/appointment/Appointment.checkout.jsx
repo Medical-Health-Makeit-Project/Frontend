@@ -49,8 +49,6 @@ export const Appointment = ({ appointmentData, patientData, id }) => {
 Appointment.prototypes = {
   id: PropTypes.string,
   appointmentData: PropTypes.shape({
-    appointmentDate: PropTypes.string,
-    appointmentPrice: PropTypes.string,
     specialitySelected: PropTypes.string,
     preferredDoctorSelected: PropTypes.string,
     countrySelected: PropTypes.string,
