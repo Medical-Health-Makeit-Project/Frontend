@@ -14,7 +14,7 @@ export const Checkout = () => {
   const cart = useSelector((state) => state.cart);
   const showCheckout = cart.products.length > 0 || cart.appointments.length > 0 ? true : false;
 
-  if (isLoading) return <Loading />;
+  if (is) return <Loading />;
   return (
     <main className="checkout">
       <Heading title="Checkout" image={headingImage} />
