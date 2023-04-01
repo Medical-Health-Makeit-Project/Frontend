@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Heading } from '@components/heading';
+import { Button } from '@components/buttons';
 import { ProductsContainer } from './components/productContainer';
 import { ButtonCheckout } from './components/buttonCheckout';
 import headingImage from '@assets/heading-checkout.jpeg';
@@ -10,9 +11,15 @@ export const Checkout = () => {
   const cart = useSelector((state) => state.cart);
   const showCheckout = cart.products.length > 0 || cart.appointments.length > 0 ? true : false;
   return (
-    <main>
+    <main className="checkout">
       <Heading title="Checkout" image={headingImage} />
-      <ProductsContainer />
+      <div className="checkout__btn-keep-buying">
+        <Link to="/home/shop" className="link-container">
+          <Button color="info">Keep Buying</Button>
+        </Link>
+      </div>
+      {cart.products && <ProductsContainer />}
+
       {showCheckout ? <ButtonCheckout /> : null}
     </main>
   );

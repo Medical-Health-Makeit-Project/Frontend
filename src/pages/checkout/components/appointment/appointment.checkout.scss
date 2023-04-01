@@ -1,0 +1,73 @@
+@import '@sass/abstract/mixins.abstract.scss';
+
+.appointment-checkout {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.436);
+  padding-bottom: 1rem;
+
+  @media screen and (min-width: 700px) {
+    flex-direction: row;
+  }
+
+  .appointment-info {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .appointment__img-container {
+    max-width: 80px;
+
+    .appointment__img {
+      width: 100%;
+    }
+  }
+
+  .appointment-data__name,
+  .appointment-data__label,
+  .appointment-data__price {
+    @include paragraph($size: $size-xxs);
+    line-height: 20px;
+  }
+
+  .appointment-quantity__quantity,
+  .appointment__total {
+    @include paragraph($size: $size-sm);
+  }
+
+  .appointment__total {
+    padding: 0;
+  }
+
+  .footer-appointment-checkout {
+    width: 100%;
+    padding: 0;
+    display: flex;
+  }
+
+  .resume-appointment-checkout {
+    width: 100%;
+    text-align: right;
+  }
+
+  .quantity {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+  }
+
+  .buttons {
+    width: 25px;
+    height: 25px;
+    border: 1px solid rgba(0, 0, 0, 0.116);
+    padding: 0;
+    text-align: center;
+  }
+}

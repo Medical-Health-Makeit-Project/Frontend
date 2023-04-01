@@ -5,6 +5,7 @@ export const doctorsByAreaAdapter = (response) => {
         id: area.id,
         area: area.area,
         doctors: area.doctors,
+        price: area.price,
       };
     });
   } else {
@@ -12,6 +13,7 @@ export const doctorsByAreaAdapter = (response) => {
       id: response.id,
       area: response.area,
       doctors: response.doctors,
+      price: area.price,
     };
   }
 };

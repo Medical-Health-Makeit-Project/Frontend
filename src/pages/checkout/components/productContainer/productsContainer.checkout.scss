@@ -1,17 +1,34 @@
-.products-container {
+@import '@sass/abstract/mixins.abstract.scss';
+@import '@sass/base/typography.base.scss';
+
+.checkout__products-container {
   max-width: 1000px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4rem 0;
-  margin: 1rem auto;
-  padding: 1rem;
-  @media screen and (min-width: 900px) {
-    flex-direction: row;
-    justify-content: center;
+  margin: 0 auto;
+
+  .products-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 4rem;
+    gap: 1rem 0;
+    margin: 1rem auto;
+    padding: 1rem;
+    @media screen and (min-width: 900px) {
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+  }
+
+  .products-list__title,
+  .appointments-list__title {
+    @include heading($color: map-get($typography-colors, 'black'), $size: $size-lg);
+    margin-right: auto;
+  }
+
+  .appointments-list__title {
+    margin-top: 2rem;
   }
 
   .link-container {
@@ -22,6 +39,7 @@
   .total {
     width: 100%;
     display: flex;
+    padding: 1rem;
     justify-content: flex-end;
   }
 }

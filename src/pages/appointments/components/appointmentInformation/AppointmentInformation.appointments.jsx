@@ -15,7 +15,7 @@ export const AppointmentInformation = () => {
     doctorsByArea,
     appointmentForm,
     setAppointmentForm,
-    createppointment,
+    createAppointment,
   } = useAppointmentContext();
   const [countrySelected, setCountrySelected] = useState(
     appointmentForm.countrySelected || 'Colombia'
@@ -106,6 +106,9 @@ export const AppointmentInformation = () => {
 
   const handleSpeciality = (e) => {
     setAreaSelected(e.target.value);
+    setAppointmentForm({
+      ...appointmentForm,
+    });
     return handleChangeForm(e);
   };
 
@@ -130,7 +133,9 @@ export const AppointmentInformation = () => {
     if (Object.values(appointmentForm).find((e) => e === '')) {
       return errorMessage('You must complete the form');
     }
-    createppointment();
+    const price = doctorsByArea.find((e) => e.area === areaSelected).price;
+
+    createAppointment(price);
   };
 
   return (
@@ -270,6 +275,7 @@ export const AppointmentInformation = () => {
             className="input-container__textarea"
             onChange={handleChangeForm}
             value={appointmentForm.consultationReasons}
+            maxLength={200}
           ></textarea>
         </div>
         <div className="buttons-container">

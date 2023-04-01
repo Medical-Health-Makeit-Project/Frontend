@@ -1,12 +1,11 @@
 import { useSelector } from 'react-redux';
 import { Product } from '../product';
-import { Button } from '@components/buttons';
-import { Link } from 'react-router-dom';
+import { Appointment } from '../appointment';
 import './productsContainer.checkout.scss';
 
 export const ProductsContainer = () => {
   const cart = useSelector((state) => state.cart);
-  const priceUnityAfterDiscount = cart.products.map((product) => {
+  const productPriceUnityAfterDiscount = cart.products.map((product) => {
     if (product.discount) {
       return +(
         (product.price - (product.price * product.discount) / 100) *
@@ -15,26 +14,43 @@ export const ProductsContainer = () => {
     }
     return product.price * product.quantity;
   });
-  const totalAfterDiscount = priceUnityAfterDiscount.reduce((prev, acc) => (acc += prev), 0);
+  const totalAfterDiscount = productPriceUnityAfterDiscount.reduce((prev, acc) => (acc += prev), 0);
+
+  const appointmentsPrice = cart.appointments.reduce(
+    (prev, acc) => (prev += acc.appointmentData.appointmentPrice),
+    0
+  );
+
   const showEmptyMessage =
     cart.products.length <= 0 && cart.appointments.length <= 0 ? true : false;
 
   return (
-    <section className="products-container">
-      <div className="link-container">
-        <Link to="/home/shop">
-          <Button color="info">Keep Buying</Button>
-        </Link>
-      </div>
+    <section className="checkout__products-container">
       {showEmptyMessage ? (
         <div>Your cart is empty please add some product</div>
-      ) : (
-        cart.products.map((e) => {
-          return <Product key={e.id} {...e} />;
-        })
-      )}
+      ) : cart.products.length && cart.appointments.length ? (
+        <div className="products-list">
+          <h2 className="products-list__title">PRODUCTS:</h2>
+          {cart.products.map((e) => {
+            return <Product key={e.id} {...e} />;
+          })}
+          <h2 className="products-list__title">APPOINTMENTS:</h2>
+          {cart.appointments.map((e) => {
+            return <Appointment key={e.id} {...e} />;
+          })}
+        </div>
+      ) : cart.appointments.length ? (
+        <div className="products-list">
+          <h2 className="appointments-list__title">APPOINTMENTS:</h2>
+          {cart.appointments.map((e) => {
+            return <Appointment key={e.id} {...e} />;
+          })}
+        </div>
+      ) : null}
       {(!!cart.products.length || !!cart.appointments.length) && (
-        <div className="total">SUBTOTAL: ${totalAfterDiscount.toFixed(2)}</div>
+        <div className="total">
+          SUBTOTAL: ${(totalAfterDiscount + appointmentsPrice).toFixed(2)}
+        </div>
       )}
     </section>
   );
