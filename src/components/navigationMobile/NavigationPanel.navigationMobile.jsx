@@ -3,9 +3,10 @@ import { PropTypes } from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout } from '@redux/features';
+import { NavigationLink } from '../navigationLink';
 import { useIsLoggedOut } from '@hooks';
 import { PublicRoutes } from '@routes';
-import { NavigationLink } from '../navigationLink';
+import { findAndDestroy } from '@utils/tools';
 import './navigationPanel.navigationMobile.scss';
 
 export const NavigationPanel = ({ panelOptions, showMenu, setShowMenu }) => {
@@ -16,6 +17,7 @@ export const NavigationPanel = ({ panelOptions, showMenu, setShowMenu }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isLoggedOut } = useIsLoggedOut();
+  const filteredOptions = findAndDestroy(panelOptions, 'Login');
 
   const handleAccessButton = () => {
     dispatch(logout());
@@ -30,7 +32,7 @@ export const NavigationPanel = ({ panelOptions, showMenu, setShowMenu }) => {
       tabIndex="0"
     >
       <ul className={`mobile-menu__ul ${positionPanel}`}>
-        {panelOptions.map((option) => {
+        {filteredOptions.map((option) => {
           return (
             <li key={option} className="mobile-menu__li">
               <NavigationLink text={option} isButton={false} />
