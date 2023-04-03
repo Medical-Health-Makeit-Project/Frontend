@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import TimePicker from 'react-time-picker';
+import { useNavigate } from 'react-router-dom';
 import { BsArrowLeftShort } from 'react-icons/bs';
 import { Button } from '@components/buttons';
 import { useAppointmentContext } from '../../context';
 import { errorMessage } from '@utils/toastify';
 import { timeExtractor } from '@utils/tools';
+import { PrivateRoutes } from '@routes';
 import './appointmentInformation.appointments.scss';
 
 export const AppointmentInformation = () => {
@@ -15,8 +17,9 @@ export const AppointmentInformation = () => {
     doctorsByArea,
     appointmentForm,
     setAppointmentForm,
-    createppointment,
+    createAppointment,
   } = useAppointmentContext();
+
   const [countrySelected, setCountrySelected] = useState(
     appointmentForm.countrySelected || 'Colombia'
   );
@@ -54,6 +57,7 @@ export const AppointmentInformation = () => {
     { id: '4', name: 'Dr. Gil Parrish' },
     { id: '6', name: 'Dr. Matie Delgado' },
   ]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const citys = locations.find((element) => element.country === countrySelected);
@@ -106,6 +110,9 @@ export const AppointmentInformation = () => {
 
   const handleSpeciality = (e) => {
     setAreaSelected(e.target.value);
+    setAppointmentForm({
+      ...appointmentForm,
+    });
     return handleChangeForm(e);
   };
 
@@ -130,7 +137,9 @@ export const AppointmentInformation = () => {
     if (Object.values(appointmentForm).find((e) => e === '')) {
       return errorMessage('You must complete the form');
     }
-    createppointment();
+    const price = doctorsByArea.find((e) => e.area === areaSelected).price;
+    createAppointment(price);
+    navigate(PrivateRoutes.CHECKOUT);
   };
 
   return (
@@ -270,6 +279,7 @@ export const AppointmentInformation = () => {
             className="input-container__textarea"
             onChange={handleChangeForm}
             value={appointmentForm.consultationReasons}
+            maxLength={200}
           ></textarea>
         </div>
         <div className="buttons-container">

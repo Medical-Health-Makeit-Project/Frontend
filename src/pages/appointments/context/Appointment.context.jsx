@@ -39,6 +39,7 @@ export const AppointmentContext = ({ children }) => {
     appointmentDate: new Date(),
     appointmentTime: '',
     consultationReasons: '',
+    appointmentPrice: null,
   });
 
   const { data: doctorsByArea, error: isErrorDoctorsByArea } = useSWR(
@@ -48,19 +49,18 @@ export const AppointmentContext = ({ children }) => {
   );
   const { data: locations, error: locationsError } = useSWR(LOCATIONS, locationService, swrConfig);
 
-  const createppointment = () => {
+  const createAppointment = (price) => {
     const newAppointment = {
       id: uuid(),
       patientData: { ...patientForm, patientBirth: patientForm.patientBirth.toLocaleDateString() },
       appointmentData: {
         ...appointmentForm,
         appointmentDate: appointmentForm.appointmentDate.toLocaleDateString(),
+        appointmentPrice: price,
       },
     };
     dispatch(postAppointment(newAppointment));
   };
-  console.log(appointmentForm);
-  console.log(patientForm);
 
   return (
     <AppointmentStore.Provider
@@ -75,7 +75,7 @@ export const AppointmentContext = ({ children }) => {
         isErrorDoctorsByArea,
         locations,
         locationsError,
-        createppointment,
+        createAppointment,
       }}
     >
       {children}

@@ -1,9 +1,9 @@
 export const categoryAapter = (categories) => {
   if (Array.isArray(categories)) {
-    return categories.map((category) => {
+    return categories.map(({ id, category }) => {
       return {
-        id: category.id,
-        category: category.category,
+        id: id,
+        category: category,
       };
     });
   }

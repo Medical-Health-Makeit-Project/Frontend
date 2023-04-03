@@ -1,5 +1,5 @@
-export const authAdapter = (response) => {
+export const authAdapter = ({ ACCESS_TOKEN }) => {
   return {
-    ACCESS_TOKEN: response.ACCESS_TOKEN,
+    ACCESS_TOKEN: ACCESS_TOKEN,
   };
 };

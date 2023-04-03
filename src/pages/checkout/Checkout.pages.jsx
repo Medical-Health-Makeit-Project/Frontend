@@ -1,5 +1,7 @@
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Heading } from '@components/heading';
+import { Button } from '@components/buttons';
 import { Loading } from '@components/loading';
 import { useIsLoading } from '@hooks';
 import { ProductsContainer } from './components/productContainer';
@@ -14,9 +16,15 @@ export const Checkout = () => {
 
   if (isLoading) return <Loading />;
   return (
-    <main>
+    <main className="checkout">
       <Heading title="Checkout" image={headingImage} />
-      <ProductsContainer />
+      <div className="checkout__btn-keep-buying">
+        <Link to="/home/shop" className="link-container">
+          <Button color="info">Keep Buying</Button>
+        </Link>
+      </div>
+      {cart.products && <ProductsContainer />}
+
       {showCheckout ? <ButtonCheckout /> : null}
     </main>
   );

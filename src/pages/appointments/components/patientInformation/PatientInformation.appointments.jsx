@@ -34,9 +34,9 @@ export const PatientInformation = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // if (Object.values(patientForm).some((input) => input === '')) {
-    //   return errorMessage('You must complete the form');
-    // }
+    if (Object.values(patientForm).some((input) => input === '')) {
+      return errorMessage('You must complete the form');
+    }
     if (Object.values(errorsMessage).some((error) => error !== '')) {
       return errorMessage('You have some error in the form, please verify');
     }

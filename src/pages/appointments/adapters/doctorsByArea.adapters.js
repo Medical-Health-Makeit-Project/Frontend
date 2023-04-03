@@ -1,10 +1,11 @@
 export const doctorsByAreaAdapter = (response) => {
   if (Array.isArray(response)) {
-    return response.map((area) => {
+    return response.map(({ id, area, doctors, price }) => {
       return {
-        id: area.id,
-        area: area.area,
-        doctors: area.doctors,
+        id: id,
+        area: area,
+        doctors: doctors,
+        price: price,
       };
     });
   } else {
@@ -12,6 +13,7 @@ export const doctorsByAreaAdapter = (response) => {
       id: response.id,
       area: response.area,
       doctors: response.doctors,
+      price: area.price,
     };
   }
 };
