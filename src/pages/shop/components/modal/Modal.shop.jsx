@@ -25,7 +25,7 @@ export const ContentModal = ({
             <div className="modal-container__label">
               <p>Label:</p>
               <p>
-                <b>{label}</b>{' '}
+                <b>{label}</b>
               </p>
             </div>
             <div className="modal-container__dose">
