@@ -135,7 +135,7 @@ export const Register = () => {
               I agree with the{' '}
               <div>
                 <_Modal
-                  title="Terms and Conditions"
+                  dispatcher="Terms and Conditions"
                   className="terms__modal"
                   content={<TermsAndCoditions />}
                 />

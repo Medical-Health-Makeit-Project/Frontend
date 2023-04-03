@@ -3,8 +3,7 @@ import './termsAndConditions.components.scss';
 export const TermsAndCoditions = () => {
   return (
     <div className="terms-conditions-container">
-      <section>
-        <p>Welcome to Website Name!</p>
+      <section className="terms-conditions-container__section">
         <p>
           These terms and conditions outline the rules and regulations for the use of Company Name's
           Website, located at Website.com.
@@ -29,7 +28,7 @@ export const TermsAndCoditions = () => {
         </p>
       </section>
 
-      <h3>Cookies</h3>
+      <h3 className="terms-conditions-container__subtitle">Cookies</h3>
       <p>
         We employ the use of cookies. By accessing Website Name, you agreed to use cookies in
         agreement with the Company Name's Privacy Policy.
@@ -40,7 +39,7 @@ export const TermsAndCoditions = () => {
         easier for people visiting our website. Some of our affiliate/advertising partners may also
         use cookies.
       </p>
-      <h3>License</h3>
+      <h3 className="terms-conditions-container__subtitle">License</h3>
       <p>
         Unless otherwise stated, Company Name and/or its licensors own the intellectual property
         rights for all material on Website Name. All intellectual property rights are reserved. You
@@ -49,7 +48,7 @@ export const TermsAndCoditions = () => {
       </p>
 
       <p>You must not</p>
-      <ul>
+      <ul className="terms-conditions-container__ul">
         <li>Republish material from Website Name</li>
         <li>Sell, rent or sub-license material from Website Name</li>
         <li>Reproduce, duplicate or copy material from Website Name</li>
@@ -71,7 +70,7 @@ export const TermsAndCoditions = () => {
         be considered inappropriate, offensive or causes breach of these Terms and Conditions.
       </p>
       <p>You warrant and represent that:</p>
-      <ul>
+      <ul className="terms-conditions-container__ul">
         <li>
           You are entitled to post the Comments on our website and have all necessary licenses and
           consents to do so;
@@ -94,9 +93,9 @@ export const TermsAndCoditions = () => {
         others to use, reproduce and edit any of your Comments in any and all forms, formats or
         media.
       </p>
-      <h3>Hyperlinking to our Content</h3>
+      <h3 className="terms-conditions-container__subtitle">Hyperlinking to our Content</h3>
       <p>The following organizations may link to our Website without prior written approval:</p>
-      <ul>
+      <ul className="terms-conditions-container__ul">
         <li>Government agencies;</li>
         <li>Search engines;</li>
         <li>News organizations;</li>
@@ -119,7 +118,7 @@ export const TermsAndCoditions = () => {
       <p>
         We may consider and approve other link requests from the following types of organizations:
       </p>
-      <ul>
+      <ul className="terms-conditions-container__ul">
         <li>commonly-known consumer and/or business information sources;</li>
         <li>dot.com community sites;</li>
         <li>associations or other groups representing charities;</li>

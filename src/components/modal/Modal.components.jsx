@@ -1,3 +1,4 @@
+import { PropTypes } from 'prop-types';
 import {
   Modal,
   ModalOverlay,
@@ -10,12 +11,12 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 
-export const _Modal = ({ title = undefined, className, content }) => {
+export const _Modal = ({ dispatcher, className, content }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
       <div onClick={onOpen} className={className}>
-        {title}
+        {dispatcher}
       </div>
 
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
@@ -24,7 +25,6 @@ export const _Modal = ({ title = undefined, className, content }) => {
           <ModalHeader>Terms & Conditions</ModalHeader>
           <ModalCloseButton />
           <ModalBody>{content}</ModalBody>
-
           <ModalFooter>
             <Button colorScheme="blue" mr={3} onClick={onClose}>
               Close
@@ -34,4 +34,10 @@ export const _Modal = ({ title = undefined, className, content }) => {
       </Modal>
     </>
   );
+};
+
+_Modal.prototypes = {
+  dispatcher: PropTypes.element || PropTypes.string,
+  className: PropTypes.string,
+  content: PropTypes.element || PropTypes.string,
 };
