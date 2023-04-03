@@ -1,10 +1,12 @@
-import { Heading } from '@components/heading';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import headingImage from '@assets/heading-login.png';
 import { BsArrowRight } from 'react-icons/bs';
+import { Heading } from '@components/heading';
 import { Button } from '@components/buttons/Button.components';
-import '@pages/register/register.page.scss';
+import { _Modal } from '@components/modal';
+import { TermsAndCoditions } from '@components/termsAndConditions';
+import headingImage from '@assets/heading-login.png';
+import './register.page.scss';
 
 export const Register = () => {
   const [data, setData] = useState({
@@ -130,7 +132,14 @@ export const Register = () => {
 
           <div className="terms__container">
             <label htmlFor="terms" className="terms__label">
-              I agree with the <p>Terms & Conditions</p>
+              I agree with the{' '}
+              <div>
+                <_Modal
+                  title="Terms and Conditions"
+                  className="terms__modal"
+                  content={<TermsAndCoditions />}
+                />
+              </div>
             </label>
             <input
               id="terms"
