@@ -1,22 +1,13 @@
-import { useState, useEffect } from 'react';
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  useDisclosure,
-} from '@chakra-ui/react';
-import { useWindowSize } from '@hooks';
+import { useState } from 'react';
+import { useDisclosure } from '@chakra-ui/react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { PropTypes } from 'prop-types';
 import { ProductImage } from '../productImage';
 import { ProductInfo } from '../productInfo';
 import { ProductQuantity } from '../productQuantity';
 import { ProductBuyButton } from '../productBuyButton';
-import { ContentModal } from '../modal';
+import { ProductModal } from '../modal';
+
 import './product.shop.scss';
 
 export const Product = ({
@@ -30,8 +21,8 @@ export const Product = ({
   price,
   stock,
 }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const windowSize = useWindowSize();
+  const { onOpen, isOpen, onClose } = useDisclosure();
+
   const [quantitySelected, setQuantitySelected] = useState(null);
   const [resetQuantity, setResetQuantity] = useState(false);
 
@@ -72,45 +63,24 @@ export const Product = ({
           resetQuantity={handlerResetQuantity}
         />
       </article>
-      <Modal
-        isOpen={isOpen}
+      <ProductModal
+        id={id}
+        product={product}
+        image={image}
+        dose={dose}
+        description={description}
+        label={label}
+        price={price}
+        stock={stock}
+        handlerResetQuantity={handlerResetQuantity}
+        handlerRetrieveQuantity={handlerRetrieveQuantity}
+        resetQuantity={resetQuantity}
+        quantitySelected={quantitySelected}
+        discount={discount}
+        onOpen={onOpen}
         onClose={onClose}
-        onEsc
-        size={windowSize > 900 ? '3xl' : windowSize > 700 ? '2xl' : windowSize > 400 ? 'md' : 'xs'}
-      >
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader />
-          <ModalCloseButton />
-          <ModalBody>
-            <ContentModal
-              description={description}
-              dose={dose}
-              image={image}
-              label={label}
-              price={price}
-              product={product}
-              stock={stock}
-              quantityRetriever={handlerRetrieveQuantity}
-              resetQuantity={resetQuantity}
-            />
-          </ModalBody>
-          <ModalFooter>
-            <ProductBuyButton
-              id={id}
-              quantity={quantitySelected}
-              product={product}
-              image={image}
-              dose={dose}
-              label={label}
-              discount={discount}
-              price={price}
-              stock={stock}
-              resetQuantity={handlerResetQuantity}
-            />
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+        isOpen={isOpen}
+      />
     </>
   );
 };
