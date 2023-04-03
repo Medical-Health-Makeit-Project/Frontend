@@ -1,5 +1,5 @@
-import { ProductQuantity } from '../productQuantity';
-import './modal.shop.scss';
+import { ProductQuantity } from '../../productQuantity';
+import './contentModal.shop.scss';
 
 export const ContentModal = ({
   image,

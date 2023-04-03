@@ -1,1 +1,2 @@
-export * from './Modal.shop';
+export * from './ProductModal.shop';
+export * from './components';
