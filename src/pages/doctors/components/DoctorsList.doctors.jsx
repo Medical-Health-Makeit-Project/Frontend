@@ -23,7 +23,7 @@ export const DoctorsList = () => {
         <div className="doctors__grid">
           {doctors.map((doctor) => {
             return (
-              <div key={doctor.id} className="doctor__card">
+              <div key={doctor.id} className="doctor__card-list">
                 <picture className="doctor__img-container">
                   <img src={doctor.avatar} alt="doctor image profile" className="doctors__image" />
                 </picture>
