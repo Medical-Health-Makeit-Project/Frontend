@@ -43,6 +43,8 @@ function App() {
             <Route path="home/test" element={<div>Test</div>} />
           </Route>
         </Route>
+
+        {/*TO-DO: THIS ROUTE IS COMMENTED TO AN EASY INTERACTION WITH THE BUILDING PROCESS OF THE COMPONENT ADMINISTRATION. THIS WILL BE UNCOMMENTED WHEN THE AUTHORIZATION PROCESS WITH THE LOGIN BE NEEDED */}
         {/* <Route element={<RequireAuth allowedRoles={roles.ADMIN} />}> */}
         <Route path={PrivateRoutes.ADMIN} element={<Administration />} />
         {/* </Route> */}
