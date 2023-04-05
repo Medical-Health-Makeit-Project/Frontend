@@ -12,8 +12,10 @@ export const Header = () => {
   const navigationOptions =
     emptyObject(user) || user === 'Unauthorized'
       ? ['Home', 'Our Doctors', 'Shop', 'Login']
-      : user.role === roles.USER || user.role === roles.ADMIN
+      : user.role === roles.USER
       ? ['Profile', 'Our Doctors', 'Shop']
+      : user.role === roles.ADMIN
+      ? ['Profile', 'Our Doctors', 'Shop', 'Your Panel']
       : user.role === roles.DOCTOR
       ? ['Profile', 'Shop']
       : ['Our Doctors', 'Shop', 'Login'];

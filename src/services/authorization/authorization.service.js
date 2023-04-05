@@ -48,43 +48,43 @@ const userAuthorized = (user, token) => {
       const { username, avatar, role, email, phone, nationality, gender, birthday, blood } =
         user.find((e) => e.username === 'Ricardo Munera' && e);
       return {
-        username: username,
-        avatar: avatar,
-        email: email,
-        phone: phone,
-        nationality: nationality,
-        gender: gender,
-        birthday: birthday,
-        blood: blood,
-        role: role,
+        username,
+        avatar,
+        email,
+        phone,
+        nationality,
+        gender,
+        birthday,
+        blood,
+        role,
       };
     } else if (token === '56789') {
       const { username, avatar, role, email, phone, nationality, gender, birthday, blood } =
         user.find((e) => e.username === 'Robert Langdon' && e);
       return {
-        username: username,
-        avatar: avatar,
-        email: email,
-        phone: phone,
-        nationality: nationality,
-        gender: gender,
-        birthday: birthday,
-        blood: blood,
-        role: role,
+        username,
+        avatar,
+        email,
+        phone,
+        nationality,
+        gender,
+        birthday,
+        blood,
+        role,
       };
     } else if (token === '123') {
       const { username, avatar, role, email, phone, nationality, gender, birthday, blood } =
         user.find((e) => e.username === 'Jean Vittory' && e);
       return {
-        username: username,
-        avatar: avatar,
-        email: email,
-        phone: phone,
-        nationality: nationality,
-        gender: gender,
-        birthday: birthday,
-        blood: blood,
-        role: role,
+        username,
+        avatar,
+        email,
+        phone,
+        nationality,
+        gender,
+        birthday,
+        blood,
+        role,
       };
     } else {
       return new Error('Unauthorized');

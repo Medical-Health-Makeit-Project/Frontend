@@ -43,7 +43,6 @@ function App() {
             <Route path="home/test" element={<div>Test</div>} />
           </Route>
         </Route>
-
         <Route element={<RequireAuth allowedRoles={[roles.ADMIN]} />}>
           <Route path={PrivateRoutes.ADMIN} element={<Administration />} />
         </Route>

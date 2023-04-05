@@ -42,7 +42,6 @@ export const Login = () => {
     }
     try {
       const isToken = await authService(AUTH, userData);
-      console.log(isToken);
       if (isToken instanceof Error) throw isToken;
       localStorage.setItem(TOKEN, isToken.ACCESS_TOKEN);
       const isUser = await dispatch(findUserWithToken(isToken.ACCESS_TOKEN));

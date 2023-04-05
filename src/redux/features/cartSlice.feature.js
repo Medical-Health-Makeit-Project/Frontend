@@ -70,9 +70,7 @@ export const cartSlice = createSlice({
     deleteAppointment: (state, action) => {
       const exist = state.appointments.find((e) => e.id === action.payload);
       if (exist) {
-        console.log(exist);
         state.appointments = state.appointments.filter((e) => e.id !== action.payload);
-
         return state;
       }
     },
