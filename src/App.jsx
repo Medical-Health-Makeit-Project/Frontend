@@ -44,7 +44,6 @@ function App() {
           </Route>
         </Route>
 
-        {/*TO-DO: THIS ROUTE IS COMMENTED FOR AN EASY INTERACTION WITH THE BUILDING PROCESS OF THE COMPONENT ADMINISTRATION. THIS WILL BE UNCOMMENTED WHEN THE AUTHORIZATION PROCESS WITH THE LOGIN BE NEEDED */}
         <Route element={<RequireAuth allowedRoles={[roles.ADMIN]} />}>
           <Route path={PrivateRoutes.ADMIN} element={<Administration />} />
         </Route>
