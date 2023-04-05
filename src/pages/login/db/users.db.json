@@ -27,7 +27,7 @@
     "password": "Muchogusto123456",
     "role": 1993
   },
-  
+
   {
     "id": "2",
     "name": "Ricardo Munera",
@@ -51,5 +51,19 @@
     "blood": "A-",
     "password": "Muchogusto123456",
     "role": 2023
+  },
+  {
+    "id": "4",
+    "name": "Jean Vittory",
+    "username": "Jean Vittory",
+    "avatar": "/src/assets/user-avatar.jpg",
+    "email": "test123@test.com",
+    "phone": "320 774 1234",
+    "nationality": "Cali, Colombia",
+    "gender": "Male",
+    "birthday": "02/12/1996",
+    "blood": "A-",
+    "password": "Muchogusto123456",
+    "role": 1000
   }
 ]
