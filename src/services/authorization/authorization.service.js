@@ -14,7 +14,7 @@ export const isAuthorized = async (URL, token) => {
 };
 
 const userAuthorized = (user, token) => {
-  if (token === '987654321' || token === '123456789' || token === '56789') {
+  if (token === '987654321' || token === '123456789' || token === '56789' || token === '123') {
     if (token === '987654321') {
       const {
         id,
@@ -72,8 +72,22 @@ const userAuthorized = (user, token) => {
         blood: blood,
         role: role,
       };
+    } else if (token === '123') {
+      const { username, avatar, role, email, phone, nationality, gender, birthday, blood } =
+        user.find((e) => e.username === 'Jean Vittory' && e);
+      return {
+        username: username,
+        avatar: avatar,
+        email: email,
+        phone: phone,
+        nationality: nationality,
+        gender: gender,
+        birthday: birthday,
+        blood: blood,
+        role: role,
+      };
+    } else {
+      return new Error('Unauthorized');
     }
-  } else {
-    return new Error('Unauthorized');
   }
 };

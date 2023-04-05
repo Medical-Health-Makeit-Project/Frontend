@@ -28,6 +28,10 @@ const validateUser = (userToValidate, user) => {
     return {
       ACCESS_TOKEN: '987654321',
     };
+  } else if (userExist.username === 'Jean Vittory') {
+    return {
+      ACCESS_TOKEN: '123',
+    };
   } else {
     return {
       ACCESS_TOKEN: '9876543210',

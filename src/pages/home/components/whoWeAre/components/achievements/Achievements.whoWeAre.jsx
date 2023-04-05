@@ -72,5 +72,5 @@ Achievements.propTypes = {
       quantity: PropTypes.string,
       achievement: PropTypes.string,
     })
-  ).isRequired,
+  ),
 };

@@ -1,7 +1,7 @@
 import { roles } from '@utils/roles';
 
 export const authorizationAdapter = (response) => {
-  if (response.role === roles.USER) {
+  if (response.role === roles.USER || response.role === roles.ADMIN) {
     return {
       id: response.id,
       username: response.username,
