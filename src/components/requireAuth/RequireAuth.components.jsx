@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, Outlet } from 'react-router-dom';
+import { PropTypes } from 'prop-types';
 import { findUserWithToken } from '@redux/thunks';
 import { useDispatch } from 'react-redux';
 import { PublicRoutes } from '@routes';
@@ -38,4 +39,8 @@ export const RequireAuth = ({ allowedRoles }) => {
   }, []);
 
   return isAuth && <Outlet />;
+};
+
+RequireAuth.propTypes = {
+  allowedRoles: PropTypes.arrayOf(PropTypes.number) || PropTypes.number,
 };

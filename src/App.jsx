@@ -11,6 +11,7 @@ import { ContainerProfiles } from './pages/profiles';
 import { Checkout } from './pages/checkout';
 import { Payment } from './pages/payment';
 import { Appointments } from './pages/appointments';
+import { Administration } from './pages/administration';
 import { Unauthorized } from './pages/unauthorized';
 import { PublicRoutes, PrivateRoutes } from './routes/routes.routes';
 import { roles } from './utils/roles/roles.utils';
@@ -41,6 +42,9 @@ function App() {
           <Route element={<RequireAuth allowedRoles={[roles.ADMIN, roles.DOCTOR]} />}>
             <Route path="home/test" element={<div>Test</div>} />
           </Route>
+        </Route>
+        <Route element={<RequireAuth allowedRoles={[roles.ADMIN]} />}>
+          <Route path={PrivateRoutes.ADMIN} element={<Administration />} />
         </Route>
       </Routes>
       <ToastContainer limit={2} />
