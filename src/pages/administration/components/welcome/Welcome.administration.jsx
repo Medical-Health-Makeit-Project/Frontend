@@ -18,12 +18,12 @@ export const Welcome = () => {
       <h3 className="admin-welcome__paragraph">What do you want to see:</h3>
       <div className="admin-welcome__buttons">
         <Link to={`${PrivateRoutes.ADMIN.INDEX}/${PrivateRoutes.ADMIN.DOCTORS}`}>
-          <Button tton variant="outline" color="info" className="button">
+          <Button tton variant="outline" color="info" className="admin-welcome__button">
             Doctors
           </Button>
         </Link>
         <Link to={`${PrivateRoutes.ADMIN.INDEX}/${PrivateRoutes.ADMIN.PRODUCTS}`}>
-          <Button variant="outline" color="info" className="button">
+          <Button variant="outline" color="info" className="admin-welcome__button">
             Products
           </Button>
         </Link>

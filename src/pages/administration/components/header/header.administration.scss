@@ -3,6 +3,8 @@
 @import '@sass/base/typography.base.scss';
 
 .admin-header {
+  width: 100%;
+  max-width: 2400px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
