@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BsArrowRight } from 'react-icons/bs';
-import { SelecCountry } from './components/SelectCountry.register';
-import { SelectBlood } from './components/SelecBlood.register';
+import { SelectCountry } from './components/SelectCountry.register';
+import { SelectBlood } from './components/SelectBlood.register';
 import { Heading } from '@components/heading';
 import { Button } from '@components/buttons/Button.components';
 import { _Modal } from '@components/modal';
@@ -27,7 +27,6 @@ export const Register = () => {
     const { name, type, value, checked } = event.target;
     setData({ ...data, [name]: type === 'checkbox' ? checked : value });
   };
-  console.log(data);
   const handleSubmit = (event) => {
     event.preventDefault();
     if (data.password === data.repeatPassword) {
@@ -126,8 +125,8 @@ export const Register = () => {
           </div>
 
           <div className="country__container input__container">
-            <label htmlFor="country">Selec your country:</label>
-            <SelecCountry handleChange={handleChange} />
+            <label htmlFor="country">Select your country:</label>
+            <SelectCountry handleChange={handleChange} />
           </div>
 
           <div className="blood__container input__container">

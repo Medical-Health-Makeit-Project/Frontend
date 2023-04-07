@@ -1,4 +1,6 @@
 export const SelectBlood = ({ handleChange }) => {
+  const bloodTypes = ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'];
+
   return (
     <select
       id="blood"
@@ -9,14 +11,13 @@ export const SelectBlood = ({ handleChange }) => {
       onChange={(event) => handleChange(event)}
     >
       <option value="">Select...</option>
-      <option value="A+">A+</option>
-      <option value="A-">A-</option>
-      <option value="B+">B+</option>
-      <option value="B-">B-</option>
-      <option value="O+">O+</option>
-      <option value="O-">O-</option>
-      <option value="AB+">AB+</option>
-      <option value="AB-"></option>
+      {bloodTypes.map((type) => {
+        return (
+          <option key={type} value={type}>
+            {type}
+          </option>
+        );
+      })}
     </select>
   );
 };
