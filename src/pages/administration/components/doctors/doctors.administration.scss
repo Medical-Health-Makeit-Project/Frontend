@@ -1,0 +1,14 @@
+@import '@sass/abstract/mixins.abstract.scss';
+
+.admin-doctors {
+  width: 100%;
+  max-width: 2400px;
+  height: 100vh;
+  padding: 1rem;
+  margin: 0 auto;
+
+  .admin-doctors__title {
+    @include subtitle($color: map-get($typography-colors, 'black'));
+    text-align: left;
+  }
+}

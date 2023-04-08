@@ -4,27 +4,22 @@
     "country": "Colombia",
     "locations": [
       {
-        "id": "1",
         "city": "Bogotá",
         "address": "Carrer d'Apuntadors, 3"
       },
       {
-        "id": "2",
         "city": "Cali",
         "address": "Parque de Negocios Mas Blau II, Carrer de l'Alta Ribagorca 18"
       },
       {
-        "id": "3",
         "city": "Medellin",
         "address": "Avda Gabriel Roca, 14, local 2B"
       },
       {
-        "id": "4",
         "city": "Bucaramanga",
         "address": "Calle de Blasco Ibanez, 1"
       },
       {
-        "id": "5",
         "city": "Pereira",
         "address": "Calle Valdegarea, 12"
       }
@@ -35,17 +30,14 @@
     "country": "USA",
     "locations": [
       {
-        "id": "1",
         "city": "New York",
         "address": "525 Paseo Del Pueblo Norte"
       },
       {
-        "id": "2",
         "city": "Los Angeles",
         "address": "2800 W Bethel Ave"
       },
       {
-        "id": "3",
         "city": "Miami",
         "address": "1945 20th Ave SE"
       }
@@ -56,17 +48,14 @@
     "country": "México",
     "locations": [
       {
-        "id": "1",
         "city": "CDMX",
         "address": "Marina Plaza Bonita N/A"
       },
       {
-        "id": "2",
         "city": "Guadalajara",
         "address": "Carra A Miguel Aleman Km 23.7"
       },
       {
-        "id": "3",
         "city": "Monterrey",
         "address": "Atenas 101"
       }
@@ -77,12 +66,10 @@
     "country": "Argentina",
     "locations": [
       {
-        "id": "1",
         "city": "Buenos Aires",
         "address": "Aguado 2385"
       },
       {
-        "id": "2",
         "city": "Rosario",
         "address": "San Fernando del Valle de Catamarca"
       }

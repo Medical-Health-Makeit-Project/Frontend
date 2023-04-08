@@ -1,0 +1,1 @@
+export * from './doctorAreas.services';

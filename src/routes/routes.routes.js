@@ -14,5 +14,10 @@ export const PrivateRoutes = {
   CHECKOUT: '/home/checkout',
   PAYMENT: '/home/payment',
   PROFILES: '/home/profile',
-  ADMIN: '/home/admin',
+  ADMIN: {
+    INDEX: '/home/admin',
+    HOME: 'dashboard',
+    DOCTORS: 'doctors',
+    PRODUCTS: 'products',
+  },
 };

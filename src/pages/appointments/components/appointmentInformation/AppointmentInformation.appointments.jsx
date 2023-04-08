@@ -23,40 +23,11 @@ export const AppointmentInformation = () => {
   const [countrySelected, setCountrySelected] = useState(
     appointmentForm.countrySelected || 'Colombia'
   );
-  const [city, setCity] = useState([
-    {
-      id: '1',
-      city: 'Bogotá',
-      address: "Carrer d'Apuntadors, 3",
-    },
-    {
-      id: '2',
-      city: 'Cali',
-      address: "Parque de Negocios Mas Blau II, Carrer de l'Alta Ribagorca 18",
-    },
-    {
-      id: '3',
-      city: 'Medellin',
-      address: 'Avda Gabriel Roca, 14, local 2B',
-    },
-    {
-      id: '4',
-      city: 'Bucaramanga',
-      address: 'Calle de Blasco Ibanez, 1',
-    },
-    {
-      id: '5',
-      city: 'Pereira',
-      address: 'Calle Valdegarea, 12',
-    },
-  ]);
+  const [city, setCity] = useState([]);
   const [areaSelected, setAreaSelected] = useState(
     appointmentForm.specialitySelected || 'General surgeon'
   );
-  const [doctorSelected, setDoctorSelected] = useState([
-    { id: '4', name: 'Dr. Gil Parrish' },
-    { id: '6', name: 'Dr. Matie Delgado' },
-  ]);
+  const [doctorSelected, setDoctorSelected] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -79,7 +50,7 @@ export const AppointmentInformation = () => {
     } else {
       setAppointmentForm({
         ...appointmentForm,
-        preferredDoctorSelected: doctorSelected[0].name,
+        preferredDoctorSelected: appointmentForm.preferredDoctorSelected,
       });
     }
   }, [doctorSelected]);
@@ -179,10 +150,10 @@ export const AppointmentInformation = () => {
               value={appointmentForm.preferredDoctorSelected}
               onChange={handleChangeForm}
             >
-              <option value="" disabled>
+              <option value="" disabled defaultValue>
                 --Choose a doctor--
               </option>
-              {doctorSelected.map((e) => {
+              {doctorSelected?.map((e) => {
                 return (
                   <option key={e.id} value={e.name}>
                     {e.name}
@@ -225,10 +196,10 @@ export const AppointmentInformation = () => {
               onChange={handleChangeForm}
               value={appointmentForm.citySelected}
             >
-              <option value="" disabled>
+              <option value="" disabled defaultValue>
                 --Choose your city--
               </option>
-              {city.map((element) => {
+              {city?.map((element) => {
                 return (
                   <option key={element.city} value={element.city}>
                     {element.city}

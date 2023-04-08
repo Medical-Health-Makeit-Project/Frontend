@@ -15,7 +15,7 @@ export const Header = () => {
       : user.role === roles.USER
       ? ['Profile', 'Our Doctors', 'Shop']
       : user.role === roles.ADMIN
-      ? ['Profile', 'Our Doctors', 'Shop', 'Your Panel']
+      ? ['Our Doctors', 'Shop', 'Your Panel']
       : user.role === roles.DOCTOR
       ? ['Profile', 'Shop']
       : ['Our Doctors', 'Shop', 'Login'];
