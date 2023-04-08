@@ -8,7 +8,7 @@ export const NavigationLink = ({ text, isButton }) => {
   const link = text.replace(regex, '-').toLowerCase();
   const route =
     text === 'Your Panel'
-      ? '/home/admin/dashboard'
+      ? `${PrivateRoutes.ADMIN.INDEX}/${PrivateRoutes.ADMIN.HOME}`
       : text === 'Home'
       ? PublicRoutes.HOME
       : `/home/${link}`;
