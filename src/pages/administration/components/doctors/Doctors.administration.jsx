@@ -5,6 +5,8 @@ import { Loading } from '@components/loading';
 import { DOCTORS_AREA } from '@constants';
 import { doctorAreas } from '../../services/doctorAreas';
 import { locationsSWR } from '@services/locations';
+import { useUpdater } from './hooks/useUpdater.hooks';
+import { useIsLoading } from '@hooks';
 import emptyAvatar from '@assets/empty-avatar.png';
 import './doctors.administration.scss';
 
@@ -24,40 +26,59 @@ export const Doctors = () => {
     password: Date.now(),
     role: 1993,
   });
-
-  const [qualifications, setQualifications] = useState([]);
-
-  const { locations, locationsError } = locationsSWR();
-  const {
-    data: doctorArea,
-    error,
-    isLoading,
-  } = useSWR(DOCTORS_AREA, doctorAreas, {
-    revalidateOnFocus: false,
-    revalidateIfStale: false,
-  });
+  const [avatarSelected, setAvatarSelected] = useState();
   const [city, setCity] = useState([]);
   const [countrySelected, setCountrySelected] = useState(
     newDoctor.headquarter.country || 'Colombia'
   );
+  const { locations } = locationsSWR();
+  const { data: doctorArea } = useSWR(DOCTORS_AREA, doctorAreas, {
+    revalidateOnFocus: false,
+    revalidateIfStale: false,
+  });
 
   useEffect(() => {
-    console.log('hello');
     const citys = locations?.find((element) => element.country === countrySelected);
     setCity(citys?.locations);
   }, [countrySelected]);
 
+  const {
+    qualification,
+    membership,
+    skill,
+    handleQualification,
+    handleAddQualification,
+    handleDeleteQualifications,
+    handleMembership,
+    handleAddMemberships,
+    handleDeleteMembership,
+    handleSkill,
+    handleAddSkill,
+    handleDeleteSkill,
+  } = useUpdater(newDoctor, setNewDoctor);
+
+  const [isLoading] = useIsLoading();
+
   const handleSelectHeadquarters = (e) => {
     const { name, value } = e.target;
     if (name === 'country') setCountrySelected(e.currentTarget.value);
-
     setNewDoctor({
       ...newDoctor,
       headquarter: { ...newDoctor.headquarter, [name]: value },
     });
   };
 
-  const handleChangeform = (e) => {
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    const avatarURL = URL.createObjectURL(file);
+    setAvatarSelected(avatarURL);
+    setNewDoctor({
+      ...newDoctor,
+      avatar: file,
+    });
+  };
+
+  const handleChangeForm = (e) => {
     const { name, value } = e.target;
     setNewDoctor({
       ...newDoctor,
@@ -65,7 +86,10 @@ export const Doctors = () => {
     });
   };
 
-  console.log(newDoctor);
+  //to-do this function will be used to send the new doctor to the api
+  const handleSubmit = () => {
+    //use formData()
+  };
 
   if (isLoading) return <Loading />;
 
@@ -75,20 +99,32 @@ export const Doctors = () => {
       <form>
         <div>
           <label htmlFor="firstname">Name:</label>
-          <input type="text" name="firstname" id="firstname" />
+          <input
+            type="text"
+            name="firstname"
+            id="firstname"
+            onChange={handleChangeForm}
+            value={newDoctor.firstname}
+          />
         </div>
         <div>
           <label htmlFor="lastname">Lastname:</label>
-          <input type="text" name="lastname" id="lastname" />
+          <input
+            type="text"
+            name="lastname"
+            id="lastname"
+            onChange={handleChangeForm}
+            value={newDoctor.lastname}
+          />
         </div>
         <div>
           <label htmlFor="area">Area:</label>
           <div>
-            <select name="area" id="area">
+            <select name="area" id="area" onChange={handleChangeForm}>
               <option value="" disabled defaultValue>
                 --Choose an area--
               </option>
-              {doctorArea.map((e) => {
+              {doctorArea?.map((e) => {
                 return (
                   <option key={e.id} value={e.area}>
                     {e.area}
@@ -100,15 +136,20 @@ export const Doctors = () => {
         </div>
         <div>
           <label>Upload image: </label>
-          <input type="file" name="avatar" />
+          <input
+            type="file"
+            name="avatar"
+            onChange={handleImageUpload}
+            accept="image/jpeg, image/png, image/webp"
+          />
         </div>
         <div>
           <label htmlFor="email">Email:</label>
-          <input type="email" name="email" id="email" />
+          <input type="email" name="email" id="email" onChange={handleChangeForm} />
         </div>
         <div>
-          <label htmlFor="phone">Email:</label>
-          <input type="phone" name="phone" id="phone" />
+          <label htmlFor="phone">Phone:</label>
+          <input type="phone" name="phone" id="phone" onChange={handleChangeForm} />
         </div>
         <div>
           <p>Headquarter:</p>
@@ -160,26 +201,80 @@ export const Doctors = () => {
         <div>
           <p>Gender:</p>
           <div>
-            <input type="radio" id="male" value="Male" name="gender" />
+            <input type="radio" id="male" value="Male" name="gender" onChange={handleChangeForm} />
             <label htmlFor="male">Male</label>
           </div>
           <div>
-            <input type="radio" id="female" value="Female" name="gender" />
+            <input
+              type="radio"
+              id="female"
+              value="Female"
+              name="gender"
+              onChange={handleChangeForm}
+            />
             <label htmlFor="female">Female</label>
           </div>
           <div>
-            <input type="radio" id="noBinary" value="No Binary" name="gender" />
+            <input
+              type="radio"
+              id="noBinary"
+              value="No Binary"
+              name="gender"
+              onChange={handleChangeForm}
+            />
             <label htmlFor="noBinary">No Binary</label>
           </div>
         </div>
         <div>
           <label htmlFor="qualifications">Qualifications:</label>
-          <input type="text" name="qualifications" id="qualifications" />
+          <input
+            type="text"
+            name="qualifications"
+            id="qualifications"
+            onChange={handleQualification}
+            value={qualification}
+          />
+          <button onClick={handleAddQualification}>Add</button>
           <div>
-            {qualifications?.map((e) => {
+            {newDoctor.qualifications?.map((qualification) => {
               return (
-                <div key={e}>
-                  {e} <IoIosClose />
+                <div key={qualification}>
+                  {qualification}{' '}
+                  <IoIosClose onClick={(e) => handleDeleteQualifications(e, qualification)} />
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <div>
+          <label htmlFor="memberships">Memberships:</label>
+          <input
+            type="text"
+            name="memberships"
+            id="memberships"
+            onChange={handleMembership}
+            value={membership}
+          />
+          <button onClick={handleAddMemberships}>Add</button>
+          <div>
+            {newDoctor.memberships?.map((membership) => {
+              return (
+                <div key={membership}>
+                  {membership} <IoIosClose onClick={(e) => handleDeleteMembership(e, membership)} />
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <div>
+          <label htmlFor="skills">Skills:</label>
+          <input type="text" name="skills" id="skills" onChange={handleSkill} value={skill} />
+          <button onClick={handleAddSkill}>Add</button>
+          <div>
+            {newDoctor.skills?.map((skill) => {
+              return (
+                <div key={skill}>
+                  {skill} <IoIosClose onClick={(e) => handleDeleteSkill(e, skill)} />
                 </div>
               );
             })}
@@ -187,7 +282,7 @@ export const Doctors = () => {
         </div>
       </form>
       <div>
-        <img src={newDoctor.avatar || emptyAvatar} alt="avatar" />
+        <img src={avatarSelected || emptyAvatar} alt="avatar" />
       </div>
     </main>
   );

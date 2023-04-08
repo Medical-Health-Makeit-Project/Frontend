@@ -18,7 +18,7 @@ export const Welcome = () => {
       <h3 className="admin-welcome__paragraph">What do you want to see:</h3>
       <div className="admin-welcome__buttons">
         <Link to={`${PrivateRoutes.ADMIN.INDEX}/${PrivateRoutes.ADMIN.DOCTORS}`}>
-          <Button tton variant="outline" color="info" className="admin-welcome__button">
+          <Button variant="outline" color="info" className="admin-welcome__button">
             Doctors
           </Button>
         </Link>
