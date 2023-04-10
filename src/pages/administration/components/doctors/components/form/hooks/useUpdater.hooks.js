@@ -16,6 +16,7 @@ export const useUpdater = (newDoctor, setNewDoctor) => {
       ...newDoctor,
       qualifications: [...newDoctor.qualifications, qualification],
     });
+
     setQualification('');
   };
 
@@ -45,6 +46,7 @@ export const useUpdater = (newDoctor, setNewDoctor) => {
       ...newDoctor,
       memberships: newDoctor.memberships.filter((e) => e !== membership),
     });
+    setMembership('');
   };
 
   const handleSkill = (e) => {
@@ -66,6 +68,7 @@ export const useUpdater = (newDoctor, setNewDoctor) => {
       ...newDoctor,
       skills: newDoctor.skills.filter((e) => e !== skill),
     });
+    setSkill('');
   };
 
   return {

@@ -1,5 +1,6 @@
 export const colorIcons = 'rgba(63, 182, 214)';
 export const TOKEN = 'ACCESS_TOKEN';
+export const IMAGE_MAX_SIZE = 5242880;
 
 // jsons that will be change to endpoints of the backend
 export const ALL_PRODUCTS = '/src/pages/shop/db/allProducts/products.json';
