@@ -5,8 +5,8 @@ import { v4 as uuid } from 'uuid';
 import { useDispatch } from 'react-redux';
 import { postAppointment } from '@redux/features';
 import { doctorsByAreaService } from '../service/appointment.service';
-import { locationService } from '@services/locations';
-import { DOCTORS_BY_AREA, LOCATIONS } from '@constants';
+import { DOCTORS_BY_AREA } from '@constants';
+import { locationsSWR } from '@services/locations';
 
 export const AppointmentStore = createContext();
 
@@ -47,7 +47,7 @@ export const AppointmentContext = ({ children }) => {
     doctorsByAreaService,
     swrConfig
   );
-  const { data: locations, error: locationsError } = useSWR(LOCATIONS, locationService, swrConfig);
+  const { locations, locationsError } = locationsSWR();
 
   const createAppointment = (price) => {
     const newAppointment = {

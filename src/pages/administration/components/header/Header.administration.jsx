@@ -1,9 +1,19 @@
 import { Avatar, Menu, MenuButton, MenuList, MenuItem, Button } from '@chakra-ui/react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { logout } from '@redux/features';
+import { PublicRoutes, PrivateRoutes } from '@routes';
 import './header.administration.scss';
 
 export const Header = () => {
   const { username, avatar } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate(PublicRoutes.LOGIN);
+  };
 
   return (
     <header className="admin-header">
@@ -13,9 +23,16 @@ export const Header = () => {
           <Avatar name={username} src={avatar} />
         </MenuButton>
         <MenuList>
-          <MenuItem>Doctors</MenuItem>
-          <MenuItem>Products</MenuItem>
-          <MenuItem>Logout</MenuItem>
+          <Link to={PrivateRoutes.ADMIN.DOCTORS}>
+            <MenuItem>Doctors</MenuItem>
+          </Link>
+          <Link to={PrivateRoutes.ADMIN.PRODUCTS}>
+            <MenuItem>Products</MenuItem>
+          </Link>
+          <Link to={PublicRoutes.HOME}>
+            <MenuItem>Go app</MenuItem>
+          </Link>
+          <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </MenuList>
       </Menu>
     </header>

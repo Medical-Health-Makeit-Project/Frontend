@@ -12,8 +12,24 @@
 
   .admin-welcome__title {
     @include heading(map-get($typography-colors, 'black'));
-    span {
+    text-align: center;
+
+    @media screen and (min-width: 700px) {
+      @include heading(map-get($typography-colors, 'black'));
+    }
+    .admin-welcome__mebid {
       color: map-get($typography-colors, 'blue');
+      margin: 0 0 0 8px;
+    }
+
+    .admin-welcome__username {
+      display: block;
+      color: map-get($typography-colors, 'black');
+      margin-left: 8px;
+
+      @media screen and (min-width: 700px) {
+        display: inline-block;
+      }
     }
   }
 
@@ -27,7 +43,7 @@
     margin-top: 1rem;
   }
 
-  .button {
+  .admin-welcome__button {
     padding: 0.3rem 0.6rem;
     border: 0;
     border-radius: 5px;

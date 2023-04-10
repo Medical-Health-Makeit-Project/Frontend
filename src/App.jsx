@@ -1,5 +1,5 @@
 import { ToastContainer } from 'react-toastify';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import { Layout } from './components';
 import { RequireAuth } from '@components/requireAuth';
 import { Home } from './pages/home';
@@ -11,7 +11,7 @@ import { ContainerProfiles } from './pages/profiles';
 import { Checkout } from './pages/checkout';
 import { Payment } from './pages/payment';
 import { Appointments } from './pages/appointments';
-import { Administration } from './pages/administration';
+import { Dashboard } from './pages/administration';
 import { Unauthorized } from './pages/unauthorized';
 import { PublicRoutes, PrivateRoutes } from './routes/routes.routes';
 import { roles } from './utils/roles/roles.utils';
@@ -23,7 +23,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Navigate to="home" />} />
+          <Route index element={<Navigate to={PublicRoutes.HOME} />} />
           <Route path={PublicRoutes.HOME} element={<Home />} />
           <Route path={PublicRoutes.LOGIN} element={<Login />} />
           <Route path={PublicRoutes.REGISTER} element={<Register />} />
@@ -44,7 +44,7 @@ function App() {
           </Route>
         </Route>
         <Route element={<RequireAuth allowedRoles={[roles.ADMIN]} />}>
-          <Route path={PrivateRoutes.ADMIN} element={<Administration />} />
+          <Route path={`${PrivateRoutes.ADMIN.INDEX}/*`} element={<Dashboard />} />
         </Route>
       </Routes>
       <ToastContainer limit={2} />

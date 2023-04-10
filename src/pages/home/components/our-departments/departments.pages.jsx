@@ -14,6 +14,7 @@ export const Departments = () => {
         });
       }, 5000);
     } catch (error) {
+      //TO-DO catch error from backend
       console.log(error);
     }
   }, []);
