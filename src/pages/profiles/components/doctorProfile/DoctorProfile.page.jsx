@@ -3,6 +3,7 @@ import { BiMap, BiEdit } from 'react-icons/bi';
 import { BsTelephoneOutbound, BsGenderAmbiguous, BsCheckLg } from 'react-icons/bs';
 import { AiOutlineMail } from 'react-icons/ai';
 import { Button } from '@components/buttons';
+import { phoneValidation, emailValidation } from '@constants/';
 
 import './doctorProfile.page.scss';
 
@@ -105,7 +106,7 @@ export const DoctorProfile = ({
                   placeholder={emailStatus}
                   required
                   onChange={handleEmailChange}
-                  pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}"
+                  pattern={emailValidation}
                 />
               </div>
               <div className={`info__containers ${prevData}`}>
@@ -123,7 +124,7 @@ export const DoctorProfile = ({
                   placeholder={phoneStatus}
                   required
                   onChange={handlePhoneChange}
-                  pattern="/^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/"
+                  pattern={phoneValidation}
                 />
               </div>
               <div className={`info__containers ${prevData}`}>
