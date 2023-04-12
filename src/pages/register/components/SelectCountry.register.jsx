@@ -112,7 +112,7 @@ export const SelectCountry = ({ handleChange }) => {
     'Lithuania',
     'Luxembourg',
     'Macau',
-    'Macedonia',
+    'Northern Macedonia',
     'Madagascar',
     'Malawi',
     'Malaysia',
