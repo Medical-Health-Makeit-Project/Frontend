@@ -119,7 +119,7 @@
     font-size: small;
   }
   .check-icon {
-    color: #3fb6d6;
+    color: theme-color('accent', 'light');
   }
 }
 .skill__layout {
@@ -143,36 +143,8 @@
     font-size: medium;
     margin-bottom: 10px;
   }
-
-  .form__container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .inputs-container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-
-    label {
-      @include paragraph($weight: weight-typo('poppins', 'semi-bold'));
-    }
-  }
 }
 
-.input-box {
-  width: 100%;
-  height: 40px;
-  border: 1px solid #80808082;
-  border-radius: 5px;
-  padding-left: 10px;
-
-  &:hover {
-    background-color: rgb(205 244 255 / 36%);
-  }
-}
 .appointment__button {
   width: 160px;
 }

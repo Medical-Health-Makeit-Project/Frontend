@@ -1,4 +1,6 @@
-@import '@sass/abstract/variables.abstract.scss';
+@import '@sass/themes/theme.themes.scss';
+@import '@sass/base/typography.base.scss';
+@import '@sass/abstract/mixins.abstract.scss';
 
 .testimonials__container {
   height: 500px;
@@ -6,7 +8,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: $primary-background-blue;
+  background-color: theme-color('background', 'lighter');
   padding: 3rem 0 1rem 0;
 
   .testimonials__text {
@@ -15,9 +17,7 @@
     margin-bottom: 2rem;
 
     p {
-      font-size: 14px;
-      font-weight: 600;
-      color: $primary-color-scooter;
+      @include paragraph($color: map-get($typography-colors, 'blue'));
       margin-bottom: 40px;
     }
     h3 {
@@ -44,9 +44,9 @@
     flex-direction: column;
     gap: 10px;
     margin-top: 50px;
-    font-size: 14px;
+    font-size: $size-xs;
     font-family: $font-poppins;
-    color: gray;
+    color: map-get($map: $typography-colors, $key: 'gray');
     margin-bottom: 2.3rem;
   }
 }
@@ -57,6 +57,6 @@
   .testimonial__fullname {
     font-size: 16px;
     font-weight: 700;
-    color: black;
+    color: map-get($map: $typography-colors, $key: 'black');
   }
 }
