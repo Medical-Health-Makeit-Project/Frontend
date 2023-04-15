@@ -112,7 +112,7 @@ export const Register = () => {
             <label htmlFor="gender">Select your gender:</label>
             <select
               id="gender"
-              name="gneder"
+              name="gender"
               type="select"
               required
               className="email__input input-box"
@@ -130,7 +130,7 @@ export const Register = () => {
           </div>
 
           <div className="blood__container input__container">
-            <label htmlFor="blood_type">Selec your blood type:</label>
+            <label htmlFor="blood_type">Select your blood type:</label>
             <SelectBlood handleChange={handleChange} />
           </div>
 
