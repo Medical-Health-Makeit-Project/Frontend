@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BsArrowRight } from 'react-icons/bs';
+import { SelectCountry } from './components/SelectCountry.register';
+import { SelectBlood } from './components/SelectBlood.register';
 import { Heading } from '@components/heading';
 import { Button } from '@components/buttons/Button.components';
 import { _Modal } from '@components/modal';
@@ -14,6 +16,8 @@ export const Register = () => {
     lastName: '',
     username: '',
     email: '',
+    gender: '',
+    coutry: '',
     password: '',
     repeatPassword: '',
     termsAndConditions: false,
@@ -102,6 +106,32 @@ export const Register = () => {
               value={email}
               onChange={(event) => handleChange(event)}
             />
+          </div>
+
+          <div className="gender__container input__container">
+            <label htmlFor="gender">Select your gender:</label>
+            <select
+              id="gender"
+              name="gneder"
+              type="select"
+              required
+              className="email__input input-box"
+              onChange={(event) => handleChange(event)}
+            >
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="non-binary">Non binary</option>
+            </select>
+          </div>
+
+          <div className="country__container input__container">
+            <label htmlFor="country">Select your country:</label>
+            <SelectCountry handleChange={handleChange} />
+          </div>
+
+          <div className="blood__container input__container">
+            <label htmlFor="blood_type">Selec your blood type:</label>
+            <SelectBlood handleChange={handleChange} />
           </div>
 
           <div className="password__container input__container">
