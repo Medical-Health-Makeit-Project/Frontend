@@ -4,8 +4,10 @@ import { BsTelephoneOutbound, BsGenderAmbiguous, BsCalendarCheck } from 'react-i
 import { MdBloodtype } from 'react-icons/md';
 import { BiMap, BiEdit } from 'react-icons/bi';
 import { Button } from '@components/buttons';
+import { phoneValidation, emailValidation } from '@constants/';
 
 import './userProfile.page.scss';
+import axios from 'axios';
 
 export const UserProfile = ({
   id,
@@ -28,10 +30,26 @@ export const UserProfile = ({
   const [prevData, setPrevData] = useState(dataStyleOn);
   const [emailStatus, setEmailStauts] = useState(email);
   const [phoneStatus, setPhoneSatus] = useState(phone);
+  const [appointments, setAppointments] = useState([]);
 
-  const updateData = () => {
-    //axios
-  };
+  //@Todo: assign link to backend to update actions
+  // const updateData = () => {
+  //   axios
+  //     .post('URL to back', {
+  //       email: emailStatus,
+  //       phone: phoneStatus,
+  //     })
+  //     .then((response) => {
+  //       alert(response);
+  //     });
+  // };
+
+  // const getAppointments = () => {
+  //   axios.get('URL to back').then((response) => {
+  //     setAppointments(response);
+  //   });
+  // };
+
   const handleEditOn = () => {
     setEditState(editStyleOn);
     setPrevData(dataStyleOff);
@@ -77,7 +95,7 @@ export const UserProfile = ({
               placeholder={emailStatus}
               required
               onChange={handleEmailChange}
-              pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}"
+              pattern={emailValidation}
             />
           </div>
           <div className={`email__container second__info ${prevData}`}>
@@ -90,7 +108,7 @@ export const UserProfile = ({
               placeholder={phoneStatus}
               required
               onChange={handlePhoneChange}
-              pattern="/^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/"
+              pattern={phoneValidation}
             />
           </div>
           <div className={`phone__container second__info ${prevData}`}>

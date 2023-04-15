@@ -29,6 +29,25 @@ export const DoctorProfile = ({
   const [prevData, setPrevData] = useState(dataStyleOn);
   const [emailStatus, setEmailStauts] = useState(email);
   const [phoneStatus, setPhoneSatus] = useState(phone);
+  const [appointments, setAppointments] = useState([]);
+
+  //@Todo: assign link to backend to update actions
+  // const updateData = () => {
+  //   axios
+  //     .post('URL to back', {
+  //       email: emailStatus,
+  //       phone: phoneStatus,
+  //     })
+  //     .then((response) => {
+  //       alert(response);
+  //     });
+  // };
+
+  // const getAppointments = () => {
+  //   axios.get('URL to back').then((response) => {
+  //     setAppointments(response);
+  //   });
+  // };
 
   const handleEditOn = () => {
     setEditState(editStyleOn);
