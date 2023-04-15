@@ -1,103 +1,103 @@
-$primary-color-blue-ribbon: #2762c1;
-$primary-color-scooter: rgba(63, 182, 214);
-$primary-background-blue: rgb(205 244 255 / 36%);
-$background-white: #f9f9f9;
-$primary-red: rgb(190 18 60);
-$neutral-white: #ffffff;
-$neutral-black: rgb(0, 0, 0);
-$button-info: rgb(63, 181, 214);
-$button-danger: rgb(220, 53, 69);
-$button-success: rgb(25, 135, 84);
-$button-warning: rgb(255, 193, 7);
-$icon-danger: rgb(220, 53, 69);
-$icon-warning: rgb(255, 193, 7);
-$icon-success: rgb(25, 135, 84);
-$icon-info: rgb(63, 181, 214);
-$icon-regular: #ffffff;
-$font-sans: 'Open Sans', sans-serif;
-$font-poppins: 'Poppins', sans-serif;
+// $primary-color-blue-ribbon: #2762c1;
+// $primary-color-scooter: rgba(63, 182, 214);
+// $primary-background-blue: rgb(205 244 255 / 36%);
+// $background-white: #f9f9f9;
+// $primary-red: rgb(190 18 60);
+// $neutral-white: #ffffff;
+// $neutral-black: rgb(0, 0, 0);
+// $button-info: rgb(63, 181, 214);
+// $button-danger: rgb(220, 53, 69);
+// $button-success: rgb(25, 135, 84);
+// $button-warning: rgb(255, 193, 7);
+// $icon-danger: rgb(220, 53, 69);
+// $icon-warning: rgb(255, 193, 7);
+// $icon-success: rgb(25, 135, 84);
+// $icon-info: rgb(63, 181, 214);
+// $icon-regular: #ffffff;
+// $font-sans: 'Open Sans', sans-serif;
+// $font-poppins: 'Poppins', sans-serif;
 
-$theme-colors: (
-  'primary': (
-    'base': #3fb6d6,
-    'dark': #238aa5,
-    'light': #69c6df,
-  ),
+// $theme-colors: (
+//   'primary': (
+//     'base': #3fb6d6,
+//     'dark': #238aa5,
+//     'light': #69c6df,
+//   ),
 
-  'accent': (
-    'base': #2762c1,
-    'dark': #1a4281,
-    'light': #578bdd,
-  ),
+//   'accent': (
+//     'base': #2762c1,
+//     'dark': #1a4281,
+//     'light': #578bdd,
+//   ),
 
-  'background': (
-    'base': #f9f9f9,
-    'dark': #000000,
-    'light': #cdf4ff,
-  ),
-);
+//   'background': (
+//     'base': #f9f9f9,
+//     'dark': #000000,
+//     'light': #cdf4ff,
+//   ),
+// );
 
-@function theme-color($key: 'primary', $variant: 'base') {
-  $map: map-get($theme-colors, $key);
-  @return map-get($map, $variant);
-}
+// @function theme-color($key: 'primary', $variant: 'base') {
+//   $map: map-get($theme-colors, $key);
+//   @return map-get($map, $variant);
+// }
 
-$background-colors: (
-  'primary': (
-    'base': #f9f9f9,
-    'dark': #d3d3d3,
-    'light': #ffffff,
-  ),
+// $background-colors: (
+//   'primary': (
+//     'base': #f9f9f9,
+//     'dark': #d3d3d3,
+//     'light': #ffffff,
+//   ),
 
-  'accent': (
-    'base': #cdf4ff,
-    'dark': #8faab2,
-    'light': #ebfaff,
-  ),
-);
+//   'accent': (
+//     'base': #cdf4ff,
+//     'dark': #8faab2,
+//     'light': #ebfaff,
+//   ),
+// );
 
-@function background-color($key: 'primary', $variant: 'base') {
-  $map: map-get($background-colors, $key);
-  @return map-get($map, $variant);
-}
+// @function background-color($key: 'primary', $variant: 'base') {
+//   $map: map-get($background-colors, $key);
+//   @return map-get($map, $variant);
+// }
 
-$typography-colors: (
-  'black': #000000,
-  'white': #ffffff,
-);
+// $typography-colors: (
+//   'black': #000000,
+//   'white': #ffffff,
+// );
 
-$alerts-colors: (
-  'regular': (
-    'base': #ffffff,
-    'dark': #2762c1,
-  ),
+// $alerts-colors: (
+//   'regular': (
+//     'base': #ffffff,
+//     'dark': #2762c1,
+//   ),
 
-  'info': (
-    'base': #3fb5d6,
-    'dark': #2797b7,
-    'light': #78cbe2,
-  ),
+//   'info': (
+//     'base': #3fb5d6,
+//     'dark': #2797b7,
+//     'light': #78cbe2,
+//   ),
 
-  'danger': (
-    'base': #dc3545,
-    'dark': #ba202f,
-    'light': #f3b8be,
-  ),
+//   'danger': (
+//     'base': #dc3545,
+//     'dark': #ba202f,
+//     'light': #f3b8be,
+//   ),
 
-  'success': (
-    'base': #198754,
-    'dark': #146c43,
-    'light': #1fa969,
-  ),
+//   'success': (
+//     'base': #198754,
+//     'dark': #146c43,
+//     'light': #1fa969,
+//   ),
 
-  'warning': (
-    'base': #ffc107,
-    'dark': #d29d00,
-    'light': #ffd148,
-  ),
-);
+//   'warning': (
+//     'base': #ffc107,
+//     'dark': #d29d00,
+//     'light': #ffd148,
+//   ),
+// );
 
-@function alert-color($key: 'regular', $variant: 'base') {
-  $map: map-get($alerts-colors, $key);
-  @return map-get($map, $variant);
-}
+// @function alert-color($key: 'regular', $variant: 'base') {
+//   $map: map-get($alerts-colors, $key);
+//   @return map-get($map, $variant);
+// }

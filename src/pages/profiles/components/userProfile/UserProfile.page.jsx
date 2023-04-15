@@ -74,7 +74,7 @@ export const UserProfile = ({
     <section className="userProfile__background">
       <article className="userProfile__card">
         <div className="edit__container">
-          <BiEdit size={20} className="icons" onClick={handleEditOn} />
+          <BiEdit size={20} className="icons edit__icon" onClick={handleEditOn} />
         </div>
         <picture className="userProfile__image-container">
           <img src={avatar} className="avatar__image" />
@@ -98,7 +98,7 @@ export const UserProfile = ({
               pattern={emailValidation}
             />
           </div>
-          <div className={`email__container second__info ${prevData}`}>
+          <div className={`email__container second__info`} id={prevData}>
             <AiOutlineMail size={18} className="icons" /> <p>{emailStatus}</p>
           </div>
           <div className={editState}>
@@ -111,7 +111,7 @@ export const UserProfile = ({
               pattern={phoneValidation}
             />
           </div>
-          <div className={`phone__container second__info ${prevData}`}>
+          <div className={`phone__container second__info`} id={prevData}>
             <BsTelephoneOutbound size={18} className="icons" />
             <p>{phoneStatus}</p>
           </div>

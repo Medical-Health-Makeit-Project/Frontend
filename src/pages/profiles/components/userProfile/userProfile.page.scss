@@ -43,10 +43,6 @@
   }
 }
 
-.dataOn {
-  display: flex;
-}
-
 .profile__main-info {
   text-align: center;
   margin-bottom: 1rem;
@@ -72,14 +68,15 @@
   flex-direction: column;
   gap: 15px;
 
-  .second__info {
+  .second__info,
+  .dataOn {
     width: 100%;
     padding-bottom: 5px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     gap: 10px;
-    border-bottom: solid 1px theme-color('accent', 'light');
+    border-bottom: 1px solid theme-color('accent', 'light');
     p {
       @include paragraph($size-sm);
       font-weight: 400;
@@ -87,13 +84,13 @@
   }
 }
 
-.dataOff {
-  display: none;
-}
-
 .icons {
   color: theme-color('accent', 'base');
 }
+.edit__icon {
+  cursor: pointer;
+}
+
 .editOn {
   display: block;
 }
@@ -111,4 +108,11 @@
 
 .save__button {
   margin-top: 20px;
+}
+
+#dataOff {
+  display: none;
+}
+#dataOn {
+  display: flex;
 }

@@ -74,7 +74,7 @@ export const DoctorProfile = ({
         <section className="doctor__card">
           <article className="primary__info-container">
             <div className="edit__container-doctor">
-              <BiEdit size={20} className="icons" onClick={handleEditOn} />
+              <BiEdit size={20} className="icons edit__icon" onClick={handleEditOn} />
             </div>
             <div className="avatar__main-container ">
               <picture className="profile__img-container">

@@ -22,7 +22,8 @@
   margin: 3rem 0;
 
   p {
-    @include paragraph;
+    @include title;
+    margin-bottom: 1.5rem;
   }
 
   h3 {
@@ -53,6 +54,7 @@
   .scroll__card-title {
     margin: 10px 0;
     @include paragraph($size: $size-md);
+    font-weight: 600;
   }
   .scroll__card-description {
     @include paragraph($size: $size-md);
@@ -80,5 +82,5 @@
   }
 }
 .more__container:hover {
-  border-bottom: solid 1px theme-color('background', 'lighter');
+  border-bottom: 1px solid theme-color('primary', 'light');
 }
