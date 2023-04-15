@@ -4,7 +4,7 @@
 @import '@sass/abstract/mixins.abstract.scss';
 
 .doctor__profile-main {
-  background-color: #69c6df3d;
+  background-color: theme-color('background', 'lighter');
   display: grid;
   place-items: center;
   padding: 50px 0;
@@ -12,7 +12,7 @@
 
 .doctor__card {
   width: 280px;
-  background-color: ghostwhite;
+  background-color: theme-color('background', 'base');
   border-radius: 10px;
   padding: 20px;
   display: flex;
@@ -46,7 +46,7 @@
     height: 100px;
     object-fit: cover;
     border-radius: 50%;
-    border: 2px solid #2762c182;
+    border: 2px solid theme-color('accent', 'base');
   }
 }
 
@@ -71,7 +71,7 @@
   .area {
     @include paragraph($size-xs);
     font-weight: 400;
-    color: #3fb6d6;
+    color: map-get($map: $typography-colors, $key: 'blue');
     margin-bottom: 10px;
   }
   .location__info {
