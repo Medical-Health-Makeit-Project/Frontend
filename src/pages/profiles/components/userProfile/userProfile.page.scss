@@ -21,6 +21,11 @@
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
+.edit__container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
 .userProfile__image-container {
   width: 100%;
   display: flex;
@@ -63,14 +68,15 @@
   flex-direction: column;
   gap: 15px;
 
-  .second__info {
+  .second__info,
+  .dataOn {
     width: 100%;
     padding-bottom: 5px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     gap: 10px;
-    border-bottom: solid 1px theme-color('accent', 'light');
+    border-bottom: 1px solid theme-color('accent', 'light');
     p {
       @include paragraph($size-sm);
       font-weight: 400;
@@ -80,4 +86,33 @@
 
 .icons {
   color: theme-color('accent', 'base');
+}
+.edit__icon {
+  cursor: pointer;
+}
+
+.editOn {
+  display: block;
+}
+.editOff {
+  display: none;
+}
+.edit__input {
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #2762c182;
+  padding-left: 5px;
+  &::placeholder {
+    color: #000000;
+  }
+}
+
+.save__button {
+  margin-top: 20px;
+}
+
+#dataOff {
+  display: none;
+}
+#dataOn {
+  display: flex;
 }

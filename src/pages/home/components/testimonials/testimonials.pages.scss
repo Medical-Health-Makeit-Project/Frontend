@@ -17,7 +17,7 @@
     margin-bottom: 2rem;
 
     p {
-      @include paragraph($color: map-get($typography-colors, 'blue'));
+      @include title;
       margin-bottom: 40px;
     }
     h3 {

@@ -95,6 +95,10 @@
   }
 }
 
+.dataOn {
+  display: flex;
+}
+
 .second__info-container {
   width: 100%;
   padding: 12px;
@@ -133,4 +137,34 @@
     @include paragraph($size-md);
     font-weight: 300;
   }
+}
+
+.edit__container-doctor {
+  display: flex;
+  @media (min-width: 758px) {
+    justify-content: flex-start;
+  }
+}
+.dataOff {
+  display: none;
+}
+
+.editOn {
+  display: block;
+}
+.editOff {
+  display: none;
+}
+.edit__input {
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #2762c182;
+  padding-left: 5px;
+
+  &::placeholder {
+    color: #000000;
+  }
+}
+
+.save__button {
+  margin-top: 20px;
 }
