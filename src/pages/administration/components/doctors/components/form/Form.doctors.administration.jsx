@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import useSWR from 'swr';
-import { useForm } from 'react-hook-form';
+import DatePicker from 'react-datepicker';
+import { useForm, Controller } from 'react-hook-form';
 import { IoIosClose } from 'react-icons/io';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Loading } from '@components/loading';
@@ -18,6 +19,7 @@ export const Form = () => {
   const [newDoctor, setNewDoctor] = useState({
     firstname: '',
     lastname: '',
+    birthdate: Date.now(),
     area: '',
     avatar: '',
     email: '',
@@ -28,7 +30,6 @@ export const Form = () => {
     memberships: [],
     skills: [],
     password: Date.now(),
-    role: 1993,
   });
   const [showError, setShowError] = useState(false);
   const [avatarSelected, setAvatarSelected] = useState();
@@ -100,21 +101,25 @@ export const Form = () => {
   };
 
   const submitForm = (data) => {
-    if (
-      !newDoctor.qualifications.length ||
-      !newDoctor.memberships.length ||
-      !newDoctor.skills.length
-    )
-      return setShowError(true);
+    if (!newDoctor.qualifications.length || !newDoctor.skills.length) return setShowError(true);
+    const prefix = 'Dr';
     const formattingForm = {
       ...data,
+      prefix,
       headquarter: {
         city: data.city,
         country: data.country,
       },
+      birthdate: newDoctor.birthdate,
       password: Date.now(),
+      qualifications: [...newDoctor.qualifications],
+      skills: [...newDoctor.skills],
+      memberships: [...newDoctor.memberships],
     };
+
     const { city, country, ...finalForm } = formattingForm;
+    // TO-DO: Final form to be send at backend
+    console.log('form', finalForm);
   };
 
   if (isLoading) return <Loading />;
@@ -155,6 +160,23 @@ export const Form = () => {
               className="form-doctors__input-text"
             />
             <p className="form-doctors__error-message">{errors.lastname?.message}</p>
+          </div>
+        </div>
+        <div className="form-doctors__select-container">
+          <label htmlFor="birthdate" className="form-doctors__label">
+            Birthdate:
+          </label>
+          <div className="select-container-date">
+            <DatePicker
+              id="birthdate"
+              name="birthdate"
+              selected={newDoctor.birthdate}
+              dateFormat="dd/MM/yyyy"
+              className="input-container__date"
+              onChange={(date) => setNewDoctor({ ...newDoctor, birthdate: date })}
+              required
+            />
+            <p className="form-doctors__error-message">{errors.birthdate?.message}</p>
           </div>
         </div>
         <div className="form-doctors__select-container">
