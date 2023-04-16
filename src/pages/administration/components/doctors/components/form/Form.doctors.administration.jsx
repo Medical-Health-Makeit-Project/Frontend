@@ -113,7 +113,6 @@ export const Form = () => {
         country: data.country,
       },
       password: Date.now(),
-      role: 1993,
     };
     const { city, country, ...finalForm } = formattingForm;
   };

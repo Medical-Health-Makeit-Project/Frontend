@@ -26,5 +26,4 @@ export const createDoctorSchema = yup.object().shape({
   memberships: yup.string(),
   skills: yup.string().required('You must to provide at least one skill'),
   password: yup.date(),
-  role: yup.number(),
 });
