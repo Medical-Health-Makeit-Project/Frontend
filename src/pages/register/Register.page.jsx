@@ -35,7 +35,7 @@ export const Register = () => {
       const month = stringBirthday.getMonth();
       const day = stringBirthday.getUTCDate();
 
-      const birthdayToString = `${month + 1}/${day}/ ${year}`;
+      const birthdayToString = `${day}/${month + 1}/${year}`;
       setUserData({ ...userData, birthday: birthdayToString });
     }
   }, [stringBirthday]);
@@ -158,7 +158,7 @@ export const Register = () => {
           <div className="birthday__container input__container">
             <label htmlFor="bithday">Enter your birthday:</label>
             <DatePicker
-              id="bithDate"
+              id="birthDate"
               selected={stringBirthday ? stringBirthday : new Date()}
               dateFormat="dd/MM/yyyy"
               peekNextMonth
@@ -247,7 +247,6 @@ export const Register = () => {
               onChange={(event) => handleChange(event)}
             />
           </div>
-
           <Button
             variant="solid"
             color="info"
@@ -260,7 +259,6 @@ export const Register = () => {
               <BsArrowRight size={18} />
             </span>
           </Button>
-
           <div className="toLogin__container">
             <p>Already have an account?</p>
             <div className="toLogin__link">
