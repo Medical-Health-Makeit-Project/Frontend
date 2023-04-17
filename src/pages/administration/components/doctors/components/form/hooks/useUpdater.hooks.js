@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
 export const useUpdater = (newDoctor, setNewDoctor) => {
-  const [qualification, setQualification] = useState('');
-  const [membership, setMembership] = useState('');
-  const [skill, setSkill] = useState('');
+  const [qualification, setQualification] = useState([]);
+  const [membership, setMembership] = useState([]);
+  const [skill, setSkill] = useState([]);
 
   const handleQualification = (e) => {
     setQualification(e.target.value);
