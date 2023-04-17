@@ -48,16 +48,9 @@ export const Register = () => {
   //  //to-do: backend link
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log(userData);
     if (userData.password === userData.repeatPassword) {
       if (userData.termsAndConditions) {
-        // axios
-        //   .post('URL to back', {
-        //     data,
-        //   })
-        //   .then((response) => alert(response));
-
-        console.log(userData);
-
         const data = new FormData();
         const dataKeys = Object.keys(userData);
         const dataValues = Object.values(userData);
@@ -65,9 +58,21 @@ export const Register = () => {
         for (let i = 0; i < dataKeys.length; i++) {
           data.append(dataKeys[i], `${dataValues[i]}`);
         }
+        data.delete('repeatPassword');
+        data.delete('termsAndConditions');
+
         for (const val of data.values()) {
           console.log(val);
         }
+
+        axios
+          .post('URL to back', {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+            body: data,
+          })
+          .then((response) => alert(response));
       } else {
         alert('You must agree to terms and conditions');
       }
@@ -199,6 +204,7 @@ export const Register = () => {
               className="email__input input-box"
               onChange={(event) => handleChange(event)}
             >
+              <option value="">Select...</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
               <option value="non-binary">Non binary</option>
