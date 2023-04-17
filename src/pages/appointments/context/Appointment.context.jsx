@@ -41,6 +41,7 @@ export const AppointmentContext = ({ children }) => {
     consultationReasons: '',
     appointmentPrice: null,
   });
+  console.log(appointmentForm);
 
   const { data: doctorsByArea, error: isErrorDoctorsByArea } = useSWR(
     DOCTORS_BY_AREA,

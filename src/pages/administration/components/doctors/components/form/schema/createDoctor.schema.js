@@ -4,6 +4,7 @@ import { IMAGE_MAX_SIZE } from '@constants';
 export const createDoctorSchema = yup.object().shape({
   firstname: yup.string().required('You must to provide a firstname'),
   lastname: yup.string().required('You must to provide a lastname'),
+  email: yup.string().email().required('You must provide an email'),
   birthdate: yup.date(),
   area: yup.string().required('You must to provide an area'),
   avatar: yup
@@ -30,5 +31,5 @@ export const createDoctorSchema = yup.object().shape({
   qualifications: yup.string().required('You must to provide at least one qualification'),
   memberships: yup.string(),
   skills: yup.string().required('You must to provide at least one skill'),
-  password: yup.date(),
+  password: yup.string(),
 });
