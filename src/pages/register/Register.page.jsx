@@ -22,7 +22,7 @@ export const Register = () => {
     phone: '',
     gender: '',
     birthday: '',
-    coutry: '',
+    country: '',
     password: '',
     repeatPassword: '',
     termsAndConditions: false,
@@ -55,7 +55,19 @@ export const Register = () => {
         //     data,
         //   })
         //   .then((response) => alert(response));
+
         console.log(userData);
+
+        const data = new FormData();
+        const dataKeys = Object.keys(userData);
+        const dataValues = Object.values(userData);
+
+        for (let i = 0; i < dataKeys.length; i++) {
+          data.append(dataKeys[i], `${dataValues[i]}`);
+        }
+        for (const val of data.values()) {
+          console.log(val);
+        }
       } else {
         alert('You must agree to terms and conditions');
       }
@@ -70,6 +82,8 @@ export const Register = () => {
     username,
     email,
     phone,
+    gender,
+    country,
     password,
     repeatPassword,
     termsAndConditions,
@@ -159,6 +173,7 @@ export const Register = () => {
             <label htmlFor="bithday">Enter your birthday:</label>
             <DatePicker
               id="birthDate"
+              name="birthDate"
               selected={stringBirthday ? stringBirthday : new Date()}
               dateFormat="dd/MM/yyyy"
               peekNextMonth
@@ -166,9 +181,8 @@ export const Register = () => {
               showYearDropdown
               dropdownMode="select"
               strictParsing
-              name="birthDate"
               onChange={(date) => {
-                setStringBirthday(date);
+                setUserData({ ...userData, birthday: date });
               }}
               required
               className="input-box"
