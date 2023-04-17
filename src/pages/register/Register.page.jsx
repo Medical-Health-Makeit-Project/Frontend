@@ -1,38 +1,61 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import DatePicker from 'react-datepicker';
 import { BsArrowRight } from 'react-icons/bs';
+import axios from 'axios';
 import { SelectCountry } from './components/SelectCountry.register';
 import { SelectBlood } from './components/SelectBlood.register';
 import { Heading } from '@components/heading';
 import { Button } from '@components/buttons/Button.components';
 import { _Modal } from '@components/modal';
 import { TermsAndCoditions } from '@components/termsAndConditions';
+import { phoneValidation, emailValidation } from '@constants/';
 import headingImage from '@assets/heading-login.png';
 import './register.page.scss';
 
 export const Register = () => {
-  const [data, setData] = useState({
+  const [userData, setUserData] = useState({
     firstName: '',
     lastName: '',
     username: '',
     email: '',
+    phone: '',
     gender: '',
+    birthday: '',
     coutry: '',
     password: '',
     repeatPassword: '',
     termsAndConditions: false,
   });
 
+  const [stringBirthday, setStringBirthday] = useState('');
+  useEffect(() => {
+    if (stringBirthday) {
+      const year = stringBirthday.getUTCFullYear();
+      const month = stringBirthday.getMonth();
+      const day = stringBirthday.getUTCDate();
+
+      const birthdayToString = `${day}/${month + 1}/${year}`;
+      setUserData({ ...userData, birthday: birthdayToString });
+    }
+  }, [stringBirthday]);
+
   const handleChange = (event) => {
     const { name, type, value, checked } = event.target;
-    setData({ ...data, [name]: type === 'checkbox' ? checked : value });
+    setUserData({ ...userData, [name]: type === 'checkbox' ? checked : value });
   };
+
+  //  //to-do: backend link
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (data.password === data.repeatPassword) {
-      if (data.termsAndConditions) {
-        //to-do: backend POST
-        console.log(data);
+    if (userData.password === userData.repeatPassword) {
+      if (userData.termsAndConditions) {
+        // axios
+        //   .post('URL to back', {
+        //     data,
+        //   })
+        //   .then((response) => alert(response));
+        console.log(userData);
       } else {
         alert('You must agree to terms and conditions');
       }
@@ -41,8 +64,16 @@ export const Register = () => {
     }
   };
 
-  const { firstName, lastName, username, email, password, repeatPassword, termsAndConditions } =
-    data;
+  const {
+    firstName,
+    lastName,
+    username,
+    email,
+    phone,
+    password,
+    repeatPassword,
+    termsAndConditions,
+  } = userData;
 
   return (
     <section className="register__container">
@@ -99,12 +130,48 @@ export const Register = () => {
             <input
               id="email"
               name="email"
-              placeholder="Enter your mail"
+              placeholder="Enter your email"
               type="text"
               required
               className="email__input input-box"
               value={email}
+              pattern={emailValidation}
               onChange={(event) => handleChange(event)}
+            />
+          </div>
+
+          <div className="phone__container input__container">
+            <label htmlFor="phone">Phone number</label>
+            <input
+              id="phone"
+              name="phone"
+              placeholder="Enter your phone number"
+              type="number"
+              required
+              className="phone__input input-box"
+              value={phone}
+              pattern={phoneValidation}
+              onChange={(event) => handleChange(event)}
+            />
+          </div>
+
+          <div className="birthday__container input__container">
+            <label htmlFor="bithday">Enter your birthday:</label>
+            <DatePicker
+              id="birthDate"
+              selected={stringBirthday ? stringBirthday : new Date()}
+              dateFormat="dd/MM/yyyy"
+              peekNextMonth
+              showMonthDropdown
+              showYearDropdown
+              dropdownMode="select"
+              strictParsing
+              name="birthDate"
+              onChange={(date) => {
+                setStringBirthday(date);
+              }}
+              required
+              className="input-box"
             />
           </div>
 
@@ -180,14 +247,18 @@ export const Register = () => {
               onChange={(event) => handleChange(event)}
             />
           </div>
-
-          <Button variant="solid" color="info" className="register__buton" type="submit">
+          <Button
+            variant="solid"
+            color="info"
+            className="register__buton"
+            type="submit"
+            onSubmit={handleSubmit}
+          >
             Register now
             <span className="arrow-button">
               <BsArrowRight size={18} />
             </span>
           </Button>
-
           <div className="toLogin__container">
             <p>Already have an account?</p>
             <div className="toLogin__link">
