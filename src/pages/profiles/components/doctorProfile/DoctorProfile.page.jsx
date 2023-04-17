@@ -163,12 +163,11 @@ export const DoctorProfile = ({
             </Button>
           </article>
           <article className="appointments__section-doctor">
-            <AppontmetsListDoctor />
-            {/* {appointments.length > 0 ? (
+            {appointments.length > 0 ? (
               <AppontmetsListDoctor appointments={appointments} />
             ) : (
               <NoAppointmentsDoctor />
-            )} */}
+            )}
           </article>
         </section>
       </main>
