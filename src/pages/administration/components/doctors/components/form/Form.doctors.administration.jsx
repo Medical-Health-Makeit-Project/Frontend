@@ -121,8 +121,13 @@ export const Form = () => {
     };
 
     const { city, country, ...finalForm } = formattingForm;
-    // TO-DO: Final form to be send at backend
-    console.log('form', finalForm);
+    const form = new FormData();
+    for (const key in finalForm) {
+      form.append(key, finalForm[key]);
+    }
+
+    //TO-DO: add an axios call with POST method to the correspondent URL provided by the backend
+    // ...
   };
 
   if (isLoading) return <Loading />;
