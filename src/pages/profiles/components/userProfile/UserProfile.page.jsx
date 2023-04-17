@@ -3,6 +3,8 @@ import { AiOutlineMail } from 'react-icons/ai';
 import { BsTelephoneOutbound, BsGenderAmbiguous, BsCalendarCheck } from 'react-icons/bs';
 import { MdBloodtype } from 'react-icons/md';
 import { BiMap, BiEdit } from 'react-icons/bi';
+import { AppontmetsList } from './components/Appointments.userProfile';
+import { NoAppointments } from './components/NoAppointments.userProfile';
 import { Button } from '@components/buttons';
 import { phoneValidation, emailValidation } from '@constants/';
 
@@ -73,73 +75,83 @@ export const UserProfile = ({
   return (
     <section className="userProfile__background">
       <article className="userProfile__card">
-        <div className="edit__container">
-          <BiEdit size={20} className="icons edit__icon" onClick={handleEditOn} />
+        <div>
+          <div className="edit__container">
+            <BiEdit size={20} className="icons edit__icon" onClick={handleEditOn} />
+          </div>
+          <picture className="userProfile__image-container">
+            <img src={avatar} className="avatar__image" />
+          </picture>
+          <div className="profile__main-info">
+            <p>{name}</p>
+            <div className="nationality__container">
+              <BiMap size={18} className="icons" />
+              <p>{nationality}</p>
+            </div>
+          </div>
+
+          <div className="profile__info-container">
+            <div className={editState}>
+              <input
+                type="text"
+                className="edit__input"
+                placeholder={emailStatus}
+                required
+                onChange={handleEmailChange}
+                pattern={emailValidation}
+              />
+            </div>
+            <div className={`email__container second__info`} id={prevData}>
+              <AiOutlineMail size={18} className="icons" /> <p>{emailStatus}</p>
+            </div>
+            <div className={editState}>
+              <input
+                type="text"
+                className="edit__input"
+                placeholder={phoneStatus}
+                required
+                onChange={handlePhoneChange}
+                pattern={phoneValidation}
+              />
+            </div>
+            <div className={`phone__container second__info`} id={prevData}>
+              <BsTelephoneOutbound size={18} className="icons" />
+              <p>{phoneStatus}</p>
+            </div>
+
+            <div className="gender__container second__info">
+              <BsGenderAmbiguous size={18} className="icons" />
+              <p>{gender}</p>
+            </div>
+
+            <div className="birthday__container second__info">
+              <BsCalendarCheck size={18} className="icons" />
+              <p>{birthday}</p>
+            </div>
+
+            <div className="blood__container second__info">
+              <MdBloodtype size={18} className="icons" />
+              <p>{blood}</p>
+            </div>
+          </div>
+
+          <Button
+            variant="solid"
+            color="info"
+            className={`${editState} save__button`}
+            onClick={handleEditOff}
+          >
+            Save changes
+          </Button>
         </div>
-        <picture className="userProfile__image-container">
-          <img src={avatar} className="avatar__image" />
-        </picture>
-        <div className="profile__main-info">
-          <p>{name}</p>
-          <div className="nationality__container">
-            <BiMap size={18} className="icons" />
-            <p>{nationality}</p>
-          </div>
+
+        <div className="appointments__section">
+          {appointments.length > 0 ? (
+            <AppontmetsList appointments={appointments} />
+          ) : (
+            <NoAppointments />
+          )}
         </div>
-
-        <div className="profile__info-container">
-          <div className={editState}>
-            <input
-              type="text"
-              className="edit__input"
-              placeholder={emailStatus}
-              required
-              onChange={handleEmailChange}
-              pattern={emailValidation}
-            />
-          </div>
-          <div className={`email__container second__info`} id={prevData}>
-            <AiOutlineMail size={18} className="icons" /> <p>{emailStatus}</p>
-          </div>
-          <div className={editState}>
-            <input
-              type="text"
-              className="edit__input"
-              placeholder={phoneStatus}
-              required
-              onChange={handlePhoneChange}
-              pattern={phoneValidation}
-            />
-          </div>
-          <div className={`phone__container second__info`} id={prevData}>
-            <BsTelephoneOutbound size={18} className="icons" />
-            <p>{phoneStatus}</p>
-          </div>
-
-          <div className="gender__container second__info">
-            <BsGenderAmbiguous size={18} className="icons" />
-            <p>{gender}</p>
-          </div>
-
-          <div className="birthday__container second__info">
-            <BsCalendarCheck size={18} className="icons" />
-            <p>{birthday}</p>
-          </div>
-
-          <div className="blood__container second__info">
-            <MdBloodtype size={18} className="icons" />
-            <p>{blood}</p>
-          </div>
-        </div>
-
-        <Button
-          variant="solid"
-          color="info"
-          className={`${editState} save__button`}
-          onClick={handleEditOff}
-        >
-          Save changes
-        </Button>
       </article>
     </section>
   );

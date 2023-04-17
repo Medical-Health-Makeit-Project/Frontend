@@ -12,6 +12,7 @@
 
 .userProfile__card {
   width: 280px;
+  height: 100%;
   background-color: theme-color('background', 'base');
   border-radius: 10px;
   padding: 20px;
@@ -19,6 +20,11 @@
   flex-direction: column;
   align-items: center;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    width: 700px;
+  }
 }
 
 .edit__container {
@@ -115,4 +121,47 @@
 }
 #dataOn {
   display: flex;
+}
+
+.appointments__section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+  padding: 10px;
+  border-top: 1px dotted theme-color('accent', 'base');
+  text-align: center;
+  p {
+    @include paragraph;
+  }
+
+  @media (min-width: 768px) {
+    height: 100%;
+    margin-top: 0;
+    margin-left: 20px;
+    padding-left: 10px;
+    border-left: 1px dotted theme-color('accent', 'base');
+    border-top: none;
+    align-self: flex-start;
+  }
+}
+
+.appointments-none {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+.accordion__container {
+  width: 180px;
+
+  @media (min-width: 768px) {
+    width: 300px;
+  }
+}
+
+.accordion__description {
+  text-align: left;
 }

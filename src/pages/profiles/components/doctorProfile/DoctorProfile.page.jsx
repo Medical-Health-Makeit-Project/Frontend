@@ -3,6 +3,8 @@ import { BiMap, BiEdit } from 'react-icons/bi';
 import { BsTelephoneOutbound, BsGenderAmbiguous, BsCheckLg } from 'react-icons/bs';
 import { AiOutlineMail } from 'react-icons/ai';
 import { Button } from '@components/buttons';
+import { AppontmetsListDoctor } from './components/AppontmetsListDoctor.doctorProfile';
+import { NoAppointmentsDoctor } from './components/NoAppointmentsDoctor.doctorProfile';
 import { phoneValidation, emailValidation } from '@constants/';
 
 import './doctorProfile.page.scss';
@@ -151,15 +153,23 @@ export const DoctorProfile = ({
                 <p>{phoneStatus}</p>
               </div>
             </div>
+            <Button
+              variant="solid"
+              color="info"
+              className={`${editState} save__button`}
+              onClick={handleEditOff}
+            >
+              Save changes
+            </Button>
           </article>
-          <Button
-            variant="solid"
-            color="info"
-            className={`${editState} save__button`}
-            onClick={handleEditOff}
-          >
-            Save changes
-          </Button>
+          <article className="appointments__section-doctor">
+            <AppontmetsListDoctor />
+            {/* {appointments.length > 0 ? (
+              <AppontmetsListDoctor appointments={appointments} />
+            ) : (
+              <NoAppointmentsDoctor />
+            )} */}
+          </article>
         </section>
       </main>
     </>

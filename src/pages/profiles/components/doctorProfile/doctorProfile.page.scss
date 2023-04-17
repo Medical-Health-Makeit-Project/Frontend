@@ -18,18 +18,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
   @media (min-width: 768px) {
     width: 80%;
+    height: 600px;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-items: flex-start;
   }
 }
 
 .primary__info-container {
   @media (min-width: 768) {
-    width: 50%;
+    width: 33%;
   }
 }
 
@@ -101,9 +104,11 @@
 
 .second__info-container {
   width: 100%;
+  justify-self: center;
+  margin: 0 20px;
   padding: 12px;
   @media (min-width: 768px) {
-    width: 50%;
+    width: 33%;
   }
 }
 
@@ -167,4 +172,31 @@
 
 .save__button {
   margin-top: 20px;
+}
+
+.appointments__section-doctor {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dotted theme-color('accent', 'base');
+  p {
+    @include paragraph;
+  }
+
+  @media (min-width: 768px) {
+    width: 33%;
+    height: 90%;
+    margin-left: 20px;
+    padding-left: 10px;
+    padding-top: 0;
+    border-top: none;
+    border-left: 1px dotted theme-color('accent', 'base');
+  }
+}
+
+.accordion__container-doctor {
+  width: 180px;
 }
