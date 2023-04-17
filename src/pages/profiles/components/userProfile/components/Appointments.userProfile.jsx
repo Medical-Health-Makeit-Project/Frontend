@@ -7,7 +7,7 @@ import {
   Box,
 } from '@chakra-ui/react';
 
-export const AppontmetsList = () => {
+export const AppointmetsList = () => {
   return (
     <div className="appointments-exist">
       <Accordion allowToggle className="accordion__container">

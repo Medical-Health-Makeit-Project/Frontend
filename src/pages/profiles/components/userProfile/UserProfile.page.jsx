@@ -3,7 +3,7 @@ import { AiOutlineMail } from 'react-icons/ai';
 import { BsTelephoneOutbound, BsGenderAmbiguous, BsCalendarCheck } from 'react-icons/bs';
 import { MdBloodtype } from 'react-icons/md';
 import { BiMap, BiEdit } from 'react-icons/bi';
-import { AppontmetsList } from './components/Appointments.userProfile';
+import { AppointmetsList } from './components/Appointments.userProfile';
 import { NoAppointments } from './components/NoAppointments.userProfile';
 import { Button } from '@components/buttons';
 import { phoneValidation, emailValidation } from '@constants/';
@@ -38,6 +38,7 @@ export const UserProfile = ({
   // const updateData = () => {
   //   axios
   //     .post('URL to back', {
+  //        Armar formData y append de estados que cambiaron. Enviar jwt en localstorage en un headerAuthori
   //       email: emailStatus,
   //       phone: phoneStatus,
   //     })
@@ -146,8 +147,8 @@ export const UserProfile = ({
         </div>
 
         <div className="appointments__section">
-          {appointments.length > 0 ? (
-            <AppontmetsList appointments={appointments} />
+          {appointments.length ? (
+            <AppointmetsList appointments={appointments} />
           ) : (
             <NoAppointments />
           )}

@@ -163,7 +163,7 @@ export const DoctorProfile = ({
             </Button>
           </article>
           <article className="appointments__section-doctor">
-            {appointments.length > 0 ? (
+            {appointments.length ? (
               <AppontmetsListDoctor appointments={appointments} />
             ) : (
               <NoAppointmentsDoctor />
