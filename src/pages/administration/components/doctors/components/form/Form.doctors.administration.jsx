@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import useSWR from 'swr';
 import DatePicker from 'react-datepicker';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { IoIosClose } from 'react-icons/io';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Loading } from '@components/loading';
@@ -11,7 +11,7 @@ import { locationsSWR } from '@services/locations';
 import { useUpdater } from './hooks/useUpdater.hooks';
 import { useIsLoading } from '@hooks';
 import { createDoctorSchema } from './schema';
-import { DOCTORS_AREA } from '@constants';
+import { DOCTORS_AREA, DOCTOR_EMAIL_DOMAIN, DOCTOR_PREFIX } from '@constants';
 import emptyAvatar from '@assets/empty-avatar.png';
 import './form.doctors.administration.scss';
 
@@ -19,12 +19,12 @@ export const Form = () => {
   const [newDoctor, setNewDoctor] = useState({
     firstname: '',
     lastname: '',
+    email: '',
     birthdate: Date.now(),
     area: '',
     avatar: '',
-    email: '',
     phone: '',
-    headquarter: { city: '', country: '' },
+    location: { city: '', country: '' },
     gender: '',
     qualifications: [],
     memberships: [],
@@ -34,9 +34,8 @@ export const Form = () => {
   const [showError, setShowError] = useState(false);
   const [avatarSelected, setAvatarSelected] = useState();
   const [city, setCity] = useState([]);
-  const [countrySelected, setCountrySelected] = useState(
-    newDoctor.headquarter.country || 'Colombia'
-  );
+  const [countrySelected, setCountrySelected] = useState(newDoctor.location.country || 'Colombia');
+  const [emailError, setEmailError] = useState(false);
   const { locations } = locationsSWR();
   const { data: doctorArea } = useSWR(DOCTORS_AREA, doctorAreas, {
     revalidateOnFocus: false,
@@ -77,7 +76,7 @@ export const Form = () => {
     if (name === 'country') setCountrySelected(e.currentTarget.value);
     setNewDoctor({
       ...newDoctor,
-      headquarter: { ...newDoctor.headquarter, [name]: value },
+      location: { ...newDoctor.location, [name]: value },
     });
   };
 
@@ -102,11 +101,15 @@ export const Form = () => {
 
   const submitForm = (data) => {
     if (!newDoctor.qualifications.length || !newDoctor.skills.length) return setShowError(true);
-    const prefix = 'Dr';
+    if (!newDoctor.email.endsWith(DOCTOR_EMAIL_DOMAIN)) {
+      return setEmailError(true);
+    }
+    setEmailError(false);
+
     const formattingForm = {
       ...data,
-      prefix,
-      headquarter: {
+      prefix: DOCTOR_PREFIX,
+      location: {
         city: data.city,
         country: data.country,
       },
@@ -118,8 +121,13 @@ export const Form = () => {
     };
 
     const { city, country, ...finalForm } = formattingForm;
-    // TO-DO: Final form to be send at backend
-    console.log('form', finalForm);
+    const form = new FormData();
+    for (const key in finalForm) {
+      form.append(key, finalForm[key]);
+    }
+
+    //TO-DO: add an axios call with POST method to the correspondent URL provided by the backend sending the form variable in 124 line
+    // ...
   };
 
   if (isLoading) return <Loading />;
@@ -238,13 +246,15 @@ export const Form = () => {
           <div>
             <input
               type="email"
-              name="email"
-              {...register('email', { required: 'Required' })}
+              {...register('email', { required: 'required' })}
               id="email"
+              name="email"
               onChange={handleChangeForm}
               className="form-doctors__input-text"
             />
-            <p className="form-doctors__error-message">{errors.email?.message}</p>
+            <p className="form-doctors__error-message">
+              {errors.email?.message || emailError ? 'You must use only @drmebid.com' : null}
+            </p>
           </div>
         </div>
         <div className="form-doctors__input-container">
@@ -275,7 +285,7 @@ export const Form = () => {
                 id="country"
                 {...register('country')}
                 onChange={handleSelectHeadquarters}
-                value={newDoctor.headquarter.country}
+                value={newDoctor.location.country}
                 className="form-doctors__input-select"
               >
                 <option value="" disabled defaultValue>
@@ -301,7 +311,7 @@ export const Form = () => {
                 {...register('city')}
                 id="city"
                 onChange={handleSelectHeadquarters}
-                value={newDoctor.headquarter.city}
+                value={newDoctor.location.city}
                 className="form-doctors__input-select"
               >
                 <option value="" disabled defaultValue>
