@@ -10,15 +10,24 @@
 .form-doctors {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 20px;
+
+  @media screen and (min-width: 800px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 40px 20px;
+  }
 
   .form-doctors__input-container,
   .form-doctors__select-container {
-    max-width: 300px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 10px;
   }
+
   .form-doctors__input-container-radios {
     display: flex;
     gap: 0.5rem;
@@ -36,10 +45,6 @@
     width: 100%;
     border: 1px solid rgba(0, 0, 0, 0.291);
     padding: 0.4rem;
-  }
-
-  .form-doctor-selects-container {
-    max-width: 300px;
   }
 
   .form-doctors__input-select {
@@ -63,10 +68,18 @@
 
   .form-doctors-headquarter,
   .form-doctors-gender {
-    max-width: 300px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 1rem;
+  }
+
+  .form-doctors-select-container {
+    @media screen and (min-width: 500px) {
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+    }
   }
 
   .form-doctors__input-with-button {
@@ -115,5 +128,10 @@
   .form-doctors__error-message {
     @include paragraph($size: $size-xxs);
     color: alert-color($key: 'danger', $variant: 'base');
+  }
+
+  .select-container-date {
+    border: 1px solid rgba(0, 0, 0, 0.291);
+    padding: 0.4rem;
   }
 }

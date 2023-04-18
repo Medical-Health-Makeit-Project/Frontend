@@ -12,6 +12,7 @@ import { useUpdater } from './hooks/useUpdater.hooks';
 import { useIsLoading } from '@hooks';
 import { createDoctorSchema } from './schema';
 import { DOCTORS_AREA, DOCTOR_EMAIL_DOMAIN, DOCTOR_PREFIX } from '@constants';
+import { useDoctorContext } from '../../context/doctors.context';
 import emptyAvatar from '@assets/empty-avatar.png';
 import './form.doctors.administration.scss';
 
@@ -31,21 +32,43 @@ export const Form = () => {
     skills: [],
     password: Date.now(),
   });
+  const { doctorToBeUpdated } = useDoctorContext();
   const [showError, setShowError] = useState(false);
   const [avatarSelected, setAvatarSelected] = useState();
   const [city, setCity] = useState([]);
-  const [countrySelected, setCountrySelected] = useState(newDoctor.location.country || 'Colombia');
+
   const [emailError, setEmailError] = useState(false);
   const { locations } = locationsSWR();
   const { data: doctorArea } = useSWR(DOCTORS_AREA, doctorAreas, {
     revalidateOnFocus: false,
     revalidateIfStale: false,
   });
+  const [isLoading] = useIsLoading();
 
   useEffect(() => {
-    const citys = locations?.find((element) => element.country === countrySelected);
+    setNewDoctor({
+      firstname: doctorToBeUpdated.firstname,
+      lastname: doctorToBeUpdated.lastname,
+      email: doctorToBeUpdated.email,
+      birthdate: new Date(doctorToBeUpdated.birthdate) || new Date(),
+      area: doctorToBeUpdated.area,
+      avatar: doctorToBeUpdated.avatar,
+      phone: doctorToBeUpdated.phone,
+      location: {
+        city: doctorToBeUpdated.location.city,
+        country: doctorToBeUpdated.location.country,
+      },
+      gender: doctorToBeUpdated.gender,
+      qualifications: [...doctorToBeUpdated.qualifications],
+      memberships: [...doctorToBeUpdated.memberships],
+      skills: [...doctorToBeUpdated.skills],
+    });
+  }, [doctorToBeUpdated]);
+
+  useEffect(() => {
+    const citys = locations?.find((element) => element.country === newDoctor.location.country);
     setCity(citys?.locations);
-  }, [countrySelected]);
+  }, [newDoctor.location.country]);
 
   const {
     register,
@@ -69,11 +92,8 @@ export const Form = () => {
     handleDeleteSkill,
   } = useUpdater(newDoctor, setNewDoctor);
 
-  const [isLoading] = useIsLoading();
-
   const handleSelectHeadquarters = (e) => {
     const { name, value } = e.target;
-    if (name === 'country') setCountrySelected(e.currentTarget.value);
     setNewDoctor({
       ...newDoctor,
       location: { ...newDoctor.location, [name]: value },
@@ -125,7 +145,6 @@ export const Form = () => {
     for (const key in finalForm) {
       form.append(key, finalForm[key]);
     }
-
     //TO-DO: add an axios call with POST method to the correspondent URL provided by the backend sending the form variable in 124 line
     // ...
   };
@@ -177,8 +196,8 @@ export const Form = () => {
           <div className="select-container-date">
             <DatePicker
               id="birthdate"
-              name="birthdate"
               selected={newDoctor.birthdate}
+              name="birthdate"
               dateFormat="dd/MM/yyyy"
               className="input-container__date"
               onChange={(date) => setNewDoctor({ ...newDoctor, birthdate: date })}
@@ -232,7 +251,7 @@ export const Form = () => {
             <div className="avatar-container">
               <img
                 className="avatar-container__img"
-                src={avatarSelected || emptyAvatar}
+                src={avatarSelected || newDoctor.avatar || emptyAvatar}
                 alt="avatar"
               />
             </div>
@@ -251,6 +270,7 @@ export const Form = () => {
               name="email"
               onChange={handleChangeForm}
               className="form-doctors__input-text"
+              value={newDoctor.email}
             />
             <p className="form-doctors__error-message">
               {errors.email?.message || emailError ? 'You must use only @drmebid.com' : null}
@@ -269,6 +289,7 @@ export const Form = () => {
               id="phone"
               onChange={handleChangeForm}
               className="form-doctors__input-text"
+              value={newDoctor.phone}
             />
             <p className="form-doctors__error-message">{errors.phone?.message}</p>
           </div>
