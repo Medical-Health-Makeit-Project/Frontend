@@ -27,12 +27,3 @@ export const authSlice = createSlice({
 
 export const { setAuth, logout } = authSlice.actions;
 export default authSlice.reducer;
-
-/*
-  - cuando usuario login guardar token en cookie
-  - cuando carga la pagina mirar si tengo la cookie
-  - si si, hacer un getUser al backend con el token almacenado
-    - guardar informacion (releveante) de respuesta en el initialState
-  - y si no, no se hace llamado y se inicializa el estado con un usuario vacio
-  - controlar error del backend si getUser falla
-*/

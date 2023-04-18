@@ -126,7 +126,7 @@ export const Form = () => {
       form.append(key, finalForm[key]);
     }
 
-    //TO-DO: add an axios call with POST method to the correspondent URL provided by the backend
+    //TO-DO: add an axios call with POST method to the correspondent URL provided by the backend sending the form variable in 124 line
     // ...
   };
 
