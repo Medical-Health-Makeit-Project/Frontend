@@ -32,11 +32,11 @@ export const Form = () => {
     skills: [],
     password: Date.now(),
   });
-  const { doctorToBeUpdated } = useDoctorContext();
+  const { doctorToBeUpdated, setDoctorToBeUpdated } = useDoctorContext();
   const [showError, setShowError] = useState(false);
   const [avatarSelected, setAvatarSelected] = useState();
   const [city, setCity] = useState([]);
-
+  const [isUpdating, setIsupdating] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const { locations } = locationsSWR();
   const { data: doctorArea } = useSWR(DOCTORS_AREA, doctorAreas, {
@@ -63,6 +63,9 @@ export const Form = () => {
       memberships: [...doctorToBeUpdated.memberships],
       skills: [...doctorToBeUpdated.skills],
     });
+
+    if (!Object.values(doctorToBeUpdated).some((e) => e === '')) return setIsupdating(true);
+    setIsupdating(false);
   }, [doctorToBeUpdated]);
 
   useEffect(() => {
@@ -119,6 +122,10 @@ export const Form = () => {
     });
   };
 
+  const handleUpdateDoctor = () => {
+    handleClearForm();
+  };
+
   const submitForm = (data) => {
     if (!newDoctor.qualifications.length || !newDoctor.skills.length) return setShowError(true);
     if (!newDoctor.email.endsWith(DOCTOR_EMAIL_DOMAIN)) {
@@ -145,8 +152,43 @@ export const Form = () => {
     for (const key in finalForm) {
       form.append(key, finalForm[key]);
     }
+
     //TO-DO: add an axios call with POST method to the correspondent URL provided by the backend sending the form variable in 124 line
     // ...
+
+    handleClearForm();
+  };
+
+  const handleClearForm = () => {
+    setDoctorToBeUpdated({
+      firstname: '',
+      lastname: '',
+      email: '',
+      birthdate: Date.now(),
+      area: '',
+      avatar: '',
+      phone: '',
+      location: { city: '', country: '' },
+      gender: '',
+      qualifications: [],
+      memberships: [],
+      skills: [],
+    });
+    setNewDoctor({
+      firstname: '',
+      lastname: '',
+      email: '',
+      birthdate: Date.now(),
+      area: '',
+      avatar: '',
+      phone: '',
+      location: { city: '', country: '' },
+      gender: '',
+      qualifications: [],
+      memberships: [],
+      skills: [],
+      password: Date.now(),
+    });
   };
 
   if (isLoading) return <Loading />;
@@ -504,8 +546,16 @@ export const Form = () => {
             })}
           </div>
         </div>
-        <Button color="danger" type="submit" className="form-doctors__btn-submitter">
-          Send
+        <Button
+          color="danger"
+          type={isUpdating ? 'button' : 'submit'}
+          className="form-doctors__btn-submitter"
+          onClick={isUpdating ? handleUpdateDoctor : null}
+        >
+          {isUpdating ? 'UPDATE' : 'CREATE'}
+        </Button>
+        <Button color="info" className="form-doctors__btn-clear" onClick={handleClearForm}>
+          CLEAR
         </Button>
       </form>
     </>
