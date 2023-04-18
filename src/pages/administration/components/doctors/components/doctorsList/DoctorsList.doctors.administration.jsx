@@ -1,10 +1,15 @@
-import { allDoctorsSWR } from '@services/allDoctors';
-import { Button } from '@components/buttons';
-import { useDoctorContext } from '../../context/doctors.context';
+import { memo } from 'react';
 import { v4 as uuid } from 'uuid';
+import axios from 'axios';
+import { Button } from '@components/buttons';
+import { Loading } from '@components/loading';
+import { Error } from '@components/error';
+import { useDoctorContext } from '../../context/doctors.context';
+import { allDoctorsSWR } from '@services/allDoctors';
+import { errorMessage } from '@utils/toastify/error.toastify';
 import './doctorsList.doctors.administration.scss';
 
-export const DoctorsList = () => {
+export const DoctorsList = memo(() => {
   const { allDoctors, allDoctorsError, allDoctorsIsLoading } = allDoctorsSWR();
 
   const { setDoctorToBeUpdated } = useDoctorContext();
@@ -26,6 +31,28 @@ export const DoctorsList = () => {
     });
   };
 
+  const handleDelete = async (e, doctor) => {
+    try {
+      e.preventDefault();
+      const errorMessage = 'Something went wrong! please try again or call your nearest dev!';
+      const ACCESS_TOKEN = localStorage.getItem('ACCESS_TOKEN');
+      const { email } = doctor;
+      const { status } = await axios.delete('URL', {
+        headers: {
+          Authorization: `Bearer ${ACCESS_TOKEN}`,
+        },
+        data: email,
+      });
+      if (status > 399) return errorMessage(errorMessage);
+    } catch (error) {
+      return errorMessage(error.message);
+    }
+  };
+
+  if (allDoctorsError) return <Error />;
+
+  if (allDoctorsIsLoading) return <Loading />;
+
   return (
     <section className="doctor-list">
       {allDoctors?.map((doctor) => {
@@ -39,7 +66,7 @@ export const DoctorsList = () => {
               <p className="doctor-list-area">{doctor.area}</p>
             </section>
             <section className="buttons-action-container">
-              <Button variant="outline" color="danger">
+              <Button variant="outline" color="danger" onClick={(e) => handleDelete(e, doctor)}>
                 Delete
               </Button>
               <Button color="info" onClick={() => handleSetFormToUpdate(doctor)}>
@@ -51,4 +78,4 @@ export const DoctorsList = () => {
       })}
     </section>
   );
-};
+});
