@@ -8,6 +8,8 @@ import { SelectBlood } from './components/SelectBlood.register';
 import { Heading } from '@components/heading';
 import { Button } from '@components/buttons/Button.components';
 import { _Modal } from '@components/modal';
+import { errorMessage } from '@utils/toastify/error.toastify';
+import { successMessage } from '@utils/toastify/success.toastify';
 import { TermsAndCoditions } from '@components/termsAndConditions';
 import { phoneValidation, emailValidation } from '@constants/';
 import headingImage from '@assets/heading-login.png';
@@ -28,25 +30,13 @@ export const Register = () => {
     termsAndConditions: false,
   });
 
-  const [stringBirthday, setStringBirthday] = useState('');
-  useEffect(() => {
-    if (stringBirthday) {
-      const year = stringBirthday.getUTCFullYear();
-      const month = stringBirthday.getMonth();
-      const day = stringBirthday.getUTCDate();
-
-      const birthdayToString = `${day}/${month + 1}/${year}`;
-      setUserData({ ...userData, birthday: birthdayToString });
-    }
-  }, [stringBirthday]);
-
   const handleChange = (event) => {
     const { name, type, value, checked } = event.target;
     setUserData({ ...userData, [name]: type === 'checkbox' ? checked : value });
   };
 
   //  //to-do: backend link
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(userData);
     if (userData.password === userData.repeatPassword) {
@@ -61,23 +51,19 @@ export const Register = () => {
         data.delete('repeatPassword');
         data.delete('termsAndConditions');
 
-        for (const val of data.values()) {
-          console.log(val);
-        }
-
-        axios
-          .post('URL to back', {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-            },
-            body: data,
-          })
-          .then((response) => alert(response));
+        const { status } = await axios.post('URL to back', {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+          body: data,
+        });
+        if (status > 399) return errorMessage('Something went wrong!');
+        return successMessage('Your register was success!');
       } else {
-        alert('You must agree to terms and conditions');
+        errorMessage('You must agree to terms and conditions');
       }
     } else {
-      alert('Passwords must match');
+      errorMessage('Passwords must match');
     }
   };
 
@@ -87,8 +73,6 @@ export const Register = () => {
     username,
     email,
     phone,
-    gender,
-    country,
     password,
     repeatPassword,
     termsAndConditions,
