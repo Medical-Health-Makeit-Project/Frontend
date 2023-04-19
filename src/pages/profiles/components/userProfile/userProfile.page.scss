@@ -98,7 +98,8 @@
 }
 
 .editOn {
-  display: block;
+  display: flex;
+  flex-direction: column;
 }
 .editOff {
   display: none;
@@ -164,4 +165,14 @@
 
 .accordion__description {
   text-align: left;
+}
+
+.avatar__label {
+  @include paragraph;
+}
+.avatar__input {
+  display: flex;
+  flex-direction: column;
+  max-width: 180px;
+  margin: 10px 0;
 }

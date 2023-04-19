@@ -119,20 +119,21 @@
     font-weight: 700;
   }
 }
-
-.email__info {
-  margin-bottom: 8px;
-  h3 {
-    @include paragraph($size-lg);
-    font-weight: 700;
-  }
+.intro__title-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.intro-paragraph {
+  width: 100%;
   p {
-    @include paragraph($size-md);
-    font-weight: 300;
+    width: 100%;
   }
 }
-
-.phone__info {
+.icons {
+  display: flex;
+}
+.info__container {
   margin-bottom: 8px;
   h3 {
     @include paragraph($size-lg);

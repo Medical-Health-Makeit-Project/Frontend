@@ -3,13 +3,16 @@ import { AiOutlineMail } from 'react-icons/ai';
 import { BsTelephoneOutbound, BsGenderAmbiguous, BsCalendarCheck } from 'react-icons/bs';
 import { MdBloodtype } from 'react-icons/md';
 import { BiMap, BiEdit } from 'react-icons/bi';
-import { AppointmetsList } from './components/Appointments.userProfile';
+import { errorMessage } from '@utils/toastify/error.toastify';
+import { successMessage } from '@utils/toastify/success.toastify';
+import { AppointmentsList } from './components/Appointments.userProfile';
 import { NoAppointments } from './components/NoAppointments.userProfile';
 import { Button } from '@components/buttons';
 import { phoneValidation, emailValidation } from '@constants/';
+import axios from 'axios';
 
 import './userProfile.page.scss';
-import axios from 'axios';
+import { useEffect } from 'react';
 
 export const UserProfile = ({
   id,
@@ -33,25 +36,54 @@ export const UserProfile = ({
   const [emailStatus, setEmailStauts] = useState(email);
   const [phoneStatus, setPhoneSatus] = useState(phone);
   const [appointments, setAppointments] = useState([]);
+  const [file, setFile] = useState(null);
+  const [newAvatar, setNewAvatar] = useState(null);
 
   //@Todo: assign link to backend to update actions
-  // const updateData = () => {
-  //   axios
-  //     .post('URL to back', {
-  //        Armar formData y append de estados que cambiaron. Enviar jwt en localstorage en un headerAuthori
-  //       email: emailStatus,
-  //       phone: phoneStatus,
-  //     })
-  //     .then((response) => {
-  //       alert(response);
-  //     });
-  // };
+  const updateData = async () => {
+    try {
+      const token = localStorage.getItem('ACCESS_TOKEN');
+      const data = new FormData();
+      if (phoneStatus !== phone) {
+        data.append(phone, phoneStatus);
+      } else if (emailStatus !== email) {
+        data.append(email, emailStatus);
+      } else if (newAvatar) {
+        data.append(avatar, newAvatar);
+      }
+      const { status } = await axios.post('URL to back', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        },
+        body: data,
+      });
+      if (status > 399) return errorMessage('Something went wrong');
+      return successMessage('Your data was updated!');
+    } catch (error) {
+      return errorMessage(error.message);
+    }
+  };
 
-  // const getAppointments = () => {
-  //   axios.get('URL to back').then((response) => {
-  //     setAppointments(response);
-  //   });
-  // };
+  useEffect(() => {
+    const getAppointments = async () => {
+      try {
+        const { status } = await axios.get('URL to back').then((response) => {
+          setAppointments(response.data);
+        });
+        if (status > 399) return errorMessage('Something went wrong');
+      } catch (error) {
+        return errorMessage(error.message);
+      }
+    };
+    getAppointments();
+  }, []);
+
+  const readFile = (file) => {
+    const reader = new FileReader();
+    reader.onload = (e) => setNewAvatar(e.target.result);
+    reader.readAsDataURL(file);
+  };
 
   const handleEditOn = () => {
     setEditState(editStyleOn);
@@ -73,6 +105,13 @@ export const UserProfile = ({
     setPhoneSatus(newPhone);
   };
 
+  const handleFile = (event) => {
+    readFile(event.target.files[0]);
+    setFile(event.target.files);
+  };
+
+  const avatarImage = newAvatar ? newAvatar : avatar;
+
   return (
     <section className="userProfile__background">
       <article className="userProfile__card">
@@ -81,8 +120,22 @@ export const UserProfile = ({
             <BiEdit size={20} className="icons edit__icon" onClick={handleEditOn} />
           </div>
           <picture className="userProfile__image-container">
-            <img src={avatar} className="avatar__image" />
+            <img src={avatarImage} className="avatar__image" />
           </picture>
+          <div className={`${editState}`}>
+            <label htmlFor="newAvatar" className="avatar__label">
+              Edit profile image
+            </label>
+            <input
+              className="avatar__input"
+              type="file"
+              accept="image/*"
+              name="newAvatar"
+              id="newAvatar"
+              max-size="200"
+              onChange={handleFile}
+            />
+          </div>
           <div className="profile__main-info">
             <p>{name}</p>
             <div className="nationality__container">
@@ -93,7 +146,9 @@ export const UserProfile = ({
 
           <div className="profile__info-container">
             <div className={editState}>
+              <label htmlFor="newEmail">Edit email</label>
               <input
+                name="newEmail"
                 type="text"
                 className="edit__input"
                 placeholder={emailStatus}
@@ -106,7 +161,9 @@ export const UserProfile = ({
               <AiOutlineMail size={18} className="icons" /> <p>{emailStatus}</p>
             </div>
             <div className={editState}>
+              <label htmlFor="newPhone">Edit phone</label>
               <input
+                name="newPhone"
                 type="text"
                 className="edit__input"
                 placeholder={phoneStatus}
@@ -148,7 +205,7 @@ export const UserProfile = ({
 
         <div className="appointments__section">
           {appointments.length ? (
-            <AppointmetsList appointments={appointments} />
+            <AppointmentsList appointments={appointments} />
           ) : (
             <NoAppointments />
           )}
