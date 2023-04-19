@@ -63,6 +63,10 @@
       @include paragraph($color: map-get($typography-colors, 'black'), $size: $size-xs);
       background-color: rgb(240, 237, 237);
       padding: 0.4rem 0.8rem;
+
+      @media screen and (min-width: 700px) {
+        cursor: pointer;
+      }
     }
   }
 

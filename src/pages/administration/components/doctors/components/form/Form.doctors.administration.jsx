@@ -116,25 +116,29 @@ export const Form = () => {
     if (!newDoctor.qualifications.length || !newDoctor.skills.length) return setShowError(true);
     if (!newDoctor.email.endsWith(DOCTOR_EMAIL_DOMAIN)) return setEmailError(true);
     if (typeof avatar === 'string') {
-      console.log('isString');
       const form = new FormData();
       const { avatar, ...toUpdate } = newDoctor;
       for (const key in toUpdate) {
         form.append(key, toUpdate[key]);
       }
-      return;
-      //TO-DO: add an axios call with UPDATE method to the correspondent URL provided by the backend sending the form variable in 131 line
+      //TO-DO: add an axios call with UPDATE method to the correspondent URL provided by the backend sending the form variable in 119 line
       // ...
+      handleClearForm();
+      return;
     }
     setEmailError(false);
+    const form = new FormData();
+    for (const key in newDoctor) {
+      form.append(key, newDoctor[key]);
+    }
+    //TO-DO: add an axios call with UPDATE method to the correspondent URL provided by the backend sending the form variable in 130 line
+    // ...
 
-    console.log('isNotString');
-
-    //handleClearForm();
+    handleClearForm();
+    return;
   };
 
   const handleImageUpload = (e) => {
-    console.log(newDoctor.avatar);
     const file = e.target.files[0];
     const avatarURL = URL.createObjectURL(file);
     setAvatarSelected(avatarURL);
@@ -172,7 +176,7 @@ export const Form = () => {
       form.append(key, finalForm[key]);
     }
 
-    //TO-DO: add an axios call with POST method to the correspondent URL provided by the backend sending the form variable in 124 line
+    //TO-DO: add an axios call with POST method to the correspondent URL provided by the backend sending the form variable in 174 line
     // ...
 
     handleClearForm();

@@ -1,4 +1,5 @@
 @import '@sass/abstract/mixins.abstract.scss';
+@import '@sass/base/typography.base.scss';
 @import '@sass/base/alerts.base.scss';
 
 .products-form__h1 {
@@ -130,5 +131,13 @@
     @include paragraph($color: map-get($typography-colors, 'black'), $size: $size-xs);
     background-color: rgb(240, 237, 237);
     padding: 0.4rem 0.8rem;
+
+    @media screen and (min-width: 700px) {
+      cursor: pointer;
+    }
+  }
+
+  .dose-example {
+    @include paragraph($size: $size-xxs);
   }
 }

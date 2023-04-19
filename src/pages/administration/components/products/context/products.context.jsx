@@ -6,18 +6,15 @@ const ProductsStore = createContext();
 
 export const ProductsContext = ({ children }) => {
   const [ProductToBeUpdated, setProductToBeUpdated] = useState({
-    firstname: '',
-    lastname: '',
-    email: '',
-    birthdate: new Date(),
-    area: '',
-    avatar: '',
-    phone: '',
-    location: { city: '', country: '' },
-    gender: '',
-    qualifications: [],
-    memberships: [],
-    skills: [],
+    product: '',
+    label: '',
+    description: '',
+    price: '',
+    stock: '',
+    image: '',
+    dose: '',
+    discount: 0,
+    category: '',
   });
 
   const { products, productsError, productsIsLoading } = useProducts();

@@ -1,84 +1,75 @@
-import { memo } from 'react';
-import { v4 as uuid } from 'uuid';
 import axios from 'axios';
+import { memo } from 'react';
+import { useProductsContext } from '../../context/products.context';
+import { v4 as uuid } from 'uuid';
 import { Button } from '@components/buttons';
 import { Loading } from '@components/loading';
 import { Error } from '@components/error';
-import { allDoctorsSWR } from '@services/allDoctors';
+import { useProducts } from '@services/products';
 import { errorMessage } from '@utils/toastify/error.toastify';
 import './productList.products.administration.scss';
 
 export const ProductsList = () => {
-  return <div>hello</div>;
+  const { products, productsError, productsIsLoading } = useProducts();
+  const { setProductToBeUpdated } = useProductsContext();
+
+  const handleSetFormToUpdate = (product) => {
+    setProductToBeUpdated({
+      product: product.product,
+      label: product.label,
+      description: product.description,
+      price: product.price,
+      stock: product.stock,
+      image: product.image,
+      dose: product.dose,
+      discount: product.discount,
+      category: product.category,
+    });
+  };
+
+  const handleDelete = async (e, product) => {
+    try {
+      e.preventDefault();
+      const errorMessage = 'Something went wrong! please try again or call your nearest dev!';
+      const ACCESS_TOKEN = localStorage.getItem('ACCESS_TOKEN');
+      const { product: productName } = product;
+      const { status } = await axios.delete('URL', {
+        headers: {
+          Authorization: `Bearer ${ACCESS_TOKEN}`,
+        },
+        data: productName,
+      });
+      if (status > 399) return errorMessage(errorMessage);
+    } catch (error) {
+      return errorMessage(error.message);
+    }
+  };
+
+  if (productsError) return <Error />;
+  if (productsIsLoading) return <Loading />;
+  return (
+    <section className="product-list">
+      {products?.map((product) => {
+        return (
+          <article key={uuid()} className="product-list__item">
+            <div className="product-list__image-container">
+              <img src={product.image} alt="Image" className="image" />
+            </div>
+            <section className="product-list-info">
+              <h3 className="product-list-info__product">{`${product.product}`}</h3>
+              <p className="product-list-area">{product.label}</p>
+            </section>
+            <section className="product-list__buttons-action-container">
+              <Button variant="outline" color="danger" onClick={(e) => handleDelete(e, product)}>
+                Delete
+              </Button>
+              <Button color="info" onClick={() => handleSetFormToUpdate(product)}>
+                Update
+              </Button>
+            </section>
+          </article>
+        );
+      })}
+    </section>
+  );
 };
-
-// export const ProductsList = memo(() => {
-//   const { allDoctors, allDoctorsError, allDoctorsIsLoading } = allDoctorsSWR();
-
-//   const { setDoctorToBeUpdated } = useDoctorContext();
-
-//   const handleSetFormToUpdate = (doctor) => {
-//     setDoctorToBeUpdated({
-//       firstname: doctor.firstname,
-//       lastname: doctor.lastname,
-//       email: doctor.email,
-//       birthdate: doctor.birthdate,
-//       area: doctor.area,
-//       avatar: doctor.avatar,
-//       phone: doctor.phone,
-//       location: { city: doctor.headquarter.city, country: doctor.headquarter.country },
-//       gender: doctor.gender,
-//       qualifications: [...doctor.qualifications],
-//       memberships: [...doctor.memberships],
-//       skills: [...doctor.skills],
-//     });
-//   };
-
-//   const handleDelete = async (e, doctor) => {
-//     try {
-//       e.preventDefault();
-//       const errorMessage = 'Something went wrong! please try again or call your nearest dev!';
-//       const ACCESS_TOKEN = localStorage.getItem('ACCESS_TOKEN');
-//       const { email } = doctor;
-//       const { status } = await axios.delete('URL', {
-//         headers: {
-//           Authorization: `Bearer ${ACCESS_TOKEN}`,
-//         },
-//         data: email,
-//       });
-//       if (status > 399) return errorMessage(errorMessage);
-//     } catch (error) {
-//       return errorMessage(error.message);
-//     }
-//   };
-
-//   if (allDoctorsError) return <Error />;
-
-//   if (allDoctorsIsLoading) return <Loading />;
-
-//   return (
-//     <section className="doctor-list">
-//       {allDoctors?.map((doctor) => {
-//         return (
-//           <article key={uuid()} className="doctor-list__item">
-//             <div className="doctor-list__avatar-container">
-//               <img src={doctor.avatar} alt="Avatar" className="avatar" />
-//             </div>
-//             <section className="doctor-list-info">
-//               <h3 className="doctor-list-info__fullname">{`${doctor.firstname} ${doctor.lastname}`}</h3>
-//               <p className="doctor-list-area">{doctor.area}</p>
-//             </section>
-//             <section className="buttons-action-container">
-//               <Button variant="outline" color="danger" onClick={(e) => handleDelete(e, doctor)}>
-//                 Delete
-//               </Button>
-//               <Button color="info" onClick={() => handleSetFormToUpdate(doctor)}>
-//                 Update
-//               </Button>
-//             </section>
-//           </article>
-//         );
-//       })}
-//     </section>
-//   );
-// });

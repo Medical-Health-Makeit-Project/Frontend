@@ -1,11 +1,25 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 import { Loading } from '@components/loading';
 import { Button } from '@components/buttons';
 import { useIsLoading } from '@hooks';
 import { useProductsContext } from '../../context/products.context';
+import { errorMessage } from '@utils/toastify/error.toastify';
 import emptyImage from '@assets/empty-avatar.png';
 import './form.products.administration.scss';
+import * as Yup from 'yup';
+
+const schemaYup = Yup.object().shape({
+  product: Yup.string().required(),
+  label: Yup.string().required(),
+  description: Yup.string().required(),
+  price: Yup.number().required(),
+  stock: Yup.number().required(),
+  dose: Yup.string().required(),
+  discount: Yup.number().required(),
+  category: Yup.string().required(),
+  newCategory: Yup.string().required(),
+});
 
 export const Form = () => {
   const [newProduct, setNewProduct] = useState({
@@ -16,19 +30,36 @@ export const Form = () => {
     stock: '',
     image: '',
     dose: '',
-    discount: 0,
+    discount: '',
     category: '',
     newCategory: '',
   });
   const [imageSelected, setImageSelected] = useState('');
   const [isUpdating, setIsupdating] = useState(false);
   const { isLoading } = useIsLoading();
-  const { categories } = useProductsContext();
+  const { categories, ProductToBeUpdated, setProductToBeUpdated } = useProductsContext();
+
+  useEffect(() => {
+    setNewProduct({
+      product: ProductToBeUpdated.product,
+      label: ProductToBeUpdated.label,
+      description: ProductToBeUpdated.description,
+      price: ProductToBeUpdated.price,
+      stock: ProductToBeUpdated.stock,
+      image: ProductToBeUpdated.image,
+      dose: ProductToBeUpdated.dose,
+      discount: ProductToBeUpdated.discount,
+      category: ProductToBeUpdated.category,
+      newCategory: '',
+    });
+    if (!Object.values(ProductToBeUpdated).some((e) => e === '')) return setIsupdating(true);
+    setIsupdating(false);
+  }, [ProductToBeUpdated]);
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
-    const avatarURL = URL.createObjectURL(file);
-    setAvatarSelected(avatarURL);
+    const imageURL = URL.createObjectURL(file);
+    setImageSelected(imageURL);
     setNewProduct({
       ...newProduct,
       image: file,
@@ -38,10 +69,14 @@ export const Form = () => {
   const handleChangeForm = (e) => {
     const { name, value } = e.target;
     if (name === 'price' || name === 'discount' || name === 'stock') {
-      return setNewProduct({
-        ...newProduct,
-        [name]: +value,
-      });
+      if (value === '' || +value) {
+        return setNewProduct({
+          ...newProduct,
+          [name]: value,
+        });
+      } else {
+        return errorMessage('You must provide only numbers');
+      }
     }
     if (newProduct.category !== 'Other') {
       return setNewProduct({
@@ -53,6 +88,56 @@ export const Form = () => {
     setNewProduct({
       ...newProduct,
       [name]: value,
+    });
+  };
+
+  const handleUpdateDoctor = () => {
+    const { image } = newProduct;
+    if (typeof image === 'string') {
+      const form = new FormData();
+      const { image, ...toUpdate } = newProduct;
+      for (const key in toUpdate) {
+        form.append(key, toUpdate[key]);
+      }
+      //TO-DO: add an axios call with UPDATE method to the correspondent URL provided by the backend sending the form variable in 81 line
+      // ...
+      handleClearForm();
+      return;
+    }
+    const form = new FormData();
+    for (const key in newProduct) {
+      form.append(key, newProduct[key]);
+    }
+    //TO-DO: add an axios call with UPDATE method to the correspondent URL provided by the backend sending the form variable in 91 line
+    // ...
+    handleClearForm();
+    return;
+  };
+
+  const handleClearForm = () => {
+    setImageSelected('');
+    setProductToBeUpdated({
+      product: '',
+      label: '',
+      description: '',
+      price: '',
+      stock: '',
+      image: '',
+      dose: '',
+      discount: 0,
+      category: '',
+    });
+    setNewProduct({
+      product: '',
+      label: '',
+      description: '',
+      price: '',
+      stock: '',
+      image: '',
+      dose: '',
+      discount: 0,
+      category: '',
+      newCategory: '',
     });
   };
 
@@ -73,21 +158,23 @@ export const Form = () => {
               id="productName"
               className="form-products__input-text"
               onChange={handleChangeForm}
+              value={newProduct.product}
             />
             <p className="form-products__error-message"></p>
           </div>
         </div>
         <div className="form-products__input-container">
-          <label htmlFor="labelName" className="form-products__label">
+          <label htmlFor="label" className="form-products__label">
             Label name:
           </label>
           <div>
             <input
               type="text"
-              name="labelName"
-              id="labelName"
+              name="label"
+              id="label"
               className="form-products__input-text"
               onChange={handleChangeForm}
+              value={newProduct.label}
             />
             <p className="form-products__error-message">{}</p>
           </div>
@@ -102,6 +189,7 @@ export const Form = () => {
               name="price"
               id="price"
               className="form-products__input-text"
+              value={newProduct.price}
               onChange={handleChangeForm}
             />
             <p className="form-products__error-message">{}</p>
@@ -118,13 +206,14 @@ export const Form = () => {
               id="stock"
               className="form-products__input-text"
               onChange={handleChangeForm}
+              value={newProduct.stock}
             />
             <p className="form-products__error-message">{}</p>
           </div>
         </div>
         <div className="form-products__input-container">
           <label htmlFor="dose" className="form-products__label">
-            Dose:
+            Dose <span className="dose-example">(example: 12mg/ml)</span>:
           </label>
           <div>
             <input
@@ -133,13 +222,14 @@ export const Form = () => {
               id="dose"
               className="form-products__input-text"
               onChange={handleChangeForm}
+              value={newProduct.dose}
             />
             <p className="form-products__error-message">{}</p>
           </div>
         </div>
         <div className="form-products__input-container">
           <label htmlFor="discount" className="form-products__label">
-            Discount:
+            Discount (%):
           </label>
           <div>
             <input
@@ -148,6 +238,7 @@ export const Form = () => {
               id="discount"
               className="form-products__input-text"
               onChange={handleChangeForm}
+              value={newProduct.discount}
             />
             <p className="form-products__error-message">{}</p>
           </div>
@@ -161,8 +252,8 @@ export const Form = () => {
               name="category"
               id="category"
               className="form-products__input-select"
-              value={newProduct.category}
               onChange={handleChangeForm}
+              value={newProduct.category}
             >
               <option value="" disabled defaultValue>
                 --Choose a category--
@@ -206,7 +297,13 @@ export const Form = () => {
             <div className="form-products-image-container">
               <img
                 className="form-products-image-container__img"
-                src={imageSelected || emptyImage}
+                src={
+                  isUpdating
+                    ? newProduct.image instanceof File
+                      ? imageSelected
+                      : newProduct.image
+                    : imageSelected || emptyImage
+                }
                 alt="product"
               />
             </div>
@@ -225,6 +322,7 @@ export const Form = () => {
                 className="input-container__textarea"
                 maxLength={200}
                 onChange={handleChangeForm}
+                value={newProduct.description}
               ></textarea>
             </div>
             <p className="form-products__error-message">{}</p>
@@ -235,11 +333,11 @@ export const Form = () => {
           color="danger"
           type={isUpdating ? 'button' : 'submit'}
           className="form-products__btn-submitter"
-          // onClick={isUpdating ? handleUpdateDoctor : null}
+          onClick={isUpdating ? handleUpdateDoctor : null}
         >
           {isUpdating ? 'UPDATE' : 'CREATE'}
         </Button>
-        <Button color="info" className="form-products__btn-clear">
+        <Button color="info" className="form-products__btn-clear" onClick={handleClearForm}>
           CLEAR
         </Button>
       </form>

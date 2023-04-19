@@ -1,6 +1,6 @@
 @import '@sass/abstract/mixins.abstract.scss';
 
-.doctor-list {
+.product-list {
   width: 100%;
   max-width: 2400px;
   margin: 0 auto;
@@ -22,35 +22,35 @@
     grid-gap: 60px 40px;
   }
 
-  .doctor-list__item {
+  .product-list__item {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
   }
 
-  .doctor-list__avatar-container {
+  .product-list__image-container {
     width: 200px;
     height: 200px;
   }
-  .avatar {
+  .image {
     border-radius: 75%;
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 
-  .doctor-list-info__fullname {
+  .product-list-info__product {
     text-align: center;
     @include subtitle;
   }
 
-  .doctor-list-area {
+  .doctor-list-label {
     text-align: center;
     @include paragraph;
   }
 
-  .buttons-action-container {
+  .product-list__buttons-action-container {
     width: 100%;
     display: flex;
     justify-content: space-evenly;
