@@ -18,7 +18,7 @@ export const DoctorProfile = ({
   name,
   area,
   avatar,
-  introduction = '',
+  introduction,
   email,
   phone,
   headquarter,
@@ -61,6 +61,7 @@ export const DoctorProfile = ({
       } else if (introStatus !== introduction) {
         data.append(introduction, introStatus);
       }
+
       const { status } = await axios.post('URL to back', {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -75,12 +76,16 @@ export const DoctorProfile = ({
     }
   };
   useEffect(() => {
+    const token = localStorage.getItem('ACCESS_TOKEN');
     const getAppointments = async () => {
       try {
-        const { status } = await axios.get('URL to back').then((response) => {
-          setAppointments(response.data);
+        const response = await axios.get('URL to back', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         });
-        if (status > 399) return errorMessage('Something went wrong');
+        if (response.status > 399) return errorMessage('Something went wrong');
+        setAppointments(response.data);
       } catch (error) {
         return errorMessage(error.message);
       }

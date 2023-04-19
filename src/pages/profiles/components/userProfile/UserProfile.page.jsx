@@ -66,12 +66,16 @@ export const UserProfile = ({
   };
 
   useEffect(() => {
+    const token = localStorage.getItem('ACCESS_TOKEN');
     const getAppointments = async () => {
       try {
-        const { status } = await axios.get('URL to back').then((response) => {
-          setAppointments(response.data);
+        const { response } = await axios.get('URL to back', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         });
-        if (status > 399) return errorMessage('Something went wrong');
+        if (response.status > 399) return errorMessage('Something went wrong');
+        setAppointments(response.data);
       } catch (error) {
         return errorMessage(error.message);
       }
