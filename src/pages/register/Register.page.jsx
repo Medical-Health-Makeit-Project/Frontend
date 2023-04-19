@@ -8,6 +8,8 @@ import { SelectBlood } from './components/SelectBlood.register';
 import { Heading } from '@components/heading';
 import { Button } from '@components/buttons/Button.components';
 import { _Modal } from '@components/modal';
+import { errorMessage } from '@utils/toastify/error.toastify';
+import { successMessage } from '@utils/toastify/success.toastify';
 import { TermsAndCoditions } from '@components/termsAndConditions';
 import { phoneValidation, emailValidation } from '@constants/';
 import headingImage from '@assets/heading-login.png';
@@ -22,23 +24,11 @@ export const Register = () => {
     phone: '',
     gender: '',
     birthday: '',
-    coutry: '',
+    country: '',
     password: '',
     repeatPassword: '',
     termsAndConditions: false,
   });
-
-  const [stringBirthday, setStringBirthday] = useState('');
-  useEffect(() => {
-    if (stringBirthday) {
-      const year = stringBirthday.getUTCFullYear();
-      const month = stringBirthday.getMonth();
-      const day = stringBirthday.getUTCDate();
-
-      const birthdayToString = `${day}/${month + 1}/${year}`;
-      setUserData({ ...userData, birthday: birthdayToString });
-    }
-  }, [stringBirthday]);
 
   const handleChange = (event) => {
     const { name, type, value, checked } = event.target;
@@ -46,21 +36,34 @@ export const Register = () => {
   };
 
   //  //to-do: backend link
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log(userData);
     if (userData.password === userData.repeatPassword) {
       if (userData.termsAndConditions) {
-        // axios
-        //   .post('URL to back', {
-        //     data,
-        //   })
-        //   .then((response) => alert(response));
-        console.log(userData);
+        const data = new FormData();
+        const dataKeys = Object.keys(userData);
+        const dataValues = Object.values(userData);
+
+        for (let i = 0; i < dataKeys.length; i++) {
+          data.append(dataKeys[i], `${dataValues[i]}`);
+        }
+        data.delete('repeatPassword');
+        data.delete('termsAndConditions');
+
+        const { status } = await axios.post('URL to back', {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+          body: data,
+        });
+        if (status > 399) return errorMessage('Something went wrong!');
+        return successMessage('Your register was success!');
       } else {
-        alert('You must agree to terms and conditions');
+        errorMessage('You must agree to terms and conditions');
       }
     } else {
-      alert('Passwords must match');
+      errorMessage('Passwords must match');
     }
   };
 
@@ -159,6 +162,7 @@ export const Register = () => {
             <label htmlFor="bithday">Enter your birthday:</label>
             <DatePicker
               id="birthDate"
+              name="birthDate"
               selected={stringBirthday ? stringBirthday : new Date()}
               dateFormat="dd/MM/yyyy"
               peekNextMonth
@@ -166,9 +170,8 @@ export const Register = () => {
               showYearDropdown
               dropdownMode="select"
               strictParsing
-              name="birthDate"
               onChange={(date) => {
-                setStringBirthday(date);
+                setUserData({ ...userData, birthday: date });
               }}
               required
               className="input-box"
@@ -185,6 +188,7 @@ export const Register = () => {
               className="email__input input-box"
               onChange={(event) => handleChange(event)}
             >
+              <option value="">Select...</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
               <option value="non-binary">Non binary</option>
