@@ -1,1 +1,4 @@
-export * from './form/Form.doctors.administration';
+export * from './doctorsList';
+export * from './form/hooks';
+export * from './form';
+export * from './form/schema';

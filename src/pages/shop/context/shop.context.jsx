@@ -1,7 +1,7 @@
 import { PropTypes } from 'prop-types';
 import { createContext, useContext, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useProducts, useCategories } from '../swr';
+import { useProducts, useCategories } from '@services/products';
 
 const ShopStore = createContext();
 
