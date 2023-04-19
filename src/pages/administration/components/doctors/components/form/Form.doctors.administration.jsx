@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import useSWR from 'swr';
 import DatePicker from 'react-datepicker';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { IoIosClose } from 'react-icons/io';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Loading } from '@components/loading';
@@ -11,7 +11,8 @@ import { locationsSWR } from '@services/locations';
 import { useUpdater } from './hooks/useUpdater.hooks';
 import { useIsLoading } from '@hooks';
 import { createDoctorSchema } from './schema';
-import { DOCTORS_AREA } from '@constants';
+import { DOCTORS_AREA, DOCTOR_EMAIL_DOMAIN, DOCTOR_PREFIX } from '@constants';
+import { useDoctorContext } from '../../context/doctors.context';
 import emptyAvatar from '@assets/empty-avatar.png';
 import './form.doctors.administration.scss';
 
@@ -19,34 +20,58 @@ export const Form = () => {
   const [newDoctor, setNewDoctor] = useState({
     firstname: '',
     lastname: '',
+    email: '',
     birthdate: Date.now(),
     area: '',
     avatar: '',
-    email: '',
     phone: '',
-    headquarter: { city: '', country: '' },
+    location: { city: '', country: '' },
     gender: '',
     qualifications: [],
     memberships: [],
     skills: [],
     password: Date.now(),
   });
+  const { doctorToBeUpdated, setDoctorToBeUpdated } = useDoctorContext();
   const [showError, setShowError] = useState(false);
   const [avatarSelected, setAvatarSelected] = useState();
   const [city, setCity] = useState([]);
-  const [countrySelected, setCountrySelected] = useState(
-    newDoctor.headquarter.country || 'Colombia'
-  );
+  const [isUpdating, setIsupdating] = useState(false);
+  const [emailError, setEmailError] = useState(false);
   const { locations } = locationsSWR();
   const { data: doctorArea } = useSWR(DOCTORS_AREA, doctorAreas, {
     revalidateOnFocus: false,
     revalidateIfStale: false,
   });
+  const [isLoading] = useIsLoading();
 
   useEffect(() => {
-    const citys = locations?.find((element) => element.country === countrySelected);
+    setNewDoctor({
+      firstname: doctorToBeUpdated.firstname,
+      lastname: doctorToBeUpdated.lastname,
+      email: doctorToBeUpdated.email,
+      birthdate: new Date(doctorToBeUpdated.birthdate) || new Date(),
+      area: doctorToBeUpdated.area,
+      avatar: doctorToBeUpdated.avatar,
+      phone: doctorToBeUpdated.phone,
+      location: {
+        city: doctorToBeUpdated.location.city,
+        country: doctorToBeUpdated.location.country,
+      },
+      gender: doctorToBeUpdated.gender,
+      qualifications: [...doctorToBeUpdated.qualifications],
+      memberships: [...doctorToBeUpdated.memberships],
+      skills: [...doctorToBeUpdated.skills],
+    });
+
+    if (!Object.values(doctorToBeUpdated).some((e) => e === '')) return setIsupdating(true);
+    setIsupdating(false);
+  }, [doctorToBeUpdated]);
+
+  useEffect(() => {
+    const citys = locations?.find((element) => element.country === newDoctor.location.country);
     setCity(citys?.locations);
-  }, [countrySelected]);
+  }, [newDoctor.location.country]);
 
   const {
     register,
@@ -70,14 +95,11 @@ export const Form = () => {
     handleDeleteSkill,
   } = useUpdater(newDoctor, setNewDoctor);
 
-  const [isLoading] = useIsLoading();
-
   const handleSelectHeadquarters = (e) => {
     const { name, value } = e.target;
-    if (name === 'country') setCountrySelected(e.currentTarget.value);
     setNewDoctor({
       ...newDoctor,
-      headquarter: { ...newDoctor.headquarter, [name]: value },
+      location: { ...newDoctor.location, [name]: value },
     });
   };
 
@@ -100,13 +122,21 @@ export const Form = () => {
     });
   };
 
+  const handleUpdateDoctor = () => {
+    handleClearForm();
+  };
+
   const submitForm = (data) => {
     if (!newDoctor.qualifications.length || !newDoctor.skills.length) return setShowError(true);
-    const prefix = 'Dr';
+    if (!newDoctor.email.endsWith(DOCTOR_EMAIL_DOMAIN)) {
+      return setEmailError(true);
+    }
+    setEmailError(false);
+
     const formattingForm = {
       ...data,
-      prefix,
-      headquarter: {
+      prefix: DOCTOR_PREFIX,
+      location: {
         city: data.city,
         country: data.country,
       },
@@ -118,8 +148,47 @@ export const Form = () => {
     };
 
     const { city, country, ...finalForm } = formattingForm;
-    // TO-DO: Final form to be send at backend
-    console.log('form', finalForm);
+    const form = new FormData();
+    for (const key in finalForm) {
+      form.append(key, finalForm[key]);
+    }
+
+    //TO-DO: add an axios call with POST method to the correspondent URL provided by the backend sending the form variable in 124 line
+    // ...
+
+    handleClearForm();
+  };
+
+  const handleClearForm = () => {
+    setDoctorToBeUpdated({
+      firstname: '',
+      lastname: '',
+      email: '',
+      birthdate: Date.now(),
+      area: '',
+      avatar: '',
+      phone: '',
+      location: { city: '', country: '' },
+      gender: '',
+      qualifications: [],
+      memberships: [],
+      skills: [],
+    });
+    setNewDoctor({
+      firstname: '',
+      lastname: '',
+      email: '',
+      birthdate: Date.now(),
+      area: '',
+      avatar: '',
+      phone: '',
+      location: { city: '', country: '' },
+      gender: '',
+      qualifications: [],
+      memberships: [],
+      skills: [],
+      password: Date.now(),
+    });
   };
 
   if (isLoading) return <Loading />;
@@ -169,8 +238,8 @@ export const Form = () => {
           <div className="select-container-date">
             <DatePicker
               id="birthdate"
-              name="birthdate"
               selected={newDoctor.birthdate}
+              name="birthdate"
               dateFormat="dd/MM/yyyy"
               className="input-container__date"
               onChange={(date) => setNewDoctor({ ...newDoctor, birthdate: date })}
@@ -224,7 +293,7 @@ export const Form = () => {
             <div className="avatar-container">
               <img
                 className="avatar-container__img"
-                src={avatarSelected || emptyAvatar}
+                src={avatarSelected || newDoctor.avatar || emptyAvatar}
                 alt="avatar"
               />
             </div>
@@ -238,13 +307,16 @@ export const Form = () => {
           <div>
             <input
               type="email"
-              name="email"
-              {...register('email', { required: 'Required' })}
+              {...register('email', { required: 'required' })}
               id="email"
+              name="email"
               onChange={handleChangeForm}
               className="form-doctors__input-text"
+              value={newDoctor.email}
             />
-            <p className="form-doctors__error-message">{errors.email?.message}</p>
+            <p className="form-doctors__error-message">
+              {errors.email?.message || emailError ? 'You must use only @drmebid.com' : null}
+            </p>
           </div>
         </div>
         <div className="form-doctors__input-container">
@@ -259,6 +331,7 @@ export const Form = () => {
               id="phone"
               onChange={handleChangeForm}
               className="form-doctors__input-text"
+              value={newDoctor.phone}
             />
             <p className="form-doctors__error-message">{errors.phone?.message}</p>
           </div>
@@ -275,7 +348,7 @@ export const Form = () => {
                 id="country"
                 {...register('country')}
                 onChange={handleSelectHeadquarters}
-                value={newDoctor.headquarter.country}
+                value={newDoctor.location.country}
                 className="form-doctors__input-select"
               >
                 <option value="" disabled defaultValue>
@@ -301,7 +374,7 @@ export const Form = () => {
                 {...register('city')}
                 id="city"
                 onChange={handleSelectHeadquarters}
-                value={newDoctor.headquarter.city}
+                value={newDoctor.location.city}
                 className="form-doctors__input-select"
               >
                 <option value="" disabled defaultValue>
@@ -473,8 +546,16 @@ export const Form = () => {
             })}
           </div>
         </div>
-        <Button color="danger" type="submit" className="form-doctors__btn-submitter">
-          Send
+        <Button
+          color="danger"
+          type={isUpdating ? 'button' : 'submit'}
+          className="form-doctors__btn-submitter"
+          onClick={isUpdating ? handleUpdateDoctor : null}
+        >
+          {isUpdating ? 'UPDATE' : 'CREATE'}
+        </Button>
+        <Button color="info" className="form-doctors__btn-clear" onClick={handleClearForm}>
+          CLEAR
         </Button>
       </form>
     </>

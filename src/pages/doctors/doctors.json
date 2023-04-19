@@ -5,10 +5,11 @@
     "firstname": "Perry",
     "lastname": "Barkley",
     "area": "Family physician",
+    "birthdate": "Tue Apr 18 1993 01:08:34 GMT-0500",
     "avatar": "https://images.unsplash.com/photo-1622253692010-333f2da6031d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGRvY3RvcnN8ZW58MHx8MHx8&auto=format&fit=crop&w=400&q=60",
     "email": "perrybarkley@drmebid.com",
     "phone": "7652819878",
-    "headquarter": {
+    "location": {
       "city": "Bogotá",
       "country": "Colombia"
     },
@@ -41,10 +42,11 @@
     "firstname": "Crystal",
     "lastname": "Fitzhug",
     "area": "Endocrinologist",
+    "birthdate": "Tue Apr 18 2023 01:08:34 GMT-0500",
     "avatar": "https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=400",
     "email": "crystalfitzhug@drmebid.com",
     "phone": "9826719101",
-    "headquarter": {
+    "location": {
       "city": "Cali",
       "country": "Colombia"
     },
@@ -74,12 +76,13 @@
     "id": "3",
     "prefix": "Dr.",
     "firstname": "Helen",
-    "lastname,": "Schefler",
+    "lastname": "Schefler",
     "area": "Oncologist",
+    "birthdate": "Tue Apr 18 2023 01:08:34 GMT-0500",
     "avatar": "https://images.pexels.com/photos/5327580/pexels-photo-5327580.jpeg?auto=compress&cs=tinysrgb&w=400",
     "email": "helenschefler@drmebid.com",
     "phone": "9826719101",
-    "headquarter": {
+    "location": {
       "city": "Monterrey",
       "country": "México"
     },
@@ -111,10 +114,11 @@
     "firstname": "Gail",
     "lastname": "Parrish",
     "area": "General Surgeon",
+    "birthdate": "Tue Apr 18 2023 01:08:34 GMT-0500",
     "avatar": "https://images.pexels.com/photos/5327656/pexels-photo-5327656.jpeg?auto=compress&cs=tinysrgb&w=400",
     "email": "gailparrish@drmebid.com",
     "phone": "9826719101",
-    "headquarter": {
+    "location": {
       "city": "Medellín",
       "country": "Colombia"
     },
@@ -146,10 +150,11 @@
     "firstname": "Charles",
     "lastname": "Gordon",
     "area": "Medical advisor",
+    "birthdate": "Tue Apr 18 2023 01:08:34 GMT-0500",
     "avatar": "/src/assets/charles.jpg",
     "email": "charlesgordon@drmebid.com",
     "phone": "9826719101",
-    "headquarter": {
+    "location": {
       "city": "New York",
       "country": "USA"
     },
@@ -181,10 +186,11 @@
     "firstname": "Matie",
     "lastname": "Delgado",
     "area": "General surgeon",
+    "birthdate": "Tue Apr 18 2023 01:08:34 GMT-0500",
     "avatar": "https://images.unsplash.com/photo-1623854767276-5025b88735d3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NzF8fGRvY3RvcnN8ZW58MHx8MHx8&auto=format&fit=crop&w=400&q=60",
     "email": "matiedelgado@drmebid.com",
     "phone": "9826719101",
-    "headquarter": {
+    "location": {
       "city": "New York",
       "country": "USA"
     },
@@ -215,10 +221,11 @@
     "firstname": "Verna",
     "lastname": "Leto",
     "area": "Cosmetic surgeon",
+    "birthdate": "Tue Apr 18 2023 01:08:34 GMT-0500",
     "avatar": "/src/assets/verna.jpg",
     "email": "vernaleto@drmebid.com",
     "phone": "9826719101",
-    "headquarter": {
+    "location": {
       "city": "Rosario",
       "country": "Argentina"
     },
@@ -247,13 +254,14 @@
   {
     "id": "8",
     "prefix": "Dr.",
-    "name": "Stephen",
+    "firstname": "Stephen",
     "lastname": "Walke",
     "area": "Neurologist",
+    "birthdate": "Tue Apr 18 2023 01:08:34 GMT-0500",
     "avatar": "/src/assets/gail.jpg",
     "email": "stephenwalke@drmebid.com",
     "phone": "9826719101",
-    "headquarter": {
+    "location": {
       "city": "Los Angeles",
       "country": "USA"
     },

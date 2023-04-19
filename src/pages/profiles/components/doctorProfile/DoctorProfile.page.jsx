@@ -2,16 +2,23 @@ import { useState } from 'react';
 import { BiMap, BiEdit } from 'react-icons/bi';
 import { BsTelephoneOutbound, BsGenderAmbiguous, BsCheckLg } from 'react-icons/bs';
 import { AiOutlineMail } from 'react-icons/ai';
+import { ImProfile } from 'react-icons/im';
+import { errorMessage } from '@utils/toastify/error.toastify';
+import { successMessage } from '@utils/toastify/success.toastify';
 import { Button } from '@components/buttons';
+import { AppontmetsListDoctor } from './components/AppontmetsListDoctor.doctorProfile';
+import { NoAppointmentsDoctor } from './components/NoAppointmentsDoctor.doctorProfile';
 import { phoneValidation, emailValidation } from '@constants/';
+import axios from 'axios';
 
 import './doctorProfile.page.scss';
+import { useEffect } from 'react';
 
 export const DoctorProfile = ({
-  id,
   name,
   area,
   avatar,
+  introduction,
   email,
   phone,
   headquarter,
@@ -29,25 +36,62 @@ export const DoctorProfile = ({
   const [prevData, setPrevData] = useState(dataStyleOn);
   const [emailStatus, setEmailStauts] = useState(email);
   const [phoneStatus, setPhoneSatus] = useState(phone);
+  const [introStatus, setIntroStatus] = useState(introduction);
   const [appointments, setAppointments] = useState([]);
+  const [file, setFile] = useState(null);
+  const [newAvatar, setNewAvatar] = useState(null);
 
+  const readFile = (file) => {
+    const reader = new FileReader();
+    reader.onload = (e) => setNewAvatar(e.target.result);
+    reader.readAsDataURL(file);
+  };
   //@Todo: assign link to backend to update actions
-  // const updateData = () => {
-  //   axios
-  //     .post('URL to back', {
-  //       email: emailStatus,
-  //       phone: phoneStatus,
-  //     })
-  //     .then((response) => {
-  //       alert(response);
-  //     });
-  // };
 
-  // const getAppointments = () => {
-  //   axios.get('URL to back').then((response) => {
-  //     setAppointments(response);
-  //   });
-  // };
+  const updateData = async () => {
+    try {
+      const token = localStorage.getItem('ACCESS_TOKEN');
+      const data = new FormData();
+      if (phoneStatus !== phone) {
+        data.append(phone, phoneStatus);
+      } else if (emailStatus !== email) {
+        data.append(email, emailStatus);
+      } else if (newAvatar) {
+        data.append(avatar, newAvatar);
+      } else if (introStatus !== introduction) {
+        data.append(introduction, introStatus);
+      }
+
+      const { status } = await axios.post('URL to back', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        },
+        body: data,
+      });
+      if (status > 399) return errorMessage('Something went wrong');
+      return successMessage('Your data was updated!');
+    } catch (error) {
+      return errorMessage(error.message);
+    }
+  };
+  useEffect(() => {
+    const token = localStorage.getItem('ACCESS_TOKEN');
+    const getAppointments = async () => {
+      try {
+        const response = await axios.get('URL to back', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (response.status > 399) return errorMessage('Something went wrong');
+        setAppointments(response.data);
+      } catch (error) {
+        return errorMessage(error.message);
+      }
+    };
+    getAppointments();
+  }, []);
 
   const handleEditOn = () => {
     setEditState(editStyleOn);
@@ -57,6 +101,7 @@ export const DoctorProfile = ({
   const handleEditOff = () => {
     setEditState(editStyleOff);
     setPrevData(dataStyleOn);
+    updateData();
   };
 
   const handleEmailChange = (event) => {
@@ -67,7 +112,15 @@ export const DoctorProfile = ({
     const newPhone = event.target.value;
     setPhoneSatus(newPhone);
   };
-
+  const handleIntro = (event) => {
+    const newIntro = event.target.value;
+    setIntroStatus(newIntro);
+  };
+  const handleFile = (event) => {
+    readFile(event.target.files[0]);
+    setFile(event.target.files);
+  };
+  const avatarImage = newAvatar ? newAvatar : avatar;
   return (
     <>
       <main className="doctor__profile-main">
@@ -78,8 +131,22 @@ export const DoctorProfile = ({
             </div>
             <div className="avatar__main-container ">
               <picture className="profile__img-container">
-                <img src={avatar} alt="Profile image" />
+                <img src={avatarImage} alt="Profile image" />
               </picture>
+              <div className={`${editState}`}>
+                <label htmlFor="newAvatar" className="avatar__label">
+                  Edit profile image
+                </label>
+                <input
+                  className="avatar__input"
+                  type="file"
+                  accept="image/*"
+                  name="newAvatar"
+                  id="newAvatar"
+                  max-size="200"
+                  onChange={handleFile}
+                />
+              </div>
             </div>
 
             <div className="main__doctor-info">
@@ -116,7 +183,23 @@ export const DoctorProfile = ({
               ))}
             </div>
 
-            <div className="email__info">
+            <div className="intro__info info__container">
+              <div className="intro__title-container">
+                <h3>Introduction</h3>
+                <ImProfile size={18} className="icons" />
+              </div>
+              <div className={editState}>
+                <label htmlFor="intro">Enter your introduction</label>
+                <textarea id="intro" name="intro" value={introStatus} onChange={handleIntro} />
+              </div>
+              <div className={`info__containers ${prevData}`}>
+                <div className="intro-paragraph">
+                  <p>{introStatus}</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="email__info info__container">
               <h3>Email</h3>
               <div className={editState}>
                 <input
@@ -134,7 +217,7 @@ export const DoctorProfile = ({
               </div>
             </div>
 
-            <div className="phone__info">
+            <div className="phone__info info__container">
               <h3>Phone</h3>
               <div className={editState}>
                 <input
@@ -151,15 +234,22 @@ export const DoctorProfile = ({
                 <p>{phoneStatus}</p>
               </div>
             </div>
+            <Button
+              variant="solid"
+              color="info"
+              className={`${editState} save__button`}
+              onClick={handleEditOff}
+            >
+              Save changes
+            </Button>
           </article>
-          <Button
-            variant="solid"
-            color="info"
-            className={`${editState} save__button`}
-            onClick={handleEditOff}
-          >
-            Save changes
-          </Button>
+          <article className="appointments__section-doctor">
+            {appointments.length ? (
+              <AppontmetsListDoctor appointments={appointments} />
+            ) : (
+              <NoAppointmentsDoctor />
+            )}
+          </article>
         </section>
       </main>
     </>
