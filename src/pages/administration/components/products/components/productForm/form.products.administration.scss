@@ -1,0 +1,134 @@
+@import '@sass/abstract/mixins.abstract.scss';
+@import '@sass/base/alerts.base.scss';
+
+.products-form__h1 {
+  @include heading($color: map-get($typography-colors, 'black'), $size: $size-xl);
+  text-align: left;
+  margin: 1rem 0;
+}
+
+.form-products {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+
+  @media screen and (min-width: 800px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 40px 20px;
+  }
+
+  .form-products__input-container,
+  .form-products__select-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .form-products-selects-container {
+    display: flex;
+    gap: 10px;
+  }
+
+  .form-products__label {
+    @include subtitle(
+      $color: map-get($typography-colors, 'black'),
+      $size: $size-sm,
+      $weight: weight-typo('poppins', 'light')
+    );
+  }
+
+  .form-products__input-text {
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.291);
+    padding: 0.4rem;
+  }
+
+  .form-products__input-select {
+    border: 1px solid rgba(0, 0, 0, 0.291);
+    width: 100%;
+    padding: 0.4rem;
+  }
+
+  .form-products__image-selection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 300px;
+
+    .form-doctor__btn-upload-image {
+      @include paragraph($color: map-get($typography-colors, 'black'), $size: $size-xs);
+      background-color: rgb(240, 237, 237);
+      padding: 0.4rem 0.8rem;
+    }
+  }
+
+  .form-products-select-container {
+    @media screen and (min-width: 500px) {
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+    }
+  }
+
+  .form-products__input-with-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+
+    .form-products__button-add {
+      padding: 0.5rem 0.5rem;
+    }
+  }
+
+  .form-products-items-added-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .form-products-image-container {
+    width: 40px;
+    .form-products-image-container__img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+
+  .form-products__btn-submitter,
+  .form-products__btn-clear {
+    width: 300px;
+  }
+
+  .form-products__error-message {
+    @include paragraph($size: $size-xxs);
+    color: alert-color($key: 'danger', $variant: 'base');
+  }
+
+  .input-container-textarea {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .input-container__textarea {
+      border: solid 1px rgba(0, 0, 0, 0.372);
+      padding: 1rem;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+  .form-products__btn-upload-image {
+    @include paragraph($color: map-get($typography-colors, 'black'), $size: $size-xs);
+    background-color: rgb(240, 237, 237);
+    padding: 0.4rem 0.8rem;
+  }
+}

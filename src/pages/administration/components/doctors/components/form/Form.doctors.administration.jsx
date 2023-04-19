@@ -32,9 +32,9 @@ export const Form = () => {
     skills: [],
     password: Date.now(),
   });
+  const [avatarSelected, setAvatarSelected] = useState();
   const { doctorToBeUpdated, setDoctorToBeUpdated } = useDoctorContext();
   const [showError, setShowError] = useState(false);
-  const [avatarSelected, setAvatarSelected] = useState();
   const [city, setCity] = useState([]);
   const [isUpdating, setIsupdating] = useState(false);
   const [emailError, setEmailError] = useState(false);
@@ -103,17 +103,6 @@ export const Form = () => {
     });
   };
 
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    const avatarURL = URL.createObjectURL(file);
-    setAvatarSelected(avatarURL);
-    setNewDoctor({
-      ...newDoctor,
-      avatar: file,
-    });
-    onChange(e);
-  };
-
   const handleChangeForm = (e) => {
     const { name, value } = e.target;
     setNewDoctor({
@@ -123,7 +112,37 @@ export const Form = () => {
   };
 
   const handleUpdateDoctor = () => {
-    handleClearForm();
+    const { avatar } = newDoctor;
+    if (!newDoctor.qualifications.length || !newDoctor.skills.length) return setShowError(true);
+    if (!newDoctor.email.endsWith(DOCTOR_EMAIL_DOMAIN)) return setEmailError(true);
+    if (typeof avatar === 'string') {
+      console.log('isString');
+      const form = new FormData();
+      const { avatar, ...toUpdate } = newDoctor;
+      for (const key in toUpdate) {
+        form.append(key, toUpdate[key]);
+      }
+      return;
+      //TO-DO: add an axios call with UPDATE method to the correspondent URL provided by the backend sending the form variable in 131 line
+      // ...
+    }
+    setEmailError(false);
+
+    console.log('isNotString');
+
+    //handleClearForm();
+  };
+
+  const handleImageUpload = (e) => {
+    console.log(newDoctor.avatar);
+    const file = e.target.files[0];
+    const avatarURL = URL.createObjectURL(file);
+    setAvatarSelected(avatarURL);
+    setNewDoctor({
+      ...newDoctor,
+      avatar: file,
+    });
+    onChange(e);
   };
 
   const submitForm = (data) => {
@@ -160,6 +179,7 @@ export const Form = () => {
   };
 
   const handleClearForm = () => {
+    setAvatarSelected('');
     setDoctorToBeUpdated({
       firstname: '',
       lastname: '',
@@ -293,7 +313,13 @@ export const Form = () => {
             <div className="avatar-container">
               <img
                 className="avatar-container__img"
-                src={avatarSelected || newDoctor.avatar || emptyAvatar}
+                src={
+                  isUpdating
+                    ? newDoctor.avatar instanceof File
+                      ? avatarSelected
+                      : newDoctor.avatar
+                    : avatarSelected || emptyAvatar
+                }
                 alt="avatar"
               />
             </div>

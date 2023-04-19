@@ -1,4 +1,4 @@
-export const categoryAapter = (categories) => {
+export const categoryAdapter = (categories) => {
   if (Array.isArray(categories)) {
     return categories.map(({ id, category }) => {
       return {

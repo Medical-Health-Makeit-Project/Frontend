@@ -1,3 +1,3 @@
-export * from './Form.doctors.administration';
+export * from './Form.products.administration';
 export * from './hooks';
 export * from './schema';

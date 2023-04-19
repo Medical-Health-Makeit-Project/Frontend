@@ -1,7 +1,7 @@
 /* eslint-disable no-shadow */
 import useSWR from 'swr';
 import { ALL_PRODUCTS, CATEGORIES, PRODUCTS_BY_CATEGORY } from '@constants/';
-import { getProducts, getCategories, getProductsByCategory } from '../service';
+import { getProducts, getCategories, getProductsByCategory } from './products.service';
 
 export const useProducts = (category) => {
   const {
