@@ -1,6 +1,7 @@
 import { LayoutAdmin } from './components/layout';
 import { Welcome } from './components/welcome';
 import { Doctors } from './components/doctors';
+import { Products } from './components/products/Products.administration';
 import { Loading } from '@components/loading';
 import { useIsLoading } from '@hooks';
 import { PrivateRoutes } from '@routes';
@@ -16,6 +17,7 @@ export const Dashboard = () => {
       <Route path="/" element={<LayoutAdmin />}>
         <Route index path={PrivateRoutes.ADMIN.HOME} element={<Welcome />} />
         <Route path={PrivateRoutes.ADMIN.DOCTORS} element={<Doctors />} />
+        <Route path={PrivateRoutes.ADMIN.PRODUCTS} element={<Products />} />
       </Route>
     </Routes>
   );

@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { productAdapter, categoryAapter } from '../adapters';
+import { categoryAdapter } from './categories.adapter';
+import { productAdapter } from './products.adapter';
 
 export const getProducts = async (URL) => {
   const response = await axios.get(URL);
@@ -22,6 +23,6 @@ export const getProductById = async (URL, id) => {
 
 export const getCategories = async (URL) => {
   const response = await axios.get(URL);
-  const categoriesAdapted = categoryAapter(response.data);
+  const categoriesAdapted = categoryAdapter(response.data);
   return categoriesAdapted;
 };
