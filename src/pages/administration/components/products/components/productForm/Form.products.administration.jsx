@@ -7,22 +7,10 @@ import { useProductsContext } from '../../context/products.context';
 import { errorMessage } from '@utils/toastify/error.toastify';
 import emptyImage from '@assets/empty-avatar.png';
 import './form.products.administration.scss';
-import * as Yup from 'yup';
-
-const schemaYup = Yup.object().shape({
-  product: Yup.string().required(),
-  label: Yup.string().required(),
-  description: Yup.string().required(),
-  price: Yup.number().required(),
-  stock: Yup.number().required(),
-  dose: Yup.string().required(),
-  discount: Yup.number().required(),
-  category: Yup.string().required(),
-  newCategory: Yup.string().required(),
-});
 
 export const Form = () => {
   const [newProduct, setNewProduct] = useState({
+    id: '',
     product: '',
     label: '',
     description: '',
@@ -41,6 +29,7 @@ export const Form = () => {
 
   useEffect(() => {
     setNewProduct({
+      id: ProductToBeUpdated.id,
       product: ProductToBeUpdated.product,
       label: ProductToBeUpdated.label,
       description: ProductToBeUpdated.description,
@@ -99,7 +88,7 @@ export const Form = () => {
       for (const key in toUpdate) {
         form.append(key, toUpdate[key]);
       }
-      //TO-DO: add an axios call with UPDATE method to the correspondent URL provided by the backend sending the form variable in 81 line
+      //TO-DO: add an axios call with UPDATE method to the correspondent URL provided by the backend sending the form variable in 87 line
       // ...
       handleClearForm();
       return;
@@ -108,10 +97,47 @@ export const Form = () => {
     for (const key in newProduct) {
       form.append(key, newProduct[key]);
     }
-    //TO-DO: add an axios call with UPDATE method to the correspondent URL provided by the backend sending the form variable in 91 line
+    //TO-DO: add an axios call with UPDATE method to the correspondent URL provided by the backend sending the form variable in 94 line
     // ...
     handleClearForm();
     return;
+  };
+
+  const handleSubmitForm = async (e) => {
+    e.preventDefault();
+    try {
+      const { category, newCategory } = newProduct;
+      if (category === 'Other' && newCategory === '')
+        return errorMessage('You must provide a new category name');
+      if (category !== 'Other') {
+        const { newCategory, ...rest } = newProduct;
+        if (Object.values(rest).some((e) => e === ''))
+          return errorMessage('You must complete the fields');
+        console.log('new product with no new category');
+        const form = new FormData();
+        for (const key in newProduct) {
+          form.append(key, newProduct[key]);
+        }
+        //TO-DO: add an axios call with POST method to the correspondent URL provided by the backend sending the form variable in 115 line
+        for (const key of form.keys()) {
+          console.log(key);
+        }
+        handleClearForm();
+        return;
+      }
+      if (Object.values(newProduct).some((e) => e === ''))
+        return errorMessage('You must complete the fields');
+      console.log('new product with new category');
+      const form = new FormData();
+      for (const key in newProduct) {
+        form.append(key, newProduct[key]);
+      }
+      //TO-DO: add an axios call with POST method to the correspondent URL provided by the backend sending the form variable in 125 line
+      handleClearForm();
+      return;
+    } catch (error) {
+      errorMessage(error.message);
+    }
   };
 
   const handleClearForm = () => {
@@ -124,7 +150,7 @@ export const Form = () => {
       stock: '',
       image: '',
       dose: '',
-      discount: 0,
+      discount: '',
       category: '',
     });
     setNewProduct({
@@ -135,7 +161,7 @@ export const Form = () => {
       stock: '',
       image: '',
       dose: '',
-      discount: 0,
+      discount: '',
       category: '',
       newCategory: '',
     });
@@ -148,14 +174,14 @@ export const Form = () => {
       <h1 className="products-form__h1">Products</h1>
       <form className="form-products">
         <div className="form-products__input-container">
-          <label htmlFor="ProductName" className="form-products__label">
+          <label htmlFor="product" className="form-products__label">
             Product name:
           </label>
           <div>
             <input
               type="text"
-              name="productName"
-              id="productName"
+              name="product"
+              id="product"
               className="form-products__input-text"
               onChange={handleChangeForm}
               value={newProduct.product}
@@ -181,7 +207,7 @@ export const Form = () => {
         </div>
         <div className="form-products__input-container">
           <label htmlFor="price" className="form-products__label">
-            Price:
+            Price <span className="dose-example">(USD)</span>:
           </label>
           <div>
             <input
@@ -333,7 +359,7 @@ export const Form = () => {
           color="danger"
           type={isUpdating ? 'button' : 'submit'}
           className="form-products__btn-submitter"
-          onClick={isUpdating ? handleUpdateDoctor : null}
+          onClick={isUpdating ? handleUpdateDoctor : handleSubmitForm}
         >
           {isUpdating ? 'UPDATE' : 'CREATE'}
         </Button>
