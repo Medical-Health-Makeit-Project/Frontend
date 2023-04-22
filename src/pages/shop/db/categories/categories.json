@@ -1,18 +1,18 @@
 [
   {
     "id": 1,
-    "category": "Beauty"
+    "name": "Beauty"
   },
   {
     "id": 2,
-    "category": "Toilet"
+    "name": "Toilet"
   },
   {
     "id": 3,
-    "category": "Pills"
+    "name": "Pills"
   },
   {
     "id": 4,
-    "category": "First Aid"
+    "name": "First Aid"
   }
 ]

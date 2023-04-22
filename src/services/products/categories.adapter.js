@@ -1,14 +1,14 @@
 export const categoryAdapter = (categories) => {
   if (Array.isArray(categories)) {
-    return categories.map(({ id, category }) => {
+    return categories.map(({ id, name }) => {
       return {
         id: id,
-        category: category,
+        category: name,
       };
     });
   }
   return {
     id: categories.id,
-    category: categories.category,
+    category: categories.name,
   };
 };

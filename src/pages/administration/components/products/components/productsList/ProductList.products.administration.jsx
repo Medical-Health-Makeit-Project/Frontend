@@ -15,6 +15,7 @@ export const ProductsList = () => {
 
   const handleSetFormToUpdate = (product) => {
     setProductToBeUpdated({
+      id: product.id,
       product: product.product,
       label: product.label,
       description: product.description,
@@ -51,7 +52,7 @@ export const ProductsList = () => {
     <section className="product-list">
       {products?.map((product) => {
         return (
-          <article key={uuid()} className="product-list__item">
+          <article key={product.id} className="product-list__item">
             <div className="product-list__image-container">
               <img src={product.image} alt="Image" className="image" />
             </div>

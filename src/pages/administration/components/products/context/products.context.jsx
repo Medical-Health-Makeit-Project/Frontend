@@ -6,6 +6,7 @@ const ProductsStore = createContext();
 
 export const ProductsContext = ({ children }) => {
   const [ProductToBeUpdated, setProductToBeUpdated] = useState({
+    id: '',
     product: '',
     label: '',
     description: '',
@@ -13,7 +14,7 @@ export const ProductsContext = ({ children }) => {
     stock: '',
     image: '',
     dose: '',
-    discount: 0,
+    discount: '',
     category: '',
   });
 
