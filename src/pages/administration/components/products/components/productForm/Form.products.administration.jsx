@@ -113,21 +113,16 @@ export const Form = () => {
         const { newCategory, ...rest } = newProduct;
         if (Object.values(rest).some((e) => e === ''))
           return errorMessage('You must complete the fields');
-        console.log('new product with no new category');
         const form = new FormData();
         for (const key in newProduct) {
           form.append(key, newProduct[key]);
         }
         //TO-DO: add an axios call with POST method to the correspondent URL provided by the backend sending the form variable in 115 line
-        for (const key of form.keys()) {
-          console.log(key);
-        }
         handleClearForm();
         return;
       }
       if (Object.values(newProduct).some((e) => e === ''))
         return errorMessage('You must complete the fields');
-      console.log('new product with new category');
       const form = new FormData();
       for (const key in newProduct) {
         form.append(key, newProduct[key]);
