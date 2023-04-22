@@ -1,163 +1,167 @@
-import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import {
+  useStripe,
+  useElements,
+  CardNumberElement,
+  CardExpiryElement,
+  CardCvcElement,
+} from '@stripe/react-stripe-js';
+import Swal from 'sweetalert2';
 import { Button } from '@components/buttons';
-import { toast } from 'react-toastify';
+import { emptyCart } from '@redux/features/cartSlice.feature';
+import { PublicRoutes } from '@routes/';
+import { errorMessage } from '@utils/toastify/error.toastify';
+import { BsCreditCard2Back } from 'react-icons/bs';
+import { MdOutlineUpdate } from 'react-icons/md';
+import { TbPassword } from 'react-icons/tb';
+
 import './form.payment.scss';
 
-const locations = {
-  Colombia: ['Bogotá', 'Cali', 'Medellin', 'Bucaramanga', 'Pereira'],
-  USA: ['New York', 'Los Angeles', 'Miami'],
-  Mexico: ['CDMX', 'Guadalajara', 'Monterrey'],
-  Argentina: ['Buenos Aires', 'Rosario'],
-};
-
 export const Form = () => {
-  const [countrySelected, setCountrySelected] = useState('Colombia');
-  const [citySelected, setCitySelected] = useState(locations.Colombia);
-  const [userData, setUserData] = useState({
-    name: '',
-    lastname: '',
-    email: '',
-    phone: '',
-    idType: '',
-    idNumber: '',
-    country: 'Colombia',
-    city: 'Bogota',
-    address: '',
-  });
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const client = useSelector((state) => state.auth);
+  const cart = useSelector((state) => state.cart);
+  const { products, appointments } = cart;
 
-  useEffect(() => {
-    Object.entries(locations).map(([key, value]) => {
-      if (key === countrySelected) return setCitySelected(value);
-    });
-  }, [countrySelected]);
+  const { username, nationality, email, phone } = client;
+  const elements = useElements();
+  const stripe = useStripe();
 
-  const handleSelectedCountry = (e) => {
-    setCountrySelected(e.currentTarget.value);
-    handleOnChange(e);
-  };
+  let data = {};
+  let productsSubTotal = [];
+  let appointmentsSubTotal = [];
 
-  const handleOnChange = (e) => {
-    setUserData({
-      ...userData,
-      [e.target.name]: e.target.value,
-    });
-  };
+  if (appointments.length) {
+    data.appointments = appointments;
 
-  const handlerSubmit = (e) => {
-    e.preventDefault();
-    if (Object.values(userData).some((e) => e === ''))
-      toast.error(`We can't send your products if you don't complete the form.`, {
-        position: 'top-right',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'colored',
+    for (let appointment = 0; appointment < appointments.length; appointment++) {
+      const finalPrice = appointments[appointment].appointmentData.appointmentPrice;
+      appointmentsSubTotal.push(finalPrice);
+    }
+  }
+
+  if (products.length) {
+    data.products = products;
+    for (let product = 0; product < products.length; product++) {
+      const finalPrice =
+        (1 - products[product].discount / 100) *
+        products[product].price *
+        products[product].quantity;
+
+      productsSubTotal.push(parseFloat(finalPrice.toFixed(2)));
+    }
+  }
+  const totalProducts = productsSubTotal.length ? productsSubTotal.reduce((a, b) => a + b) : 0;
+  const totalAppointments = appointmentsSubTotal.length
+    ? appointmentsSubTotal.reduce((a, b) => a + b)
+    : 0;
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const token = localStorage.getItem('ACCESS_TOKEN');
+
+    try {
+      const { error, paymentMethod } = await stripe.createPaymentMethod({
+        type: 'card',
+        card: elements.getElement(CardNumberElement),
       });
-    return toast.clearWaitingQueue();
+      if (error) {
+        if (error.code === 'authentication_required')
+          return errorMessage('The authentication is required');
+      }
+      const { response } = await axios.post('URL to back', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: {
+          paymentMethod,
+          data,
+          amount: parseFloat(totalAppointments + totalProducts).toFixed(2),
+        },
+      });
+      if (response.status > 399)
+        return errorMessage('Something went wrong, the order was rejected!');
+      if (response.statusText === 'OK') {
+        dispatch(emptyCart());
+        Swal.fire({
+          icon: 'success',
+          title: 'Your order was created!',
+          text: false,
+          showCancelButton: false,
+          confirmButtonText: 'Go to home',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            return navigate(PublicRoutes.HOME);
+          }
+        });
+      }
+      return elements.getElement(CardNumberElement).clear();
+    } catch (error) {
+      errorMessage(error.message);
+    }
   };
 
   return (
-    <div className="form-container">
-      <form className="form" onSubmit={handlerSubmit}>
-        <label className="label" htmlFor="name">
-          Your Name
-        </label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          minLength="3"
-          pattern="[A-Za-z\s]{3,}"
-          onChange={handleOnChange}
-          placeholder="John"
-        />
-        <label className="label" htmlFor="lastname">
-          Your lastname
-        </label>
-        <input
-          type="text"
-          id="lastname"
-          name="lastname"
-          minLength="3"
-          pattern="[A-Za-z\s]{3,}"
-          onChange={handleOnChange}
-          placeholder="Doe"
-        />
-        <label className="label" htmlFor="email">
-          Your Email
-        </label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}"
-          placeholder="john@doe.com"
-          onChange={handleOnChange}
-        />
-        <label className="label" htmlFor="phone">
-          Your Phone
-        </label>
-        <input
-          type="text"
-          id="phone"
-          name="phone"
-          pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$"
-          onChange={handleOnChange}
-          placeholder="321 678 7878"
-        />
-        <label className="label" htmlFor="idType">
-          Identification Type
-        </label>
-        <select className="select" name="idType" id="idType" onChange={handleOnChange}>
-          <option value="ID">ID</option>
-          <option value="passport">Passport</option>
-        </select>
-        <label className="label" htmlFor="idNumber">
-          Identification Number
-        </label>
-        <input
-          type="text"
-          id="idNumber"
-          name="idNumber"
-          pattern="[0-9]+{5,10}"
-          onChange={handleOnChange}
-          placeholder="0000000000"
-        />
-        <label className="label" htmlFor="country">
-          Your Country
-        </label>
-        <select className="select" name="country" id="country" onChange={handleSelectedCountry}>
-          {Object.keys(locations).map((e) => {
-            return (
-              <option value={e} key={e}>
-                {e}
-              </option>
-            );
-          })}
-        </select>
-        <label className="label" htmlFor="city">
-          Your City
-        </label>
-        <select className="select" name="city" id="city" onChange={handleOnChange}>
-          {citySelected.map((city) => {
-            return (
-              <option value={city} key={city}>
-                {city}
-              </option>
-            );
-          })}
-        </select>
-        <label className="label" htmlFor="address">
-          Your Address
-        </label>
-        <input type="text" id="address" name="address" onChange={handleOnChange} />
-        <Button type="submit" color="danger" className="button-checkout">
-          Place order
+    <form onSubmit={handleSubmit} className="form__container-payment">
+      <section className="resume__container">
+        <article className="resume__card">
+          <div>
+            <h4>Name</h4>
+            <p>{username}</p>
+          </div>
+          <div>
+            <h4>Location</h4>
+            <p>{nationality}</p>
+          </div>
+          <div>
+            <h4>Email</h4>
+            <p>{email}</p>
+          </div>
+          <div>
+            <h4>Phone</h4>
+            <p>{phone}</p>
+          </div>
+          <div>
+            <h4>Appointments Sub-total</h4>
+            <p>{appointments.length ? `$${totalAppointments}` : '$0'}</p>
+          </div>
+          <div>
+            <h4>Products Sub-total</h4>
+            <p>{products.length ? `$${parseFloat(totalProducts.toFixed(2))}` : '$0'}</p>
+          </div>
+          <div className="total__container">
+            <h4>Total</h4>
+            <p>{`$${parseFloat(totalAppointments + totalProducts).toFixed(2)}`}</p>
+          </div>
+        </article>
+      </section>
+      <div className="payment__input-placer">
+        <div className="payment__input-container">
+          <p>Card number</p>
+          <div className="input__element-container">
+            <BsCreditCard2Back />
+            <CardNumberElement className="card__number-container" />
+          </div>
+          <p>Expiry</p>
+          <div className="input__element-container">
+            <MdOutlineUpdate />
+            <CardExpiryElement className="card__expiry-container" />
+          </div>
+          <p>CVC</p>
+          <div className="input__element-container">
+            <TbPassword />
+            <CardCvcElement className="card__cvc-container" />
+          </div>
+        </div>
+      </div>
+      <div className="button__pay-container">
+        <Button color="danger" type="submit" className="button__pay">
+          Order
         </Button>
-      </form>
-    </div>
+      </div>
+    </form>
   );
 };

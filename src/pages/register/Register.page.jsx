@@ -38,7 +38,6 @@ export const Register = () => {
   //  //to-do: backend link
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(userData);
     if (userData.password === userData.repeatPassword) {
       if (userData.termsAndConditions) {
         const data = new FormData();
