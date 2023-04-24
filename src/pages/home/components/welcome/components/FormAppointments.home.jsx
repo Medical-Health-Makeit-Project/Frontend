@@ -37,6 +37,10 @@ export const FormAppointments = () => {
           type="email"
           placeholder="Email address"
           className="welcome-form__input-email"
+          peekNextMonth
+          showMonthDropdown
+          showYearDropdown
+          dropdownMode="select"
           pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}"
           required
         />
