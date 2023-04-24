@@ -76,7 +76,6 @@ export const Register = () => {
     repeatPassword,
     termsAndConditions,
   } = userData;
-  console.log(userData.birthday);
   return (
     <section className="register__container">
       <Heading title="Register" image={headingImage} />
