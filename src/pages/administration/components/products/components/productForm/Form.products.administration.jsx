@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
+import { useNavigate } from 'react-router-dom';
 import { Loading } from '@components/loading';
 import { Button } from '@components/buttons';
+import { postProducts, updateProducts } from './services';
 import { useIsLoading } from '@hooks';
 import { useProductsContext } from '../../context/products.context';
-import { errorMessage } from '@utils/toastify/error.toastify';
+import { POST_PRODUCTS, TOKEN, UPDATE_PRODUCTS } from '@constants';
+import { PublicRoutes } from '@routes';
+import { errorMessage, successMessage } from '@utils/toastify';
 import emptyImage from '@assets/empty-avatar.png';
 import './form.products.administration.scss';
 
@@ -22,10 +26,12 @@ export const Form = () => {
     category: '',
     newCategory: '',
   });
+
   const [imageSelected, setImageSelected] = useState('');
   const [isUpdating, setIsupdating] = useState(false);
   const { isLoading } = useIsLoading();
   const { categories, ProductToBeUpdated, setProductToBeUpdated } = useProductsContext();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setNewProduct({
@@ -80,27 +86,32 @@ export const Form = () => {
     });
   };
 
-  const handleUpdateDoctor = () => {
-    const { image } = newProduct;
-    if (typeof image === 'string') {
+  const handleUpdateProduct = async () => {
+    try {
+      const isToken = localStorage.getItem(TOKEN);
+      if (!isToken) return navigate(PublicRoutes.LOGIN);
+      const { image } = newProduct;
+      if (typeof image === 'string') {
+        const { image, category, newCategory, ...toUpdate } = newProduct;
+        const form = new FormData();
+        for (const key in toUpdate) {
+          form.append(key, toUpdate[key]);
+        }
+        await updateProducts(UPDATE_PRODUCTS, form, isToken);
+        successMessage('Product updated succesfully!');
+        return handleClearForm();
+      }
+      const { category, newCategory, ...toUpdate } = newProduct;
       const form = new FormData();
-      const { image, ...toUpdate } = newProduct;
       for (const key in toUpdate) {
         form.append(key, toUpdate[key]);
       }
-      //TO-DO: add an axios call with UPDATE method to the correspondent URL provided by the backend sending the form variable in 87 line
-      // ...
-      handleClearForm();
-      return;
+      await updateProducts(UPDATE_PRODUCTS, form, isToken);
+      successMessage('Product updated succesfully!');
+      return handleClearForm();
+    } catch (error) {
+      errorMessage(error.response.data || error.message);
     }
-    const form = new FormData();
-    for (const key in newProduct) {
-      form.append(key, newProduct[key]);
-    }
-    //TO-DO: add an axios call with UPDATE method to the correspondent URL provided by the backend sending the form variable in 94 line
-    // ...
-    handleClearForm();
-    return;
   };
 
   const handleSubmitForm = async (e) => {
@@ -110,28 +121,34 @@ export const Form = () => {
       if (category === 'Other' && newCategory === '')
         return errorMessage('You must provide a new category name');
       if (category !== 'Other') {
-        const { newCategory, ...rest } = newProduct;
+        const { newCategory, id, ...rest } = newProduct;
         if (Object.values(rest).some((e) => e === ''))
           return errorMessage('You must complete the fields');
         const form = new FormData();
-        for (const key in newProduct) {
-          form.append(key, newProduct[key]);
+        for (const key in rest) {
+          form.append(key, rest[key]);
         }
-        //TO-DO: add an axios call with POST method to the correspondent URL provided by the backend sending the form variable in 115 line
-        handleClearForm();
-        return;
+        const isToken = localStorage.getItem(TOKEN);
+        if (!isToken) return navigate(PublicRoutes.LOGIN);
+        await postProducts(POST_PRODUCTS, form, isToken);
+        successMessage('Product created succesfully!');
+        return handleClearForm();
       }
-      if (Object.values(newProduct).some((e) => e === ''))
+      const { id, ...remainingProps } = newProduct;
+      if (Object.values(remainingProps).some((e) => e === ''))
         return errorMessage('You must complete the fields');
       const form = new FormData();
-      for (const key in newProduct) {
-        form.append(key, newProduct[key]);
+      for (const key in remainingProps) {
+        form.append(key, remainingProps[key]);
       }
-      //TO-DO: add an axios call with POST method to the correspondent URL provided by the backend sending the form variable in 125 line
-      handleClearForm();
-      return;
+      const isToken = localStorage.getItem(TOKEN);
+      if (!isToken) return navigate(PublicRoutes.LOGIN);
+      await postProducts(POST_PRODUCTS, form, isToken);
+      successMessage('Product created succesfully!');
+      return handleClearForm();
     } catch (error) {
-      errorMessage(error.message);
+      errorMessage(error.response.data);
+      return handleClearForm();
     }
   };
 
@@ -275,15 +292,16 @@ export const Form = () => {
               className="form-products__input-select"
               onChange={handleChangeForm}
               value={newProduct.category}
+              disabled={isUpdating}
             >
               <option value="" disabled defaultValue>
                 --Choose a category--
               </option>
               <option>Other</option>
-              {categories?.map((e) => {
+              {categories?.map(({ id, category }) => {
                 return (
-                  <option key={uuid()} value={e}>
-                    {e}
+                  <option key={id} value={category}>
+                    {category}
                   </option>
                 );
               })}
@@ -354,7 +372,7 @@ export const Form = () => {
           color="danger"
           type={isUpdating ? 'button' : 'submit'}
           className="form-products__btn-submitter"
-          onClick={isUpdating ? handleUpdateDoctor : handleSubmitForm}
+          onClick={isUpdating ? handleUpdateProduct : handleSubmitForm}
         >
           {isUpdating ? 'UPDATE' : 'CREATE'}
         </Button>

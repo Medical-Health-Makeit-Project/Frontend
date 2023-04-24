@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import useSWR from 'swr';
+import { useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import { useForm } from 'react-hook-form';
 import { IoIosClose } from 'react-icons/io';
@@ -11,8 +12,18 @@ import { locationsSWR } from '@services/locations';
 import { useUpdater } from './hooks/useUpdater.hooks';
 import { useIsLoading } from '@hooks';
 import { createDoctorSchema } from './schema';
-import { DOCTORS_AREA, DOCTOR_EMAIL_DOMAIN, DOCTOR_PREFIX } from '@constants';
+import {
+  DOCTORS_AREA,
+  DOCTOR_EMAIL_DOMAIN,
+  DOCTOR_PREFIX,
+  POST_DOCTOR,
+  TOKEN,
+  UPDATE_DOCTOR,
+} from '@constants';
+import { PublicRoutes } from '@routes';
+import { postDoctor, updateDoctor } from '../../services';
 import { useDoctorContext } from '../../context/doctors.context';
+import { errorMessage, successMessage } from '@utils/toastify';
 import emptyAvatar from '@assets/empty-avatar.png';
 import './form.doctors.administration.scss';
 
@@ -32,7 +43,7 @@ export const Form = () => {
     skills: [],
     password: Date.now(),
   });
-  const [avatarSelected, setAvatarSelected] = useState();
+  const [avatarSelected, setAvatarSelected] = useState('');
   const { doctorToBeUpdated, setDoctorToBeUpdated } = useDoctorContext();
   const [showError, setShowError] = useState(false);
   const [city, setCity] = useState([]);
@@ -43,10 +54,13 @@ export const Form = () => {
     revalidateOnFocus: false,
     revalidateIfStale: false,
   });
+
   const [isLoading] = useIsLoading();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setNewDoctor({
+      id: doctorToBeUpdated.id,
       firstname: doctorToBeUpdated.firstname,
       lastname: doctorToBeUpdated.lastname,
       email: doctorToBeUpdated.email,
@@ -111,31 +125,61 @@ export const Form = () => {
     });
   };
 
-  const handleUpdateDoctor = () => {
-    const { avatar } = newDoctor;
-    if (!newDoctor.qualifications.length || !newDoctor.skills.length) return setShowError(true);
-    if (!newDoctor.email.endsWith(DOCTOR_EMAIL_DOMAIN)) return setEmailError(true);
-    if (typeof avatar === 'string') {
-      const form = new FormData();
-      const { avatar, ...toUpdate } = newDoctor;
-      for (const key in toUpdate) {
-        form.append(key, toUpdate[key]);
+  const handleUpdateDoctor = async () => {
+    try {
+      const ACCESS_TOKEN = localStorage.getItem(TOKEN);
+      if (!ACCESS_TOKEN) return navigate(PublicRoutes.LOGIN);
+      const { avatar } = newDoctor;
+      if (!newDoctor.qualifications.length || !newDoctor.skills.length) return setShowError(true);
+      if (!newDoctor.email.endsWith(DOCTOR_EMAIL_DOMAIN)) return setEmailError(true);
+      if (typeof avatar === 'string') {
+        const form = new FormData();
+        const { avatar, location, ...toUpdate } = newDoctor;
+        const formattedDoctor = {
+          ...toUpdate,
+          headquarter: { ...location },
+        };
+        for (const key in formattedDoctor) {
+          if (
+            Array.isArray(formattedDoctor[key]) ||
+            (formattedDoctor[key] instanceof Object && key !== 'birthdate')
+          ) {
+            form.append(key, JSON.stringify(formattedDoctor[key]));
+          } else {
+            form.append(key, formattedDoctor[key]);
+          }
+        }
+        await updateDoctor(UPDATE_DOCTOR, form, ACCESS_TOKEN);
+        successMessage('Doctor updated succesfully');
+        return handleClearForm();
       }
-      //TO-DO: add an axios call with UPDATE method to the correspondent URL provided by the backend sending the form variable in 119 line
-      // ...
-      handleClearForm();
-      return;
-    }
-    setEmailError(false);
-    const form = new FormData();
-    for (const key in newDoctor) {
-      form.append(key, newDoctor[key]);
-    }
-    //TO-DO: add an axios call with UPDATE method to the correspondent URL provided by the backend sending the form variable in 130 line
-    // ...
+      setEmailError(false);
+      const form = new FormData();
+      const { location, ...toUpdate } = newDoctor;
+      const formattedDoctor = {
+        ...toUpdate,
+        headquarter: { ...location },
+      };
 
-    handleClearForm();
-    return;
+      for (const key in formattedDoctor) {
+        if (
+          Array.isArray(formattedDoctor[key]) ||
+          (formattedDoctor[key] instanceof Object && key !== 'avatar' && key !== 'birthdate')
+        ) {
+          form.append(key, JSON.stringify(formattedDoctor[key]));
+        } else if (key === 'avatar') {
+          const avatar = formattedDoctor[key];
+          form.append(key, avatar);
+        } else {
+          form.append(key, formattedDoctor[key]);
+        }
+      }
+      await updateDoctor(UPDATE_DOCTOR, form, ACCESS_TOKEN);
+      successMessage('Doctor updated succesfully');
+      return handleClearForm();
+    } catch (error) {
+      errorMessage(error.response?.data || error.message);
+    }
   };
 
   const handleImageUpload = (e) => {
@@ -149,37 +193,50 @@ export const Form = () => {
     onChange(e);
   };
 
-  const submitForm = (data) => {
-    if (!newDoctor.qualifications.length || !newDoctor.skills.length) return setShowError(true);
-    if (!newDoctor.email.endsWith(DOCTOR_EMAIL_DOMAIN)) {
-      return setEmailError(true);
+  const submitForm = async (data) => {
+    try {
+      if (!newDoctor.qualifications.length || !newDoctor.skills.length) return setShowError(true);
+      if (!newDoctor.email.endsWith(DOCTOR_EMAIL_DOMAIN)) {
+        return setEmailError(true);
+      }
+      setEmailError(false);
+
+      const formattingForm = {
+        ...data,
+        prefix: DOCTOR_PREFIX,
+        headquarter: {
+          city: data.city,
+          country: data.country,
+        },
+        birthdate: newDoctor.birthdate,
+        password: Date.now(),
+        qualifications: [...newDoctor.qualifications],
+        skills: [...newDoctor.skills],
+        memberships: [...newDoctor.memberships],
+      };
+      const { city, country, ...finalForm } = formattingForm;
+      const form = new FormData();
+      for (const key in finalForm) {
+        if (
+          Array.isArray(finalForm[key]) ||
+          (finalForm[key] instanceof Object && key !== 'avatar')
+        ) {
+          form.append(key, JSON.stringify(finalForm[key]));
+        } else if (key === 'avatar') {
+          const avatar = finalForm[key][0];
+          form.append(key, avatar);
+        } else {
+          form.append(key, finalForm[key]);
+        }
+      }
+      const ACCESS_TOKEN = localStorage.getItem(TOKEN);
+      if (!ACCESS_TOKEN) return navigate(PublicRoutes.LOGIN);
+      await postDoctor(POST_DOCTOR, form, ACCESS_TOKEN);
+      successMessage('Doctor added succesfully!');
+      return handleClearForm();
+    } catch (error) {
+      errorMessage(error.response?.data || error.message);
     }
-    setEmailError(false);
-
-    const formattingForm = {
-      ...data,
-      prefix: DOCTOR_PREFIX,
-      location: {
-        city: data.city,
-        country: data.country,
-      },
-      birthdate: newDoctor.birthdate,
-      password: Date.now(),
-      qualifications: [...newDoctor.qualifications],
-      skills: [...newDoctor.skills],
-      memberships: [...newDoctor.memberships],
-    };
-
-    const { city, country, ...finalForm } = formattingForm;
-    const form = new FormData();
-    for (const key in finalForm) {
-      form.append(key, finalForm[key]);
-    }
-
-    //TO-DO: add an axios call with POST method to the correspondent URL provided by the backend sending the form variable in 174 line
-    // ...
-
-    handleClearForm();
   };
 
   const handleClearForm = () => {

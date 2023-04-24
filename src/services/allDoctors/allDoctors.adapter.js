@@ -11,7 +11,7 @@ export const doctorAdapter = (doctors) => {
         avatar: doctor.avatar,
         email: doctor.email,
         phone: doctor.phone,
-        headquarter: doctor.location,
+        headquarter: { ...doctor.headquarter },
         gender: doctor.gender,
         introduction: doctor.introduction,
         qualifications: doctor.qualifications,

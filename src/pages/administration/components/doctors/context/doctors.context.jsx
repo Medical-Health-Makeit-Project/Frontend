@@ -5,6 +5,7 @@ const DoctorStore = createContext();
 
 export const DoctorContext = ({ children }) => {
   const [doctorToBeUpdated, setDoctorToBeUpdated] = useState({
+    id: '',
     firstname: '',
     lastname: '',
     email: '',

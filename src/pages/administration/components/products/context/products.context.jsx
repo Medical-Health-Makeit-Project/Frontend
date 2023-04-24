@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from 'react';
 import { PropTypes } from 'prop-types';
-import { useProducts } from '@services/products';
+import { useProducts, useCategories } from '@services/products';
 
 const ProductsStore = createContext();
 
@@ -20,7 +20,9 @@ export const ProductsContext = ({ children }) => {
 
   const { products, productsError, productsIsLoading } = useProducts();
 
-  const categories = [...new Set(products?.map((product) => product.category))];
+  //const categories = [...new Set(products?.map((product) => product.category))];
+
+  const { categories } = useCategories();
 
   return (
     <ProductsStore.Provider
