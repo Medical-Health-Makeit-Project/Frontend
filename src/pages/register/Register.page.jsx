@@ -81,7 +81,7 @@ export const Register = () => {
     repeatPassword,
     termsAndConditions,
   } = userData;
-  console.log(userData.birthday);
+
   return (
     <section className="register__container">
       <Heading title="Register" image={headingImage} />
@@ -167,7 +167,7 @@ export const Register = () => {
             <DatePicker
               id="birthDate"
               name="birthDate"
-              selected={userData.birthdate}
+              selected={new Date()}
               dateFormat="dd/MM/yyyy"
               peekNextMonth
               showMonthDropdown
