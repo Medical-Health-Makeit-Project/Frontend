@@ -20,8 +20,6 @@ export const ProductsContext = ({ children }) => {
 
   const { products, productsError, productsIsLoading } = useProducts();
 
-  //const categories = [...new Set(products?.map((product) => product.category))];
-
   const { categories } = useCategories();
 
   return (

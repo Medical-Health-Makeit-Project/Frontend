@@ -59,9 +59,9 @@ export const Register = () => {
             termsAndConditions: false,
           });
           navigate(PublicRoutes.LOGIN);
-          return successMessage('Your register was success!');
+          return successMessage('Your register was succeeded!');
         } else {
-          errorMessage('You must agree to terms and conditions');
+          errorMessage('You must accept the terms and conditions');
         }
       } else {
         errorMessage('Passwords must match');

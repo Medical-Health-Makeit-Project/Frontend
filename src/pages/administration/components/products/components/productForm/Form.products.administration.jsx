@@ -107,7 +107,7 @@ export const Form = () => {
         form.append(key, toUpdate[key]);
       }
       await updateProducts(UPDATE_PRODUCTS, form, isToken);
-      successMessage('Product updated succesfully!');
+      successMessage('Product updated successfully!');
       return handleClearForm();
     } catch (error) {
       errorMessage(error.response.data || error.message);
@@ -131,7 +131,7 @@ export const Form = () => {
         const isToken = localStorage.getItem(TOKEN);
         if (!isToken) return navigate(PublicRoutes.LOGIN);
         await postProducts(POST_PRODUCTS, form, isToken);
-        successMessage('Product created succesfully!');
+        successMessage('Product updated successfully!');
         return handleClearForm();
       }
       const { id, ...remainingProps } = newProduct;
@@ -144,7 +144,7 @@ export const Form = () => {
       const isToken = localStorage.getItem(TOKEN);
       if (!isToken) return navigate(PublicRoutes.LOGIN);
       await postProducts(POST_PRODUCTS, form, isToken);
-      successMessage('Product created succesfully!');
+      successMessage('Product updated successfully!');
       return handleClearForm();
     } catch (error) {
       errorMessage(error.response.data);

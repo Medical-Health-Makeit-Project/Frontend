@@ -221,6 +221,7 @@ export const Form = () => {
           Array.isArray(finalForm[key]) ||
           (finalForm[key] instanceof Object && key !== 'avatar')
         ) {
+          console.log('stringy', key, finalForm[key]);
           form.append(key, JSON.stringify(finalForm[key]));
         } else if (key === 'avatar') {
           const avatar = finalForm[key][0];

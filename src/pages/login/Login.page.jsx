@@ -5,7 +5,7 @@ import { BiShow, BiHide } from 'react-icons/bi';
 import { Heading } from '@components/heading';
 import { Button } from '@components/buttons';
 import { Loading } from '@components/loading';
-import { AUTHENTICATION, TOKEN } from '@constants';
+import { AUTHENTICATION, TOKEN, EMAIL_REGEX, PASSWORD_REGEX } from '@constants';
 import { errorMessage } from '@utils/toastify';
 import { PublicRoutes } from '@routes';
 import { authService } from './service';
@@ -78,7 +78,7 @@ export const Login = () => {
               name="email"
               id="email"
               minLength="3"
-              pattern="[A-Za-z\s]{3,}"
+              pattern={EMAIL_REGEX}
               required
               className="user__input input-box"
               onChange={handleChange}
@@ -96,7 +96,7 @@ export const Login = () => {
                 id="password"
                 minLength="3"
                 required
-                pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$"
+                pattern={PASSWORD_REGEX}
                 className="password__input input-box"
                 onChange={handleChange}
                 value={password}
@@ -110,7 +110,7 @@ export const Login = () => {
           <div className="bottom__section">
             <div className="remember__container">
               <label htmlFor="done">Remember me</label>
-              <input id="done" name="remberMe" type="checkbox" className="remember__button" />
+              <input id="done" name="rememberMe" type="checkbox" className="remember__button" />
             </div>
             <div className="forgot__container">
               <p>Forgot password ?</p>

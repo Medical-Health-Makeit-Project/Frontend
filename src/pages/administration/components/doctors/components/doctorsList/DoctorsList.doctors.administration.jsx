@@ -45,7 +45,7 @@ export const DoctorsList = memo(() => {
       const isConfirmed = await confirmDeletion();
       if (isConfirmed) {
         await deleteDoctor(DELETE_DOCTOR, payload, ACCESS_TOKEN);
-        successMessage('Doctor deleted succesfully!');
+        successMessage('Doctor deleted successfully!');
       }
       return;
     } catch (error) {

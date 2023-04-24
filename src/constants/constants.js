@@ -2,6 +2,8 @@ export const colorIcons = 'rgba(63, 182, 214)';
 export const TOKEN = 'ACCESS_TOKEN';
 export const IMAGE_MAX_SIZE = 5242880;
 export const DOCTOR_EMAIL_DOMAIN = '@drmebid.com';
+export const EMAIL_REGEX = /[A-Za-z/s]{3,}/;
+export const PASSWORD_REGEX = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/;
 export const DOCTOR_PREFIX = 'Dr';
 export const phoneValidation =
   '/^s*(?:+?(d{1,3}))?[-. (]*(d{3})[-. )]*(d{3})[-. ]*(d{4})(?: *x(d+))?s*$/';
