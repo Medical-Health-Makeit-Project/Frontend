@@ -159,6 +159,10 @@ export const PatientInformation = () => {
           <DatePicker
             maxDate={new Date()}
             dateFormat="dd/MM/yyyy"
+            peekNextMonth
+            showMonthDropdown
+            showYearDropdown
+            dropdownMode="select"
             selected={patientForm.patientBirth}
             name="patientBirth"
             id="birth"

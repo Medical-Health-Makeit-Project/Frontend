@@ -76,7 +76,7 @@ export const Register = () => {
     repeatPassword,
     termsAndConditions,
   } = userData;
-
+  console.log(userData.birthday);
   return (
     <section className="register__container">
       <Heading title="Register" image={headingImage} />
@@ -162,13 +162,12 @@ export const Register = () => {
             <DatePicker
               id="birthDate"
               name="birthDate"
-              selected={stringBirthday ? stringBirthday : new Date()}
+              selected={new Date()}
               dateFormat="dd/MM/yyyy"
               peekNextMonth
               showMonthDropdown
               showYearDropdown
               dropdownMode="select"
-              strictParsing
               onChange={(date) => {
                 setUserData({ ...userData, birthday: date });
               }}
