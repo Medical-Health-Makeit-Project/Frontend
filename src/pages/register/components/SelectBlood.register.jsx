@@ -4,7 +4,7 @@ export const SelectBlood = ({ handleChange }) => {
   return (
     <select
       id="blood"
-      name="blood"
+      name="blood_type"
       type="blood"
       required
       className="blood__input input-box"

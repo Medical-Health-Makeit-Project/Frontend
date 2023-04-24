@@ -1,74 +1,79 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import { BsArrowRight } from 'react-icons/bs';
-import axios from 'axios';
 import { SelectCountry } from './components/SelectCountry.register';
 import { SelectBlood } from './components/SelectBlood.register';
 import { Heading } from '@components/heading';
 import { Button } from '@components/buttons/Button.components';
 import { _Modal } from '@components/modal';
+import { registerService } from './service/registerUsers.service';
 import { errorMessage } from '@utils/toastify/error.toastify';
 import { successMessage } from '@utils/toastify/success.toastify';
 import { TermsAndCoditions } from '@components/termsAndConditions';
-import { phoneValidation, emailValidation } from '@constants/';
+import { PublicRoutes } from '@routes';
+import { phoneValidation, emailValidation, REGISTER_USER } from '@constants/';
 import headingImage from '@assets/heading-login.png';
 import './register.page.scss';
 
 export const Register = () => {
   const [userData, setUserData] = useState({
-    firstName: '',
-    lastName: '',
+    name: '',
+    lastname: '',
     username: '',
     email: '',
     phone: '',
     gender: '',
-    birthday: '',
-    country: '',
+    birthdate: Date.now(),
+    nationality: '',
     password: '',
+    blood_type: '',
     repeatPassword: '',
     termsAndConditions: false,
   });
-
+  const navigate = useNavigate();
   const handleChange = (event) => {
     const { name, type, value, checked } = event.target;
     setUserData({ ...userData, [name]: type === 'checkbox' ? checked : value });
   };
 
-  //  //to-do: backend link
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (userData.password === userData.repeatPassword) {
-      if (userData.termsAndConditions) {
-        const data = new FormData();
-        const dataKeys = Object.keys(userData);
-        const dataValues = Object.values(userData);
-
-        for (let i = 0; i < dataKeys.length; i++) {
-          data.append(dataKeys[i], `${dataValues[i]}`);
+    try {
+      if (userData.password === userData.repeatPassword) {
+        if (userData.termsAndConditions) {
+          const { repeatPassword, termsAndConditions, ...remainingProps } = userData;
+          await registerService(REGISTER_USER, remainingProps);
+          setUserData({
+            name: '',
+            lastname: '',
+            username: '',
+            email: '',
+            phone: '',
+            gender: '',
+            birthdate: Date.now(),
+            nationality: '',
+            password: '',
+            blood_type: '',
+            repeatPassword: '',
+            termsAndConditions: false,
+          });
+          navigate(PublicRoutes.LOGIN);
+          return successMessage('Your register was succeeded!');
+        } else {
+          errorMessage('You must accept the terms and conditions');
         }
-        data.delete('repeatPassword');
-        data.delete('termsAndConditions');
-
-        const { status } = await axios.post('URL to back', {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-          body: data,
-        });
-        if (status > 399) return errorMessage('Something went wrong!');
-        return successMessage('Your register was success!');
       } else {
-        errorMessage('You must agree to terms and conditions');
+        errorMessage('Passwords must match');
       }
-    } else {
-      errorMessage('Passwords must match');
+    } catch (error) {
+      errorMessage(error.response?.data || error.message);
     }
   };
 
   const {
-    firstName,
-    lastName,
+    name: firstName,
+    lastname: lastName,
     username,
     email,
     phone,
@@ -88,26 +93,26 @@ export const Register = () => {
           <div className="name__container input__container">
             <label htmlFor="firstName">Name</label>
             <input
-              id="firstName"
-              name="firstName"
+              id="name"
+              name="name"
               placeholder="Enter your name"
               type="text"
               required
               className="name__input input-box"
-              value={firstName}
+              value={userData.name}
               onChange={(event) => handleChange(event)}
             />
           </div>
           <div className="name__container input__container">
             <label htmlFor="lastName">Last name</label>
             <input
-              id="lastName"
-              name="lastName"
+              id="lastname"
+              name="lastname"
               placeholder="Enter your last name"
               type="text"
               required
               className="lastName__input input-box"
-              value={lastName}
+              value={userData.lastname}
               onChange={(event) => handleChange(event)}
             />
           </div>
@@ -122,7 +127,7 @@ export const Register = () => {
               pattern="[A-Za-z\s]{3,}"
               required
               className="unsername__input input-box"
-              value={username}
+              value={userData.username}
               onChange={(event) => handleChange(event)}
             />
           </div>
@@ -136,7 +141,7 @@ export const Register = () => {
               type="text"
               required
               className="email__input input-box"
-              value={email}
+              value={userData.email}
               pattern={emailValidation}
               onChange={(event) => handleChange(event)}
             />
@@ -151,7 +156,7 @@ export const Register = () => {
               type="number"
               required
               className="phone__input input-box"
-              value={phone}
+              value={userData.phone}
               pattern={phoneValidation}
               onChange={(event) => handleChange(event)}
             />
@@ -162,14 +167,14 @@ export const Register = () => {
             <DatePicker
               id="birthDate"
               name="birthDate"
-              selected={new Date()}
+              selected={userData.birthdate}
               dateFormat="dd/MM/yyyy"
               peekNextMonth
               showMonthDropdown
               showYearDropdown
               dropdownMode="select"
               onChange={(date) => {
-                setUserData({ ...userData, birthday: date });
+                setUserData({ ...userData, birthdate: date });
               }}
               required
               className="input-box"
@@ -185,6 +190,7 @@ export const Register = () => {
               required
               className="email__input input-box"
               onChange={(event) => handleChange(event)}
+              value={userData.gender}
             >
               <option value="">Select...</option>
               <option value="male">Male</option>
@@ -194,7 +200,7 @@ export const Register = () => {
           </div>
 
           <div className="country__container input__container">
-            <label htmlFor="country">Select your country:</label>
+            <label htmlFor="nationality">Select your country:</label>
             <SelectCountry handleChange={handleChange} />
           </div>
 

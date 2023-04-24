@@ -16,6 +16,7 @@ import { errorMessage } from '@utils/toastify/error.toastify';
 import { BsCreditCard2Back } from 'react-icons/bs';
 import { MdOutlineUpdate } from 'react-icons/md';
 import { TbPassword } from 'react-icons/tb';
+import { TOKEN } from '@constants';
 
 import './form.payment.scss';
 
@@ -61,7 +62,7 @@ export const Form = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const token = localStorage.getItem('ACCESS_TOKEN');
+    const token = localStorage.getItem(TOKEN);
 
     try {
       const { error, paymentMethod } = await stripe.createPaymentMethod({

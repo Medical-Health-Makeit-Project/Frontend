@@ -1,17 +1,17 @@
 export const locationsAdapter = (response) => {
   if (Array.isArray(response)) {
-    return response.map(({ id, country, locations }) => {
+    return response.map(({ id, country, headquarters }) => {
       return {
         id: id,
         country: country,
-        locations: locations,
+        locations: headquarters,
       };
     });
   } else {
     return {
-      id: element.id,
-      country: element.country,
-      locations: element.locations,
+      id: response.id,
+      country: response.country,
+      locations: response.headquarters,
     };
   }
 };

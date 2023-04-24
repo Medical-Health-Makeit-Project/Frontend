@@ -5,11 +5,10 @@ import { ALL_DOCTORS } from '@constants';
 
 export const allDoctorsService = async (URL) => {
   try {
-    const response = await axios.get(URL);
-    const data = doctorAdapter(response.data);
-    return data;
+    const { data } = await axios.get(URL);
+    return doctorAdapter(data);
   } catch (error) {
-    return error;
+    throw error;
   }
 };
 

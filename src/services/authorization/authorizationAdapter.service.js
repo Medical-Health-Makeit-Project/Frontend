@@ -1,7 +1,7 @@
 import { roles } from '@utils/roles';
 
 export const authorizationAdapter = (response) => {
-  if (response.role === roles.USER || response.role === roles.ADMIN) {
+  if (response.role === roles.USER) {
     return {
       id: response.id,
       username: response.username,
@@ -12,6 +12,13 @@ export const authorizationAdapter = (response) => {
       gender: response.gender,
       birthday: response.birthday,
       blood: response.blood,
+      role: response.role,
+    };
+  }
+  if (response.role === roles.ADMIN) {
+    return {
+      name: response.name,
+      email: response.email,
       role: response.role,
     };
   }
