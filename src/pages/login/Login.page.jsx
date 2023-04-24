@@ -5,7 +5,7 @@ import { BiShow, BiHide } from 'react-icons/bi';
 import { Heading } from '@components/heading';
 import { Button } from '@components/buttons';
 import { Loading } from '@components/loading';
-import { AUTH, TOKEN } from '@constants';
+import { AUTHENTICATION, TOKEN, EMAIL_REGEX, PASSWORD_REGEX } from '@constants';
 import { errorMessage } from '@utils/toastify';
 import { PublicRoutes } from '@routes';
 import { authService } from './service';
@@ -18,9 +18,8 @@ export const Login = () => {
   const [isLoading] = useIsLoading();
 
   const [userData, setUserData] = useState({
-    username: '',
+    email: '',
     password: '',
-    remberMe: false,
   });
   const [showPwd, setShowPwd] = useState(false);
   const inputName = useRef(null);
@@ -38,25 +37,22 @@ export const Login = () => {
 
   const handleAuth = async () => {
     if (Object.values(userData).some((e) => e === '')) {
-      errorMessage('You need fill every field on the form');
+      errorMessage('You need to complete the form.');
     }
     try {
-      const isToken = await authService(AUTH, userData);
+      const isToken = await authService(AUTHENTICATION, userData);
       if (isToken instanceof Error) throw isToken;
       localStorage.setItem(TOKEN, isToken.ACCESS_TOKEN);
-      const isUser = await dispatch(findUserWithToken(isToken.ACCESS_TOKEN));
-      if (isUser.payload === 'Unauthorized')
-        throw new Error('Something went wrong, contact your nearest dev!');
+      await dispatch(findUserWithToken(isToken.ACCESS_TOKEN));
       navigate(PublicRoutes.HOME);
     } catch (error) {
       localStorage.removeItem(TOKEN);
       navigate(PublicRoutes.login);
-      errorMessage(error.message);
+      errorMessage(error.response?.data || error);
     }
     setUserData({
-      username: '',
+      email: '',
       password: '',
-      remberMe: false,
     });
     setShowPwd(false);
   };
@@ -64,7 +60,7 @@ export const Login = () => {
   const handleShowPwd = () => {
     setShowPwd(!showPwd);
   };
-  const { password, remember } = userData;
+  const { password } = userData;
 
   if (isLoading) return <Loading />;
   return (
@@ -72,21 +68,21 @@ export const Login = () => {
       <Heading title="Login" image={headingImage} />
       <section className="login__main">
         <h2 className="login__title">Login</h2>
-        <form className="form__container">
+        <form className="form__container" autoComplete="off">
           <div className="user__container input__container">
-            <label htmlFor="username">Username</label>
+            <label htmlFor="email">Email</label>
             <input
               type="text"
               ref={inputName}
-              placeholder="Username"
-              name="username"
-              id="username"
+              placeholder="Email"
+              name="email"
+              id="email"
               minLength="3"
-              pattern="[A-Za-z\s]{3,}"
+              pattern={EMAIL_REGEX}
               required
               className="user__input input-box"
               onChange={handleChange}
-              value={userData.username}
+              value={userData.email}
             />
           </div>
 
@@ -100,7 +96,7 @@ export const Login = () => {
                 id="password"
                 minLength="3"
                 required
-                pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$"
+                pattern={PASSWORD_REGEX}
                 className="password__input input-box"
                 onChange={handleChange}
                 value={password}
@@ -114,14 +110,7 @@ export const Login = () => {
           <div className="bottom__section">
             <div className="remember__container">
               <label htmlFor="done">Remember me</label>
-              <input
-                id="done"
-                name="remberMe"
-                type="checkbox"
-                className="remember__button"
-                onChange={handleChange}
-                checked={remember}
-              />
+              <input id="done" name="rememberMe" type="checkbox" className="remember__button" />
             </div>
             <div className="forgot__container">
               <p>Forgot password ?</p>

@@ -1,10 +1,9 @@
 import axios from 'axios';
-import { authAdapter } from '../adapters';
 
-export const authService = async (URL, user) => {
+export const registerService = async (URL, user) => {
   try {
     const { data } = await axios.post(URL, user);
-    return authAdapter(data);
+    return data;
   } catch (error) {
     throw error;
   }
