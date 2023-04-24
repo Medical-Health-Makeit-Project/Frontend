@@ -7,6 +7,7 @@ export const PublicRoutes = {
   SHOP: '/home/shop',
   CATEGORY: '/home/shop/:category',
   UNAUTHORIZED: '/home/unauthorized',
+  PAGE404: '/*',
 };
 
 export const PrivateRoutes = {
