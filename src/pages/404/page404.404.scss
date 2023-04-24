@@ -1,0 +1,44 @@
+@import '@sass/base/typography.base.scss';
+@import '@sass/themes/theme.themes.scss';
+@import '@sass/base/alerts.base.scss';
+@import '@sass/abstract/mixins.abstract.scss';
+
+.main__404 {
+  width: 100vw;
+  height: 100vh;
+  background-color: theme-color('background', 'lighter');
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo__container {
+  width: 200px;
+  height: 200px;
+
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+  }
+}
+
+.info__404 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+  text-align: center;
+  margin-bottom: 1rem;
+
+  h3 {
+    font-size: 50px;
+  }
+  p {
+    @include paragraph;
+    font-weight: weight-typo('poppins', '500');
+  }
+}

@@ -13,6 +13,7 @@ import { Payment } from './pages/payment';
 import { Appointments } from './pages/appointments';
 import { Dashboard } from './pages/administration';
 import { Unauthorized } from './pages/unauthorized';
+import { Page404 } from './pages/404';
 import { PublicRoutes, PrivateRoutes } from './routes/routes.routes';
 import { roles } from './utils/roles/roles.utils';
 import 'react-toastify/dist/ReactToastify.css';
@@ -22,6 +23,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
+        <Route path={PublicRoutes.PAGE404} element={<Page404 />} />
         <Route path="/" element={<Layout />}>
           <Route index element={<Navigate to={PublicRoutes.HOME} />} />
           <Route path={PublicRoutes.HOME} element={<Home />} />
