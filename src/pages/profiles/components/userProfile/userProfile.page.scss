@@ -83,10 +83,6 @@
     justify-content: flex-start;
     gap: 10px;
     border-bottom: 1px solid theme-color('accent', 'light');
-    p {
-      @include paragraph($size-sm);
-      font-weight: 400;
-    }
   }
 }
 
@@ -114,7 +110,13 @@
 }
 
 .save__button {
+  width: 100%;
   margin-top: 20px;
+  margin-bottom: 1rem;
+}
+
+.cancel__button {
+  width: 100%;
 }
 
 #dataOff {
@@ -175,4 +177,10 @@
   flex-direction: column;
   max-width: 180px;
   margin: 10px 0;
+}
+
+.paragraph {
+  @include paragraph();
+  font-size: $size-xxs;
+  font-weight: 400;
 }

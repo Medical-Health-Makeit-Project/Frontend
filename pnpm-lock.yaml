@@ -14,6 +14,7 @@ specifiers:
   axios: ^1.3.4
   commitizen: ^4.3.0
   cz-conventional-changelog: ^3.3.0
+  dayjs: ^1.11.7
   eslint: ^8.35.0
   eslint-config-airbnb: ^19.0.4
   eslint-config-prettier: ^8.7.0
@@ -56,6 +57,7 @@ dependencies:
   '@stripe/react-stripe-js': 2.1.0_qzwhpr2eo7kmsmscrkh4nijc24
   '@stripe/stripe-js': 1.52.1
   axios: 1.3.4
+  dayjs: 1.11.7
   framer-motion: 10.0.1_biqbaboplfbrettd7655fr4n2y
   prop-types: 15.8.1
   react: 18.2.0
@@ -2564,6 +2566,10 @@ packages:
   /date-fns/2.29.3:
     resolution: {integrity: sha512-dDCnyH2WnnKusqvZZ6+jA1O51Ibt8ZMRNkDZdyAyK4YfbDwa/cEmuztzG5pk6hqlp9aSBPYcjOlktquahGwGeA==}
     engines: {node: '>=0.11'}
+    dev: false
+
+  /dayjs/1.11.7:
+    resolution: {integrity: sha512-+Yw9U6YO5TQohxLcIkrXBeY73WP3ejHWVvx8XCk3gxvQDCTEmS48ZrSZCKciI7Bhl/uCMyxYtE9UqRILmFphkQ==}
     dev: false
 
   /debug/3.2.7:

@@ -10,8 +10,8 @@ export const authorizationAdapter = (response) => {
       phone: response.phone,
       nationality: response.nationality,
       gender: response.gender,
-      birthday: response.birthday,
-      blood: response.blood,
+      birthday: response.birthdate,
+      blood: response.blood_type,
       role: response.role,
     };
   }
@@ -24,18 +24,17 @@ export const authorizationAdapter = (response) => {
   }
   return {
     id: response.id,
-    name: response.name,
+    name: response.firstname,
     area: response.area,
-    avatar: response.img_profile,
+    avatar: response.avatar,
     email: response.email,
     phone: response.phone,
-    headquarter: response.headquarter,
+    headquarter: response.location,
     gender: response.gender,
     qualifications: response.qualifications,
     memberships: response.memberships,
     introduction: response.introduction,
     skills: response.skills,
-    password: response.password,
     role: response.role,
   };
 };

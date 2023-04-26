@@ -7,7 +7,8 @@ export const PASSWORD_REGEX = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/;
 export const DOCTOR_PREFIX = 'Dr';
 export const phoneValidation =
   '/^s*(?:+?(d{1,3}))?[-. (]*(d{3})[-. )]*(d{3})[-. ]*(d{4})(?: *x(d+))?s*$/';
-export const emailValidation = '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}';
+export const emailValidation = /^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}/;
+export const DATE_FORMAT = 'DD/MM/YYYY';
 export const STRIPE_PUBLIC_KEY =
   'pk_test_51Mz5GfGuKX0jSjOwt0aR0OYVxnjYpKnCPWm4LeMrNgJQz3pDNVnnX3C2faSkG1uhwtsoYKfb7B3aPtkMASQqEMiR00s5c12Uux';
 
@@ -51,12 +52,12 @@ export const UPDATE_PRODUCTS = !import.meta.env.PROD
 
 // AUTHENTICATION
 
-//CHECK
+//check
 export const AUTHENTICATION = !import.meta.env.PROD
   ? 'http://localhost:5150/api/v1/auth/'
   : '/src/pages/login/db/users.db.json';
 
-//CHECK
+//check
 export const AUTHORIZATION = !import.meta.env.PROD
   ? 'http://localhost:5150/api/v1/auth/authorization'
   : '/src/pages/login/db/users.db.json';
@@ -65,14 +66,17 @@ export const AUTHORIZATION = !import.meta.env.PROD
 
 // DOCTORS
 
+//check
 export const POST_DOCTOR = !import.meta.env.PROD
   ? 'http://localhost:5150/api/v1/auth/register/doctor'
   : null;
 
+//check
 export const UPDATE_DOCTOR = !import.meta.env.PROD ? 'http://localhost:5150/api/v1/doctors' : null;
 
 export const DELETE_DOCTOR = !import.meta.env.PROD ? 'http://localhost:5150/api/v1/doctors' : null;
 
+//check
 export const ALL_DOCTORS = !import.meta.env.PROD
   ? 'http://localhost:5150/api/v1/doctors'
   : '/src/pages/doctors/doctors.json';
@@ -81,6 +85,7 @@ export const DOCTORS_BY_AREA = !import.meta.env.PROD
   ? 'http://localhost:5150/api/v1/doctors/areas'
   : '/src/pages/appointments/db/doctorsByArea.json';
 
+//check
 export const LOCATIONS = !import.meta.env.PROD
   ? 'http://localhost:5150/api/v1/locations'
   : '/src/pages/appointments/db/locations.json';
@@ -89,9 +94,16 @@ export const LOCATIONS = !import.meta.env.PROD
 
 // USERS
 
+//check
 export const REGISTER_USER = !import.meta.env.PROD
   ? 'http://localhost:5150/api/v1/auth/register'
   : null;
+
+// check
+export const UPDATE_USER = !import.meta.env.PROD ? 'http://localhost:5150/api/v1/users' : null;
+
+//-----------------------------------------------------------
+
 //export const GET_USERS = '/src/pages/profiles/user.json';
 
 export const DOCTORS_AREA = '/src/pages/administration/db/doctorsArea.json'; // This endpoint should be replaced bY DOCTORS_BY_AREA

@@ -86,6 +86,7 @@
   padding: 12px;
   background-color: #8080805e;
   border-radius: 8px;
+  margin-bottom: 2rem;
 
   h3 {
     @include paragraph($size-lg);
@@ -172,7 +173,13 @@
 }
 
 .save__button {
+  width: 100%;
   margin-top: 20px;
+  margin-bottom: 1rem;
+}
+
+.cancel__button {
+  width: 100%;
 }
 
 .appointments__section-doctor {
@@ -200,4 +207,11 @@
 
 .accordion__container-doctor {
   width: 180px;
+}
+
+.introduction {
+  border: black 1px solid;
+  outline: none;
+  padding: 0.5rem;
+  resize: none;
 }

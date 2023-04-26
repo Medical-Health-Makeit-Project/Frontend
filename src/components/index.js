@@ -1,6 +1,7 @@
 export * from './appointmentButton';
 export * from './buttons';
 export * from './cart';
+export * from './error';
 export * from './footer/components/aboutFooter';
 export * from './footer/components/departments';
 export * from './footer/components/newsLetter';
@@ -18,3 +19,4 @@ export * from './navigationLink';
 export * from './navigationMobile';
 export * from './requireAuth';
 export * from './termsAndConditions';
+export * from './updatePassword';
