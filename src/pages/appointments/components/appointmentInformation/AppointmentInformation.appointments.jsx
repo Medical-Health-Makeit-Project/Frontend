@@ -217,6 +217,10 @@ export const AppointmentInformation = () => {
               minDate={new Date()}
               selected={appointmentForm.appointmentDate}
               dateFormat="dd/MM/yyyy"
+              peekNextMonth
+              showMonthDropdown
+              showYearDropdown
+              dropdownMode="select"
               name="appointmentDate"
               className="input-container__date"
               onChange={(date) => setAppointmentForm({ ...appointmentForm, appointmentDate: date })}
