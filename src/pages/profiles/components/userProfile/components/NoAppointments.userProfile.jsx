@@ -5,7 +5,7 @@ import { Button } from '@components/buttons';
 export const NoAppointments = () => {
   return (
     <div className="appointments-none">
-      <p>You don't have assigned appointments yet</p>
+      <p>You don't have appointments assigned yet</p>
       <Link to={PrivateRoutes.APPOINTMENTS}>
         <Button variant="solid" color="info">
           Book an appointment

@@ -42,6 +42,7 @@ export const UserProfile = ({
   const [imageSelected, setImageSelected] = useState('');
   const [file, setFile] = useState(null);
   const navigate = useNavigate();
+
   //@Todo: assign link to backend to update actions
   useEffect(() => {
     // const token = localStorage.getItem(TOKEN);
@@ -91,8 +92,8 @@ export const UserProfile = ({
 
   const updateData = async () => {
     try {
-      const ACCES_TOKEN = localStorage.getItem(TOKEN);
-      if (!ACCES_TOKEN) return navigate(PublicRoutes.LOGIN);
+      const ACCESS_TOKEN = localStorage.getItem(TOKEN);
+      if (!ACCESS_TOKEN) return navigate(PublicRoutes.LOGIN);
       const data = new FormData();
       if (phoneStatus !== phone) {
         data.append('phone', phoneStatus);
@@ -213,7 +214,7 @@ export const UserProfile = ({
             </div>
           </div>
 
-          <UpdatePassword updater={updateUser} url={UPDATE_USER} />
+          {isUpdating || <UpdatePassword updater={updateUser} url={UPDATE_USER} />}
 
           <Button
             variant="solid"

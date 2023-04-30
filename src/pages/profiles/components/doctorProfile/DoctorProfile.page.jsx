@@ -46,9 +46,6 @@ export const DoctorProfile = ({
   const [isUpdating, setIsUpdating] = useState(false);
   const [imageSelected, setImageSelected] = useState('');
   const navigate = useNavigate();
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
-  //@Todo: assign link to backend to update actions
 
   const handleFile = (e) => {
     const file = e.target.files[0];
@@ -207,41 +204,6 @@ export const DoctorProfile = ({
                 </div>
               ))}
             </div>
-          </article>
-
-          <article className="second__info-container">
-            <div className="skills__info">
-              <h3>Skills</h3>
-              {skills.map((skill) => (
-                <div key={skill} className="info__containers">
-                  <BsCheckLg size={12} className="icons" />
-                  <p>{skill}</p>
-                </div>
-              ))}
-            </div>
-
-            <div className="intro__info info__container">
-              <div className="intro__title-container">
-                <h3>Introduction</h3>
-                <ImProfile size={18} className="icons" />
-              </div>
-              <div className={editState}>
-                <label htmlFor="intro">Enter your introduction</label>
-                <textarea
-                  id="intro"
-                  name="intro"
-                  onChange={handleIntro}
-                  className="introduction"
-                  value={isUpdating ? introStatus : introduction || ''}
-                />
-              </div>
-              <div className={`info__containers ${prevData}`}>
-                <div className="intro-paragraph">
-                  <p>{introStatus}</p>
-                </div>
-              </div>
-            </div>
-
             <div className="email__info info__container">
               <h3>Email</h3>
               <div className={editState}>
@@ -279,7 +241,44 @@ export const DoctorProfile = ({
                 <p>{phoneStatus}</p>
               </div>
             </div>
-            <UpdatePassword updater={updateDoctorProfile} url={UPDATE_DOCTOR} />
+          </article>
+
+          <article className="second__info-container">
+            <div className="skills__info">
+              <h3>Skills</h3>
+              <div className="skills__containers ">
+                {skills.map((skill) => (
+                  <div key={skill} className="skill">
+                    <BsCheckLg size={12} className="icons" />
+                    <p>{skill}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="intro__info info__container">
+              <div className="intro__title-container">
+                <h3>Introduction</h3>
+                <ImProfile size={18} className="icons" />
+              </div>
+              <div className={editState}>
+                <textarea
+                  id="intro"
+                  name="intro"
+                  onChange={handleIntro}
+                  className="introduction"
+                  value={isUpdating ? introStatus : introduction || ''}
+                />
+              </div>
+              <div className={`info__containers ${prevData}`}>
+                <div className="intro-paragraph">
+                  <p>{introStatus}</p>
+                </div>
+              </div>
+            </div>
+
+            {isUpdating || <UpdatePassword updater={updateDoctorProfile} url={UPDATE_DOCTOR} />}
+
             <Button
               variant="solid"
               color="info"
