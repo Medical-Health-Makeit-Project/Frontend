@@ -2,13 +2,13 @@ import axios from 'axios';
 
 export const postProducts = async (URL, product, token) => {
   try {
-    const response = await axios.post(URL, product, {
+    const { status, data } = await axios.post(URL, product, {
       headers: {
         'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${token}`,
       },
     });
-    return response;
+    return { status, data };
   } catch (error) {
     throw error;
   }
