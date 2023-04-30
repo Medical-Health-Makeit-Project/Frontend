@@ -8,7 +8,7 @@ import { successMessage } from '@utils/toastify/success.toastify';
 import { AppointmentsList } from './components/Appointments.userProfile';
 import { NoAppointments } from './components/NoAppointments.userProfile';
 import { Button } from '@components/buttons';
-import { phoneValidation, emailValidation } from '@constants/';
+import { phoneValidation, emailValidation, TOKEN } from '@constants/';
 import axios from 'axios';
 
 import './userProfile.page.scss';
@@ -42,7 +42,7 @@ export const UserProfile = ({
   //@Todo: assign link to backend to update actions
   const updateData = async () => {
     try {
-      const token = localStorage.getItem('ACCESS_TOKEN');
+      const token = localStorage.getItem(TOKEN);
       const data = new FormData();
       if (phoneStatus !== phone) {
         data.append(phone, phoneStatus);
@@ -66,7 +66,7 @@ export const UserProfile = ({
   };
 
   useEffect(() => {
-    const token = localStorage.getItem('ACCESS_TOKEN');
+    const token = localStorage.getItem(TOKEN);
     const getAppointments = async () => {
       try {
         const { response } = await axios.get('URL to back', {

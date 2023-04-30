@@ -1,17 +1,21 @@
-import axios from 'axios';
-import { memo } from 'react';
 import { useProductsContext } from '../../context/products.context';
-import { v4 as uuid } from 'uuid';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@components/buttons';
 import { Loading } from '@components/loading';
 import { Error } from '@components/error';
+import { deleteProduct } from './services';
 import { useProducts } from '@services/products';
 import { errorMessage } from '@utils/toastify/error.toastify';
+import { PublicRoutes } from '@routes';
+import { TOKEN, DELETE_PRODUCT } from '@constants';
+import { successMessage } from '@utils/toastify';
+import { confirmDeletion } from '@utils/swal';
 import './productList.products.administration.scss';
 
 export const ProductsList = () => {
   const { products, productsError, productsIsLoading } = useProducts();
   const { setProductToBeUpdated } = useProductsContext();
+  const navigate = useNavigate();
 
   const handleSetFormToUpdate = (product) => {
     setProductToBeUpdated({
@@ -28,19 +32,18 @@ export const ProductsList = () => {
     });
   };
 
-  const handleDelete = async (e, product) => {
+  const handleDelete = async (e, productId) => {
     try {
       e.preventDefault();
-      const errorMessage = 'Something went wrong! please try again or call your nearest dev!';
-      const ACCESS_TOKEN = localStorage.getItem('ACCESS_TOKEN');
-      const { product: productName } = product;
-      const { status } = await axios.delete('URL', {
-        headers: {
-          Authorization: `Bearer ${ACCESS_TOKEN}`,
-        },
-        data: productName,
-      });
-      if (status > 399) return errorMessage(errorMessage);
+      const ACCESS_TOKEN = localStorage.getItem(TOKEN);
+      const payload = { id: productId };
+      if (!ACCESS_TOKEN) return navigate(PublicRoutes.LOGIN);
+      const isConfirmed = await confirmDeletion();
+      if (isConfirmed) {
+        await deleteProduct(DELETE_PRODUCT, payload, ACCESS_TOKEN);
+        return successMessage('Product deleted successfully!');
+      }
+      return;
     } catch (error) {
       return errorMessage(error.message);
     }
@@ -61,7 +64,7 @@ export const ProductsList = () => {
               <p className="product-list-area">{product.label}</p>
             </section>
             <section className="product-list__buttons-action-container">
-              <Button variant="outline" color="danger" onClick={(e) => handleDelete(e, product)}>
+              <Button variant="outline" color="danger" onClick={(e) => handleDelete(e, product.id)}>
                 Delete
               </Button>
               <Button color="info" onClick={() => handleSetFormToUpdate(product)}>

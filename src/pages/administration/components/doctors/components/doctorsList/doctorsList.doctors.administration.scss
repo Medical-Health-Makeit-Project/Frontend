@@ -24,7 +24,9 @@
 
   .doctor-list__item {
     display: flex;
+    height: 100%;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     gap: 20px;
   }

@@ -8,7 +8,7 @@ import { successMessage } from '@utils/toastify/success.toastify';
 import { Button } from '@components/buttons';
 import { AppontmetsListDoctor } from './components/AppontmetsListDoctor.doctorProfile';
 import { NoAppointmentsDoctor } from './components/NoAppointmentsDoctor.doctorProfile';
-import { phoneValidation, emailValidation } from '@constants/';
+import { phoneValidation, emailValidation, TOKEN } from '@constants/';
 import axios from 'axios';
 
 import './doctorProfile.page.scss';
@@ -50,7 +50,7 @@ export const DoctorProfile = ({
 
   const updateData = async () => {
     try {
-      const token = localStorage.getItem('ACCESS_TOKEN');
+      const token = localStorage.getItem(TOKEN);
       const data = new FormData();
       if (phoneStatus !== phone) {
         data.append(phone, phoneStatus);
@@ -76,7 +76,7 @@ export const DoctorProfile = ({
     }
   };
   useEffect(() => {
-    const token = localStorage.getItem('ACCESS_TOKEN');
+    const token = localStorage.getItem(TOKEN);
     const getAppointments = async () => {
       try {
         const response = await axios.get('URL to back', {

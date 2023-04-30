@@ -5,14 +5,14 @@ import { PrivateRoutes } from '@routes';
 import './welcome.administration.scss';
 
 export const Welcome = () => {
-  const { username } = useSelector((state) => state.auth);
+  const { name } = useSelector((state) => state.auth);
 
   return (
     <section className="admin-welcome">
       <h2 className="admin-welcome__title">
         WELCOME TO
         <span className="admin-welcome__mebid">
-          MEBID<span className="admin-welcome__username">{username.toUpperCase()}</span>
+          MEBID<span className="admin-welcome__username">{name.toUpperCase()}</span>
         </span>
       </h2>
       <h3 className="admin-welcome__paragraph">What do you want to see:</h3>
