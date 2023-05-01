@@ -108,36 +108,40 @@ export const Form = () => {
   return (
     <form onSubmit={handleSubmit} className="form__container-payment">
       <section className="resume__container">
-        <article className="resume__card">
-          <div>
-            <h4>Name</h4>
-            <p>{username}</p>
-          </div>
-          <div>
-            <h4>Location</h4>
-            <p>{nationality}</p>
-          </div>
-          <div>
-            <h4>Email</h4>
-            <p>{email}</p>
-          </div>
-          <div>
-            <h4>Phone</h4>
-            <p>{phone}</p>
-          </div>
-          <div>
-            <h4>Appointments Sub-total</h4>
-            <p>{appointments.length ? `$${totalAppointments}` : '$0'}</p>
-          </div>
-          <div>
-            <h4>Products Sub-total</h4>
-            <p>{products.length ? `$${parseFloat(totalProducts.toFixed(2))}` : '$0'}</p>
-          </div>
-          <div className="total__container">
-            <h4>Total</h4>
-            <p>{`$${parseFloat(totalAppointments + totalProducts).toFixed(2)}`}</p>
-          </div>
-        </article>
+        <div className="sections__container">
+          <article className="resume__card resume-first">
+            <div>
+              <h4>Name</h4>
+              <p>{username}</p>
+            </div>
+            <div>
+              <h4>Location</h4>
+              <p>{nationality}</p>
+            </div>
+            <div>
+              <h4>Email</h4>
+              <p>{email}</p>
+            </div>
+          </article>
+          <article className="resume__card resume-second">
+            <div>
+              <h4>Phone</h4>
+              <p>{phone}</p>
+            </div>
+            <div>
+              <h4>Appointments Sub-total</h4>
+              <p>{appointments.length ? `$${totalAppointments}` : '$0'}</p>
+            </div>
+            <div>
+              <h4>Products Sub-total</h4>
+              <p>{products.length ? `$${parseFloat(totalProducts.toFixed(2))}` : '$0'}</p>
+            </div>
+          </article>
+        </div>
+        <div className="total__container">
+          <h4>Total</h4>
+          <p>{`$${parseFloat(totalAppointments + totalProducts).toFixed(2)}`}</p>
+        </div>
       </section>
       <div className="payment__input-placer">
         <div className="payment__input-container">
@@ -157,11 +161,11 @@ export const Form = () => {
             <CardCvcElement className="card__cvc-container" />
           </div>
         </div>
-      </div>
-      <div className="button__pay-container">
-        <Button color="danger" type="submit" className="button__pay">
-          Order
-        </Button>
+        <div className="button__pay-container">
+          <Button color="danger" type="submit" className="button__pay">
+            Order
+          </Button>
+        </div>
       </div>
     </form>
   );
