@@ -14,7 +14,6 @@ export const DoctorDetail = () => {
   const [date, setDate] = useState(new Date());
 
   const doctor = doctorFilter(id);
-  console.log(doctor);
 
   if (error) return <p>Error</p>;
 

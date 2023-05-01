@@ -112,8 +112,6 @@ export const AppointmentInformation = () => {
     createAppointment(price);
     navigate(PrivateRoutes.CHECKOUT);
   };
-
-  console.log(city);
   return (
     <section className="appointments-section-2">
       <h2 className="appointments-section-2__title">Appointment Information</h2>

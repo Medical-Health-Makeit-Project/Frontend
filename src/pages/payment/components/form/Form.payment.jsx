@@ -153,11 +153,11 @@ export const Form = () => {
             <CardCvcElement className="card__cvc-container" />
           </div>
         </div>
-      </div>
-      <div className="button__pay-container">
-        <Button color="danger" type="submit" className="button__pay">
-          Order
-        </Button>
+        <div className="button__pay-container">
+          <Button color="danger" type="submit" className="button__pay">
+            Order
+          </Button>
+        </div>
       </div>
     </form>
   );
