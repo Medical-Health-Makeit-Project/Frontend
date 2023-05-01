@@ -1,7 +1,7 @@
 import { Heading } from '@components/heading';
 import { Route, Routes } from 'react-router-dom';
-import { DoctorDetail } from './components/DoctorDetail.doctors';
-import { DoctorsList } from './components/DoctorsList.doctors';
+import { DoctorDetail } from './components/doctorDetail/DoctorDetail.doctors';
+import { DoctorsList } from './components/doctorList/DoctorsList.doctors';
 import { DoctorsContext } from './context/DoctorsContext';
 import { PublicRoutes } from '@routes';
 import headingImage from '@assets/doctorsheading.jpg';
