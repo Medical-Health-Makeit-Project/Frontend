@@ -7,7 +7,7 @@ import './categories.shop.scss';
 export const SelectCategories = () => {
   const { categories, categoriesError, categoriesIsLoading, handleSelectCategories } =
     useShopContext();
-  const location = window.location.pathname;
+  const { pathname: location } = window.location;
 
   if (categoriesError) {
     const { status } = categoriesError.response;

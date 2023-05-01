@@ -99,8 +99,12 @@ export const Form = () => {
         for (const key in toUpdate) {
           form.append(key, toUpdate[key]);
         }
-        await updateProducts(UPDATE_PRODUCTS, form, isToken);
-        successMessage('Product updated succesfully!');
+        setProcessingData(true);
+        const { status } = await updateProducts(UPDATE_PRODUCTS, form, isToken);
+        if (status < 300) {
+          setProcessingData(false);
+          successMessage('Product updated succesfully!');
+        }
         return handleClearForm();
       }
       const { category, newCategory, ...toUpdate } = newProduct;
@@ -112,6 +116,7 @@ export const Form = () => {
       successMessage('Product updated successfully!');
       return handleClearForm();
     } catch (error) {
+      setProcessingData(false);
       errorMessage(error.response.data || error.message);
     }
   };
@@ -154,6 +159,7 @@ export const Form = () => {
       return handleClearForm();
     } catch (error) {
       errorMessage(error.response.data);
+      setProcessingData(false);
       return handleClearForm();
     }
   };

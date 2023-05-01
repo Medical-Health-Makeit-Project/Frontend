@@ -151,8 +151,12 @@ export const Form = () => {
             form.append(key, formattedDoctor[key]);
           }
         }
-        await updateDoctor(UPDATE_DOCTOR, form, ACCESS_TOKEN);
-        successMessage('Doctor updated succesfully');
+        setProcessingData(true);
+        const { status } = await updateDoctor(UPDATE_DOCTOR, form, ACCESS_TOKEN);
+        if (status < 300) {
+          setProcessingData(false);
+          successMessage('Doctor updated succesfully');
+        }
         return handleClearForm();
       }
       setEmailError(false);
@@ -180,6 +184,7 @@ export const Form = () => {
       successMessage('Doctor updated succesfully');
       return handleClearForm();
     } catch (error) {
+      setProcessingData(false);
       errorMessage(error.response?.data || error.message);
     }
   };
@@ -237,11 +242,12 @@ export const Form = () => {
       setProcessingData(true);
       const { status } = await postDoctor(POST_DOCTOR, form, ACCESS_TOKEN);
       if (status < 300) {
-        successMessage('Doctor added succesfully!');
+        successMessage('Doctor added successfully!');
         setProcessingData(false);
       }
       return handleClearForm();
     } catch (error) {
+      setProcessingData(false);
       errorMessage(error.response?.data || error.message);
     }
   };
@@ -534,7 +540,7 @@ export const Form = () => {
             <p className="form-doctors__error-message">{errors.gender?.message}</p>
           </div>
         </div>
-        <div className="form-doctors__input-container">
+        <div className="form-doctors__input-container input__add">
           <label htmlFor="qualifications" className="form-doctors__label">
             11. Qualifications:
           </label>
@@ -575,7 +581,7 @@ export const Form = () => {
             })}
           </div>
         </div>
-        <div className="form-doctors__input-container">
+        <div className="form-doctors__input-container input__add">
           <label htmlFor="memberships" className="form-doctors__label">
             12. Memberships:
           </label>
@@ -610,7 +616,7 @@ export const Form = () => {
             })}
           </div>
         </div>
-        <div className="form-doctors__input-container">
+        <div className="form-doctors__input-container input__add">
           <label htmlFor="skills" className="form-doctors__label">
             13. Skills:
           </label>
@@ -644,6 +650,7 @@ export const Form = () => {
             })}
           </div>
         </div>
+
         <Button
           color="danger"
           type={isUpdating ? 'button' : 'submit'}
