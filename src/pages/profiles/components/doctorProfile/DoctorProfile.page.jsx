@@ -80,6 +80,7 @@ export const DoctorProfile = ({
     }
   };
 
+  // TO-DO : useEffect to bring up the appointments if the user has one scheduled
   useEffect(() => {
     // const token = localStorage.getItem(TOKEN);
     // const getAppointments = async () => {
