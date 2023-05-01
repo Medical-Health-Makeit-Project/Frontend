@@ -10,7 +10,7 @@ export const ProductInfo = ({ product, dose, price, label }) => {
         <p className="product-data-container__label">{label}</p>
         <p className="product-data-container__dose">{dose}</p>
       </div>
-      <div className="product-info__price">${price.toFixed(1)}</div>
+      <div className="product-info__price">${price}</div>
     </section>
   );
 };

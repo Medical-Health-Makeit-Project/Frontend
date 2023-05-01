@@ -1,21 +1,23 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import dayjs from 'dayjs';
 import { AiOutlineMail } from 'react-icons/ai';
 import { BsTelephoneOutbound, BsGenderAmbiguous, BsCalendarCheck } from 'react-icons/bs';
 import { MdBloodtype } from 'react-icons/md';
 import { BiMap, BiEdit } from 'react-icons/bi';
-import { errorMessage } from '@utils/toastify/error.toastify';
-import { successMessage } from '@utils/toastify/success.toastify';
 import { AppointmentsList } from './components/Appointments.userProfile';
 import { NoAppointments } from './components/NoAppointments.userProfile';
 import { Button } from '@components/buttons';
-import { phoneValidation, emailValidation, TOKEN } from '@constants/';
-import axios from 'axios';
-
+import { UpdatePassword } from '@components/updatePassword/UpdatePassword.components';
+import { updateUser } from './service/updateUser.service';
+import { errorMessage } from '@utils/toastify/error.toastify';
+import { successMessage } from '@utils/toastify/success.toastify';
+import { PublicRoutes } from '@routes';
+import { TOKEN, UPDATE_USER, DATE_FORMAT } from '@constants/';
+import emptyAvatar from '@assets/empty-avatar.png';
 import './userProfile.page.scss';
-import { useEffect } from 'react';
 
 export const UserProfile = ({
-  id,
   name,
   email,
   phone,
@@ -35,69 +37,79 @@ export const UserProfile = ({
   const [prevData, setPrevData] = useState(dataStyleOn);
   const [emailStatus, setEmailStauts] = useState(email);
   const [phoneStatus, setPhoneSatus] = useState(phone);
+  const [isUpdating, setIsUpdating] = useState(false);
   const [appointments, setAppointments] = useState([]);
+  const [imageSelected, setImageSelected] = useState('');
   const [file, setFile] = useState(null);
-  const [newAvatar, setNewAvatar] = useState(null);
+  const navigate = useNavigate();
 
   //@Todo: assign link to backend to update actions
-  const updateData = async () => {
-    try {
-      const token = localStorage.getItem(TOKEN);
-      const data = new FormData();
-      if (phoneStatus !== phone) {
-        data.append(phone, phoneStatus);
-      } else if (emailStatus !== email) {
-        data.append(email, emailStatus);
-      } else if (newAvatar) {
-        data.append(avatar, newAvatar);
-      }
-      const { status } = await axios.post('URL to back', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'multipart/form-data',
-        },
-        body: data,
-      });
-      if (status > 399) return errorMessage('Something went wrong');
-      return successMessage('Your data was updated!');
-    } catch (error) {
-      return errorMessage(error.message);
-    }
-  };
-
   useEffect(() => {
-    const token = localStorage.getItem(TOKEN);
-    const getAppointments = async () => {
-      try {
-        const { response } = await axios.get('URL to back', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        if (response.status > 399) return errorMessage('Something went wrong');
-        setAppointments(response.data);
-      } catch (error) {
-        return errorMessage(error.message);
-      }
-    };
-    getAppointments();
+    // const token = localStorage.getItem(TOKEN);
+    // const getAppointments = async () => {
+    //   try {
+    //     const { response } = await axios.get('URL to back', {
+    //       headers: {
+    //         Authorization: `Bearer ${token}`,
+    //       },
+    //     });
+    //     if (response.status > 399) return errorMessage('Something went wrong');
+    //     setAppointments(response.data);
+    //   } catch (error) {
+    //     return errorMessage(error.message);
+    //   }
+    // };
+    // getAppointments();
   }, []);
 
-  const readFile = (file) => {
-    const reader = new FileReader();
-    reader.onload = (e) => setNewAvatar(e.target.result);
-    reader.readAsDataURL(file);
+  const handleFile = (e) => {
+    const file = e.target.files[0];
+    const imageURL = URL.createObjectURL(file);
+    setFile(file);
+    setImageSelected(imageURL);
   };
 
   const handleEditOn = () => {
+    setIsUpdating(true);
     setEditState(editStyleOn);
     setPrevData(dataStyleOff);
   };
 
-  const handleEditOff = () => {
+  const handleUpdate = () => {
     setEditState(editStyleOff);
     setPrevData(dataStyleOn);
     updateData();
+  };
+
+  const cancelUpdate = () => {
+    setIsUpdating(false);
+    setEmailStauts(email);
+    setPhoneSatus(phone);
+    setImageSelected('');
+    setEditState(editStyleOff);
+    setPrevData(dataStyleOn);
+  };
+
+  const updateData = async () => {
+    try {
+      const ACCESS_TOKEN = localStorage.getItem(TOKEN);
+      if (!ACCESS_TOKEN) return navigate(PublicRoutes.LOGIN);
+      const data = new FormData();
+      if (phoneStatus !== phone) {
+        data.append('phone', phoneStatus);
+      }
+      if (emailStatus !== email) {
+        data.append('email', emailStatus);
+      }
+      if (imageSelected) {
+        data.append('avatar', file);
+      }
+      await updateUser(UPDATE_USER, data, ACCES_TOKEN);
+
+      return successMessage('Your data was updated!');
+    } catch (error) {
+      return errorMessage(error.message);
+    }
   };
 
   const handleEmailChange = (event) => {
@@ -109,13 +121,6 @@ export const UserProfile = ({
     setPhoneSatus(newPhone);
   };
 
-  const handleFile = (event) => {
-    readFile(event.target.files[0]);
-    setFile(event.target.files);
-  };
-
-  const avatarImage = newAvatar ? newAvatar : avatar;
-
   return (
     <section className="userProfile__background">
       <article className="userProfile__card">
@@ -124,7 +129,13 @@ export const UserProfile = ({
             <BiEdit size={20} className="icons edit__icon" onClick={handleEditOn} />
           </div>
           <picture className="userProfile__image-container">
-            <img src={avatarImage} className="avatar__image" />
+            <img
+              alt="profile image"
+              className="avatar__image"
+              src={
+                isUpdating ? imageSelected || avatar || emptyAvatar : avatar ? avatar : emptyAvatar
+              }
+            />
           </picture>
           <div className={`${editState}`}>
             <label htmlFor="newAvatar" className="avatar__label">
@@ -133,7 +144,7 @@ export const UserProfile = ({
             <input
               className="avatar__input"
               type="file"
-              accept="image/*"
+              accept="image/png, image/jpeg"
               name="newAvatar"
               id="newAvatar"
               max-size="200"
@@ -144,7 +155,7 @@ export const UserProfile = ({
             <p>{name}</p>
             <div className="nationality__container">
               <BiMap size={18} className="icons" />
-              <p>{nationality}</p>
+              <p className="paragraph">{nationality}</p>
             </div>
           </div>
 
@@ -158,11 +169,13 @@ export const UserProfile = ({
                 placeholder={emailStatus}
                 required
                 onChange={handleEmailChange}
-                pattern={emailValidation}
+                pattern="^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}"
+                value={isUpdating ? emailStatus : email}
               />
             </div>
             <div className={`email__container second__info`} id={prevData}>
-              <AiOutlineMail size={18} className="icons" /> <p>{emailStatus}</p>
+              <AiOutlineMail size={18} className="icons" />{' '}
+              <p className="paragraph">{emailStatus}</p>
             </div>
             <div className={editState}>
               <label htmlFor="newPhone">Edit phone</label>
@@ -173,37 +186,49 @@ export const UserProfile = ({
                 placeholder={phoneStatus}
                 required
                 onChange={handlePhoneChange}
-                pattern={phoneValidation}
+                pattern="/^s*(?:+?(d{1,3}))?[\-. (]*(d{3})[\-. )]*(d{3})[\-. ]*(d{4})(?: *x(d+))?s*$/"
+                value={isUpdating ? phoneStatus : phone}
               />
             </div>
             <div className={`phone__container second__info`} id={prevData}>
               <BsTelephoneOutbound size={18} className="icons" />
-              <p>{phoneStatus}</p>
+              <p className="paragraph">{phoneStatus}</p>
             </div>
 
             <div className="gender__container second__info">
               <BsGenderAmbiguous size={18} className="icons" />
-              <p>{gender}</p>
+              <p className="paragraph">{gender}</p>
             </div>
 
             <div className="birthday__container second__info">
               <BsCalendarCheck size={18} className="icons" />
-              <p>{birthday}</p>
+              <p className="paragraph">{dayjs(birthday).format(DATE_FORMAT)}</p>
             </div>
 
             <div className="blood__container second__info">
               <MdBloodtype size={18} className="icons" />
-              <p>{blood}</p>
+              <p className="paragraph">{blood}</p>
             </div>
           </div>
+
+          {isUpdating || <UpdatePassword updater={updateUser} url={UPDATE_USER} />}
 
           <Button
             variant="solid"
             color="info"
             className={`${editState} save__button`}
-            onClick={handleEditOff}
+            onClick={handleUpdate}
           >
             Save changes
+          </Button>
+
+          <Button
+            variant="outline"
+            color="danger"
+            className={`${editState} cancel__button`}
+            onClick={cancelUpdate}
+          >
+            Cancel
           </Button>
         </div>
 

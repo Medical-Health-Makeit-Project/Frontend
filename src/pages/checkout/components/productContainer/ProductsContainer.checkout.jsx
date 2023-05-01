@@ -61,9 +61,7 @@ export const ProductsContainer = () => {
         </div>
       )}
       {(!!cart.products.length || !!cart.appointments.length) && (
-        <div className="total">
-          SUBTOTAL: ${(totalAfterDiscount + appointmentsPrice).toFixed(2)}
-        </div>
+        <div className="total">SUBTOTAL: ${totalAfterDiscount + appointmentsPrice}</div>
       )}
     </section>
   );

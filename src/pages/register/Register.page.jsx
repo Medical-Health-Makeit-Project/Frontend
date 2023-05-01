@@ -12,7 +12,7 @@ import { errorMessage } from '@utils/toastify/error.toastify';
 import { successMessage } from '@utils/toastify/success.toastify';
 import { TermsAndCoditions } from '@components/termsAndConditions';
 import { PublicRoutes } from '@routes';
-import { phoneValidation, emailValidation, REGISTER_USER } from '@constants/';
+import { REGISTER_USER } from '@constants/';
 import headingImage from '@assets/heading-login.png';
 import './register.page.scss';
 
@@ -142,7 +142,7 @@ export const Register = () => {
               required
               className="email__input input-box"
               value={userData.email}
-              pattern={emailValidation}
+              pattern="^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}"
               onChange={(event) => handleChange(event)}
             />
           </div>
@@ -157,7 +157,7 @@ export const Register = () => {
               required
               className="phone__input input-box"
               value={userData.phone}
-              pattern={phoneValidation}
+              pattern="/^s*(?:+?(d{1,3}))?[\-. (]*(d{3})[\-. )]*(d{3})[\-. ]*(d{4})(?: *x(d+))?s*$/"
               onChange={(event) => handleChange(event)}
             />
           </div>
@@ -217,6 +217,7 @@ export const Register = () => {
               type="password"
               required
               className="password__input input-box"
+              pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$"
               value={password}
               onChange={(event) => handleChange(event)}
             />
@@ -232,6 +233,7 @@ export const Register = () => {
               className="Repeatassword__input input-box"
               value={repeatPassword}
               onChange={(event) => handleChange(event)}
+              pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$"
             />
           </div>
 

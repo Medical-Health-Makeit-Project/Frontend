@@ -58,17 +58,7 @@
 }
 .doctor__main-description {
   width: max-content;
-
-  margin-top: 10px;
-  .doctor__name {
-    @include paragraph;
-    font-weight: 700;
-    margin-bottom: 2px;
-    cursor: pointer;
-    &:hover {
-      border-bottom: 1px solid theme-color('primary', 'base');
-    }
-  }
+  margin-top: 2px;
 
   .doctor__area {
     font-size: smaller;

@@ -1,0 +1,14 @@
+@import '@sass/base/typography.base.scss';
+@import '@sass/themes/theme.themes.scss';
+@import '@sass/base/alerts.base.scss';
+@import '@sass/abstract/mixins.abstract.scss';
+
+.doctor__name {
+  @include paragraph;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+  cursor: pointer;
+  &:hover {
+    @include underline-from-left;
+  }
+}

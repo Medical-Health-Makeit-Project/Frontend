@@ -41,7 +41,7 @@ export const Form = () => {
     qualifications: [],
     memberships: [],
     skills: [],
-    password: Date.now(),
+    password: import.meta.env.VITE_INITIAL_PASSWORD_DOCTORS,
   });
   const [avatarSelected, setAvatarSelected] = useState('');
   const { doctorToBeUpdated, setDoctorToBeUpdated } = useDoctorContext();
@@ -209,7 +209,7 @@ export const Form = () => {
           country: data.country,
         },
         birthdate: newDoctor.birthdate,
-        password: Date.now(),
+        password: import.meta.env.VITE_INITIAL_PASSWORD_DOCTORS,
         qualifications: [...newDoctor.qualifications],
         skills: [...newDoctor.skills],
         memberships: [...newDoctor.memberships],
@@ -221,7 +221,6 @@ export const Form = () => {
           Array.isArray(finalForm[key]) ||
           (finalForm[key] instanceof Object && key !== 'avatar')
         ) {
-          console.log('stringy', key, finalForm[key]);
           form.append(key, JSON.stringify(finalForm[key]));
         } else if (key === 'avatar') {
           const avatar = finalForm[key][0];

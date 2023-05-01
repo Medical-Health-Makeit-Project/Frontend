@@ -1,18 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { BiMap, BiEdit } from 'react-icons/bi';
 import { BsTelephoneOutbound, BsGenderAmbiguous, BsCheckLg } from 'react-icons/bs';
 import { AiOutlineMail } from 'react-icons/ai';
 import { ImProfile } from 'react-icons/im';
-import { errorMessage } from '@utils/toastify/error.toastify';
-import { successMessage } from '@utils/toastify/success.toastify';
 import { Button } from '@components/buttons';
+import { UpdatePassword } from '@components/updatePassword';
 import { AppontmetsListDoctor } from './components/AppontmetsListDoctor.doctorProfile';
 import { NoAppointmentsDoctor } from './components/NoAppointmentsDoctor.doctorProfile';
-import { phoneValidation, emailValidation, TOKEN } from '@constants/';
-import axios from 'axios';
+import { updateDoctorProfile } from './service/';
+import { PublicRoutes } from '@routes';
+import { successMessage, errorMessage } from '@utils/toastify';
+import { TOKEN, UPDATE_DOCTOR } from '@constants/';
+import { useDisclosure } from '@chakra-ui/react';
+import emptyAvatar from '@assets/empty-avatar.png';
 
 import './doctorProfile.page.scss';
-import { useEffect } from 'react';
 
 export const DoctorProfile = ({
   name,
@@ -24,6 +27,7 @@ export const DoctorProfile = ({
   headquarter,
   gender,
   qualifications,
+  memberships,
   skills,
 }) => {
   const editStyleOn = 'editOn';
@@ -36,66 +40,81 @@ export const DoctorProfile = ({
   const [prevData, setPrevData] = useState(dataStyleOn);
   const [emailStatus, setEmailStauts] = useState(email);
   const [phoneStatus, setPhoneSatus] = useState(phone);
-  const [introStatus, setIntroStatus] = useState(introduction);
+  const [introStatus, setIntroStatus] = useState(introduction || '');
   const [appointments, setAppointments] = useState([]);
   const [file, setFile] = useState(null);
-  const [newAvatar, setNewAvatar] = useState(null);
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [imageSelected, setImageSelected] = useState('');
+  const navigate = useNavigate();
 
-  const readFile = (file) => {
-    const reader = new FileReader();
-    reader.onload = (e) => setNewAvatar(e.target.result);
-    reader.readAsDataURL(file);
+  const handleFile = (e) => {
+    const file = e.target.files[0];
+    const imageURL = URL.createObjectURL(file);
+    setFile(file);
+    setImageSelected(imageURL);
   };
-  //@Todo: assign link to backend to update actions
 
   const updateData = async () => {
     try {
-      const token = localStorage.getItem(TOKEN);
+      const ACCESS_TOKEN = localStorage.getItem(TOKEN);
+
+      if (!ACCESS_TOKEN) return navigate(PublicRoutes.LOGIN);
+
       const data = new FormData();
       if (phoneStatus !== phone) {
-        data.append(phone, phoneStatus);
-      } else if (emailStatus !== email) {
-        data.append(email, emailStatus);
-      } else if (newAvatar) {
-        data.append(avatar, newAvatar);
-      } else if (introStatus !== introduction) {
-        data.append(introduction, introStatus);
+        data.append('phone', phoneStatus);
       }
-
-      const { status } = await axios.post('URL to back', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'multipart/form-data',
-        },
-        body: data,
-      });
-      if (status > 399) return errorMessage('Something went wrong');
+      if (emailStatus !== email) {
+        data.append('email', emailStatus);
+      }
+      if (imageSelected) {
+        data.append('avatar', file);
+      }
+      if (introStatus !== introduction) {
+        data.append('introduction', introStatus);
+      }
+      await updateDoctorProfile(UPDATE_DOCTOR, data, ACCESS_TOKEN);
       return successMessage('Your data was updated!');
     } catch (error) {
       return errorMessage(error.message);
     }
   };
+
+  // TO-DO : useEffect to bring up the appointments if the user has one scheduled
   useEffect(() => {
-    const token = localStorage.getItem(TOKEN);
-    const getAppointments = async () => {
-      try {
-        const response = await axios.get('URL to back', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        if (response.status > 399) return errorMessage('Something went wrong');
-        setAppointments(response.data);
-      } catch (error) {
-        return errorMessage(error.message);
-      }
-    };
-    getAppointments();
+    // const token = localStorage.getItem(TOKEN);
+    // const getAppointments = async () => {
+    //   try {
+    //     const response = await axios.get('URL to back', {
+    //       headers: {
+    //         Authorization: `Bearer ${token}`,
+    //       },
+    //     });
+    //     if (response.status > 399) return errorMessage('Something went wrong');
+    //     setAppointments(response.data);
+    //   } catch (error) {
+    //     return errorMessage(error.message);
+    //   }
+    // };
+    // getAppointments();
   }, []);
 
+  const handleUpdatePassword = () => {
+    return updatePassword();
+  };
+
   const handleEditOn = () => {
+    setIsUpdating(true);
     setEditState(editStyleOn);
     setPrevData(dataStyleOff);
+  };
+  const cancelUpdate = () => {
+    setIsUpdating(false);
+    setEmailStauts(email);
+    setPhoneSatus(phone);
+    setImageSelected('');
+    setEditState(editStyleOff);
+    setPrevData(dataStyleOn);
   };
 
   const handleEditOff = () => {
@@ -108,19 +127,17 @@ export const DoctorProfile = ({
     const newEmail = event.target.value;
     setEmailStauts(newEmail);
   };
+
   const handlePhoneChange = (event) => {
     const newPhone = event.target.value;
     setPhoneSatus(newPhone);
   };
+
   const handleIntro = (event) => {
     const newIntro = event.target.value;
     setIntroStatus(newIntro);
   };
-  const handleFile = (event) => {
-    readFile(event.target.files[0]);
-    setFile(event.target.files);
-  };
-  const avatarImage = newAvatar ? newAvatar : avatar;
+
   return (
     <>
       <main className="doctor__profile-main">
@@ -131,7 +148,16 @@ export const DoctorProfile = ({
             </div>
             <div className="avatar__main-container ">
               <picture className="profile__img-container">
-                <img src={avatarImage} alt="Profile image" />
+                <img
+                  src={
+                    isUpdating
+                      ? imageSelected || avatar || emptyAvatar
+                      : avatar
+                      ? avatar
+                      : emptyAvatar
+                  }
+                  alt="Profile image"
+                />
               </picture>
               <div className={`${editState}`}>
                 <label htmlFor="newAvatar" className="avatar__label">
@@ -151,7 +177,7 @@ export const DoctorProfile = ({
 
             <div className="main__doctor-info">
               <p>{name}</p>
-              <p className="area">{area}</p>
+              <p className="area">{area.area}</p>
               <div className="location__info info__containers">
                 <BiMap size={18} className="icons" />
                 <p>{`${headquarter.city}, ${headquarter.country}`}</p>
@@ -164,41 +190,21 @@ export const DoctorProfile = ({
 
             <div className="qualifications__info">
               <h3>Qualifications</h3>
-              {qualifications.map((qua) => (
-                <div key={qua}>
-                  <p>{qua}</p>
-                </div>
-              ))}
-            </div>
-          </article>
-
-          <article className="second__info-container">
-            <div className="skills__info">
-              <h3>Skills</h3>
-              {skills.map((skill) => (
-                <div key={skill} className="info__containers">
-                  <BsCheckLg size={12} className="icons" />
-                  <p>{skill}</p>
+              {qualifications.map((qualification) => (
+                <div key={qualification}>
+                  <p>{qualification}</p>
                 </div>
               ))}
             </div>
 
-            <div className="intro__info info__container">
-              <div className="intro__title-container">
-                <h3>Introduction</h3>
-                <ImProfile size={18} className="icons" />
-              </div>
-              <div className={editState}>
-                <label htmlFor="intro">Enter your introduction</label>
-                <textarea id="intro" name="intro" value={introStatus} onChange={handleIntro} />
-              </div>
-              <div className={`info__containers ${prevData}`}>
-                <div className="intro-paragraph">
-                  <p>{introStatus}</p>
+            <div className="qualifications__info">
+              <h3>Memberships</h3>
+              {memberships.map((membership) => (
+                <div key={membership}>
+                  <p>{membership}</p>
                 </div>
-              </div>
+              ))}
             </div>
-
             <div className="email__info info__container">
               <h3>Email</h3>
               <div className={editState}>
@@ -208,7 +214,8 @@ export const DoctorProfile = ({
                   placeholder={emailStatus}
                   required
                   onChange={handleEmailChange}
-                  pattern={emailValidation}
+                  pattern="^[a-z0-9._%+\-]+@[a-z0-9.\-]+.[a-z]{2,4}"
+                  value={isUpdating ? emailStatus : email}
                 />
               </div>
               <div className={`info__containers ${prevData}`}>
@@ -226,7 +233,8 @@ export const DoctorProfile = ({
                   placeholder={phoneStatus}
                   required
                   onChange={handlePhoneChange}
-                  pattern={phoneValidation}
+                  pattern="/^s*(?:+?(d{1,3}))?[\-. (]*(d{3})[\-. )]*(d{3})[\-. ]*(d{4})(?: *x(d+))?s*$/"
+                  value={isUpdating ? phoneStatus : phone}
                 />
               </div>
               <div className={`info__containers ${prevData}`}>
@@ -234,6 +242,44 @@ export const DoctorProfile = ({
                 <p>{phoneStatus}</p>
               </div>
             </div>
+          </article>
+
+          <article className="second__info-container">
+            <div className="skills__info">
+              <h3>Skills</h3>
+              <div className="skills__containers ">
+                {skills.map((skill) => (
+                  <div key={skill} className="skill">
+                    <BsCheckLg size={12} className="icons" />
+                    <p>{skill}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="intro__info info__container">
+              <div className="intro__title-container">
+                <h3>Introduction</h3>
+                <ImProfile size={18} className="icons" />
+              </div>
+              <div className={editState}>
+                <textarea
+                  id="intro"
+                  name="intro"
+                  onChange={handleIntro}
+                  className="introduction"
+                  value={isUpdating ? introStatus : introduction || ''}
+                />
+              </div>
+              <div className={`info__containers ${prevData}`}>
+                <div className="intro-paragraph">
+                  <p>{introStatus}</p>
+                </div>
+              </div>
+            </div>
+
+            {isUpdating || <UpdatePassword updater={updateDoctorProfile} url={UPDATE_DOCTOR} />}
+
             <Button
               variant="solid"
               color="info"
@@ -241,6 +287,14 @@ export const DoctorProfile = ({
               onClick={handleEditOff}
             >
               Save changes
+            </Button>
+            <Button
+              variant="outline"
+              color="danger"
+              className={`${editState} cancel__button`}
+              onClick={cancelUpdate}
+            >
+              Cancel
             </Button>
           </article>
           <article className="appointments__section-doctor">

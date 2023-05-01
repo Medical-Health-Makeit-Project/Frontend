@@ -1,5 +1,5 @@
 import { PropTypes } from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logout, emptyCart } from '@redux/features';
 import { Link } from 'react-router-dom';
 import { BiLogIn } from 'react-icons/bi';
@@ -19,6 +19,7 @@ export const NavigationDesktop = ({ options }) => {
   const { isLoggedOut } = useIsLoggedOut();
 
   const dispatch = useDispatch();
+  const { role } = useSelector((state) => state.auth);
 
   const handleAccessButton = () => {
     dispatch(logout());
@@ -43,7 +44,7 @@ export const NavigationDesktop = ({ options }) => {
         </div>
         <div className="desktop-navigation-actions">
           <Cart size={26} />
-          <AppointmentButton />
+          {role !== 1993 && <AppointmentButton />}
           <Button className="desktop-navigation-actions__login-logout" onClick={handleAccessButton}>
             <BiLogIn size="20" />
             {isLoggedOut ? 'Login' : 'Logout'}
