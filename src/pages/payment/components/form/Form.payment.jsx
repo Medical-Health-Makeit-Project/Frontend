@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import {
   useStripe,
   useElements,
@@ -8,15 +7,16 @@ import {
   CardExpiryElement,
   CardCvcElement,
 } from '@stripe/react-stripe-js';
-import Swal from 'sweetalert2';
-import { Button } from '@components/buttons';
-import { emptyCart } from '@redux/features/cartSlice.feature';
-import { PublicRoutes } from '@routes/';
-import { errorMessage } from '@utils/toastify/error.toastify';
 import { BsCreditCard2Back } from 'react-icons/bs';
 import { MdOutlineUpdate } from 'react-icons/md';
 import { TbPassword } from 'react-icons/tb';
-import { TOKEN } from '@constants';
+import Swal from 'sweetalert2';
+import { emptyCart } from '@redux/features/cartSlice.feature';
+import { Button } from '@components/buttons';
+import { paymentService } from '../../services';
+import { PublicRoutes } from '@routes/';
+import { errorMessage } from '@utils/toastify/error.toastify';
+import { TOKEN, PAYMENTS } from '@constants';
 
 import './form.payment.scss';
 
@@ -24,19 +24,19 @@ export const Form = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const client = useSelector((state) => state.auth);
-  const cart = useSelector((state) => state.cart);
-  const { products, appointments } = cart;
+  const reduxCart = useSelector((state) => state.cart);
+  const { products, appointments } = reduxCart;
 
   const { username, nationality, email, phone } = client;
   const elements = useElements();
   const stripe = useStripe();
 
-  let data = {};
+  let cart = {};
   let productsSubTotal = [];
   let appointmentsSubTotal = [];
 
   if (appointments.length) {
-    data.appointments = appointments;
+    cart.appointments = appointments;
 
     for (let appointment = 0; appointment < appointments.length; appointment++) {
       const finalPrice = appointments[appointment].appointmentData.appointmentPrice;
@@ -45,7 +45,7 @@ export const Form = () => {
   }
 
   if (products.length) {
-    data.products = products;
+    cart.products = products;
     for (let product = 0; product < products.length; product++) {
       const finalPrice =
         (1 - products[product].discount / 100) *
@@ -60,10 +60,10 @@ export const Form = () => {
     ? appointmentsSubTotal.reduce((a, b) => a + b)
     : 0;
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const token = localStorage.getItem(TOKEN);
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const ACCESS_TOKEN = localStorage.getItem(TOKEN);
+    if (!ACCESS_TOKEN) return navigate(PublicRoutes.LOGIN);
     try {
       const { error, paymentMethod } = await stripe.createPaymentMethod({
         type: 'card',
@@ -73,16 +73,12 @@ export const Form = () => {
         if (error.code === 'authentication_required')
           return errorMessage('The authentication is required');
       }
-      const { response } = await axios.post('URL to back', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: {
-          paymentMethod,
-          data,
-          amount: parseFloat(totalAppointments + totalProducts).toFixed(2),
-        },
-      });
+      const payload = {
+        paymentMethod,
+        cart,
+        amount: totalAppointments + totalProducts,
+      };
+      const { data, status } = await paymentService(PAYMENTS, ACCESS_TOKEN, payload);
       if (response.status > 399)
         return errorMessage('Something went wrong, the order was rejected!');
       if (response.statusText === 'OK') {
@@ -135,7 +131,7 @@ export const Form = () => {
           </div>
           <div className="total__container">
             <h4>Total</h4>
-            <p>{`$${parseFloat(totalAppointments + totalProducts).toFixed(2)}`}</p>
+            <p>{`$${parseFloat(totalAppointments + totalProducts)}`}</p>
           </div>
         </article>
       </section>

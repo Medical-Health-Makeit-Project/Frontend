@@ -69,7 +69,7 @@ export const Product = ({ id, discount, dose, image, label, price, product, quan
               +
             </Button>
           </div>
-          <div className="total">TOTAL: ${(priceAfterDiscount * quantity).toFixed(2)}</div>
+          <div className="total">TOTAL: ${priceAfterDiscount * quantity}</div>
         </div>
       </section>
     </article>

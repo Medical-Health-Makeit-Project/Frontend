@@ -13,7 +13,7 @@ import { updateUser } from './service/updateUser.service';
 import { errorMessage } from '@utils/toastify/error.toastify';
 import { successMessage } from '@utils/toastify/success.toastify';
 import { PublicRoutes } from '@routes';
-import { phoneValidation, emailValidation, TOKEN, UPDATE_USER, DATE_FORMAT } from '@constants/';
+import { TOKEN, UPDATE_USER, DATE_FORMAT } from '@constants/';
 import emptyAvatar from '@assets/empty-avatar.png';
 import './userProfile.page.scss';
 
@@ -104,9 +104,6 @@ export const UserProfile = ({
       if (imageSelected) {
         data.append('avatar', file);
       }
-      for (const value of data.values()) {
-        console.log(value);
-      }
       await updateUser(UPDATE_USER, data, ACCES_TOKEN);
 
       return successMessage('Your data was updated!');
@@ -172,7 +169,7 @@ export const UserProfile = ({
                 placeholder={emailStatus}
                 required
                 onChange={handleEmailChange}
-                pattern={emailValidation}
+                pattern="^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}"
                 value={isUpdating ? emailStatus : email}
               />
             </div>
@@ -189,7 +186,7 @@ export const UserProfile = ({
                 placeholder={phoneStatus}
                 required
                 onChange={handlePhoneChange}
-                pattern={phoneValidation}
+                pattern="/^s*(?:+?(d{1,3}))?[\-. (]*(d{3})[\-. )]*(d{3})[\-. ]*(d{4})(?: *x(d+))?s*$/"
                 value={isUpdating ? phoneStatus : phone}
               />
             </div>

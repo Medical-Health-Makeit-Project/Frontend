@@ -25,7 +25,7 @@ export const AppointmentInformation = () => {
   );
   const [city, setCity] = useState([]);
   const [areaSelected, setAreaSelected] = useState(
-    appointmentForm.specialitySelected || 'General surgeon'
+    appointmentForm.specialitySelected || 'General Surgeon'
   );
   const [doctorSelected, setDoctorSelected] = useState([]);
   const navigate = useNavigate();
@@ -113,6 +113,7 @@ export const AppointmentInformation = () => {
     navigate(PrivateRoutes.CHECKOUT);
   };
 
+  console.log(city);
   return (
     <section className="appointments-section-2">
       <h2 className="appointments-section-2__title">Appointment Information</h2>
@@ -156,7 +157,7 @@ export const AppointmentInformation = () => {
               {doctorSelected?.map((e) => {
                 return (
                   <option key={e.id} value={e.name}>
-                    {e.name}
+                    {`${e.firstname} ${e.lastname}`}
                   </option>
                 );
               })}

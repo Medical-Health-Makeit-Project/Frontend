@@ -5,7 +5,7 @@ import { BiShow, BiHide } from 'react-icons/bi';
 import { Heading } from '@components/heading';
 import { Button } from '@components/buttons';
 import { Loading } from '@components/loading';
-import { AUTHENTICATION, TOKEN, EMAIL_REGEX, PASSWORD_REGEX } from '@constants';
+import { AUTHENTICATION, TOKEN } from '@constants';
 import { errorMessage } from '@utils/toastify';
 import { PublicRoutes } from '@routes';
 import { authService } from './service';
@@ -78,7 +78,7 @@ export const Login = () => {
               name="email"
               id="email"
               minLength="3"
-              pattern={EMAIL_REGEX}
+              pattern="^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}"
               required
               className="user__input input-box"
               onChange={handleChange}
@@ -96,7 +96,7 @@ export const Login = () => {
                 id="password"
                 minLength="3"
                 required
-                pattern={PASSWORD_REGEX}
+                pattern="/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/"
                 className="password__input input-box"
                 onChange={handleChange}
                 value={password}

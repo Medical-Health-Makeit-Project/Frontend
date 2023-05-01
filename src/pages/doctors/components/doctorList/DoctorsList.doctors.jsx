@@ -6,7 +6,6 @@ import './doctorList.components.scss';
 export const DoctorsList = () => {
   const { doctors, error, isLoading } = useDoctorsContext();
   if (error) return <p>Error</p>;
-  console.log(doctors);
 
   if (isLoading) {
     return (

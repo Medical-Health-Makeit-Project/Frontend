@@ -11,7 +11,7 @@ import { NoAppointmentsDoctor } from './components/NoAppointmentsDoctor.doctorPr
 import { updateDoctorProfile } from './service/';
 import { PublicRoutes } from '@routes';
 import { successMessage, errorMessage } from '@utils/toastify';
-import { phoneValidation, emailValidation, TOKEN, UPDATE_DOCTOR } from '@constants/';
+import { TOKEN, UPDATE_DOCTOR } from '@constants/';
 import { useDisclosure } from '@chakra-ui/react';
 import emptyAvatar from '@assets/empty-avatar.png';
 
@@ -213,7 +213,7 @@ export const DoctorProfile = ({
                   placeholder={emailStatus}
                   required
                   onChange={handleEmailChange}
-                  pattern={emailValidation}
+                  pattern="^[a-z0-9._%+\-]+@[a-z0-9.\-]+.[a-z]{2,4}"
                   value={isUpdating ? emailStatus : email}
                 />
               </div>
@@ -232,7 +232,7 @@ export const DoctorProfile = ({
                   placeholder={phoneStatus}
                   required
                   onChange={handlePhoneChange}
-                  pattern={phoneValidation}
+                  pattern="/^s*(?:+?(d{1,3}))?[\-. (]*(d{3})[\-. )]*(d{3})[\-. ]*(d{4})(?: *x(d+))?s*$/"
                   value={isUpdating ? phoneStatus : phone}
                 />
               </div>
