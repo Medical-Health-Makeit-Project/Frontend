@@ -49,7 +49,7 @@ function App() {
           <Route path={`${PrivateRoutes.ADMIN.INDEX}/*`} element={<Dashboard />} />
         </Route>
       </Routes>
-      <ToastContainer limit={2} />
+      <ToastContainer limit={1} />
     </div>
   );
 }

@@ -14,7 +14,7 @@ export const Product = ({ id, discount, dose, image, label, price, product, quan
       return dispatch(deleteProduct(id));
     }
 
-    if (quantity >= stock) {
+    if (quantity > stock) {
       toast.error(
         'You reached the maximum product available. If you need more, please contact us.',
         {

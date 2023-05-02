@@ -5,8 +5,8 @@ export const useStock = (stock, currentQuantity) => {
 
   // eslint-disable-next-line consistent-return
   useEffect(() => {
+    if (currentQuantity <= stock - 1) return setIsOutOfStock(false);
     if (currentQuantity >= stock) return setIsOutOfStock(true);
-    if (currentQuantity <= stock) return setIsOutOfStock(false);
   }, [currentQuantity, stock]);
 
   return [isOutOfStock];

@@ -2,23 +2,27 @@ import { PropTypes } from 'prop-types';
 import { BiPlus, BiMinus } from 'react-icons/bi';
 import { toast } from 'react-toastify';
 import { Icon } from '@components/Icon';
-import { useQuantity, useStock } from '../../hooks';
+import { useQuantity } from '../../hooks';
 import './productQuantity.shop.scss';
 import { useEffect } from 'react';
 
 export const ProductQuantity = ({ stock, quantityRetriever, resetQuantity }) => {
   const [quantity, handlerMinus, handlerPlus] = useQuantity(resetQuantity);
-  const [isOutOfStock] = useStock(stock, quantity);
-  if (isOutOfStock) {
-    toast.error('If you need more of these quantity please contact us.', {
-      position: 'top-right',
-      autoClose: 5000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      draggable: true,
-      progress: undefined,
-      theme: 'colored',
-    });
+  const isOutOfStock = quantity >= stock;
+
+  if (quantity === stock) {
+    toast.error(
+      `you've exceeded the maximum stock available. If you need more, please contact us.`,
+      {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored',
+      }
+    );
     toast.clearWaitingQueue();
   }
 
