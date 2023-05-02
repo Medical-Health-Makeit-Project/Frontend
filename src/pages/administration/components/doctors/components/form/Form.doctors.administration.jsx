@@ -7,6 +7,7 @@ import { IoIosClose } from 'react-icons/io';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Loading } from '@components/loading';
 import { Button } from '@components/buttons';
+import { Spinner } from '@chakra-ui/react';
 import { doctorAreas } from '../../../../services/doctorAreas';
 import { locationsSWR } from '@services/locations';
 import { useUpdater } from './hooks/useUpdater.hooks';
@@ -48,6 +49,7 @@ export const Form = () => {
   const [showError, setShowError] = useState(false);
   const [city, setCity] = useState([]);
   const [isUpdating, setIsupdating] = useState(false);
+  const [processingData, setProcessingData] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const { locations } = locationsSWR();
   const { data: doctorArea } = useSWR(DOCTORS_AREA, doctorAreas, {
@@ -149,8 +151,12 @@ export const Form = () => {
             form.append(key, formattedDoctor[key]);
           }
         }
-        await updateDoctor(UPDATE_DOCTOR, form, ACCESS_TOKEN);
-        successMessage('Doctor updated succesfully');
+        setProcessingData(true);
+        const { status } = await updateDoctor(UPDATE_DOCTOR, form, ACCESS_TOKEN);
+        if (status < 300) {
+          setProcessingData(false);
+          successMessage('Doctor updated succesfully');
+        }
         return handleClearForm();
       }
       setEmailError(false);
@@ -178,6 +184,7 @@ export const Form = () => {
       successMessage('Doctor updated succesfully');
       return handleClearForm();
     } catch (error) {
+      setProcessingData(false);
       errorMessage(error.response?.data || error.message);
     }
   };
@@ -231,10 +238,15 @@ export const Form = () => {
       }
       const ACCESS_TOKEN = localStorage.getItem(TOKEN);
       if (!ACCESS_TOKEN) return navigate(PublicRoutes.LOGIN);
-      await postDoctor(POST_DOCTOR, form, ACCESS_TOKEN);
-      successMessage('Doctor added succesfully!');
+      setProcessingData(true);
+      const { status } = await postDoctor(POST_DOCTOR, form, ACCESS_TOKEN);
+      if (status < 300) {
+        successMessage('Doctor added successfully!');
+        setProcessingData(false);
+      }
       return handleClearForm();
     } catch (error) {
+      setProcessingData(false);
       errorMessage(error.response?.data || error.message);
     }
   };
@@ -280,7 +292,7 @@ export const Form = () => {
       <form onSubmit={handleSubmit(submitForm)} className="form-doctors">
         <div className="form-doctors__input-container">
           <label htmlFor="firstname" className="form-doctors__label">
-            Name:
+            1. Name:
           </label>
           <div>
             <input
@@ -297,7 +309,7 @@ export const Form = () => {
         </div>
         <div className="form-doctors__input-container">
           <label htmlFor="lastname" className="form-doctors__label">
-            Lastname:
+            2. Lastname:
           </label>
           <div>
             <input
@@ -314,7 +326,7 @@ export const Form = () => {
         </div>
         <div className="form-doctors__select-container">
           <label htmlFor="birthdate" className="form-doctors__label">
-            Birthdate:
+            3. Birthdate:
           </label>
           <div className="select-container-date">
             <DatePicker
@@ -322,6 +334,10 @@ export const Form = () => {
               selected={newDoctor.birthdate}
               name="birthdate"
               dateFormat="dd/MM/yyyy"
+              peekNextMonth
+              showMonthDropdown
+              showYearDropdown
+              dropdownMode="select"
               className="input-container__date"
               onChange={(date) => setNewDoctor({ ...newDoctor, birthdate: date })}
               required
@@ -331,7 +347,7 @@ export const Form = () => {
         </div>
         <div className="form-doctors__select-container">
           <label htmlFor="area" className="form-doctors__label">
-            Area:
+            4. Area:
           </label>
           <div className="form-doctor-selects-container">
             <select
@@ -357,7 +373,7 @@ export const Form = () => {
           </div>
         </div>
         <div className="form-doctors__input-container">
-          <label className="form-doctors__label">Upload Avatar: </label>
+          <label className="form-doctors__label">5. Upload Avatar: </label>
           <div className="form-doctors__avatar-selection">
             <label htmlFor="avatar" className="form-doctor__btn-upload-image">
               Choose your avatar
@@ -389,7 +405,7 @@ export const Form = () => {
         </div>
         <div className="form-doctors__input-container">
           <label htmlFor="email" className="form-doctors__label">
-            Email:
+            6. Email:
           </label>
           <div>
             <input
@@ -408,7 +424,7 @@ export const Form = () => {
         </div>
         <div className="form-doctors__input-container">
           <label htmlFor="phone" className="form-doctors__label">
-            Phone:
+            7. Phone:
           </label>
           <div>
             <input
@@ -427,7 +443,7 @@ export const Form = () => {
           <p className="form-doctors-headquarter__title">Headquarter:</p>
           <div className="form-doctors__select-container">
             <label htmlFor="country" className="form-doctors__label">
-              Country:
+              8. Country:
             </label>
             <div className="form-doctor-selects-container">
               <select
@@ -453,7 +469,7 @@ export const Form = () => {
           </div>
           <div className="form-doctors__select-container">
             <label htmlFor="city" className="form-doctors__label">
-              City:
+              9. City:
             </label>
             <div className="form-doctor-selects-container">
               <select
@@ -479,7 +495,7 @@ export const Form = () => {
           </div>
         </div>
         <div className="form-doctors-gender">
-          <p className="form-doctors-gender__title">Gender:</p>
+          <p className="form-doctors-gender__title">10. Gender:</p>
           <div>
             <div className="form-doctors__input-container-radios">
               <input
@@ -523,9 +539,9 @@ export const Form = () => {
             <p className="form-doctors__error-message">{errors.gender?.message}</p>
           </div>
         </div>
-        <div className="form-doctors__input-container">
+        <div className="form-doctors__input-container input__add">
           <label htmlFor="qualifications" className="form-doctors__label">
-            Qualifications:
+            11. Qualifications:
           </label>
           <div>
             <div className="form-doctors__input-with-button">
@@ -564,9 +580,9 @@ export const Form = () => {
             })}
           </div>
         </div>
-        <div className="form-doctors__input-container">
+        <div className="form-doctors__input-container input__add">
           <label htmlFor="memberships" className="form-doctors__label">
-            Memberships:
+            12. Memberships:
           </label>
           <div>
             <div className="form-doctors__input-with-button">
@@ -599,9 +615,9 @@ export const Form = () => {
             })}
           </div>
         </div>
-        <div className="form-doctors__input-container">
+        <div className="form-doctors__input-container input__add">
           <label htmlFor="skills" className="form-doctors__label">
-            Skills:
+            13. Skills:
           </label>
           <div>
             <div className="form-doctors__input-with-button">
@@ -633,15 +649,22 @@ export const Form = () => {
             })}
           </div>
         </div>
+
         <Button
           color="danger"
           type={isUpdating ? 'button' : 'submit'}
           className="form-doctors__btn-submitter"
           onClick={isUpdating ? handleUpdateDoctor : null}
+          disabled={processingData}
         >
-          {isUpdating ? 'UPDATE' : 'CREATE'}
+          {processingData ? <Spinner /> : isUpdating ? 'UPDATE' : 'CREATE'}
         </Button>
-        <Button color="info" className="form-doctors__btn-clear" onClick={handleClearForm}>
+        <Button
+          color="info"
+          className="form-doctors__btn-clear"
+          disabled={processingData}
+          onClick={handleClearForm}
+        >
           CLEAR
         </Button>
       </form>

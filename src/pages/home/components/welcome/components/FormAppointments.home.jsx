@@ -37,10 +37,6 @@ export const FormAppointments = () => {
           type="email"
           placeholder="Email address"
           className="welcome-form__input-email"
-          peekNextMonth
-          showMonthDropdown
-          showYearDropdown
-          dropdownMode="select"
           pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}"
           required
         />
@@ -48,6 +44,10 @@ export const FormAppointments = () => {
           <DatePicker
             selected={date}
             onChange={onChangeDate}
+            peekNextMonth
+            showMonthDropdown
+            showYearDropdown
+            dropdownMode="select"
             className="welcome-form__input-date-component"
           />
         </div>
