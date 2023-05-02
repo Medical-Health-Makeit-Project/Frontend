@@ -12,6 +12,7 @@ export const Button = forwardRef(function Button(
   return (
     <button
       type="button"
+      disabled={props.disabled}
       {...props}
       ref={ref}
       className={`${className} ${

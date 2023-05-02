@@ -3,6 +3,7 @@ import { v4 as uuid } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 import { Loading } from '@components/loading';
 import { Button } from '@components/buttons';
+import { Spinner } from '@chakra-ui/react';
 import { postProducts, updateProducts } from './services';
 import { useIsLoading } from '@hooks';
 import { useProductsContext } from '../../context/products.context';
@@ -30,6 +31,7 @@ export const Form = () => {
   const [imageSelected, setImageSelected] = useState('');
   const [isUpdating, setIsupdating] = useState(false);
   const { isLoading } = useIsLoading();
+  const [processingData, setProcessingData] = useState(false);
   const { categories, ProductToBeUpdated, setProductToBeUpdated } = useProductsContext();
   const navigate = useNavigate();
 
@@ -97,8 +99,12 @@ export const Form = () => {
         for (const key in toUpdate) {
           form.append(key, toUpdate[key]);
         }
-        await updateProducts(UPDATE_PRODUCTS, form, isToken);
-        successMessage('Product updated succesfully!');
+        setProcessingData(true);
+        const { status } = await updateProducts(UPDATE_PRODUCTS, form, isToken);
+        if (status < 300) {
+          setProcessingData(false);
+          successMessage('Product updated succesfully!');
+        }
         return handleClearForm();
       }
       const { category, newCategory, ...toUpdate } = newProduct;
@@ -110,6 +116,7 @@ export const Form = () => {
       successMessage('Product updated successfully!');
       return handleClearForm();
     } catch (error) {
+      setProcessingData(false);
       errorMessage(error.response.data || error.message);
     }
   };
@@ -130,8 +137,12 @@ export const Form = () => {
         }
         const isToken = localStorage.getItem(TOKEN);
         if (!isToken) return navigate(PublicRoutes.LOGIN);
-        await postProducts(POST_PRODUCTS, form, isToken);
-        successMessage('Product updated successfully!');
+        setProcessingData(true);
+        const { status } = await postProducts(POST_PRODUCTS, form, isToken);
+        if (status < 300) {
+          successMessage('Product updated successfully aja!');
+          setProcessingData(false);
+        }
         return handleClearForm();
       }
       const { id, ...remainingProps } = newProduct;
@@ -148,6 +159,7 @@ export const Form = () => {
       return handleClearForm();
     } catch (error) {
       errorMessage(error.response.data);
+      setProcessingData(false);
       return handleClearForm();
     }
   };
@@ -187,7 +199,7 @@ export const Form = () => {
       <form className="form-products">
         <div className="form-products__input-container">
           <label htmlFor="product" className="form-products__label">
-            Product name:
+            1. Product name:
           </label>
           <div>
             <input
@@ -203,7 +215,7 @@ export const Form = () => {
         </div>
         <div className="form-products__input-container">
           <label htmlFor="label" className="form-products__label">
-            Label name:
+            2. Label name:
           </label>
           <div>
             <input
@@ -219,7 +231,7 @@ export const Form = () => {
         </div>
         <div className="form-products__input-container">
           <label htmlFor="price" className="form-products__label">
-            Price <span className="dose-example">(USD)</span>:
+            3. Price <span className="dose-example">(USD)</span>:
           </label>
           <div>
             <input
@@ -235,7 +247,7 @@ export const Form = () => {
         </div>
         <div className="form-products__input-container">
           <label htmlFor="stock" className="form-products__label">
-            Stock:
+            4. Stock:
           </label>
           <div>
             <input
@@ -251,7 +263,7 @@ export const Form = () => {
         </div>
         <div className="form-products__input-container">
           <label htmlFor="dose" className="form-products__label">
-            Dose <span className="dose-example">(example: 12mg/ml)</span>:
+            5. Dose <span className="dose-example">(example: 12mg/ml)</span>:
           </label>
           <div>
             <input
@@ -267,7 +279,7 @@ export const Form = () => {
         </div>
         <div className="form-products__input-container">
           <label htmlFor="discount" className="form-products__label">
-            Discount (%):
+            6. Discount (%):
           </label>
           <div>
             <input
@@ -283,7 +295,7 @@ export const Form = () => {
         </div>
         <div className="form-products__select-container">
           <label htmlFor="category" className="form-products__label">
-            Category:
+            7. Category:
           </label>
           <div className="form-products-selects-container">
             <select
@@ -320,7 +332,7 @@ export const Form = () => {
           </div>
         </div>
         <div className="form-products__input-container">
-          <label className="form-products__label">Upload Image: </label>
+          <label className="form-products__label">8. Upload Image: </label>
           <div className="form-products__image-selection">
             <label htmlFor="image" className="form-products__btn-upload-image">
               Choose the Image
@@ -351,7 +363,7 @@ export const Form = () => {
         </div>
         <div className="form-products__input-container">
           <label htmlFor="description" className="form-products__label">
-            Description:
+            9. Description:
           </label>
           <div>
             <div className="input-container-textarea">
@@ -373,8 +385,9 @@ export const Form = () => {
           type={isUpdating ? 'button' : 'submit'}
           className="form-products__btn-submitter"
           onClick={isUpdating ? handleUpdateProduct : handleSubmitForm}
+          disabled={processingData}
         >
-          {isUpdating ? 'UPDATE' : 'CREATE'}
+          {processingData ? <Spinner /> : isUpdating ? 'UPDATE' : 'CREATE'}
         </Button>
         <Button color="info" className="form-products__btn-clear" onClick={handleClearForm}>
           CLEAR

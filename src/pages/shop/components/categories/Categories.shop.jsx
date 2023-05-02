@@ -1,20 +1,22 @@
 import { BiErrorCircle } from 'react-icons/bi';
 import { Spinner } from '@chakra-ui/react';
-import './categories.shop.scss';
 import { useShopContext } from '../../context';
+import { Error } from '@components/error';
+import './categories.shop.scss';
 
 export const SelectCategories = () => {
   const { categories, categoriesError, categoriesIsLoading, handleSelectCategories } =
     useShopContext();
+  const { pathname: location } = window.location;
 
-  const location = window.location.pathname;
   if (categoriesError) {
-    return (
-      <div className="error-message">
-        <BiErrorCircle size={30} color="red" />
-        <p>Something went wrong with categories</p>
-      </div>
-    );
+    const { status } = categoriesError.response;
+    if (status === 404) {
+      return <Error error="There isn't categories to show" status={status} />;
+    }
+    if (status === 500) {
+      return;
+    }
   }
   if (categoriesIsLoading)
     return (
