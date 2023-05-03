@@ -78,6 +78,7 @@ export const Form = () => {
         cart,
         amount: totalAppointments + totalProducts,
       };
+
       const { data, status } = await paymentService(PAYMENTS, ACCESS_TOKEN, payload);
       if (response.status > 399)
         return errorMessage('Something went wrong, the order was rejected!');
@@ -97,7 +98,7 @@ export const Form = () => {
       }
       return elements.getElement(CardNumberElement).clear();
     } catch (error) {
-      errorMessage(error.message);
+      errorMessage(error.response.data || error.message);
     }
   };
 
@@ -131,7 +132,7 @@ export const Form = () => {
           </div>
           <div className="total__container">
             <h4>Total</h4>
-            <p>{`$${parseFloat(totalAppointments + totalProducts)}`}</p>
+            <p>{`$${parseFloat(totalAppointments + totalProducts).toFixed(2)}`}</p>
           </div>
         </article>
       </section>

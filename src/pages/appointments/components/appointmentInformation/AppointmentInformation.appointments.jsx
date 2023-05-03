@@ -84,7 +84,11 @@ export const AppointmentInformation = () => {
     setAppointmentForm({
       ...appointmentForm,
     });
-    return handleChangeForm(e);
+    const { name } = e.target;
+    return setAppointmentForm({
+      ...appointmentForm,
+      [name]: e.target.options[e.target.selectedIndex].dataset.id,
+    });
   };
 
   const handleChangeForm = (e) => {
@@ -131,7 +135,7 @@ export const AppointmentInformation = () => {
               </option>
               {doctorsByArea.map((e) => {
                 return (
-                  <option key={e.area} value={e.area}>
+                  <option key={e.area} value={e.area} data-id={e.id}>
                     {e.area}
                   </option>
                 );
@@ -154,7 +158,7 @@ export const AppointmentInformation = () => {
               </option>
               {doctorSelected?.map((e) => {
                 return (
-                  <option key={e.id} value={e.name}>
+                  <option key={e.id} value={e.id}>
                     {`${e.firstname} ${e.lastname}`}
                   </option>
                 );
