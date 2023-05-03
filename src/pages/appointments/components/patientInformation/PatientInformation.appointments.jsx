@@ -50,7 +50,7 @@ export const PatientInformation = () => {
   ) : (
     <section className="appointments-section-1">
       <h2 className="appointments-section-1__title">Patient Information</h2>
-      <form className="appointments-section-1__form" data-aos="fade-right">
+      <form className="appointments-section-1__form" data-aos="fade-right" autoComplete="off">
         <div className="input-container">
           <label htmlFor="name">Patient Name:</label>
           <input
@@ -134,7 +134,7 @@ export const PatientInformation = () => {
             id="email"
             name="patientEmail"
             className="input-container__input"
-            pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}"
+            pattern="^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}"
             onChange={handleChangeEmail}
             value={patientForm.patientEmail}
           />
@@ -148,7 +148,7 @@ export const PatientInformation = () => {
             id="phone"
             name="patientPhone"
             className="input-container__input"
-            pattern="^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$"
+            pattern="/^s*(?:+?(d{1,3}))?[\-. (]*(d{3})[\-. )]*(d{3})[\-. ]*(d{4})(?: *x(d+))?s*$/"
             onChange={handleChangePhone}
             value={patientForm.patientPhone}
           />

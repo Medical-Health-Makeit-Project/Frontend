@@ -289,7 +289,7 @@ export const Form = () => {
   return (
     <>
       <h1 className="doctors-form__h1">Doctors</h1>
-      <form onSubmit={handleSubmit(submitForm)} className="form-doctors">
+      <form onSubmit={handleSubmit(submitForm)} className="form-doctors" autoComplete="off">
         <div className="form-doctors__input-container">
           <label htmlFor="firstname" className="form-doctors__label">
             1. Name:

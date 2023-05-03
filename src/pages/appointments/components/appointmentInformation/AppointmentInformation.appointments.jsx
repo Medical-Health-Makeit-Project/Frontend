@@ -119,7 +119,7 @@ export const AppointmentInformation = () => {
   return (
     <section className="appointments-section-2">
       <h2 className="appointments-section-2__title">Appointment Information</h2>
-      <form className="appointments-section-2__form">
+      <form className="appointments-section-2__form" autoComplete="off">
         <div className="input-container">
           <label htmlFor="speciality">Speciality:</label>
           <div className="select-container">
