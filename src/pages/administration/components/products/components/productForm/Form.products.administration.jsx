@@ -196,7 +196,7 @@ export const Form = () => {
   return (
     <>
       <h1 className="products-form__h1">Products</h1>
-      <form className="form-products">
+      <form className="form-products" autoComplete="off">
         <div className="form-products__input-container">
           <label htmlFor="product" className="form-products__label">
             1. Product name:
