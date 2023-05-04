@@ -9,11 +9,12 @@ import { AppointmentsList } from './components/Appointments.userProfile';
 import { NoAppointments } from './components/NoAppointments.userProfile';
 import { Button } from '@components/buttons';
 import { UpdatePassword } from '@components/updatePassword/UpdatePassword.components';
-import { updateUser } from './service/updateUser.service';
+import { updateUser } from './service/updateUser/updateUser.service';
+import { getAppointments } from './service/appointments/getAppointments.service';
 import { errorMessage } from '@utils/toastify/error.toastify';
 import { successMessage } from '@utils/toastify/success.toastify';
 import { PublicRoutes } from '@routes';
-import { TOKEN, UPDATE_USER, DATE_FORMAT } from '@constants/';
+import { TOKEN, UPDATE_USER, DATE_FORMAT, APPOINTMENTS } from '@constants/';
 import emptyAvatar from '@assets/empty-avatar.png';
 import './userProfile.page.scss';
 
@@ -43,23 +44,20 @@ export const UserProfile = ({
   const [file, setFile] = useState(null);
   const navigate = useNavigate();
 
-  //@Todo: assign link to backend to update actions
   useEffect(() => {
-    // const token = localStorage.getItem(TOKEN);
-    // const getAppointments = async () => {
-    //   try {
-    //     const { response } = await axios.get('URL to back', {
-    //       headers: {
-    //         Authorization: `Bearer ${token}`,
-    //       },
-    //     });
-    //     if (response.status > 399) return errorMessage('Something went wrong');
-    //     setAppointments(response.data);
-    //   } catch (error) {
-    //     return errorMessage(error.message);
-    //   }
-    // };
-    // getAppointments();
+    const ACCESS_TOKEN = localStorage.getItem(TOKEN);
+    if (!ACCESS_TOKEN) return navigate(PublicRoutes.LOGIN);
+    const fetchAppointments = async () => {
+      try {
+        const { appointments } = await getAppointments(APPOINTMENTS, ACCESS_TOKEN);
+
+        setAppointments(appointments);
+      } catch (error) {
+        console.log(error);
+        return errorMessage(error.response.data || error.message);
+      }
+    };
+    fetchAppointments();
   }, []);
 
   const handleFile = (e) => {

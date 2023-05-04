@@ -148,7 +148,7 @@ export const PatientInformation = () => {
             id="phone"
             name="patientPhone"
             className="input-container__input"
-            pattern="/^s*(?:+?(d{1,3}))?[\-. (]*(d{3})[\-. )]*(d{3})[\-. ]*(d{4})(?: *x(d+))?s*$/"
+            pattern="^s*(?:+?(d{1,3}))?[\-. (]*(d{3})[\-. )]*(d{3})[\-. ]*(d{4})(?: *x(d+))?s*$"
             onChange={handleChangePhone}
             value={patientForm.patientPhone}
           />

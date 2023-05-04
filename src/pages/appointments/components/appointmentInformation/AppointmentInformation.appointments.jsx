@@ -20,25 +20,39 @@ export const AppointmentInformation = () => {
     createAppointment,
   } = useAppointmentContext();
 
-  const [countrySelected, setCountrySelected] = useState(
-    appointmentForm.countrySelected || 'Colombia'
-  );
+  const [countrySelected, setCountrySelected] = useState('');
   const [city, setCity] = useState([]);
-  const [areaSelected, setAreaSelected] = useState(
-    appointmentForm.specialitySelected || 'General Surgeon'
-  );
+  const [areaSelected, setAreaSelected] = useState('');
   const [doctorSelected, setDoctorSelected] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (!countrySelected) {
+      const citys = locations.find((element) => element.country === 'Colombia');
+      return setCity(citys.locations);
+    }
     const citys = locations.find((element) => element.country === countrySelected);
+    console.log(citys);
     setCity(citys.locations);
+    setAppointmentForm({
+      ...appointmentForm,
+      citySelected: citys.locations[0].city,
+    });
   }, [countrySelected]);
 
   useEffect(() => {
+    if (!areaSelected) {
+      const docs = doctorsByArea.find((element) => element.area === 'General Surgeon');
+      const { doctors } = docs;
+      return setDoctorSelected(doctors);
+    }
     const docs = doctorsByArea.find((element) => element.area === areaSelected);
     const { doctors } = docs;
     setDoctorSelected(doctors);
+    setAppointmentForm({
+      ...appointmentForm,
+      preferredDoctorSelected: doctors[0].id,
+    });
   }, [areaSelected]);
 
   useEffect(() => {
@@ -69,6 +83,8 @@ export const AppointmentInformation = () => {
     }
   }, [city]);
 
+  console.log(appointmentForm);
+
   const handleGoBack = (e) => {
     e.preventDefault();
     return setShowSecondForm(false);
@@ -80,11 +96,8 @@ export const AppointmentInformation = () => {
   };
 
   const handleSpeciality = (e) => {
-    setAreaSelected(e.target.value);
-    setAppointmentForm({
-      ...appointmentForm,
-    });
-    const { name } = e.target;
+    const { name, value } = e.target;
+    setAreaSelected(value);
     return setAppointmentForm({
       ...appointmentForm,
       [name]: e.target.options[e.target.selectedIndex].dataset.id,
@@ -127,7 +140,7 @@ export const AppointmentInformation = () => {
               name="specialitySelected"
               id="speciality"
               className="input-container__input"
-              value={appointmentForm.specialitySelected}
+              value={areaSelected}
               onChange={handleSpeciality}
             >
               <option value="" disabled>
@@ -173,7 +186,7 @@ export const AppointmentInformation = () => {
               name="countrySelected"
               id="country"
               className="input-container__input"
-              value={appointmentForm.countrySelected}
+              value={countrySelected}
               onChange={handleSelectCountry}
             >
               <option value="" disabled>
@@ -196,8 +209,8 @@ export const AppointmentInformation = () => {
               name="citySelected"
               id="city"
               className="input-container__input"
-              onChange={handleChangeForm}
               value={appointmentForm.citySelected}
+              onChange={handleChangeForm}
             >
               <option value="" disabled defaultValue>
                 --Choose your city--

@@ -7,7 +7,7 @@
   background-color: theme-color('background', 'lighter');
   display: grid;
   place-items: center;
-  padding: 50px 0;
+  padding: 50px 2rem;
 }
 
 .userProfile__card {
@@ -22,8 +22,8 @@
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
   @media (min-width: 768px) {
+    width: 100%;
     flex-direction: row;
-    width: 700px;
   }
 }
 

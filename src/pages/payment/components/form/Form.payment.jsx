@@ -80,16 +80,16 @@ export const Form = () => {
       };
 
       const { data, status } = await paymentService(PAYMENTS, ACCESS_TOKEN, payload);
-      if (response.status > 399)
-        return errorMessage('Something went wrong, the order was rejected!');
-      if (response.statusText === 'OK') {
+      if (status > 399) return errorMessage('Something went wrong, the order was rejected!');
+      if (status < 399) {
         dispatch(emptyCart());
         Swal.fire({
           icon: 'success',
           title: 'Your order was created!',
-          text: false,
+          text: `This is your order id ${data.id}, make sure you don't lose it`,
           showCancelButton: false,
           confirmButtonText: 'Go to home',
+          allowOutsideClick: false,
         }).then((result) => {
           if (result.isConfirmed) {
             return navigate(PublicRoutes.HOME);
