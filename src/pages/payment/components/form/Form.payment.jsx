@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -13,6 +14,7 @@ import { TbPassword } from 'react-icons/tb';
 import Swal from 'sweetalert2';
 import { emptyCart } from '@redux/features/cartSlice.feature';
 import { Button } from '@components/buttons';
+import { Loading } from '@components/loading';
 import { paymentService } from '../../services';
 import { PublicRoutes } from '@routes/';
 import { errorMessage } from '@utils/toastify/error.toastify';
@@ -21,6 +23,7 @@ import { TOKEN, PAYMENTS } from '@constants';
 import './form.payment.scss';
 
 export const Form = () => {
+  const [processingPayment, setProcessingPayment] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const client = useSelector((state) => state.auth);
@@ -78,7 +81,7 @@ export const Form = () => {
         cart,
         amount: totalAppointments + totalProducts,
       };
-
+      setProcessingPayment(true);
       const { data, status } = await paymentService(PAYMENTS, ACCESS_TOKEN, payload);
       if (status > 399) return errorMessage('Something went wrong, the order was rejected!');
       if (status < 399) {
@@ -96,8 +99,10 @@ export const Form = () => {
           }
         });
       }
+      setProcessingPayment(false);
       return elements.getElement(CardNumberElement).clear();
     } catch (error) {
+      setProcessingPayment(false);
       errorMessage(error.response.data || error.message);
     }
   };
@@ -154,11 +159,10 @@ export const Form = () => {
             <CardCvcElement className="card__cvc-container" />
           </div>
         </div>
-        <div className="button__pay-container">
-          <Button color="danger" type="submit" className="button__pay">
-            Order
-          </Button>
-        </div>
+
+        <Button color="danger" type="submit" className="button__pay" disabled={processingPayment}>
+          {processingPayment ? <Loading /> : 'Order'}
+        </Button>
       </div>
     </form>
   );

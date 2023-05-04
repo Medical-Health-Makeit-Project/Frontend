@@ -8,9 +8,11 @@ import { BiMap, BiEdit } from 'react-icons/bi';
 import { AppointmentsList } from './components/Appointments.userProfile';
 import { NoAppointments } from './components/NoAppointments.userProfile';
 import { Button } from '@components/buttons';
+import { Loading } from '@components/loading';
+import { Error } from '@components/error';
 import { UpdatePassword } from '@components/updatePassword/UpdatePassword.components';
 import { updateUser } from './service/updateUser/updateUser.service';
-import { getAppointments } from './service/appointments/getAppointments.service';
+import { appointmentsSWR } from './swr';
 import { errorMessage } from '@utils/toastify/error.toastify';
 import { successMessage } from '@utils/toastify/success.toastify';
 import { PublicRoutes } from '@routes';
@@ -39,26 +41,16 @@ export const UserProfile = ({
   const [emailStatus, setEmailStauts] = useState(email);
   const [phoneStatus, setPhoneSatus] = useState(phone);
   const [isUpdating, setIsUpdating] = useState(false);
-  const [appointments, setAppointments] = useState([]);
   const [imageSelected, setImageSelected] = useState('');
   const [file, setFile] = useState(null);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const ACCESS_TOKEN = localStorage.getItem(TOKEN);
-    if (!ACCESS_TOKEN) return navigate(PublicRoutes.LOGIN);
-    const fetchAppointments = async () => {
-      try {
-        const { appointments } = await getAppointments(APPOINTMENTS, ACCESS_TOKEN);
-
-        setAppointments(appointments);
-      } catch (error) {
-        console.log(error);
-        return errorMessage(error.response.data || error.message);
-      }
-    };
-    fetchAppointments();
-  }, []);
+  const ACCESS_TOKEN = localStorage.getItem(TOKEN);
+  if (!ACCESS_TOKEN) return navigate(PublicRoutes.LOGIN);
+  const {
+    data: appointmentsFetched,
+    error: appointmentsError,
+    isLoading: isLoadingAppointments,
+  } = appointmentsSWR(APPOINTMENTS, ACCESS_TOKEN);
 
   const handleFile = (e) => {
     const file = e.target.files[0];
@@ -102,7 +94,7 @@ export const UserProfile = ({
       if (imageSelected) {
         data.append('avatar', file);
       }
-      await updateUser(UPDATE_USER, data, ACCES_TOKEN);
+      await updateUser(UPDATE_USER, data, ACCESS_TOKEN);
 
       return successMessage('Your data was updated!');
     } catch (error) {
@@ -122,7 +114,7 @@ export const UserProfile = ({
   return (
     <section className="userProfile__background">
       <article className="userProfile__card">
-        <div>
+        <div className="userProfile__card-container">
           <div className="edit__container">
             <BiEdit size={20} className="icons edit__icon" onClick={handleEditOn} />
           </div>
@@ -231,8 +223,12 @@ export const UserProfile = ({
         </div>
 
         <div className="appointments__section">
-          {appointments.length ? (
-            <AppointmentsList appointments={appointments} />
+          {isLoadingAppointments ? (
+            <Loading />
+          ) : appointmentsError ? (
+            <Error error="We can't show your appointments right now" />
+          ) : appointmentsFetched.length ? (
+            <AppointmentsList appointments={appointmentsFetched} />
           ) : (
             <NoAppointments />
           )}

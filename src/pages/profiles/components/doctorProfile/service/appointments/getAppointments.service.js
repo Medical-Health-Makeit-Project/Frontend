@@ -1,14 +1,14 @@
 import axios from 'axios';
-import { getAppointmentsAdapter } from '../../adapters';
+import { getAppointmentsDoctorAdapter } from '../../adapter';
 
-export const getAppointments = async (URL, ACCESS_TOKEN) => {
+export const getAppointmentsDoctor = async (URL, ACCESS_TOKEN) => {
   try {
     const { data } = await axios.get(URL, {
       headers: {
         Authorization: `Bearer ${ACCESS_TOKEN}`,
       },
     });
-    return getAppointmentsAdapter(data);
+    return getAppointmentsDoctorAdapter(data);
   } catch (error) {
     throw error;
   }

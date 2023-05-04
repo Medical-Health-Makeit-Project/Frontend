@@ -32,7 +32,6 @@ export const AppointmentInformation = () => {
       return setCity(citys.locations);
     }
     const citys = locations.find((element) => element.country === countrySelected);
-    console.log(citys);
     setCity(citys.locations);
     setAppointmentForm({
       ...appointmentForm,
@@ -82,8 +81,6 @@ export const AppointmentInformation = () => {
       });
     }
   }, [city]);
-
-  console.log(appointmentForm);
 
   const handleGoBack = (e) => {
     e.preventDefault();

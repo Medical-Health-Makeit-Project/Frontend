@@ -75,14 +75,13 @@
 .payment__input {
   width: 100%;
 }
-.button__pay-container {
-  width: 100%;
+
+.button__pay {
+  width: 100px;
+  height: 45px;
   display: flex;
   justify-content: center;
-  margin-top: 30px;
-  .button__pay {
-    width: 100px;
-  }
+  margin-top: 1rem;
 }
 
 .card__number-container {

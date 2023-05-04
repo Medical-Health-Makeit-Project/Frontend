@@ -1,24 +1,13 @@
-import {
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  TableContainer,
-} from '@chakra-ui/react';
+import { Table, Thead, Tbody, Tr, Th, Td, TableCaption, TableContainer } from '@chakra-ui/react';
 import { v4 as uuid } from 'uuid';
 import dayjs from 'dayjs';
 import { DATE_FORMAT } from '@constants';
 
 export const AppointmentsList = ({ appointments }) => {
   const appointmentsOrdered = appointments.sort((a, b) => new Date(a.date) - new Date(b.date));
-  console.log(appointmentsOrdered);
   return (
     <TableContainer>
-      <Table variant="simple">
+      <Table variant="simple" size={'sm'}>
         <TableCaption>
           <div>These are your upcoming appointments, please arrive to them 15 minutes early.</div>
           <div>If you have problems getting to the appointment, please call (04) 8544 3322</div>
