@@ -1,0 +1,10 @@
+@import '@sass/base/typography.base.scss';
+@import '@sass/themes/theme.themes.scss';
+@import '@sass/base/alerts.base.scss';
+@import '@sass/abstract/mixins.abstract.scss';
+
+.doctor-appointments__title {
+  display: flex;
+  @include subtitle();
+  margin-bottom: 1rem;
+}

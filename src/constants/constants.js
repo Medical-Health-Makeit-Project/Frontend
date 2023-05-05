@@ -104,6 +104,15 @@ export const UPDATE_USER = !import.meta.env.PROD ? 'http://localhost:5150/api/v1
 export const PAYMENTS = !import.meta.env.PROD ? 'http://localhost:5150/api/v1/payments' : null;
 
 //-----------------------------------------------------------
+
+// APPOINTMENTS
+
+export const APPOINTMENTS = !import.meta.env.PROD
+  ? 'http://localhost:5150/api/v1/appointments'
+  : null;
+
+//-----------------------------------------------------------
+
 //export const GET_USERS = '/src/pages/profiles/user.json';
 
 export const DOCTORS_AREA = '/src/pages/administration/db/doctorsArea.json'; // This endpoint should be replaced bY DOCTORS_BY_AREA

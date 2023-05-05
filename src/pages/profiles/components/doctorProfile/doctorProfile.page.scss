@@ -5,9 +5,7 @@
 
 .doctor__profile-main {
   background-color: theme-color('background', 'lighter');
-  display: grid;
-  place-items: center;
-  padding: 50px 0;
+  padding: 50px 2rem;
 }
 
 .doctor__card {
@@ -200,22 +198,25 @@
 }
 
 .appointments__section-doctor {
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 10px;
-  padding-top: 10px;
-  border-top: 1px dotted theme-color('accent', 'base');
+  width: 100%;
+  margin-top: 2rem;
+  padding: 1rem;
+  text-align: center;
   p {
     @include paragraph;
   }
 
   @media (min-width: 768px) {
-    place-self: initial;
+    min-width: 200px;
+    height: 100%;
+    margin-top: 0;
+    margin-left: 20px;
     padding-left: 10px;
-
     border-top: none;
+    align-self: flex-start;
   }
 }
 

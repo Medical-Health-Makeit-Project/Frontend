@@ -8,13 +8,12 @@ import { Button } from '@components/buttons';
 import { UpdatePassword } from '@components/updatePassword';
 import { AppontmetsListDoctor } from './components/AppontmetsListDoctor.doctorProfile';
 import { NoAppointmentsDoctor } from './components/NoAppointmentsDoctor.doctorProfile';
-import { updateDoctorProfile } from './service/';
+import { updateDoctorProfile } from './service/updateDoctor';
+import { appointmentsDoctorSwr } from './swr/appointmentsDoctor.swr';
 import { PublicRoutes } from '@routes';
 import { successMessage, errorMessage } from '@utils/toastify';
-import { TOKEN, UPDATE_DOCTOR } from '@constants/';
-import { useDisclosure } from '@chakra-ui/react';
+import { TOKEN, UPDATE_DOCTOR, APPOINTMENTS } from '@constants/';
 import emptyAvatar from '@assets/empty-avatar.png';
-
 import './doctorProfile.page.scss';
 
 export const DoctorProfile = ({
@@ -46,6 +45,13 @@ export const DoctorProfile = ({
   const [isUpdating, setIsUpdating] = useState(false);
   const [imageSelected, setImageSelected] = useState('');
   const navigate = useNavigate();
+  const ACCESS_TOKEN = localStorage.getItem(TOKEN);
+  if (!ACCESS_TOKEN) return navigate(PublicRoutes.LOGIN);
+  const {
+    data: appointmentsFetched,
+    error: appointmentsError,
+    isLoading: isLoadingAppointments,
+  } = appointmentsDoctorSwr(APPOINTMENTS, ACCESS_TOKEN);
 
   const handleFile = (e) => {
     const file = e.target.files[0];
@@ -57,9 +63,7 @@ export const DoctorProfile = ({
   const updateData = async () => {
     try {
       const ACCESS_TOKEN = localStorage.getItem(TOKEN);
-
       if (!ACCESS_TOKEN) return navigate(PublicRoutes.LOGIN);
-
       const data = new FormData();
       if (phoneStatus !== phone) {
         data.append('phone', phoneStatus);
@@ -79,25 +83,6 @@ export const DoctorProfile = ({
       return errorMessage(error.message);
     }
   };
-
-  // TO-DO : useEffect to bring up the appointments if the user has one scheduled
-  useEffect(() => {
-    // const token = localStorage.getItem(TOKEN);
-    // const getAppointments = async () => {
-    //   try {
-    //     const response = await axios.get('URL to back', {
-    //       headers: {
-    //         Authorization: `Bearer ${token}`,
-    //       },
-    //     });
-    //     if (response.status > 399) return errorMessage('Something went wrong');
-    //     setAppointments(response.data);
-    //   } catch (error) {
-    //     return errorMessage(error.message);
-    //   }
-    // };
-    // getAppointments();
-  }, []);
 
   const handleUpdatePassword = () => {
     return updatePassword();
@@ -298,8 +283,12 @@ export const DoctorProfile = ({
             </Button>
           </article>
           <article className="appointments__section-doctor">
-            {appointments.length ? (
-              <AppontmetsListDoctor appointments={appointments} />
+            {isLoadingAppointments ? (
+              <Loading />
+            ) : appointmentsError ? (
+              <Error error="We can't show your appointments right now" />
+            ) : appointmentsFetched.length ? (
+              <AppontmetsListDoctor appointments={appointmentsFetched} />
             ) : (
               <NoAppointmentsDoctor />
             )}

@@ -8,12 +8,15 @@ import { BiMap, BiEdit } from 'react-icons/bi';
 import { AppointmentsList } from './components/Appointments.userProfile';
 import { NoAppointments } from './components/NoAppointments.userProfile';
 import { Button } from '@components/buttons';
+import { Loading } from '@components/loading';
+import { Error } from '@components/error';
 import { UpdatePassword } from '@components/updatePassword/UpdatePassword.components';
-import { updateUser } from './service/updateUser.service';
+import { updateUser } from './service/updateUser/updateUser.service';
+import { appointmentsSWR } from './swr';
 import { errorMessage } from '@utils/toastify/error.toastify';
 import { successMessage } from '@utils/toastify/success.toastify';
 import { PublicRoutes } from '@routes';
-import { TOKEN, UPDATE_USER, DATE_FORMAT } from '@constants/';
+import { TOKEN, UPDATE_USER, DATE_FORMAT, APPOINTMENTS } from '@constants/';
 import emptyAvatar from '@assets/empty-avatar.png';
 import './userProfile.page.scss';
 
@@ -38,29 +41,16 @@ export const UserProfile = ({
   const [emailStatus, setEmailStauts] = useState(email);
   const [phoneStatus, setPhoneSatus] = useState(phone);
   const [isUpdating, setIsUpdating] = useState(false);
-  const [appointments, setAppointments] = useState([]);
   const [imageSelected, setImageSelected] = useState('');
   const [file, setFile] = useState(null);
   const navigate = useNavigate();
-
-  //@Todo: assign link to backend to update actions
-  useEffect(() => {
-    // const token = localStorage.getItem(TOKEN);
-    // const getAppointments = async () => {
-    //   try {
-    //     const { response } = await axios.get('URL to back', {
-    //       headers: {
-    //         Authorization: `Bearer ${token}`,
-    //       },
-    //     });
-    //     if (response.status > 399) return errorMessage('Something went wrong');
-    //     setAppointments(response.data);
-    //   } catch (error) {
-    //     return errorMessage(error.message);
-    //   }
-    // };
-    // getAppointments();
-  }, []);
+  const ACCESS_TOKEN = localStorage.getItem(TOKEN);
+  if (!ACCESS_TOKEN) return navigate(PublicRoutes.LOGIN);
+  const {
+    data: appointmentsFetched,
+    error: appointmentsError,
+    isLoading: isLoadingAppointments,
+  } = appointmentsSWR(APPOINTMENTS, ACCESS_TOKEN);
 
   const handleFile = (e) => {
     const file = e.target.files[0];
@@ -104,7 +94,7 @@ export const UserProfile = ({
       if (imageSelected) {
         data.append('avatar', file);
       }
-      await updateUser(UPDATE_USER, data, ACCES_TOKEN);
+      await updateUser(UPDATE_USER, data, ACCESS_TOKEN);
 
       return successMessage('Your data was updated!');
     } catch (error) {
@@ -124,7 +114,7 @@ export const UserProfile = ({
   return (
     <section className="userProfile__background">
       <article className="userProfile__card">
-        <div>
+        <div className="userProfile__card-container">
           <div className="edit__container">
             <BiEdit size={20} className="icons edit__icon" onClick={handleEditOn} />
           </div>
@@ -233,8 +223,12 @@ export const UserProfile = ({
         </div>
 
         <div className="appointments__section">
-          {appointments.length ? (
-            <AppointmentsList appointments={appointments} />
+          {isLoadingAppointments ? (
+            <Loading />
+          ) : appointmentsError ? (
+            <Error error="We can't show your appointments right now" />
+          ) : appointmentsFetched.length ? (
+            <AppointmentsList appointments={appointmentsFetched} />
           ) : (
             <NoAppointments />
           )}

@@ -1,31 +1,44 @@
-import {
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
-  Box,
-} from '@chakra-ui/react';
+import { Table, Thead, Tbody, Tr, Th, Td, TableCaption, TableContainer } from '@chakra-ui/react';
+import { v4 as uuid } from 'uuid';
+import dayjs from 'dayjs';
+import { DATE_FORMAT } from '@constants';
+import './appointmentsListDoctor.scss';
 
-export const AppontmetsListDoctor = () => {
+export const AppontmetsListDoctor = ({ appointments }) => {
+  const appointmentsOrdered = appointments.sort((a, b) => new Date(a.date) - new Date(b.date));
+
   return (
-    <div className="appointments-exist">
-      <Accordion allowToggle className="accordion__container-doctor">
-        <AccordionItem>
-          <h3>
-            <AccordionButton>
-              <Box as="span" flex="1" textAlign="left">
-                appointment 1
-              </Box>
-              <AccordionIcon />
-            </AccordionButton>
-          </h3>
-          <AccordionPanel className="accordion__description">
-            You have a Endocrinologist appointment with the patient Robert Langdon in the
-            headquarters of Miami,USA in 19/4/2023 at 12:17
-          </AccordionPanel>
-        </AccordionItem>
-      </Accordion>
-    </div>
+    <>
+      <h2 className="doctor-appointments__title">Upcoming Appointments</h2>
+      <TableContainer>
+        <Table variant="simple" size={'sm'}>
+          <TableCaption>
+            <div>*If you have problems getting to the appointment, please call (04) 8544 3322</div>
+          </TableCaption>
+          <Thead>
+            <Tr>
+              <Th>Date</Th>
+              <Th>Time</Th>
+              <Th>Patient</Th>
+              <Th>Patient contact</Th>
+              <Th>Consultation</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {appointmentsOrdered.map(({ date, patient, scheduleAt, reason }) => {
+              return (
+                <Tr key={uuid()}>
+                  <Td>{dayjs(date).format(DATE_FORMAT)}</Td>
+                  <Td>{scheduleAt}</Td>
+                  <Td>{`${patient.firstname} ${patient.lastname}`}</Td>
+                  <Td>{patient.email}</Td>
+                  <Td>{reason}</Td>
+                </Tr>
+              );
+            })}
+          </Tbody>
+        </Table>
+      </TableContainer>
+    </>
   );
 };
