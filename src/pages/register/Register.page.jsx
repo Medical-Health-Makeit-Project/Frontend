@@ -41,7 +41,7 @@ export const Register = () => {
     event.preventDefault();
     try {
       const hasEmptyField = Object.keys(userData).some(
-        (key) => userData.hasOwnProperty(key) && userData[key] === ''
+        (key) => userData.hasOwnProperty(key) && !!userData[key] === ''
       );
       if (hasEmptyField) return errorMessage('You must complete the form!');
       if (userData.password === userData.repeatPassword) {

@@ -33,7 +33,7 @@ describe('Login flow test', () => {
     cy.contains('Authentication credential failed').should('exist');
   });
 
-  it('Show alert for form incomplete', () => {
+  it('Show alert for incomplete form', () => {
     cy.visit(url);
     cy.get('#email').type(adminEmail);
     cy.get('.login__button').click();
@@ -53,7 +53,7 @@ describe('Login flow test', () => {
     cy.contains('You need to complete the form').should('exist');
   });
 
-  it('Admin login succesfully', () => {
+  it('Admin logged in succesfully', () => {
     cy.visit(url);
     cy.get('#email').type(adminEmail);
     cy.get('#password').type(adminPassword);
@@ -65,7 +65,7 @@ describe('Login flow test', () => {
     cy.contains('Logout').should('exist');
   });
 
-  it('User login succesfully', () => {
+  it('User logged in succesfully', () => {
     cy.visit(url);
     cy.get('#email').type(userEmail);
     cy.get('#password').type(userPassword);

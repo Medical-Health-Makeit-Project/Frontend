@@ -46,7 +46,7 @@ describe('Register flow test', () => {
     cy.contains('You must complete the form!').should('exist');
   });
 
-  it('Show warning of unmatch passwords', () => {
+  it('Show warning for unmatched passwords', () => {
     cy.visit(url);
     cy.get('#name').type(name);
     cy.get('#lastname').type(lastName);

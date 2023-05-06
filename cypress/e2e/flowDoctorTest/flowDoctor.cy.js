@@ -25,7 +25,7 @@ describe('Doctor flow test', () => {
     cy.contains('Doctors').should('exist');
   });
 
-  it('Show warnig text for empty name input', () => {
+  it('Show warning text for empty name input', () => {
     loginAdmin();
     cy.get('.desktop-navigation-options > [href="/home/admin/dashboard"]').click();
     cy.get('[href="/home/admin/doctors"] > .admin-welcome__button').click();
@@ -33,7 +33,7 @@ describe('Doctor flow test', () => {
     cy.contains('You must to provide a firstname').should('exist');
   });
 
-  it('Show warnig text for empty area input', () => {
+  it('Show warning text for empty area input', () => {
     loginAdmin();
     cy.get('.desktop-navigation-options > [href="/home/admin/dashboard"]').click();
     cy.get('[href="/home/admin/doctors"] > .admin-welcome__button').click();
@@ -41,7 +41,7 @@ describe('Doctor flow test', () => {
     cy.contains('You must to provide an area').should('exist');
   });
 
-  it('Show warnig text for empty email input', () => {
+  it('Show warning text for empty email input', () => {
     loginAdmin();
     cy.get('.desktop-navigation-options > [href="/home/admin/dashboard"]').click();
     cy.get('[href="/home/admin/doctors"] > .admin-welcome__button').click();
@@ -49,7 +49,7 @@ describe('Doctor flow test', () => {
     cy.contains('You must use only @drmebid.com').should('exist');
   });
 
-  it('Show warnig text for empty phone input', () => {
+  it('Show warning text for empty phone input', () => {
     loginAdmin();
     cy.get('.desktop-navigation-options > [href="/home/admin/dashboard"]').click();
     cy.get('[href="/home/admin/doctors"] > .admin-welcome__button').click();
@@ -57,7 +57,7 @@ describe('Doctor flow test', () => {
     cy.contains('You must to provide at leaste 10 digits').should('exist');
   });
 
-  it('Show warnig text for empty qualificaions input', () => {
+  it('Show warning text for empty qualificaions input', () => {
     loginAdmin();
     cy.get('.desktop-navigation-options > [href="/home/admin/dashboard"]').click();
     cy.get('[href="/home/admin/doctors"] > .admin-welcome__button').click();
@@ -65,7 +65,7 @@ describe('Doctor flow test', () => {
     cy.contains('You must to provide at least one qualification').should('exist');
   });
 
-  it('Show input text for qualifications added', () => {
+  it('Show input text for added qualifications ', () => {
     loginAdmin();
     cy.get('.desktop-navigation-options > [href="/home/admin/dashboard"]').click();
     cy.get('[href="/home/admin/doctors"] > .admin-welcome__button').click();
@@ -146,7 +146,7 @@ describe('Doctor flow test', () => {
     cy.contains('Doctor deleted successfully!').should('exist');
   });
 
-  it('Show alert for doctor updated', () => {
+  it('Show alert for updated doctor', () => {
     loginAdmin();
     cy.get('.desktop-navigation-options > [href="/home/admin/dashboard"]').click();
     cy.get('[href="/home/admin/doctors"] > .admin-welcome__button').click();
