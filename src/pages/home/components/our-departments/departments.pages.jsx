@@ -7,16 +7,11 @@ export const Departments = () => {
   const [departments, setDepartments] = useState([]);
 
   useEffect(() => {
-    try {
-      setTimeout(() => {
-        departmentsService().then((res) => {
-          setDepartments(res.data);
-        });
-      }, 5000);
-    } catch (error) {
-      //TO-DO catch error from backend
-      console.log(error);
-    }
+    setTimeout(() => {
+      departmentsService().then((res) => {
+        setDepartments(res.data);
+      });
+    }, 5000);
   }, []);
   return (
     <section className="departments__scroll">

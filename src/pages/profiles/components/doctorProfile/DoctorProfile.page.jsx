@@ -19,6 +19,7 @@ import './doctorProfile.page.scss';
 
 export const DoctorProfile = ({
   name,
+  lastname,
   area,
   avatar,
   introduction,
@@ -41,7 +42,6 @@ export const DoctorProfile = ({
   const [emailStatus, setEmailStauts] = useState(email);
   const [phoneStatus, setPhoneSatus] = useState(phone);
   const [introStatus, setIntroStatus] = useState(introduction || '');
-  const [appointments, setAppointments] = useState([]);
   const [file, setFile] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
   const [imageSelected, setImageSelected] = useState('');
@@ -106,6 +106,7 @@ export const DoctorProfile = ({
   const handleEditOff = () => {
     setEditState(editStyleOff);
     setPrevData(dataStyleOn);
+    setIsUpdating(false);
     updateData();
   };
 
@@ -146,9 +147,6 @@ export const DoctorProfile = ({
                 />
               </picture>
               <div className={`${editState}`}>
-                <label htmlFor="newAvatar" className="avatar__label">
-                  Edit profile image
-                </label>
                 <input
                   className="avatar__input"
                   type="file"
@@ -162,7 +160,9 @@ export const DoctorProfile = ({
             </div>
 
             <div className="main__doctor-info">
-              <p>{name}</p>
+              <p>
+                {name} {lastname}
+              </p>
               <p className="area">{area.area}</p>
               <div className="location__info info__containers">
                 <BiMap size={18} className="icons" />

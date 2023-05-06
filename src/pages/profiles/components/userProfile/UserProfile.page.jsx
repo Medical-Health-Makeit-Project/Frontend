@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 import { AiOutlineMail } from 'react-icons/ai';
@@ -10,7 +10,7 @@ import { NoAppointments } from './components/NoAppointments.userProfile';
 import { Button } from '@components/buttons';
 import { Loading } from '@components/loading';
 import { Error } from '@components/error';
-import { UpdatePassword } from '@components/updatePassword/UpdatePassword.components';
+import { UpdatePassword } from '@components/updatePassword';
 import { updateUser } from './service/updateUser/updateUser.service';
 import { appointmentsSWR } from './swr';
 import { errorMessage } from '@utils/toastify/error.toastify';
@@ -44,6 +44,7 @@ export const UserProfile = ({
   const [imageSelected, setImageSelected] = useState('');
   const [file, setFile] = useState(null);
   const navigate = useNavigate();
+  const inputRef = useRef(null);
   const ACCESS_TOKEN = localStorage.getItem(TOKEN);
   if (!ACCESS_TOKEN) return navigate(PublicRoutes.LOGIN);
   const {
@@ -60,6 +61,7 @@ export const UserProfile = ({
   };
 
   const handleEditOn = () => {
+    inputRef.current.focus();
     setIsUpdating(true);
     setEditState(editStyleOn);
     setPrevData(dataStyleOff);
@@ -68,6 +70,7 @@ export const UserProfile = ({
   const handleUpdate = () => {
     setEditState(editStyleOff);
     setPrevData(dataStyleOn);
+    setIsUpdating(false);
     updateData();
   };
 
@@ -94,11 +97,11 @@ export const UserProfile = ({
       if (imageSelected) {
         data.append('avatar', file);
       }
-      await updateUser(UPDATE_USER, data, ACCESS_TOKEN);
 
+      await updateUser(UPDATE_USER, data, ACCESS_TOKEN);
       return successMessage('Your data was updated!');
     } catch (error) {
-      return errorMessage(error.message);
+      errorMessage(error.message);
     }
   };
 
@@ -123,14 +126,15 @@ export const UserProfile = ({
               alt="profile image"
               className="avatar__image"
               src={
-                isUpdating ? imageSelected || avatar || emptyAvatar : avatar ? avatar : emptyAvatar
+                isUpdating
+                  ? imageSelected || avatar || emptyAvatar
+                  : imageSelected
+                  ? imageSelected
+                  : avatar || emptyAvatar
               }
             />
           </picture>
           <div className={`${editState}`}>
-            <label htmlFor="newAvatar" className="avatar__label">
-              Edit profile image
-            </label>
             <input
               className="avatar__input"
               type="file"
@@ -151,11 +155,11 @@ export const UserProfile = ({
 
           <div className="profile__info-container">
             <div className={editState}>
-              <label htmlFor="newEmail">Edit email</label>
               <input
+                ref={inputRef}
                 name="newEmail"
                 type="text"
-                className="edit__input"
+                className="edit__input-user"
                 placeholder={emailStatus}
                 required
                 onChange={handleEmailChange}
@@ -168,11 +172,10 @@ export const UserProfile = ({
               <p className="paragraph">{emailStatus}</p>
             </div>
             <div className={editState}>
-              <label htmlFor="newPhone">Edit phone</label>
               <input
                 name="newPhone"
                 type="text"
-                className="edit__input"
+                className="edit__input-user"
                 placeholder={phoneStatus}
                 required
                 onChange={handlePhoneChange}

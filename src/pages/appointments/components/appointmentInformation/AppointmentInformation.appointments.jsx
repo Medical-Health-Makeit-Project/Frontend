@@ -97,12 +97,24 @@ export const AppointmentInformation = () => {
     setAreaSelected(value);
     return setAppointmentForm({
       ...appointmentForm,
-      [name]: e.target.options[e.target.selectedIndex].dataset.id,
+      [name]: {
+        id: e.target.options[e.target.selectedIndex].dataset.id,
+        specialityName: value,
+      },
     });
   };
 
   const handleChangeForm = (e) => {
     const { name, value } = e.target;
+    if (name === 'preferredDoctorSelected') {
+      return setAppointmentForm({
+        ...appointmentForm,
+        [name]: {
+          id: e.target.options[e.target.selectedIndex].dataset.id,
+          doctorName: value,
+        },
+      });
+    }
     return setAppointmentForm({
       ...appointmentForm,
       [name]: value,
@@ -160,7 +172,7 @@ export const AppointmentInformation = () => {
               name="preferredDoctorSelected"
               id="preferredDoctor"
               className="input-container__input"
-              value={appointmentForm.preferredDoctorSelected}
+              value={appointmentForm.preferredDoctorSelected.doctorName}
               onChange={handleChangeForm}
             >
               <option value="" disabled defaultValue>
@@ -168,7 +180,7 @@ export const AppointmentInformation = () => {
               </option>
               {doctorSelected?.map((e) => {
                 return (
-                  <option key={e.id} value={e.id}>
+                  <option key={e.id} value={`${e.firstname} ${e.lastname}`} data-id={e.id}>
                     {`${e.firstname} ${e.lastname}`}
                   </option>
                 );

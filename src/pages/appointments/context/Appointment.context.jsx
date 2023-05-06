@@ -32,8 +32,14 @@ export const AppointmentContext = ({ children }) => {
   });
 
   const [appointmentForm, setAppointmentForm] = useState({
-    specialitySelected: '',
-    preferredDoctorSelected: '',
+    specialitySelected: {
+      id: '',
+      specialityName: '',
+    },
+    preferredDoctorSelected: {
+      id: '',
+      doctorName: '',
+    },
     countrySelected: '',
     citySelected: '',
     appointmentDate: new Date(),

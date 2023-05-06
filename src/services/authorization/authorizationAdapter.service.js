@@ -25,6 +25,7 @@ export const authorizationAdapter = (response) => {
   return {
     id: response.id,
     name: response.firstname,
+    lastname: response.lastname,
     area: response.area,
     avatar: response.avatar,
     email: response.email,

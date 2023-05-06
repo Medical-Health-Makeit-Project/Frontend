@@ -27,9 +27,11 @@ export const Appointment = ({ appointmentData, patientData, id }) => {
         </div>
         <section className="appointment-data">
           <div className="appointment-data__name">
-            {specialitySelected} - {`${patientName} ${patientLastname}`}
+            {specialitySelected.specialityName} - {`${patientName} ${patientLastname}`}
           </div>
-          <div className="appointment-data__label">Doctor: {preferredDoctorSelected}</div>
+          <div className="appointment-data__label">
+            Doctor: {preferredDoctorSelected.doctorName}
+          </div>
           <div className="appointment-data__price">Date: {appointmentDate}</div>
           <div className="appointment-data__price">Time: {appointmentTime}</div>
         </section>
