@@ -5,6 +5,7 @@ import { BsTelephoneOutbound, BsGenderAmbiguous, BsCheckLg } from 'react-icons/b
 import { AiOutlineMail } from 'react-icons/ai';
 import { ImProfile } from 'react-icons/im';
 import { Button } from '@components/buttons';
+import { Loading } from '@components/loading';
 import { UpdatePassword } from '@components/updatePassword';
 import { AppontmetsListDoctor } from './components/AppontmetsListDoctor.doctorProfile';
 import { NoAppointmentsDoctor } from './components/NoAppointmentsDoctor.doctorProfile';

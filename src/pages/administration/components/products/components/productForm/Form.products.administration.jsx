@@ -140,7 +140,7 @@ export const Form = () => {
         setProcessingData(true);
         const { status } = await postProducts(POST_PRODUCTS, form, isToken);
         if (status < 300) {
-          successMessage('Product updated successfully aja!');
+          successMessage('Product created successfully!');
           setProcessingData(false);
         }
         return handleClearForm();

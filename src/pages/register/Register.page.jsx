@@ -40,6 +40,10 @@ export const Register = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      const hasEmptyField = Object.keys(userData).some(
+        (key) => userData.hasOwnProperty(key) && userData[key] === ''
+      );
+      if (hasEmptyField) return errorMessage('You must complete the form!');
       if (userData.password === userData.repeatPassword) {
         if (userData.termsAndConditions) {
           const { repeatPassword, termsAndConditions, ...remainingProps } = userData;
@@ -67,7 +71,7 @@ export const Register = () => {
         errorMessage('Passwords must match');
       }
     } catch (error) {
-      errorMessage(error.response?.data || error.message);
+      errorMessage(`${error.response?.data || error.message}: Existing user`);
     }
   };
 
@@ -97,7 +101,6 @@ export const Register = () => {
               name="name"
               placeholder="Enter your name"
               type="text"
-              required
               className="name__input input-box"
               value={userData.name}
               onChange={(event) => handleChange(event)}
@@ -110,7 +113,6 @@ export const Register = () => {
               name="lastname"
               placeholder="Enter your last name"
               type="text"
-              required
               className="lastName__input input-box"
               value={userData.lastname}
               onChange={(event) => handleChange(event)}
@@ -125,7 +127,6 @@ export const Register = () => {
               type="text"
               minLength="3"
               pattern="[A-Za-z\s]{3,}"
-              required
               className="unsername__input input-box"
               value={userData.username}
               onChange={(event) => handleChange(event)}
@@ -139,7 +140,6 @@ export const Register = () => {
               name="email"
               placeholder="Enter your email"
               type="text"
-              required
               className="email__input input-box"
               value={userData.email}
               pattern="^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}"
@@ -154,7 +154,6 @@ export const Register = () => {
               name="phone"
               placeholder="Enter your phone number"
               type="number"
-              required
               className="phone__input input-box"
               value={userData.phone}
               pattern="/^s*(?:+?(d{1,3}))?[\-. (]*(d{3})[\-. )]*(d{3})[\-. ]*(d{4})(?: *x(d+))?s*$/"
@@ -167,7 +166,7 @@ export const Register = () => {
             <DatePicker
               id="birthDate"
               name="birthDate"
-              selected={new Date()}
+              selected={userData.birthdate}
               dateFormat="dd/MM/yyyy"
               peekNextMonth
               showMonthDropdown
@@ -187,7 +186,6 @@ export const Register = () => {
               id="gender"
               name="gender"
               type="select"
-              required
               className="email__input input-box"
               onChange={(event) => handleChange(event)}
               value={userData.gender}
@@ -215,7 +213,6 @@ export const Register = () => {
               id="password"
               name="password"
               type="password"
-              required
               className="password__input input-box"
               pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$"
               value={password}
@@ -229,7 +226,6 @@ export const Register = () => {
               id="repeatPassword"
               name="repeatPassword"
               type="password"
-              required
               className="Repeatassword__input input-box"
               value={repeatPassword}
               onChange={(event) => handleChange(event)}
@@ -252,7 +248,6 @@ export const Register = () => {
               id="terms"
               name="termsAndConditions"
               type="checkbox"
-              required
               checked={termsAndConditions}
               onChange={(event) => handleChange(event)}
             />

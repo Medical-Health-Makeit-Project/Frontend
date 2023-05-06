@@ -144,5 +144,14 @@
 
 .input__add {
   height: 120px;
-  overflow: scroll;
+  overflow-y: scroll;
+  padding-right: 5px;
+}
+.input__add::-webkit-scrollbar {
+  width: 2px;
+  background-color: #cdf4ff;
+}
+
+.input__add::-webkit-scrollbar-thumb {
+  background-color: #69c6df;
 }

@@ -6,7 +6,6 @@ export const SelectBlood = ({ handleChange }) => {
       id="blood"
       name="blood_type"
       type="blood"
-      required
       className="blood__input input-box"
       onChange={(event) => handleChange(event)}
     >

@@ -1,0 +1,15 @@
+export const registerConstants = {
+  url: 'http://localhost:5173/home/register',
+  name: 'Pedro',
+  lastName: 'Perez',
+  username: 'peperez',
+  email: 'ejemplo@test.com',
+  phone: '3204567890',
+  yearBirthdate: '2000',
+  monthBirthdate: 'February',
+  gender: 'male',
+  country: 'Germany',
+  bloodType: 'A+',
+  password: 'Muchogusto123456',
+  wrongPassword: 'MUchogusto123456',
+};
