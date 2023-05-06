@@ -210,7 +210,6 @@ export const SelectCountry = ({ handleChange }) => {
     <select
       id="country"
       name="nationality"
-      required
       className="country__input input-box"
       onChange={(event) => handleChange(event)}
     >
