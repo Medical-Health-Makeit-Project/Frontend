@@ -6,7 +6,7 @@ import { Button } from '@components/buttons';
 import './product.checkout.scss';
 
 export const Product = ({ id, discount, dose, image, label, price, product, quantity, stock }) => {
-  let priceAfterDiscount = (price - (price * discount) / 100).toFixed(2);
+  let priceAfterDiscount = price * (1 - discount / 100);
   const dispatch = useDispatch();
 
   const handlerDispacth = (e) => {

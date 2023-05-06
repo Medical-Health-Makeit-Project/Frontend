@@ -58,7 +58,7 @@ export const DoctorDetail = () => {
         <section className="details__main-container">
           <article className="bio__container">
             <h3>Introduction</h3>
-            <p>{doctor.introduction}</p>
+            <p>{doctor.introduction || <i>This doctor doesn't have an introduction yet</i>}</p>
           </article>
 
           <article className="skills__container">

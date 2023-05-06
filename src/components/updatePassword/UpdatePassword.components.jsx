@@ -30,6 +30,16 @@ export const UpdatePassword = ({ updater, url }) => {
   const navigate = useNavigate();
   const inputRef = useRef(null);
 
+  const handleCurrentPassword = (e) => {
+    e.preventDefault();
+    const { name, value } = e.target;
+
+    setUpdatePasswordForm({
+      ...updatePasswordForm,
+      [name]: value,
+    });
+  };
+
   const handleUpdateFormPassword = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
@@ -42,9 +52,15 @@ export const UpdatePassword = ({ updater, url }) => {
   const handleUpdatePassword = async (e) => {
     e.preventDefault();
     try {
+      const { newPassword, repeatedPassword } = updatePasswordForm;
       const ACCESS_TOKEN = localStorage.getItem(TOKEN);
       if (!ACCESS_TOKEN) return navigate(PublicRoutes.LOGIN);
-      const { newPassword, repeatedPassword } = updatePasswordForm;
+      const regex = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/;
+      if (!regex.test(newPassword) || !regex.test(repeatedPassword))
+        return errorMessage(
+          'The passwords must contain at least one uppercase letter and 16 character as maximum'
+        );
+
       if (newPassword !== repeatedPassword) return errorMessage('The passwords must match');
       const payload = {
         password: newPassword,
@@ -74,7 +90,7 @@ export const UpdatePassword = ({ updater, url }) => {
                 <Input
                   ref={inputRef}
                   name="currentPassword"
-                  onChange={handleUpdateFormPassword}
+                  onChange={handleCurrentPassword}
                   type="password"
                 />
               </FormControl>

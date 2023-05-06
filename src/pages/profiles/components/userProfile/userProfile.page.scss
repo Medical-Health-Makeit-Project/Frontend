@@ -111,10 +111,14 @@
 .editOff {
   display: none;
 }
-.edit__input {
-  background-color: #f9f9f9;
-  border-bottom: 1px solid theme-color('accent', 'dark');
-  padding-left: 5px;
+
+.edit__input-user {
+  text-align: left;
+  background-color: theme-color($key: 'background', $variant: 'light');
+  border: 1px solid rgba($color: #000000, $alpha: 0.5);
+  border-radius: 5px;
+  padding: 0.4rem;
+  font-size: 1rem;
   &::placeholder {
     color: #000000;
   }

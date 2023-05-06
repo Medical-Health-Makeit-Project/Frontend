@@ -7,28 +7,18 @@ export const DATE_FORMAT = 'DD/MM/YYYY';
 export const STRIPE_PUBLIC_KEY =
   'pk_test_51Mz5GfGuKX0jSjOwt0aR0OYVxnjYpKnCPWm4LeMrNgJQz3pDNVnnX3C2faSkG1uhwtsoYKfb7B3aPtkMASQqEMiR00s5c12Uux';
 
-//unused endpoint
-export const PRODUCTS_BY_ID = '/src/pages/shop/db/productsById/products.json';
-
-//-----------------------------------------------------------
-// jsons that will be change to endpoints of the backend
-
 // PRODUCTS
 
 //CHECK
-export const ALL_PRODUCTS = !import.meta.env.PROD
-  ? 'http://localhost:5150/api/v1/products'
-  : '/src/pages/shop/db/allProducts/products.json';
+export const ALL_PRODUCTS = !import.meta.env.PROD ? 'http://localhost:5150/api/v1/products' : null;
 
 // CHECK
 export const PRODUCTS_BY_CATEGORY = !import.meta.env.PROD
   ? 'http://localhost:5150/api/v1/products/'
-  : '/src/pages/shop/db/productsByCategory/products.json';
+  : null;
 
 // CHECK
-export const CATEGORIES = !import.meta.env.PROD
-  ? 'http://localhost:5150/api/v1/categories'
-  : '/src/pages/shop/db/categories/categories.json';
+export const CATEGORIES = !import.meta.env.PROD ? 'http://localhost:5150/api/v1/categories' : null;
 
 // CHECK
 export const POST_PRODUCTS = !import.meta.env.PROD ? 'http://localhost:5150/api/v1/products' : null;
@@ -48,14 +38,12 @@ export const UPDATE_PRODUCTS = !import.meta.env.PROD
 // AUTHENTICATION
 
 //check
-export const AUTHENTICATION = !import.meta.env.PROD
-  ? 'http://localhost:5150/api/v1/auth/'
-  : '/src/pages/login/db/users.db.json';
+export const AUTHENTICATION = !import.meta.env.PROD ? 'http://localhost:5150/api/v1/auth/' : null;
 
 //check
 export const AUTHORIZATION = !import.meta.env.PROD
   ? 'http://localhost:5150/api/v1/auth/authorization'
-  : '/src/pages/login/db/users.db.json';
+  : null;
 
 //-----------------------------------------------------------
 
@@ -72,18 +60,14 @@ export const UPDATE_DOCTOR = !import.meta.env.PROD ? 'http://localhost:5150/api/
 export const DELETE_DOCTOR = !import.meta.env.PROD ? 'http://localhost:5150/api/v1/doctors' : null;
 
 //check
-export const ALL_DOCTORS = !import.meta.env.PROD
-  ? 'http://localhost:5150/api/v1/doctors'
-  : '/src/pages/doctors/doctors.json';
+export const ALL_DOCTORS = !import.meta.env.PROD ? 'http://localhost:5150/api/v1/doctors' : null;
 
 export const DOCTORS_BY_AREA = !import.meta.env.PROD
   ? 'http://localhost:5150/api/v1/doctors/areas'
-  : '/src/pages/appointments/db/doctorsByArea.json';
+  : null;
 
 //check
-export const LOCATIONS = !import.meta.env.PROD
-  ? 'http://localhost:5150/api/v1/locations'
-  : '/src/pages/appointments/db/locations.json';
+export const LOCATIONS = !import.meta.env.PROD ? 'http://localhost:5150/api/v1/locations' : null;
 
 //-----------------------------------------------------------
 
@@ -110,12 +94,3 @@ export const PAYMENTS = !import.meta.env.PROD ? 'http://localhost:5150/api/v1/pa
 export const APPOINTMENTS = !import.meta.env.PROD
   ? 'http://localhost:5150/api/v1/appointments'
   : null;
-
-//-----------------------------------------------------------
-
-//export const GET_USERS = '/src/pages/profiles/user.json';
-
-export const DOCTORS_AREA = '/src/pages/administration/db/doctorsArea.json'; // This endpoint should be replaced bY DOCTORS_BY_AREA
-
-//
-export const AUTH = '/src/pages/login/db/users.db.json';

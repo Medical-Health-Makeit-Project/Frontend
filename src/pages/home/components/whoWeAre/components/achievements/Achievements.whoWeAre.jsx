@@ -12,14 +12,9 @@ export const Achievements = () => {
   const [achievements, setAchievements] = useState([]);
 
   useEffect(() => {
-    try {
-      setTimeout(() => {
-        achievementsService().then((res) => setAchievements(res.data));
-      }, 5000);
-    } catch (error) {
-      //TO-DO catch error from backend
-      console.log(error);
-    }
+    setTimeout(() => {
+      achievementsService().then((res) => setAchievements(res.data));
+    }, 5000);
   }, []);
 
   const icons = {

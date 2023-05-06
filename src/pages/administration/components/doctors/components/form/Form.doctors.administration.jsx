@@ -14,7 +14,7 @@ import { useUpdater } from './hooks/useUpdater.hooks';
 import { useIsLoading } from '@hooks';
 import { createDoctorSchema } from './schema';
 import {
-  DOCTORS_AREA,
+  DOCTORS_BY_AREA,
   DOCTOR_EMAIL_DOMAIN,
   DOCTOR_PREFIX,
   POST_DOCTOR,
@@ -52,7 +52,7 @@ export const Form = () => {
   const [processingData, setProcessingData] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const { locations } = locationsSWR();
-  const { data: doctorArea } = useSWR(DOCTORS_AREA, doctorAreas, {
+  const { data: doctorArea } = useSWR(DOCTORS_BY_AREA, doctorAreas, {
     revalidateOnFocus: false,
     revalidateIfStale: false,
   });
