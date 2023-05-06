@@ -73,6 +73,7 @@ export const UpdatePassword = ({ updater, url }) => {
                 <FormLabel>Password</FormLabel>
                 <Input
                   ref={inputRef}
+                  id="currentPassword"
                   name="currentPassword"
                   onChange={handleUpdateFormPassword}
                   type="password"
@@ -81,12 +82,18 @@ export const UpdatePassword = ({ updater, url }) => {
 
               <FormControl mt={4}>
                 <FormLabel>New password</FormLabel>
-                <Input name="newPassword" onChange={handleUpdateFormPassword} type="password" />
+                <Input
+                  id="newPassword"
+                  name="newPassword"
+                  onChange={handleUpdateFormPassword}
+                  type="password"
+                />
               </FormControl>
 
               <FormControl mt={4}>
                 <FormLabel>Confirm password</FormLabel>
                 <Input
+                  id="repeatedPassword"
                   name="repeatedPassword"
                   onChange={handleUpdateFormPassword}
                   type="password"

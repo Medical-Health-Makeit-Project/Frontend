@@ -1,0 +1,15 @@
+export const doctorConstants = {
+  doctorName: 'Sebastian',
+  doctorLastname: 'Alvarez Henao',
+  monthBirthdate: 'June',
+  yearBirthdate: '1977',
+  area: 'Oncologist',
+  email: 'salvarez@drmebid.com',
+  phone: '1234567890',
+  invalidPhone: '123456789',
+  country: 'Colombia',
+  city: 'Medellin',
+  qualification: 'Correr',
+  membership: 'Nadar',
+  skills: 'Saltar',
+};
