@@ -15,7 +15,7 @@ export const allDoctorsService = async (URL) => {
 export const allDoctorsSWR = () => {
   const swrConfig = {
     revalidateOnFocus: false,
-    revalidateIfStale: false,
+    revalidateIfStale: true,
   };
 
   const {
