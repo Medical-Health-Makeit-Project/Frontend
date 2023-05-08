@@ -5,7 +5,7 @@ import { BsArrowRight } from 'react-icons/bs';
 import { SelectCountry } from './components/SelectCountry.register';
 import { SelectBlood } from './components/SelectBlood.register';
 import { Heading } from '@components/heading';
-import { Button } from '@components/buttons/Button.components';
+import { Button } from '@components/buttons';
 import { _Modal } from '@components/modal';
 import { Loading } from '@components/loading';
 import { registerService } from './service/registerUsers.service';
