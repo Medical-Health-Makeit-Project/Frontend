@@ -13,7 +13,7 @@ export const AppointmentStore = createContext();
 export const AppointmentContext = ({ children }) => {
   const swrConfig = {
     revalidateOnFocus: false,
-    revalidateIfStale: false,
+    revalidateIfStale: true,
   };
 
   const dispatch = useDispatch();
