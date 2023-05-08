@@ -1,5 +1,5 @@
 import { PropTypes } from 'prop-types';
-import { Button } from '@components/Buttons';
+import { Button } from '@components/buttons';
 import { useSelector, useDispatch } from 'react-redux';
 import { postProduct, updateProduct } from '@redux/features/cartSlice.feature';
 import { toast } from 'react-toastify';
