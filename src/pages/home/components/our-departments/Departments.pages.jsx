@@ -1,18 +1,8 @@
-import { useState, useEffect } from 'react';
 import './departments.pages.scss';
 import { Carousel } from './components/Carousel.departments';
-import { departmentsService } from './service/departments.service';
+import departments from './departmnets.json';
 
 export const Departments = () => {
-  const [departments, setDepartments] = useState([]);
-
-  useEffect(() => {
-    setTimeout(() => {
-      departmentsService().then((res) => {
-        setDepartments(res.data);
-      });
-    }, 5000);
-  }, []);
   return (
     <section className="departments__scroll">
       <div className="text__container">
