@@ -4,7 +4,7 @@ import { BsCheckLg } from 'react-icons/bs';
 import { Spinner } from '@chakra-ui/react';
 import { PrivateRoutes } from '@routes/';
 import { useDoctorsContext } from '../context/DoctorsContext';
-import { Button } from '@components/buttons/Button.components';
+import { Button } from '@components/buttons';
 import './doctordetail.doctors.scss';
 
 export const DoctorDetail = () => {

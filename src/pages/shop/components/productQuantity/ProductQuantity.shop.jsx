@@ -1,7 +1,7 @@
 import { PropTypes } from 'prop-types';
 import { BiPlus, BiMinus } from 'react-icons/bi';
 import { toast } from 'react-toastify';
-import { Icon } from '@components/Icon';
+import { Icon } from '@components/icon';
 import { useQuantity } from '../../hooks';
 import './productQuantity.shop.scss';
 import { useEffect } from 'react';
