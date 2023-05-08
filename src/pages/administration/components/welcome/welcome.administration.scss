@@ -1,0 +1,51 @@
+@import '@sass/themes/theme.themes.scss';
+@import '@sass/abstract/mixins.abstract.scss';
+@import '@sass/base/typography.base.scss';
+
+.admin-welcome {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .admin-welcome__title {
+    @include heading(map-get($typography-colors, 'black'));
+    text-align: center;
+
+    @media screen and (min-width: 700px) {
+      @include heading(map-get($typography-colors, 'black'));
+    }
+    .admin-welcome__mebid {
+      color: map-get($typography-colors, 'blue');
+      margin: 0 0 0 8px;
+    }
+
+    .admin-welcome__username {
+      display: block;
+      color: map-get($typography-colors, 'black');
+      margin-left: 8px;
+
+      @media screen and (min-width: 700px) {
+        display: inline-block;
+      }
+    }
+  }
+
+  .admin-welcome__paragraph {
+    @include paragraph(map-get($typography-colors, 'black'));
+  }
+
+  .admin-welcome__buttons {
+    display: flex;
+    gap: 1.3rem;
+    margin-top: 1rem;
+  }
+
+  .admin-welcome__button {
+    padding: 0.3rem 0.6rem;
+    border: 0;
+    border-radius: 5px;
+  }
+}

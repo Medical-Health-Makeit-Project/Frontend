@@ -1,0 +1,28 @@
+@import '@sass/abstract/mixins.abstract.scss';
+@import '@sass/base/typography.base.scss';
+
+.categories-container {
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  gap: 4rem 0;
+  border: 1px solid black;
+  padding: 0.5rem;
+  outline: none;
+  @include paragraph();
+  margin: 3rem auto;
+
+  .categories {
+    border: none;
+    outline: none;
+    background-color: transparent;
+  }
+}
+
+.error-message {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  margin-top: 2rem;
+}

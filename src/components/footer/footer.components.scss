@@ -1,0 +1,62 @@
+@import '@sass/base/typography.base.scss';
+@import '@sass/base/alerts.base.scss';
+
+.footer-container {
+  background-color: map-get($typography-colors, 'black');
+  width: 100vw;
+}
+
+.footer {
+  color: map-get($typography-colors, 'white');
+  font-family: $font-poppins;
+  max-width: 1000px;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.footer__credits {
+  background-color: map-get($typography-colors, 'white');
+  color: map-get($typography-colors, 'black');
+  font-size: 10px;
+  text-align: center;
+  padding: 0.8rem 0;
+  font-family: monospace;
+}
+
+@media screen and (min-width: 400px) {
+  .footer {
+    max-width: 1000px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+  .first {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .footer {
+    flex-direction: row;
+  }
+
+  .first {
+    width: 55%;
+    gap: 10px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .footer {
+    justify-content: space-between;
+  }
+  .first {
+    width: 50%;
+    justify-content: space-evenly;
+  }
+}

@@ -1,0 +1,30 @@
+@import '@sass/themes/theme.themes.scss';
+@import '@sass/abstract/mixins.abstract.scss';
+@import '@sass/base/typography.base.scss';
+
+.admin-header {
+  width: 100%;
+  max-width: 2400px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: theme-color($key: 'background', $variant: 'dark');
+  padding: 1rem;
+
+  .admin-header__title {
+    @include title($size: $size-md, $color: map-get($typography-colors, 'white'));
+  }
+
+  .admin-header__avatar-container {
+    width: 80px;
+    height: 100%;
+    background-color: transparent;
+
+    &:hover,
+    &:active,
+    &[data-active] {
+      background-color: black;
+    }
+  }
+}

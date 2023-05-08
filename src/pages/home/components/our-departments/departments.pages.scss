@@ -1,0 +1,86 @@
+@import '@sass/themes/theme.themes.scss';
+@import '@sass/base/typography.base.scss';
+@import '@sass/abstract/mixins.abstract.scss';
+
+.departments__scroll {
+  height: 500px;
+  display: flex;
+  padding: 10px;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: theme-color('background', 'lighter');
+}
+.swiper__container {
+  max-width: 1000px;
+  margin: 0;
+  padding-bottom: 3rem;
+  height: 100%;
+}
+.text__container {
+  text-align: center;
+  margin: 3rem 0;
+
+  p {
+    @include title;
+    margin-bottom: 1.5rem;
+  }
+
+  h3 {
+    @include paragraph($size: $size-lg);
+    max-width: 300px;
+  }
+}
+
+.scroll__container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+  height: 350px;
+
+  .scroll__card {
+    text-align: left;
+    padding: 0.5rem;
+    width: 250px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    background-color: theme-color('background', 'base');
+  }
+}
+
+.scroll__card-text {
+  width: 100%;
+
+  .scroll__card-title {
+    margin: 10px 0;
+    @include paragraph($size: $size-md);
+    font-weight: 600;
+  }
+  .scroll__card-description {
+    @include paragraph($size: $size-md);
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+}
+
+.more__container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: fit-content;
+
+  p {
+    margin: 5px 0;
+    @include paragraph($size: $size-sm);
+    cursor: pointer;
+  }
+
+  span {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+}
+.more__container:hover {
+  border-bottom: 1px solid theme-color('primary', 'light');
+}

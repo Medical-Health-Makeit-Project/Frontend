@@ -1,0 +1,44 @@
+@import '@sass/base/typography.base.scss';
+
+.desktop-navigation-options {
+  display: flex;
+  gap: 1rem;
+}
+
+.desktop-navigation-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+
+  .desktop-navigation-actions__login-logout {
+    font-size: 12px;
+    color: white;
+
+    background-color: #238aa5;
+    gap: 0.2rem;
+  }
+}
+
+.desktop-navigation-links {
+  text-decoration: none;
+  font-family: $font-sans;
+  color: map-get($typography-colors, 'black');
+  font-size: $size-xs;
+}
+
+.desktop-navigation-links:hover {
+  text-decoration: underline;
+}
+
+@media screen and (min-width: 768px) {
+  .desktop-navigation-options {
+    gap: 1.5rem;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .desktop-navigation-options {
+    cursor: pointer;
+  }
+}

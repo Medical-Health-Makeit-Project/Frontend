@@ -1,0 +1,60 @@
+@import '@sass/abstract/mixins.abstract.scss';
+
+.doctor-list {
+  width: 100%;
+  max-width: 2400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 7rem;
+  gap: 2rem;
+
+  @media screen and (min-width: 500px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media screen and (min-width: 700px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 60px 40px;
+  }
+
+  .doctor-list__item {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .doctor-list__avatar-container {
+    width: 200px;
+    height: 200px;
+  }
+  .avatar {
+    border-radius: 75%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .doctor-list-info__fullname {
+    text-align: center;
+    @include subtitle;
+  }
+
+  .doctor-list-area {
+    text-align: center;
+    @include paragraph;
+  }
+
+  .buttons-action-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+  }
+}

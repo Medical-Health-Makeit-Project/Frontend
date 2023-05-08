@@ -1,0 +1,87 @@
+@import '@sass/base/typography.base.scss';
+
+@mixin heading(
+  $color: map-get($typography-colors, 'white'),
+  $size: $size-xxl,
+  $weight: weight-typo('poppins', 'bolder'),
+  $family: $font-poppins
+) {
+  margin: 0;
+  font-family: $family;
+  font-size: $size;
+  font-weight: $weight;
+  color: $color;
+}
+
+@mixin title(
+  $color: map-get($typography-colors, 'blue'),
+  $size: $size-xs,
+  $weight: weight-typo('poppins', 'bold'),
+  $family: $font-poppins
+) {
+  margin: 0;
+  font-family: $family;
+  font-size: $size;
+  font-weight: $weight;
+  color: $color;
+}
+
+@mixin subtitle(
+  $color: map-get($typography-colors, 'black'),
+  $size: $size-lg,
+  $weight: weight-typo('poppins', 'bold'),
+  $family: $font-poppins
+) {
+  margin: 0;
+  font-family: $family;
+  font-size: $size;
+  font-weight: $weight;
+  color: $color;
+}
+
+@mixin paragraph(
+  $color: map-get($typography-colors, 'black'),
+  $size: $size-sm,
+  $weight: weight-typo('poppins', 'light'),
+  $family: $font-poppins
+) {
+  margin: 0;
+  font-family: $family;
+  font-size: $size;
+  font-weight: $weight;
+  color: $color;
+  line-height: 30px;
+}
+
+@mixin underline-from-left() {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    right: 100%;
+    bottom: 0;
+    background: #2098d1;
+    height: 1.5px;
+    -webkit-transition-property: right;
+    transition-property: right;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+  }
+
+  &:hover::before,
+  &:focus::before,
+  &:active::before {
+    right: 0;
+  }
+}

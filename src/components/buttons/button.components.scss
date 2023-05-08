@@ -1,0 +1,94 @@
+@import '@sass/base/typography.base.scss';
+@import '@sass/base/alerts.base.scss';
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: $font-poppins;
+  padding: 0.8rem;
+  gap: 0.8rem;
+  transition: all 0.2s ease-in-out;
+
+  @media screen and (min-width: 700px) {
+    cursor: pointer;
+  }
+}
+
+.solid-info {
+  border: none;
+  background-color: alert-color('info', 'base');
+  color: map-get($typography-colors, 'white');
+  font-size: $size-xs;
+}
+
+.solid-danger {
+  border: none;
+  background-color: alert-color('danger', 'base');
+  color: map-get($typography-colors, 'white');
+  font-size: $size-xs;
+}
+
+.solid-success {
+  border: none;
+  background-color: alert-color('success', 'base');
+  color: map-get($typography-colors, 'white');
+  font-size: $size-xs;
+}
+
+.solid-warning {
+  border: none;
+  background-color: alert-color('warning', 'base');
+  color: map-get($typography-colors, 'white');
+  font-size: $size-xs;
+}
+
+.solid-light {
+  border: none;
+  background-color: alert-color('regular', 'base');
+  color: map-get($typography-colors, 'black');
+  font-size: $size-xs;
+}
+
+.outline-info {
+  border: 1px solid alert-color('info', 'base');
+  color: alert-color('info', 'base');
+  background-color: transparent;
+
+  &:hover {
+    color: map-get($typography-colors, 'white');
+    background-color: alert-color('info', 'base');
+  }
+}
+
+.outline-danger {
+  border: 1px solid alert-color('danger', 'base');
+  color: alert-color('danger', 'base');
+  background-color: transparent;
+
+  &:hover {
+    color: map-get($typography-colors, 'white');
+    background-color: alert-color('danger', 'base');
+  }
+}
+
+.outline-success {
+  border: 1px solid alert-color('success', 'base');
+  color: alert-color('success', 'base');
+  background-color: transparent;
+
+  &:hover {
+    color: map-get($typography-colors, 'white');
+    background-color: alert-color('success', 'base');
+  }
+}
+.outline-warning {
+  border: 1px solid alert-color('warning', 'base');
+  color: alert-color('warning', 'base');
+  background-color: transparent;
+
+  &:hover {
+    color: map-get($typography-colors, 'white');
+    background-color: alert-color('warning', 'base');
+  }
+}

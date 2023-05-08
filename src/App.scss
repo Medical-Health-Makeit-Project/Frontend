@@ -1,0 +1,9 @@
+@import '@sass/themes/theme.themes.scss';
+
+.App {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: theme-color('background', 'base');
+}

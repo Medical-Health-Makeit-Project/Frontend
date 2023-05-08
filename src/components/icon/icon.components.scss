@@ -1,0 +1,44 @@
+@import '@sass/base/alerts.base.scss';
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 50%;
+  padding: 0.5rem;
+}
+
+.sm {
+  padding: 0.5rem;
+}
+
+.md {
+  padding: 1rem;
+}
+
+.lg {
+  padding: 1.5rem;
+}
+
+.regular {
+  background-color: alert-color('regular', 'base');
+}
+
+.danger {
+  background-color: alert-color('danger', 'base');
+}
+
+.success {
+  background-color: alert-color('success', 'base');
+}
+
+.warning {
+  background-color: alert-color('warning', 'base');
+}
+
+.info {
+  background-color: alert-color('info', 'base');
+}
+
+.transparent {
+  background-color: transparent;
+}

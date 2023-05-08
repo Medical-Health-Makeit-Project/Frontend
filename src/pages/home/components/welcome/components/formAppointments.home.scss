@@ -1,0 +1,97 @@
+@import '@sass/base/typography.base.scss';
+@import '@sass/themes/theme.themes.scss';
+@import '@sass/base/alerts.base.scss';
+@import '@sass/abstract/mixins.abstract.scss';
+
+.welcome-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 3rem 0;
+  padding: 2rem 3.5rem;
+  background-color: theme-color('background', 'dark');
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+
+  @media screen and (min-width: 525px) {
+    border-radius: 20px;
+  }
+
+  @media screen and (min-width: 700px) {
+    width: 50%;
+    gap: 0.8rem;
+  }
+
+  .welcome-form__subtitle {
+    @include subtitle($color: map-get($typography-colors, 'white'));
+    margin-top: 1rem;
+  }
+
+  .welcome-form__paragraph {
+    margin: 0;
+    @include paragraph($color: map-get($typography-colors, 'white'));
+  }
+
+  .welcome-form-inputs {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    gap: 1rem;
+  }
+
+  .welcome-form__input-name,
+  .welcome-form__input-message,
+  .welcome-form__input-email,
+  .welcome-form__input-date {
+    background-color: theme-color('background', 'dark');
+    outline: none;
+    padding: 0.5rem;
+    border: 1px rgba(255, 255, 255, 0.3) solid;
+    caret-color: map-get($typography-colors, 'white');
+    color: map-get($typography-colors, 'white');
+    font-family: $font-poppins;
+    font-size: $size-xxs;
+
+    &::placeholder {
+      color: map-get($typography-colors, 'white');
+      font-family: $font-poppins;
+      font-size: $size-xxs;
+    }
+  }
+
+  .welcome-form__input-date {
+    display: none;
+
+    .welcome-form__input-date-component {
+      width: 100%;
+      background-color: theme-color('background', 'dark');
+      border: none;
+      outline: none;
+    }
+    @media screen and (min-width: 700px) {
+      display: block;
+      margin-top: 0.5rem;
+    }
+  }
+
+  .welcome-form__input-name:not(:placeholder-shown):invalid,
+  .welcome-form__input-email:not(:placeholder-shown):invalid {
+    border: 1px solid alert-color('danger', 'dark');
+  }
+
+  .welcome-form__select-department-container,
+  .welcome-form__select-doctor-container {
+    border: 1px rgba(255, 255, 255, 0.3) solid;
+    padding: 0.5rem;
+
+    .welcome-form__select-department,
+    .welcome-form__select-doctor {
+      width: 100%;
+      background-color: theme-color('background', 'dark');
+      border: none;
+      color: map-get($typography-colors, 'white');
+      font-family: $font-poppins;
+      font-size: $size-xxs;
+      outline: none;
+    }
+  }
+}

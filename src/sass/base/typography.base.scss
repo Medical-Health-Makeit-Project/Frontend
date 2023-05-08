@@ -1,0 +1,34 @@
+$font-sans: 'Open Sans', sans-serif;
+$font-poppins: 'Poppins', sans-serif;
+$size-xxl: 2.5rem; // 40px
+$size-xl: 1.875rem; //30px
+$size-lg: 1.478rem; //23px
+$size-md: 1.125rem; //18px
+$size-sm: 0.938rem; //15px
+$size-xs: 0.875rem; //14px
+$size-xxs: 0.75rem; //12px
+
+$typography-colors: (
+  'black': #000000,
+  'gray': #839192,
+  'white': #ffffff,
+  'blue': #3fb6d6,
+);
+
+$weights-typo: (
+  'poppins': (
+    'light': 300,
+    'semi-bold': 500,
+    'bold': 600,
+    'bolder': 700,
+  ),
+  'sans': (
+    'light': 400,
+    'bold': 600,
+  ),
+);
+
+@function weight-typo($key: 'poppins', $variant: 'semi-bold') {
+  $map: map-get($weights-typo, $key);
+  @return map-get($map, $variant);
+}

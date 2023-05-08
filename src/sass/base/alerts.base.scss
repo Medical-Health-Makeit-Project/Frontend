@@ -1,0 +1,35 @@
+$alerts-colors: (
+  'regular': (
+    'base': #ffffff,
+    'dark': #2762c1,
+  ),
+
+  'info': (
+    'base': #3fb5d6,
+    'dark': #2797b7,
+    'light': #78cbe2,
+  ),
+
+  'danger': (
+    'base': #dc3545,
+    'dark': #ba202f,
+    'light': #f3b8be,
+  ),
+
+  'success': (
+    'base': #198754,
+    'dark': #146c43,
+    'light': #1fa969,
+  ),
+
+  'warning': (
+    'base': #ffc107,
+    'dark': #d29d00,
+    'light': #ffd148,
+  ),
+);
+
+@function alert-color($key: 'regular', $variant: 'base') {
+  $map: map-get($alerts-colors, $key);
+  @return map-get($map, $variant);
+}

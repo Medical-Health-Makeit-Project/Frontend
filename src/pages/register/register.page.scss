@@ -1,0 +1,95 @@
+@import '@sass/base/typography.base.scss';
+@import '@sass/themes/theme.themes.scss';
+@import '@sass/base/alerts.base.scss';
+@import '@sass/abstract/mixins.abstract.scss';
+
+.main__register {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px 15px;
+
+  @media (min-width: 768px) {
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 60px 20;
+  }
+}
+.register__title {
+  @include subtitle;
+  margin-bottom: 1rem;
+}
+
+.form__register-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  gap: 10px;
+}
+
+.input__container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+
+  label {
+    @include paragraph;
+  }
+
+  .input-box {
+    height: 50px;
+    width: 100%;
+    padding-left: 10px;
+    border: 1px solid map-get($map: $typography-colors, $key: 'gray');
+    border-radius: 5px;
+
+    &:hover {
+      background-color: theme-color('background', 'lighter');
+    }
+  }
+}
+
+.terms__container {
+  width: 300px;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+}
+
+.terms__label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+
+  .terms__modal {
+    @include underline-from-left;
+    color: theme-color('primary', 'base');
+    cursor: pointer;
+  }
+}
+
+.toLogin__container {
+  display: flex;
+  gap: 5px;
+  margin-top: 1rem;
+
+  .toLogin__link p {
+    margin-bottom: 10px;
+    @include underline-from-left;
+    color: theme-color('primary', 'base');
+    cursor: pointer;
+  }
+}
+
+.register__button {
+  width: 150px;
+  height: 50px;
+}

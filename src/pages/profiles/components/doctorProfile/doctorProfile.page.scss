@@ -1,0 +1,237 @@
+@import '@sass/base/typography.base.scss';
+@import '@sass/themes/theme.themes.scss';
+@import '@sass/base/alerts.base.scss';
+@import '@sass/abstract/mixins.abstract.scss';
+
+.doctor__profile-main {
+  background-color: theme-color('background', 'lighter');
+  padding: 50px 2rem;
+}
+
+.doctor__card {
+  background-color: theme-color('background', 'base');
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+  @media (min-width: 768px) {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+  }
+}
+
+.primary__info-container {
+  width: 100%;
+  @media (min-width: 768px) {
+    width: 33%;
+  }
+}
+
+.avatar__main-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+
+  .profile__img-container img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid theme-color('accent', 'base');
+  }
+}
+
+.info__containers {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.skills__containers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: 1rem 0;
+  gap: 10px;
+}
+
+.skill {
+  width: 200px;
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.main__doctor-info {
+  margin-bottom: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  & p:nth-child(1) {
+    @include paragraph($size-md);
+    font-weight: 700;
+  }
+
+  .area {
+    @include paragraph($size-xs);
+    font-weight: 400;
+    color: map-get($map: $typography-colors, $key: 'blue');
+    margin-bottom: 10px;
+  }
+  .location__info {
+    margin-bottom: 10px;
+  }
+}
+
+.qualifications__info {
+  padding: 12px;
+  background-color: #8080805e;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+
+  h3 {
+    @include paragraph($size-lg);
+    font-weight: 700;
+  }
+
+  p {
+    @include paragraph($size-md);
+    font-weight: 200;
+  }
+}
+
+.dataOn {
+  display: flex;
+}
+
+.second__info-container {
+  width: 100%;
+  justify-self: center;
+
+  @media (min-width: 768px) {
+    width: 55%;
+  }
+}
+
+.skills__info {
+  margin-bottom: 10px;
+  h3 {
+    @include paragraph($size-lg);
+    font-weight: 700;
+  }
+}
+.intro__title-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 2rem;
+}
+.intro-paragraph {
+  width: 100%;
+  margin-bottom: 1rem;
+  p {
+    width: 100%;
+  }
+}
+.icons {
+  display: flex;
+}
+.info__container {
+  margin-bottom: 8px;
+  h3 {
+    @include paragraph($size-lg);
+    font-weight: 700;
+  }
+  p {
+    @include paragraph($size-md);
+    font-weight: 300;
+  }
+}
+
+.edit__container-doctor {
+  display: flex;
+  @media (min-width: 758px) {
+    justify-content: flex-start;
+  }
+}
+.dataOff {
+  display: none;
+}
+
+.editOn {
+  display: block;
+}
+.editOff {
+  display: none;
+}
+.edit__input {
+  width: 100%;
+  background-color: #f9f9f9;
+  border: 1px solid rgba($color: #000000, $alpha: 0.5);
+  border-radius: 5px;
+
+  padding: 0.5rem;
+
+  &::placeholder {
+    color: #000000;
+  }
+}
+
+.save__button {
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 1rem;
+}
+
+.cancel__button {
+  width: 100%;
+}
+
+.appointments__section-doctor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 2rem;
+  padding: 1rem;
+  text-align: center;
+  p {
+    @include paragraph;
+  }
+
+  @media (min-width: 768px) {
+    min-width: 200px;
+    height: 100%;
+    margin-top: 0;
+    margin-left: 20px;
+    padding-left: 10px;
+    border-top: none;
+    align-self: flex-start;
+  }
+}
+
+.accordion__container-doctor {
+  width: 180px;
+}
+
+.introduction {
+  width: 100%;
+  height: 200px;
+  border: black 1px solid;
+  outline: none;
+  padding: 0.5rem;
+  resize: none;
+}
