@@ -27,7 +27,7 @@ export const AppointmentsList = ({ appointments }) => {
               <Tr key={uuid()}>
                 <Td>{dayjs(appointment.date).format(DATE_FORMAT)}</Td>
                 <Td>{appointment.scheduleAt}</Td>
-                <Td>{appointment.area.area}</Td>
+                <Td>{appointment.area}</Td>
                 <Td>{`${appointment.doctor.firstname} ${appointment.doctor.lastname}`}</Td>
                 <Td>{appointment.doctor.email}</Td>
               </Tr>

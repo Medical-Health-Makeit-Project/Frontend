@@ -1,22 +1,13 @@
-import { useEffect, useState } from 'react';
 import { PropTypes } from 'prop-types';
 import { TfiMedallAlt, TfiThumbUp } from 'react-icons/tfi';
 import { TbBed } from 'react-icons/tb';
 import { AiOutlineExperiment } from 'react-icons/ai';
 import { Skeleton } from '@chakra-ui/react';
 import { Icon } from '@components/icon';
-import { achievementsService } from '../../service';
+import achievements from '../../achievements.json';
 import './achievements.whoWeAre.scss';
 
 export const Achievements = () => {
-  const [achievements, setAchievements] = useState([]);
-
-  useEffect(() => {
-    setTimeout(() => {
-      achievementsService().then((res) => setAchievements(res.data));
-    }, 5000);
-  }, []);
-
   const icons = {
     TfiMedallAlt: <TfiMedallAlt color="white" size={24} />,
     TfiThumbUp: <TfiThumbUp color="white" size={24} />,

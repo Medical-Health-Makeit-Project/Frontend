@@ -55,7 +55,7 @@ export const Product = ({ id, discount, dose, image, label, price, product, quan
             Name: {product} - {dose}
           </div>
           <div className="product-data__label">Label: {label}</div>
-          <div className="product-data__price">Price: {price}</div>
+          <div className="product-data__price">Price: ${price}</div>
         </section>
       </div>
       <section className="footer-product-checkout">
