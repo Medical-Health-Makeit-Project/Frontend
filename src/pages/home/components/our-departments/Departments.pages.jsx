@@ -1,6 +1,6 @@
 import './departments.pages.scss';
 import { Carousel } from './components/Carousel.departments';
-import departments from './departmnets.json';
+import { departments } from './constants';
 
 export const Departments = () => {
   return (
