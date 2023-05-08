@@ -7,6 +7,7 @@ import { SelectBlood } from './components/SelectBlood.register';
 import { Heading } from '@components/heading';
 import { Button } from '@components/buttons/Button.components';
 import { _Modal } from '@components/modal';
+import { Loading } from '@components/loading';
 import { registerService } from './service/registerUsers.service';
 import { errorMessage } from '@utils/toastify/error.toastify';
 import { successMessage } from '@utils/toastify/success.toastify';
@@ -31,6 +32,7 @@ export const Register = () => {
     repeatPassword: '',
     termsAndConditions: false,
   });
+  const [isLoadingData, setIsLoadingData] = useState(false);
   const navigate = useNavigate();
   const handleChange = (event) => {
     const { name, type, value, checked } = event.target;
@@ -46,6 +48,7 @@ export const Register = () => {
       if (hasEmptyField) return errorMessage('You must complete the form!');
       if (userData.password === userData.repeatPassword) {
         if (userData.termsAndConditions) {
+          setIsLoadingData(true);
           const { repeatPassword, termsAndConditions, ...remainingProps } = userData;
           await registerService(REGISTER_USER, remainingProps);
           setUserData({
@@ -62,15 +65,19 @@ export const Register = () => {
             repeatPassword: '',
             termsAndConditions: false,
           });
+          setIsLoadingData(false);
           navigate(PublicRoutes.LOGIN);
           return successMessage('Your register was succeeded!');
         } else {
+          setIsLoadingData(false);
           errorMessage('You must accept the terms and conditions');
         }
       } else {
+        setIsLoadingData(false);
         errorMessage('Passwords must match');
       }
     } catch (error) {
+      setIsLoadingData(false);
       errorMessage(`${error.response?.data || error.message}: Existing user`);
     }
   };
@@ -255,11 +262,11 @@ export const Register = () => {
           <Button
             variant="solid"
             color="info"
-            className="register__buton"
+            className="register__button"
             type="submit"
             onSubmit={handleSubmit}
           >
-            Register now
+            {isLoadingData ? <Loading /> : 'Register now'}
             <span className="arrow-button">
               <BsArrowRight size={18} />
             </span>
